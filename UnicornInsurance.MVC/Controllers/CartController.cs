@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using UnicornInsurance.MVC.Constants;
 using UnicornInsurance.MVC.Contracts;
 using UnicornInsurance.MVC.Models;
+using UnicornInsurance.MVC.Services.Base;
 
 namespace UnicornInsurance.MVC.Controllers
 {
@@ -66,35 +67,40 @@ namespace UnicornInsurance.MVC.Controllers
                 Charge charge = service.Create(options);
 
                 CompleteOrderHeader completeOrderHeader = new();
+                BaseCommandResponse completeOrderResponse = new();
 
                 if (charge.BalanceTransactionId == null)
                 {
                     completeOrderHeader.Success = false;
+                    completeOrderResponse = await _orderService.CompleteOrder(completeOrderHeader);
+                    TempData["Error"] = "Stripe Payment Failed";
+                    return View(new ShoppingCartVM());
                 }
-                else
-                {
-                    completeOrderHeader.TransactionId = charge.Id;
-                }
-                if (charge.Status.ToLower() == "succeeded")
+                else if (charge.Status.ToLower() == "succeeded")
                 {
                     completeOrderHeader.Success = true;
+                    completeOrderHeader.TransactionId = charge.Id;
+                    completeOrderHeader.OrderId = initialize.Id;
+                    completeOrderResponse = await _orderService.CompleteOrder(completeOrderHeader);
                 }
 
-                completeOrderHeader.OrderId = initialize.Id;
-                var orderCompletion = await _orderService.CompleteOrder(completeOrderHeader);
-
-                if (orderCompletion.Success == false)
+                if (completeOrderResponse.Success == false)
                 {
-                    TempData["Error"] = orderCompletion.Message;
+                    TempData["Error"] = completeOrderResponse.Message;
                 }
-
             }
             else
             {
                 TempData["Error"] = initialize.Message;
+                return View(ShoppingCartVM);
             }
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("OrderConfirmation", "Cart", new { id = initialize.Id });
+        }
+
+        public IActionResult OrderConfirmation(int id)
+        {
+            return View(id);
         }
 
         public async Task<IActionResult> IncreaseWeaponQuantity(int itemId)

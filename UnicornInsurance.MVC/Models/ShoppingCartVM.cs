@@ -7,8 +7,8 @@ namespace UnicornInsurance.MVC.Models
 {
     public class ShoppingCartVM
     {
-        public List<MobileSuitCartItem> MobileSuitCartItems { get; set; }
-        public List<WeaponCartItem> WeaponCartItems { get; set; }
-        public OrderHeader OrderHeader { get; set; }
+        public List<MobileSuitCartItem> MobileSuitCartItems { get; set; } = new();
+        public List<WeaponCartItem> WeaponCartItems { get; set; } = new();
+        public OrderHeader OrderHeader { get; set; } = new();
     }
 }
