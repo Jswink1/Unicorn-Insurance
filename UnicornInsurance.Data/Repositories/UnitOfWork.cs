@@ -16,6 +16,9 @@ namespace UnicornInsurance.Data.Repositories
         private IMobileSuitRepository _mobileSuitRepository;
         private IMobileSuitCartRepository _mobileSuitCartRepository;
         private IWeaponCartRepository _weaponCartRepository;
+        private IOrderHeaderRepository _orderHeaderRepository;
+        private IMobileSuitPurchaseRepository _mobileSuitPurchaseRepository;
+        private IWeaponPurchaseRepository _weaponPurchaseRepository;        
 
         public UnitOfWork(UnicornDataDBContext context, IHttpContextAccessor httpContextAccessor)
         {
@@ -34,6 +37,15 @@ namespace UnicornInsurance.Data.Repositories
 
         public IWeaponCartRepository WeaponCartRepository =>
             _weaponCartRepository ??= new WeaponCartRepository(_context);
+
+        public IOrderHeaderRepository OrderHeaderRepository =>
+            _orderHeaderRepository ??= new OrderHeaderRepository(_context);
+
+        public IMobileSuitPurchaseRepository MobileSuitPurchaseRepository =>
+            _mobileSuitPurchaseRepository ??= new MobileSuitPurchaseRepository(_context);
+
+        public IWeaponPurchaseRepository WeaponPurchaseRepository =>
+            _weaponPurchaseRepository ??= new WeaponPurchaseRepository(_context);
 
         public void Dispose()
         {

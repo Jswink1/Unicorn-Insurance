@@ -22,9 +22,9 @@ namespace UnicornInsurance.Data
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-            services.AddScoped<IWeaponRepository, WeaponRepository>();
-            services.AddScoped<IMobileSuitRepository, MobileSuitRepository>();
-            services.AddScoped<IMobileSuitCartRepository, MobileSuitCartRepository>();
+            //services.AddScoped<IWeaponRepository, WeaponRepository>();
+            //services.AddScoped<IMobileSuitRepository, MobileSuitRepository>();
+            //services.AddScoped<IMobileSuitCartRepository, MobileSuitCartRepository>();
 
             return services;
         }

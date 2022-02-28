@@ -110,5 +110,13 @@ namespace UnicornInsurance.Api.Controllers
             await _mediator.Send(command);
             return Ok();
         }
+
+        // GET: api/<ClearShoppingCart>
+        [HttpDelete("ClearShoppingCart")]
+        public async Task<ActionResult> ClearShoppingCart()
+        {
+            var response = await _mediator.Send(new ClearShoppingCartCommand());
+            return Ok(response);
+        }
     }
 }

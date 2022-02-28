@@ -29,7 +29,7 @@ namespace UnicornInsurance.Application.Features.ShoppingCart.Handlers.Queries
         public async Task<ShoppingCartItemCountResponse> Handle(GetShoppingCartItemCountRequest request, CancellationToken cancellationToken)
         {
             var userId = _httpContextAccessor.HttpContext.User.FindFirst(
-                    q => q.Type == CustomClaimTypes.Uid)?.Value;
+                    q => q.Type == SD.Uid)?.Value;
 
             var mobileSuitCartItemsCount = await _unitOfWork.MobileSuitCartRepository.GetAllCartItems(userId);
             var weaponCartItemsCount = await _unitOfWork.WeaponCartRepository.GetAllCartItems(userId);

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Stripe;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using UnicornInsurance.MVC.Contracts;
 using UnicornInsurance.MVC.Middleware;
+using UnicornInsurance.MVC.Models;
 using UnicornInsurance.MVC.Services;
 using UnicornInsurance.MVC.Services.Base;
 
@@ -47,6 +49,9 @@ namespace UnicornInsurance.MVC
                 options.Cookie.IsEssential = true;
             });
 
+            // Configure Stripe Settings
+            services.Configure<StripeSettings>(Configuration.GetSection("Stripe"));
+
             services.AddTransient<IAuthenticationService, AuthenticationService>();
 
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
@@ -55,6 +60,7 @@ namespace UnicornInsurance.MVC
             services.AddScoped<IMobileSuitService, MobileSuitService>();
             services.AddScoped<IWeaponService, WeaponService>();
             services.AddScoped<IShoppingCartService, ShoppingCartService>();
+            services.AddScoped<IOrderService, Services.OrderService>();
 
             services.AddSingleton<ILocalStorageService, LocalStorageService>();
 
@@ -82,6 +88,8 @@ namespace UnicornInsurance.MVC
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            StripeConfiguration.ApiKey = Configuration.GetSection("Stripe")["SecretKey"];
 
             app.UseSession();
 

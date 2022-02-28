@@ -46,7 +46,7 @@ namespace UnicornInsurance.Application.Features.ShoppingCart.Handlers.Commands
             else
             {
                 var userId = _httpContextAccessor.HttpContext.User.FindFirst(
-                    q => q.Type == CustomClaimTypes.Uid)?.Value;
+                    q => q.Type == SD.Uid)?.Value;
 
                 var exists = await _unitOfWork.MobileSuitCartRepository.CartItemExists(userId, request.MobileSuitCartItem.MobileSuitId);
 

@@ -233,6 +233,65 @@ namespace UnicornInsurance.Data.Migrations
                     b.ToTable("MobileSuitCartItems");
                 });
 
+            modelBuilder.Entity("UnicornInsurance.Models.MobileSuitPurchase", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("MobileSuitId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("money");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MobileSuitId");
+
+                    b.HasIndex("OrderId");
+
+                    b.ToTable("MobileSuitPurchases");
+                });
+
+            modelBuilder.Entity("UnicornInsurance.Models.OrderHeader", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ApplicationUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("OrderDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("OrderStatus")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("OrderTotal")
+                        .HasColumnType("money");
+
+                    b.Property<DateTime>("PaymentDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("PaymentStatus")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TransactionId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("OrderHeaders");
+                });
+
             modelBuilder.Entity("UnicornInsurance.Models.Weapon", b =>
                 {
                     b.Property<int>("Id")
@@ -395,6 +454,34 @@ namespace UnicornInsurance.Data.Migrations
                     b.ToTable("WeaponCartItems");
                 });
 
+            modelBuilder.Entity("UnicornInsurance.Models.WeaponPurchase", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Count")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("money");
+
+                    b.Property<int>("WeaponId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrderId");
+
+                    b.HasIndex("WeaponId");
+
+                    b.ToTable("WeaponPurchases");
+                });
+
             modelBuilder.Entity("UnicornInsurance.Models.MobileSuit", b =>
                 {
                     b.HasOne("UnicornInsurance.Models.Weapon", "CustomWeapon")
@@ -416,6 +503,25 @@ namespace UnicornInsurance.Data.Migrations
                     b.Navigation("MobileSuit");
                 });
 
+            modelBuilder.Entity("UnicornInsurance.Models.MobileSuitPurchase", b =>
+                {
+                    b.HasOne("UnicornInsurance.Models.MobileSuit", "MobileSuit")
+                        .WithMany()
+                        .HasForeignKey("MobileSuitId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("UnicornInsurance.Models.OrderHeader", "OrderHeader")
+                        .WithMany()
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("MobileSuit");
+
+                    b.Navigation("OrderHeader");
+                });
+
             modelBuilder.Entity("UnicornInsurance.Models.WeaponCartItem", b =>
                 {
                     b.HasOne("UnicornInsurance.Models.Weapon", "Weapon")
@@ -423,6 +529,25 @@ namespace UnicornInsurance.Data.Migrations
                         .HasForeignKey("WeaponId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Weapon");
+                });
+
+            modelBuilder.Entity("UnicornInsurance.Models.WeaponPurchase", b =>
+                {
+                    b.HasOne("UnicornInsurance.Models.OrderHeader", "OrderHeader")
+                        .WithMany()
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("UnicornInsurance.Models.Weapon", "Weapon")
+                        .WithMany()
+                        .HasForeignKey("WeaponId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("OrderHeader");
 
                     b.Navigation("Weapon");
                 });

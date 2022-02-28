@@ -46,7 +46,7 @@ namespace UnicornInsurance.Application.Features.ShoppingCart.Handlers.Commands
             else
             {
                 var userId = _httpContextAccessor.HttpContext.User.FindFirst(
-                    q => q.Type == CustomClaimTypes.Uid)?.Value;
+                    q => q.Type == SD.Uid)?.Value;
 
                 var weaponCartItem = await _unitOfWork.WeaponCartRepository.GetCartItem(userId, request.WeaponCartItem.WeaponId);
 

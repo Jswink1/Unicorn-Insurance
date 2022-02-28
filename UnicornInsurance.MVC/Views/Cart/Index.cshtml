@@ -1,4 +1,6 @@
 ﻿@model ShoppingCartVM
+@using Microsoft.Extensions.Options
+@inject IOptions<StripeSettings> Stripe
 @{
     ViewData["Title"] = "Shopping Cart";
 }
@@ -8,7 +10,7 @@
     {
         <div class="container">
             <div class="card">
-                
+
                 @* Shopping Cart Item List *@
                 <div class="card-body">
 
@@ -107,24 +109,45 @@
                     }
 
                 </div>
-                    @*Total*@
-                    <div class="row">
-                        <div class="col-12 col-md-6 offset-md-6 col-lg-4 offset-lg-8 pr-4">
-                            <ul class="list-group">
-                                <li class="list-group-item d-flex justify-content-between bg-light">
-                                    <span class="text-info"> Total (USD)</span>
-                                    <strong class="text-info">$ <span id="txtOrderTotal">@Model.Total</span></strong>
-                                </li>
-                            </ul>
-                        </div>
+                @*Total*@
+                <div class="row">
+                    <div class="col-12 col-md-6 offset-md-6 col-lg-4 offset-lg-8 pr-4">
+                        <ul class="list-group">
+                            <li class="list-group-item d-flex justify-content-between bg-light">
+                                <span class="text-info"> Total (USD)</span>
+                                <strong class="text-info">$ <span id="txtOrderTotal">@Model.OrderHeader.OrderTotal</span></strong>
+                            </li>
+                        </ul>
                     </div>
+                </div>
 
                 <div class="card-footer">
                     <div class="card-footer row">
 
+                        @* Convert Total into cents for Stripe *@
+                        @{
+                            var OrderTotalForStripe = Model.OrderHeader.OrderTotal * 100;
+                        }
+
+                        <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                                data-key="@Stripe.Value.PublishableKey"
+                                data-amount="@OrderTotalForStripe"
+                                data-name="Unicorn Insurance Product Purchase"
+                                data-label="Place Order"
+                                data-description="Purchase Mobile Suits and Weapons"
+                                data-locale="auto"
+                                data-allow-remember-me="false"
+                                data-image="https://stripe.com/img/documentation/checkout/marketplace.png">
+                        </script>
+
+                        @*Hide the stripe button so that only the custom button displays*@
+                        <script>
+                                    document.getElementsByClassName("stripe-button-el")[0].style.display = 'none';
+                        </script>
+
                         @* Checkout Button *@
                         <div class="col-sm-12 col-lg-4 col-md-6 offset-lg-8 offset-md-6 ">
-                            <a asp-controller="Cart" asp-action="Checkout" class="btn btn-success form-control">Checkout</a>
+                            <button type="submit" value="Place Order" class="btn btn-success form-control">Place Order</button>
                         </div>
 
                     </div>

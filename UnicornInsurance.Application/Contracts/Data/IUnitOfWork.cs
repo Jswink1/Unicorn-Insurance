@@ -12,6 +12,9 @@ namespace UnicornInsurance.Application.Contracts.Data
         IMobileSuitRepository MobileSuitRepository { get; }
         IMobileSuitCartRepository MobileSuitCartRepository { get; }
         IWeaponCartRepository WeaponCartRepository { get; }
+        IOrderHeaderRepository OrderHeaderRepository { get; }
+        IMobileSuitPurchaseRepository MobileSuitPurchaseRepository { get; }
+        IWeaponPurchaseRepository WeaponPurchaseRepository { get; }
 
         Task Save();
     }

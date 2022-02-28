@@ -5,6 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Features\WeaponCart\**" />
+    <EmbeddedResource Remove="Features\WeaponCart\**" />
+    <None Remove="Features\WeaponCart\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="10.3.6" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
@@ -17,10 +23,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\WeaponCart\Handlers\Commands\" />
-    <Folder Include="Features\WeaponCart\Handlers\Queries\" />
-    <Folder Include="Features\WeaponCart\Request\Commands\" />
-    <Folder Include="Features\WeaponCart\Request\Queries\" />
+    <Folder Include="Features\Orders\Handlers\Queries\" />
+    <Folder Include="Features\Orders\Requests\Queries\" />
   </ItemGroup>
 
 </Project>

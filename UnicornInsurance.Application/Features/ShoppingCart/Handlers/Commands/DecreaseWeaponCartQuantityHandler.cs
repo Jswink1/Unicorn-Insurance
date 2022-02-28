@@ -32,7 +32,7 @@ namespace UnicornInsurance.Application.Features.ShoppingCart.Handlers.Commands
         public async Task<Unit> Handle(DecreaseWeaponCartQuantityCommand request, CancellationToken cancellationToken)
         {
             var userId = _httpContextAccessor.HttpContext.User.FindFirst(
-                    q => q.Type == CustomClaimTypes.Uid)?.Value;
+                    q => q.Type == SD.Uid)?.Value;
 
             var weaponCartItem = await _unitOfWork.WeaponCartRepository.GetCartItem(userId, request.ItemId);
 

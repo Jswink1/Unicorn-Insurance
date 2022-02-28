@@ -9,7 +9,6 @@ namespace UnicornInsurance.MVC.Models
     {
         public List<MobileSuitCartItem> MobileSuitCartItems { get; set; }
         public List<WeaponCartItem> WeaponCartItems { get; set; }
-        public decimal Total { get; set; }
-        //public OrderHeader OrderHeader { get; set; }
+        public OrderHeader OrderHeader { get; set; }
     }
 }

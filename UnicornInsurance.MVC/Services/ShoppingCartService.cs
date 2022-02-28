@@ -89,5 +89,11 @@ namespace UnicornInsurance.MVC.Services
             AddBearerToken();
             await _client.WeaponCartDELETEAsync(itemId);
         }
+
+        public async Task ClearShoppingCart()
+        {
+            AddBearerToken();
+            await _client.ClearShoppingCartAsync();
+        }
     }
 }

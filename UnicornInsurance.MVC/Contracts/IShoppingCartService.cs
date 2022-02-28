@@ -19,6 +19,7 @@ namespace UnicornInsurance.MVC.Contracts
         Task DeleteWeaponCartItem(int itemId);
         Task IncreaseWeaponCartQuantity(int itemId);
         Task DecreaseWeaponCartQuantity(int itemId);
+        Task ClearShoppingCart();
 
     }
 }

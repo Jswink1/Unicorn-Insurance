@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <UserSecretsId>165fd6a3-8b36-4603-a115-1bd5c02389fe</UserSecretsId>
   </PropertyGroup>
 
 	<ItemGroup>
@@ -10,6 +11,7 @@
 		<PackageReference Include="LocalStorage" Version="2.1.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="5.0.13" />
 		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
+		<PackageReference Include="Stripe.net" Version="39.93.0" />
 		<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.15.1" />
 	</ItemGroup>
 

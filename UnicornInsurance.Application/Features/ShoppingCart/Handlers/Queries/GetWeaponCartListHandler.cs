@@ -32,7 +32,7 @@ namespace UnicornInsurance.Application.Features.ShoppingCart.Handlers.Queries
         public async Task<List<WeaponCartItemDTO>> Handle(GetWeaponCartListRequest request, CancellationToken cancellationToken)
         {
             var userId = _httpContextAccessor.HttpContext.User.FindFirst(
-                    q => q.Type == CustomClaimTypes.Uid)?.Value;
+                    q => q.Type == SD.Uid)?.Value;
 
             var weaponCartItems = await _unitOfWork.WeaponCartRepository.GetAllCartItems(userId);
             return _mapper.Map<List<WeaponCartItemDTO>>(weaponCartItems);

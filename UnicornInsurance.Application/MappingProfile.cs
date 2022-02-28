@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using UnicornInsurance.Application.DTOs.MobileSuit;
 using UnicornInsurance.Application.DTOs.MobileSuitCartItem;
+using UnicornInsurance.Application.DTOs.OrderDetails;
+using UnicornInsurance.Application.DTOs.OrderHeader;
 using UnicornInsurance.Application.DTOs.Weapon;
 using UnicornInsurance.Application.DTOs.WeaponCartItem;
 using UnicornInsurance.Models;
@@ -30,6 +32,11 @@ namespace UnicornInsurance.Application
 
             CreateMap<WeaponCartItem, CreateWeaponCartItemDTO>().ReverseMap();
             CreateMap<WeaponCartItem, WeaponCartItemDTO>().ReverseMap();
+
+            CreateMap<OrderHeader, InitializeOrderHeaderDTO>().ReverseMap();
+
+            CreateMap<MobileSuitPurchase, MobileSuitPurchaseDTO>().ReverseMap();
+            CreateMap<WeaponPurchase, WeaponPurchaseDTO>().ReverseMap();
 
             //CreateMap<CustomWeapon, WeaponDTO>().ReverseMap();
 

@@ -28,6 +28,14 @@ namespace UnicornInsurance.MVC
             CreateMap<WeaponCartItem, CreateWeaponCartItemDTO>().ReverseMap();
             CreateMap<WeaponCartItem, WeaponCartItemDTO>().ReverseMap();
 
+            CreateMap<OrderHeader, InitializeOrderHeaderDTO>().ReverseMap();
+
+            CreateMap<OrderDetails, CreateOrderDetailsDTO>().ReverseMap();
+            CreateMap<MobileSuitCartItem, MobileSuitPurchaseDTO>().ReverseMap();
+            CreateMap<WeaponCartItem, WeaponPurchaseDTO>().ReverseMap();
+
+            CreateMap<CompleteOrderHeader, CompleteOrderHeaderDTO>().ReverseMap();
+
 
         }
     }
