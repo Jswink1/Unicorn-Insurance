@@ -33,29 +33,7 @@ namespace UnicornInsurance.Data
 
             modelBuilder.Entity<MobileSuit>(entity =>
             {
-                entity.Property(e => e.Armor).HasMaxLength(100);
-
-                entity.Property(e => e.Description)
-                    .IsRequired()
-                    .HasMaxLength(500);
-
-                entity.Property(e => e.Height).HasMaxLength(100);
-
-                entity.Property(e => e.ImageUrl).HasMaxLength(2000);
-
-                entity.Property(e => e.Manufacturer).HasMaxLength(100);
-
-                entity.Property(e => e.Name)
-                    .IsRequired()
-                    .HasMaxLength(100);
-
-                entity.Property(e => e.PowerOutput).HasMaxLength(100);
-
                 entity.Property(e => e.Price).HasColumnType("money");
-
-                entity.Property(e => e.Type).HasMaxLength(200);
-
-                entity.Property(e => e.Weight).HasMaxLength(100);
 
                 entity.HasOne(d => d.CustomWeapon)
                     .WithOne().OnDelete(DeleteBehavior.SetNull);
@@ -63,18 +41,6 @@ namespace UnicornInsurance.Data
 
             modelBuilder.Entity<Weapon>(entity =>
             {
-                entity.Property(e => e.Description)
-                    .IsRequired()
-                    .HasMaxLength(500);
-
-                entity.Property(e => e.ImageUrl).HasMaxLength(2000);
-
-                entity.Property(e => e.IsCustomWeapon).IsRequired();
-
-                entity.Property(e => e.Name)
-                    .IsRequired()
-                    .HasMaxLength(200);
-
                 entity.Property(e => e.Price).HasColumnType("money");                
             });
 
