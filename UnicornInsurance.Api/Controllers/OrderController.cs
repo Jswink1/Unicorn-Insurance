@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using UnicornInsurance.Application.DTOs.OrderDetails;
 using UnicornInsurance.Application.DTOs.OrderHeader;
 using UnicornInsurance.Application.Features.Orders.Requests.Commands;
+using UnicornInsurance.Application.Features.Orders.Requests.Queries;
 using UnicornInsurance.Application.Responses;
 
 namespace UnicornInsurance.Api.Controllers
@@ -23,11 +24,24 @@ namespace UnicornInsurance.Api.Controllers
             _mediator = mediator;
         }
 
-        // POST api/<WeaponCart>
+        [HttpGet("Order")]
+        public async Task<ActionResult<List<OrderHeaderDTO>>> Get()
+        {
+            var orders = await _mediator.Send(new GetOrdersListRequest());
+            return Ok(orders);
+        }
+
+        [HttpGet("Order/{id}")]
+        public async Task<ActionResult<OrderHeaderDTO>> Get(int id)
+        {
+            
+            return Ok(new OrderHeaderDTO());
+        }
+
         [HttpPost]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
-        [Route("InitializeOrder")]
+        [Route("api/InitializeOrder")]
         public async Task<ActionResult<BaseCommandResponse>> Post([FromBody] InitializeOrderHeaderDTO orderHeader)
         {
             var command = new InitializeOrderHeaderCommand { OrderHeaderDTO = orderHeader };
@@ -38,7 +52,7 @@ namespace UnicornInsurance.Api.Controllers
         [HttpPost]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
-        [Route("CreateOrderDetails")]
+        [Route("api/CreateOrderDetails")]
         public async Task<ActionResult<BaseCommandResponse>> Post([FromBody] CreateOrderDetailsDTO orderDetails)
         {
             var command = new CreateOrderDetailsCommand { OrderDetailsDTO = orderDetails };
@@ -49,7 +63,7 @@ namespace UnicornInsurance.Api.Controllers
         [HttpPost]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
-        [Route("CompleteOrder")]
+        [Route("api/CompleteOrder")]
         public async Task<ActionResult<BaseCommandResponse>> Post([FromBody] CompleteOrderHeaderDTO orderHeaderCompletion)
         {
             var command = new CompleteOrderHeaderCommand { OrderHeaderCompletionDTO = orderHeaderCompletion };

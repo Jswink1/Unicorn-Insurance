@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace UnicornInsurance.Application.Contracts.Identity
 {
-    class IUserService
+    public interface IUserService
     {
+        Task<IList<string>> GetUserRoles(string userId);
+        Task<string> GetUserEmail(string userId);
     }
 }

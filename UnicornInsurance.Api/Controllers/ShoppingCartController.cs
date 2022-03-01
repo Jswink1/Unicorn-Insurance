@@ -24,7 +24,6 @@ namespace UnicornInsurance.Api.Controllers
             _mediator = mediator;
         }
 
-        // POST api/<WeaponCart>
         [HttpPost]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
@@ -36,7 +35,6 @@ namespace UnicornInsurance.Api.Controllers
             return Ok(response);
         }
 
-        // POST api/<MobileSuitCart>
         [HttpPost]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
@@ -48,7 +46,6 @@ namespace UnicornInsurance.Api.Controllers
             return Ok(response);
         }
 
-        // GET: api/<WeaponCart>
         [HttpGet]
         [Route("WeaponCart")]
         public async Task<ActionResult<List<WeaponCartItemDTO>>> GetWeaponCartItems()
@@ -57,7 +54,6 @@ namespace UnicornInsurance.Api.Controllers
             return Ok(weaponCartItems);
         }
 
-        // GET: api/<MobileSuitCart>
         [HttpGet]
         [Route("MobileSuitCart")]
         public async Task<ActionResult<List<MobileSuitCartItemDTO>>> GetMobileSuitCartItems()
@@ -66,7 +62,6 @@ namespace UnicornInsurance.Api.Controllers
             return Ok(mobileSuitCartItems);
         }
 
-        // GET: api/<ShoppingCartItemCount>
         [HttpGet]
         [Route("ShoppingCartItemCount")]
         public async Task<ActionResult<ShoppingCartItemCountResponse>> GetShoppingCartItemCount()
@@ -75,7 +70,6 @@ namespace UnicornInsurance.Api.Controllers
             return Ok(response);
         }
 
-        // PUT api/<IncreaseWeaponCartQuantity>
         [HttpPut("IncreaseWeaponCartQuantity/{id}")]
         public async Task<ActionResult> IncreaseWeaponCartQuantity(int id)
         {
@@ -84,7 +78,6 @@ namespace UnicornInsurance.Api.Controllers
             return Ok(response);
         }
 
-        // PUT api/<DecreaseWeaponCartQuantity>
         [HttpPut("DecreaseWeaponCartQuantity/{id}")]
         public async Task<ActionResult> DecreaseWeaponCartQuantity(int id)
         {
@@ -92,8 +85,7 @@ namespace UnicornInsurance.Api.Controllers
             var response = await _mediator.Send(command);
             return Ok(response);
         }
-
-        // DELETE api/<MobileSuitCart>/5        
+   
         [HttpDelete("MobileSuitCart/{id}")]
         public async Task<ActionResult> DeleteMobileSuitCartItem(int id)
         {
@@ -101,8 +93,7 @@ namespace UnicornInsurance.Api.Controllers
             await _mediator.Send(command);
             return Ok();
         }
-
-        // DELETE api/<WeaponCart>/5        
+   
         [HttpDelete("WeaponCart/{id}")]
         public async Task<ActionResult> DeleteWeaponCartItem(int id)
         {
@@ -111,7 +102,6 @@ namespace UnicornInsurance.Api.Controllers
             return Ok();
         }
 
-        // GET: api/<ClearShoppingCart>
         [HttpDelete("ClearShoppingCart")]
         public async Task<ActionResult> ClearShoppingCart()
         {

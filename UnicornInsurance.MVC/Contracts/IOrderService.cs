@@ -9,8 +9,9 @@ namespace UnicornInsurance.MVC.Contracts
 {
     public interface IOrderService
     {
+        Task<List<OrderHeader>> GetOrders();
         Task<BaseCommandResponse> InitializeOrder(OrderHeader orderHeader);
         Task<BaseCommandResponse> CreateOrderDetails(OrderDetails orderDetails);
-        Task<BaseCommandResponse> CompleteOrder(CompleteOrderHeader orderHeaderCompletion);
+        Task<BaseCommandResponse> CompleteOrder(CompleteOrderHeader orderHeaderCompletion);        
     }
 }

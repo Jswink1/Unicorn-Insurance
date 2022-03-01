@@ -39,7 +39,7 @@ namespace UnicornInsurance.Data.Repositories
             return await _dbContext.Set<T>().FindAsync(id);
         }
 
-        public async Task<IReadOnlyList<T>> GetAll()
+        public async Task<List<T>> GetAll()
         {
             return await _dbContext.Set<T>().ToListAsync();
         }

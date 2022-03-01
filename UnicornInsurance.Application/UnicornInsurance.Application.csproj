@@ -22,9 +22,4 @@
     <ProjectReference Include="..\UnicornInsurance.Models\UnicornInsurance.Models.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Features\Orders\Handlers\Queries\" />
-    <Folder Include="Features\Orders\Requests\Queries\" />
-  </ItemGroup>
-
 </Project>

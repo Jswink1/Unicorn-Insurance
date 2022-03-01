@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,13 @@ namespace UnicornInsurance.Data.Repositories
         public OrderHeaderRepository(UnicornDataDBContext dbContext) : base(dbContext)
         {
             _dbContext = dbContext;
+        }
+
+        public async Task<List<OrderHeader>> GetUserOrders(string userId)
+        {
+            var userOrders = await _dbContext.OrderHeaders.Where(o => o.ApplicationUserId == userId).ToListAsync();
+
+            return userOrders;
         }
 
     }

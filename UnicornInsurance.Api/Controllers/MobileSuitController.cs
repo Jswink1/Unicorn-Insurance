@@ -24,7 +24,6 @@ namespace UnicornInsurance.Api.Controllers
             _mediator = mediator;
         }
 
-        // GET: api/<MobileSuitController>
         [HttpGet]
         public async Task<ActionResult<List<MobileSuitDTO>>> Get()
         {
@@ -32,7 +31,6 @@ namespace UnicornInsurance.Api.Controllers
             return Ok(mobileSuits);
         }
 
-        // GET api/<MobileSuitController>/5
         [HttpGet("{id}")]
         public async Task<ActionResult<FullMobileSuitDTO>> Get(int id)
         {
@@ -40,7 +38,6 @@ namespace UnicornInsurance.Api.Controllers
             return Ok(mobileSuit);
         }
 
-        // POST api/<MobileSuitController>
         [HttpPost]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
@@ -52,7 +49,6 @@ namespace UnicornInsurance.Api.Controllers
             return Ok(response);
         }
 
-        // PUT api/<MobileSuitController>
         [HttpPut]
         //[Authorize(Roles = "Administrator")]
         public async Task<ActionResult<BaseCommandResponse>> Put([FromBody] FullMobileSuitDTO mobileSuit)
@@ -62,7 +58,6 @@ namespace UnicornInsurance.Api.Controllers
             return Ok(response);
         }
 
-        // DELETE api/<MobileSuitController>/5
         [HttpDelete("{id}")]
         //[Authorize(Roles = "Administrator")]
         public async Task<ActionResult> Delete(int id)

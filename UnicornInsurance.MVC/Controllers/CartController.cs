@@ -63,24 +63,33 @@ namespace UnicornInsurance.MVC.Controllers
                 };
 
                 // Process the transaction
-                var service = new ChargeService();
-                Charge charge = service.Create(options);
-
-                CompleteOrderHeader completeOrderHeader = new();
+                Charge charge = new();
+                CompleteOrderHeader completeOrderHeader = new() { OrderId = initialize.Id};
                 BaseCommandResponse completeOrderResponse = new();
-
-                if (charge.BalanceTransactionId == null)
+                try
+                {
+                    var service = new ChargeService();
+                    charge = service.Create(options);
+                }
+                catch (Exception)
                 {
                     completeOrderHeader.Success = false;
                     completeOrderResponse = await _orderService.CompleteOrder(completeOrderHeader);
-                    TempData["Error"] = "Stripe Payment Failed";
-                    return View(new ShoppingCartVM());
+                    //TempData["Error"] = "Stripe Payment Failed";
+                    throw;
                 }
-                else if (charge.Status.ToLower() == "succeeded")
+
+                //if (charge.BalanceTransactionId == null)
+                //{
+                //    completeOrderHeader.Success = false;
+                //    completeOrderResponse = await _orderService.CompleteOrder(completeOrderHeader);
+                //    TempData["Error"] = "Stripe Payment Failed";
+                //    return View(new ShoppingCartVM());
+                //}
+                if (charge.Status.ToLower() == "succeeded")
                 {
                     completeOrderHeader.Success = true;
                     completeOrderHeader.TransactionId = charge.Id;
-                    completeOrderHeader.OrderId = initialize.Id;
                     completeOrderResponse = await _orderService.CompleteOrder(completeOrderHeader);
                 }
 

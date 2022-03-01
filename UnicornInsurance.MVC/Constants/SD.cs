@@ -11,8 +11,11 @@ namespace UnicornInsurance.MVC.Constants
 
         // Payment Statuses
         public const string PaymentStatusPending = "Pending";
+        public const string PaymentStatusApproved = "Approved";
+        public const string PaymentStatusRejected = "Rejected";
 
         // Order Statuses
         public const string StatusPending = "Pending";
+        public const string StatusApproved = "Approved";
     }
 }

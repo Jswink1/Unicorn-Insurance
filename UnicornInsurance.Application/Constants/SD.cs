@@ -11,6 +11,10 @@ namespace UnicornInsurance.Application.Constants
         // Custom User ID Claim Type
         public const string Uid = "uid";
 
+        // User Roles
+        public const string AdminRole = "Admin";
+        public const string CustomerRole = "Customer";
+
         // Payment Statuses
         public const string PaymentStatusPending = "Pending";
         public const string PaymentStatusApproved = "Approved";

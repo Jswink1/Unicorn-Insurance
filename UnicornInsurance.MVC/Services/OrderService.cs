@@ -22,6 +22,14 @@ namespace UnicornInsurance.MVC.Services
             _httpclient = httpclient;
         }
 
+        public async Task<List<OrderHeader>> GetOrders()
+        {
+            AddBearerToken();
+            var ordersListDTO = await _client.OrderAllAsync();
+                
+            return _mapper.Map<List<OrderHeader>>(ordersListDTO);
+        }
+
         public async Task<BaseCommandResponse> InitializeOrder(OrderHeader orderHeader)
         {
             AddBearerToken();

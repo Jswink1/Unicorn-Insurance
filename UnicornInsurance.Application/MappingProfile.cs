@@ -34,6 +34,7 @@ namespace UnicornInsurance.Application
             CreateMap<WeaponCartItem, WeaponCartItemDTO>().ReverseMap();
 
             CreateMap<OrderHeader, InitializeOrderHeaderDTO>().ReverseMap();
+            CreateMap<OrderHeader, OrderHeaderDTO>().ReverseMap();
 
             CreateMap<MobileSuitPurchase, MobileSuitPurchaseDTO>().ReverseMap();
             CreateMap<WeaponPurchase, WeaponPurchaseDTO>().ReverseMap();

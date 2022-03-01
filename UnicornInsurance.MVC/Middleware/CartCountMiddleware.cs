@@ -66,7 +66,7 @@ namespace UnicornInsurance.MVC.Middleware
                 // Move on to the next request
                 await _next(httpContext);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;

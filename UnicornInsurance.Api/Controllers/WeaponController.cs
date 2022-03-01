@@ -24,7 +24,6 @@ namespace UnicornInsurance.Api.Controllers
             _mediator = mediator;
         }
 
-        // GET: api/<WeaponController>
         [HttpGet]
         public async Task<ActionResult<List<WeaponDTO>>> Get()
         {
@@ -32,7 +31,6 @@ namespace UnicornInsurance.Api.Controllers
             return Ok(weapons);
         }
 
-        // GET api/<WeaponController>/5
         [HttpGet("{id}")]
         public async Task<ActionResult<FullWeaponDTO>> Get(int id)
         {
@@ -40,7 +38,6 @@ namespace UnicornInsurance.Api.Controllers
             return Ok(weapon);
         }
 
-        // POST api/<WeaponController>
         [HttpPost]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
@@ -52,7 +49,6 @@ namespace UnicornInsurance.Api.Controllers
             return Ok(response);
         }
 
-        // PUT api/<WeaponController>
         [HttpPut]
         //[Authorize(Roles = "Administrator")]
         public async Task<ActionResult<BaseCommandResponse>> Put([FromBody] WeaponDTO weapon)
@@ -62,7 +58,6 @@ namespace UnicornInsurance.Api.Controllers
             return Ok(response);
         }
 
-        // DELETE api/<WeaponController>/5
         [HttpDelete("{id}")]
         //[Authorize(Roles = "Administrator")]
         public async Task<ActionResult> Delete(int id)
