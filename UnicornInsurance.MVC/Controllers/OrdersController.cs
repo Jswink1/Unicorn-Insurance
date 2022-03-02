@@ -23,6 +23,15 @@ namespace UnicornInsurance.MVC.Controllers
             return View();
         }
 
+        public async Task<IActionResult> Details(int id)
+        {
+            OrderDetailsVM orderDetails = await _orderService.GetOrderDetails(id);
+
+            Console.WriteLine("sdfs");
+
+            return View(orderDetails);
+        }
+
         #region API Calls
 
         [HttpGet]

@@ -14,5 +14,6 @@ namespace UnicornInsurance.MVC.Models
         public DateTime OrderDate { get; set; }
         public DateTime PaymentDate { get; set; }
         public string UserEmail { get; set; }
+        public string TransactionId { get; set; }
     }
 }

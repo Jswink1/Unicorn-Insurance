@@ -9,5 +9,6 @@ namespace UnicornInsurance.Application.Contracts.Data
 {
     public interface IMobileSuitPurchaseRepository : IGenericRepository<MobileSuitPurchase>
     {
+        Task<List<MobileSuitPurchase>> GetMobileSuitPurchasesForOrder(int orderId);
     }
 }

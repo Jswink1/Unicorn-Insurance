@@ -9,6 +9,10 @@ namespace UnicornInsurance.MVC.Constants
     {
         public const string CartSesh = "UnicornShoppingCart";
 
+        // User Roles
+        public const string AdminRole = "Admin";
+        public const string CustomerRole = "Customer";
+
         // Payment Statuses
         public const string PaymentStatusPending = "Pending";
         public const string PaymentStatusApproved = "Approved";

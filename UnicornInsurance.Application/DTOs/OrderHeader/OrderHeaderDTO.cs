@@ -15,5 +15,6 @@ namespace UnicornInsurance.Application.DTOs.OrderHeader
         public string OrderStatus { get; set; }
         public DateTime PaymentDate { get; set; }
         public string UserEmail { get; set; }
+        public string TransactionId { get; set; }
     }
 }

@@ -40,7 +40,7 @@
                         @if (HttpContextAccessor.HttpContext.Session.GetInt32(SD.CartSesh) != null)
                         {
                             <li style="color: red;">
-                                <a asp-controller="Cart" asp-action="Index" class="nav-link">
+                                <a asp-controller="Cart" asp-action="Index" class="nav-link text-right">
                                     @{
                                         var count = HttpContextAccessor.HttpContext.Session.GetInt32(SD.CartSesh);
                                     }
@@ -81,8 +81,7 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
 
-    @*Datatables, JqueryUI, and FontAwesome*@
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    @*Datatables, and FontAwesome*@
     <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
     <script src="https://kit.fontawesome.com/e19c476714.js"></script>
 

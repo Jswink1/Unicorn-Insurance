@@ -30,6 +30,14 @@ namespace UnicornInsurance.MVC.Services
             return _mapper.Map<List<OrderHeader>>(ordersListDTO);
         }
 
+        public async Task<OrderDetailsVM> GetOrderDetails(int orderId)
+        {
+            AddBearerToken();
+            var orderDTO = await _client.OrderAsync(orderId);
+
+            return _mapper.Map<OrderDetailsVM>(orderDTO);
+        }
+
         public async Task<BaseCommandResponse> InitializeOrder(OrderHeader orderHeader)
         {
             AddBearerToken();

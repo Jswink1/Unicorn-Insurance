@@ -1,0 +1,150 @@
+﻿@model OrderDetailsVM
+@using UnicornInsurance.MVC.Constants
+@{
+    ViewData["Title"] = "Order Details";
+}
+
+<form method="post">
+    <input hidden asp-for="OrderHeader.Id" />
+    <br />
+    <div class="container">
+        <div class="card">
+            <div class="card-header bg-dark text-light ml-0 row container">
+
+                @* Page Header/Title *@
+                <div class="col-12 d-none d-md-block col-md-6 pb-1">
+                    <i class="fas fa-shopping-cart"></i> &nbsp; Order Summary
+                </div>
+
+                @* Back to Orders Page *@
+                <div class="col-12 col-md-4 offset-md-2 text-right">
+                    <a asp-controller="Order" asp-action="Index" class="btn btn-outline-info form-control btn-sm">Back to Orders</a>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="container rounded p-2">
+                    <div class="row">
+                        <div class="col-12 col-lg-6 pb-4">
+                            <div class="row">
+                                @* Order Details Header/Title *@
+                                <h4 class="d-flex justify-content-between align-items-center mb-3">
+                                    <span class="text-primary">Order Details:</span>
+                                </h4>
+                            </div>
+
+                            @* Order Id *@
+                            <div class="row my-1">
+                                <div class="col-3">Order Id</div>
+                                <div class="col-9">
+                                    <input readonly asp-for="OrderHeader.Id" type="text" class="form-control" />
+                                </div>
+                            </div>
+
+                            @* User Name *@
+                            <div class="row my-1">
+                                <div class="col-3">Name</div>
+                                <div class="col-9">
+                                    <input readonly asp-for="OrderHeader.UserEmail" type="text" class="form-control" />
+                                </div>
+                            </div>
+
+                            @* Order Date *@
+                            <div class="row my-1">
+                                <div class="col-3">Order Date</div>
+                                <div class="col-9">
+                                    <input readonly asp-for="OrderHeader.OrderDate" type="text" class="form-control" />
+                                </div>
+                            </div>
+
+                            @* Payment Status *@
+                            <div class="row my-1">
+                                <div class="col-3">Payment Status</div>
+                                <div class="col-9">
+                                    <input readonly asp-for="OrderHeader.PaymentStatus" type="text" class="form-control" />
+                                </div>
+                            </div>
+
+
+                            @*Only display TransacionId if the user is an admin*@
+                            @if (User.IsInRole(SD.AdminRole))
+                            {
+                                if (Model.OrderHeader.TransactionId is not null)
+                                {
+                                    <div class="row my-1">
+                                        <div class="col-3">Transaction ID</div>
+                                        <div class="col-9">
+                                            <input asp-for="OrderHeader.TransactionId" type="text" readonly class="form-control" />
+                                        </div>
+                                    </div>
+                                }
+
+                                //TODO: remove the order status property. it doesnt really even make sense to have it
+                                @* Order Status *@
+                                <div class="row my-1">
+                                    <div class="col-3">Order Status</div>
+                                    <div class="col-9">
+                                        <input readonly asp-for="OrderHeader.OrderStatus" type="text" class="form-control" />
+                                    </div>
+                                </div>
+                            }
+                        </div>
+
+                        @*Order Summary*@
+                    <div class="col-12 col-lg-5 offset-lg-1">
+                        <h4 class="d-flex justify-content-between align-items-center mb-3">
+                            <span class="text-primary">Item Purchases:</span>
+                        </h4>
+                        <ul class="list-group mb-3">
+
+                            @*Order Details (Product, Quantity, Price)*@
+                            @foreach (var mobileSuit in Model.MobileSuitPurchases)
+                            {
+                                <li class="list-group-item d-flex justify-content-between p-2">
+                                    <div class="row container">
+                                        <div class="col-8">
+                                            <h6 class="my-0 text-primary">@mobileSuit.MobileSuit.Name</h6>
+                                        </div>
+                                        <div class="col-4">
+                                            <p class="text-success">@(String.Format("{0:C}", mobileSuit.Price))</p>
+                                        </div>
+                                    </div>
+                                </li>
+                            }
+                            @foreach (var weapon in Model.WeaponPurchases)
+                            {
+                                <li class="list-group-item d-flex justify-content-between p-2">
+                                    <div class="row container">
+                                        <div class="col-8">
+                                            <h6 class="my-0 text-primary">@weapon.Weapon.Name</h6>
+                                            <small class="text-muted">Quantity : @weapon.Count</small>
+                                        </div>
+                                        <div class="col-4">
+                                            <p class="text-success">@(String.Format("{0:C}", weapon.Price))</p>
+                                        </div>
+                                    </div>
+                                </li>
+                            }
+
+                            @*Order Total*@
+                            <li class="list-group-item bg-info">
+                                <div class="row container">
+                                    <div class="col-6">
+                                        <h5 class="text-white">TOTAL </h5>
+                                    </div>
+                                    <div class="col-6 text-right">
+                                        <h5 class="text-white">@(String.Format("{0:C}", Model.OrderHeader.OrderTotal))</h5>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+
+                        @*TODO: Create refund functionality*@
+                        @*TODO: Create payment functionality for if a customers payment gets rejected the first time*@
+
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

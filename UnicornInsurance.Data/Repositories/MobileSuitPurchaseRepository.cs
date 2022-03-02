@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,15 @@ namespace UnicornInsurance.Data.Repositories
         public MobileSuitPurchaseRepository(UnicornDataDBContext dbContext) : base(dbContext)
         {
             _dbContext = dbContext;
+        }
+
+        public async Task<List<MobileSuitPurchase>> GetMobileSuitPurchasesForOrder(int orderId)
+        {
+            var mobileSuitPurchases = await _dbContext.MobileSuitPurchases.Where(p => p.OrderId == orderId)
+                                                                          .Include(p => p.MobileSuit)                
+                                                                          .ToListAsync();
+
+            return mobileSuitPurchases;
         }
     }
 }

@@ -32,10 +32,11 @@ namespace UnicornInsurance.Api.Controllers
         }
 
         [HttpGet("Order/{id}")]
-        public async Task<ActionResult<OrderHeaderDTO>> Get(int id)
+        public async Task<ActionResult<OrderDetailsDTO>> Get(int id)
         {
-            
-            return Ok(new OrderHeaderDTO());
+            var orderDetails = await _mediator.Send(new GetOrderDetailsRequest() { OrderId = id });
+
+            return Ok(orderDetails);
         }
 
         [HttpPost]
