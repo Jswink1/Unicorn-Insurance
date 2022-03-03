@@ -55,7 +55,6 @@ namespace UnicornInsurance.Application.Features.Orders.Handlers.Commands
 
                 if (request.OrderHeaderCompletionDTO.Success)
                 {
-                    orderHeader.OrderStatus = SD.PaymentStatusApproved;
                     orderHeader.PaymentStatus = SD.StatusApproved;
                     orderHeader.PaymentDate = DateTime.Now;
                     orderHeader.TransactionId = request.OrderHeaderCompletionDTO.TransactionId;

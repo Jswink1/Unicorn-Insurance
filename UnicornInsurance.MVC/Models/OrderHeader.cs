@@ -10,7 +10,6 @@ namespace UnicornInsurance.MVC.Models
         public int Id { get; set; }
         public decimal OrderTotal { get; set; }
         public string PaymentStatus { get; set; }
-        public string OrderStatus { get; set; }
         public DateTime OrderDate { get; set; }
         public DateTime PaymentDate { get; set; }
         public string UserEmail { get; set; }

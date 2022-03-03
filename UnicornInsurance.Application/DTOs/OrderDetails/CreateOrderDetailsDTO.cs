@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace UnicornInsurance.Application.DTOs.OrderDetails
 {
-    public class CreateOrderDetailsDTO : IOrderDetailsDTO
+    public class CreateOrderDetailsDTO
     {
-        public List<MobileSuitPurchaseDTO> MobileSuitPurchases { get; set; }
-        public List<WeaponPurchaseDTO> WeaponPurchases { get; set; }
+        public List<CreateMobileSuitPurchaseDTO> MobileSuitPurchases { get; set; }
+        public List<CreateWeaponPurchaseDTO> WeaponPurchases { get; set; }
         public int OrderHeaderId { get; set; }
     }
 }

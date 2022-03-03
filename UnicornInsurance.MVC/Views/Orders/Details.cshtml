@@ -79,15 +79,6 @@
                                         </div>
                                     </div>
                                 }
-
-                                //TODO: remove the order status property. it doesnt really even make sense to have it
-                                @* Order Status *@
-                                <div class="row my-1">
-                                    <div class="col-3">Order Status</div>
-                                    <div class="col-9">
-                                        <input readonly asp-for="OrderHeader.OrderStatus" type="text" class="form-control" />
-                                    </div>
-                                </div>
                             }
                         </div>
 
@@ -169,7 +160,6 @@
                         }
 
                         @*TODO: Create refund functionality*@
-                        @*TODO: Create payment functionality for if a customers payment gets rejected the first time*@
 
                     </div>
                     </div>

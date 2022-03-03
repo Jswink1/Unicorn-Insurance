@@ -2949,9 +2949,6 @@ namespace UnicornInsurance.MVC.Services.Base
         [Newtonsoft.Json.JsonProperty("paymentStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string PaymentStatus { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("orderStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string OrderStatus { get; set; }
-
         [Newtonsoft.Json.JsonProperty("paymentDate", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset PaymentDate { get; set; }
 

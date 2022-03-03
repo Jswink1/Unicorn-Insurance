@@ -11,7 +11,9 @@ namespace UnicornInsurance.Application.DTOs.OrderDetails.Validators
     {
         public CreateOrderDetailsDTOValidator()
         {
-            Include(new IOrderDetailsDTOValidator());
+            RuleFor(p => p.OrderHeaderId)
+                .NotEmpty().WithMessage("{PropertyName} is required.")
+                .NotNull();
         }
     }
 }

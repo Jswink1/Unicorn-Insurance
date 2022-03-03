@@ -50,7 +50,6 @@ namespace UnicornInsurance.Application.Features.Orders.Handlers.Commands
 
                 var orderheader = _mapper.Map<OrderHeader>(request.OrderHeaderDTO);
                 orderheader.PaymentStatus = SD.PaymentStatusPending;
-                orderheader.OrderStatus = SD.StatusPending;
                 orderheader.OrderDate = DateTime.Now;
                 orderheader.ApplicationUserId = userId;
 
