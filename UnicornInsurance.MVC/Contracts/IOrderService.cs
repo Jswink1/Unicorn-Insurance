@@ -14,5 +14,6 @@ namespace UnicornInsurance.MVC.Contracts
         Task<BaseCommandResponse> CreateOrderDetails(OrderDetails orderDetails);
         Task<BaseCommandResponse> CompleteOrder(CompleteOrderHeader orderHeaderCompletion);
         Task<OrderDetailsVM> GetOrderDetails(int orderId);
+        Task<OrderHeader> GetOrderHeader(int orderId);
     }
 }

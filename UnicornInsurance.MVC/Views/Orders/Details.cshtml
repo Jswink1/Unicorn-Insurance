@@ -1,5 +1,7 @@
 ﻿@model OrderDetailsVM
 @using UnicornInsurance.MVC.Constants
+@using Microsoft.Extensions.Options
+@inject IOptions<StripeSettings> Stripe
 @{
     ViewData["Title"] = "Order Details";
 }
@@ -18,7 +20,7 @@
 
                 @* Back to Orders Page *@
                 <div class="col-12 col-md-4 offset-md-2 text-right">
-                    <a asp-controller="Order" asp-action="Index" class="btn btn-outline-info form-control btn-sm">Back to Orders</a>
+                    <a asp-controller="Orders" asp-action="Index" class="btn btn-outline-info form-control btn-sm">Back to Orders</a>
                 </div>
             </div>
             <div class="card-body">
@@ -137,6 +139,34 @@
                                 </div>
                             </li>
                         </ul>
+
+                        @{
+                            //Order Total variable for Stripe, in the form of cents
+                            var OrderTotalForStripe = Model.OrderHeader.OrderTotal * 100;
+                        }
+
+                        @*If the user has placed the order but it was rejected, display a button for them to try and pay again*@
+                        @if (Model.OrderHeader.PaymentStatus == SD.PaymentStatusRejected
+                       && User.IsInRole(SD.CustomerRole))
+                        {
+                            <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                                    data-key="@Stripe.Value.PublishableKey"
+                                    data-amount="@OrderTotalForStripe"
+                                    data-name="Unicorn Insurance Product Purchase"
+                                    data-label="Place Order"
+                                    data-description="Purchase Mobile Suits and Weapons"
+                                    data-locale="auto"
+                                    data-allow-remember-me="false"
+                                    data-image="https://stripe.com/img/documentation/checkout/marketplace.png">
+                            </script>
+
+                            //Hide the stripe button so that only our button displays
+                            <script>
+                                document.getElementsByClassName("stripe-button-el")[0].style.display = 'none';
+                            </script>
+
+                            <button type="submit" value="Place Order" class="btn btn-success form-control">Pay Now</button>
+                        }
 
                         @*TODO: Create refund functionality*@
                         @*TODO: Create payment functionality for if a customers payment gets rejected the first time*@

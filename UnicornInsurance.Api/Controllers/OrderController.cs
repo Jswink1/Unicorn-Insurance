@@ -24,25 +24,34 @@ namespace UnicornInsurance.Api.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet("Order")]
+        [HttpGet("Orders")]
         public async Task<ActionResult<List<OrderHeaderDTO>>> Get()
         {
             var orders = await _mediator.Send(new GetOrdersListRequest());
+
             return Ok(orders);
         }
 
-        [HttpGet("Order/{id}")]
-        public async Task<ActionResult<OrderDetailsDTO>> Get(int id)
+        [HttpGet("OrderDetails/{id}")]
+        public async Task<ActionResult<OrderDetailsDTO>> GetOrderDetails(int id)
         {
             var orderDetails = await _mediator.Send(new GetOrderDetailsRequest() { OrderId = id });
 
             return Ok(orderDetails);
         }
 
+        [HttpGet("OrderHeader/{id}")]
+        public async Task<ActionResult<OrderHeaderDTO>> GetOrderHeader(int id)
+        {
+            var orderHeader = await _mediator.Send(new GetOrderHeaderRequest() { OrderId = id });
+
+            return Ok(orderHeader);
+        }
+
         [HttpPost]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
-        [Route("api/InitializeOrder")]
+        [Route("InitializeOrder")]
         public async Task<ActionResult<BaseCommandResponse>> Post([FromBody] InitializeOrderHeaderDTO orderHeader)
         {
             var command = new InitializeOrderHeaderCommand { OrderHeaderDTO = orderHeader };
@@ -53,7 +62,7 @@ namespace UnicornInsurance.Api.Controllers
         [HttpPost]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
-        [Route("api/CreateOrderDetails")]
+        [Route("CreateOrderDetails")]
         public async Task<ActionResult<BaseCommandResponse>> Post([FromBody] CreateOrderDetailsDTO orderDetails)
         {
             var command = new CreateOrderDetailsCommand { OrderDetailsDTO = orderDetails };
@@ -64,7 +73,7 @@ namespace UnicornInsurance.Api.Controllers
         [HttpPost]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
-        [Route("api/CompleteOrder")]
+        [Route("CompleteOrder")]
         public async Task<ActionResult<BaseCommandResponse>> Post([FromBody] CompleteOrderHeaderDTO orderHeaderCompletion)
         {
             var command = new CompleteOrderHeaderCommand { OrderHeaderCompletionDTO = orderHeaderCompletion };
