@@ -46,7 +46,7 @@ namespace UnicornInsurance.MVC.Controllers
         // Add to Cart
         public async Task<IActionResult> Details(WeaponVM weaponVM)
         {
-            var response = await _shoppingCartService.CreateWeaponCartItem(new WeaponCartItem
+            var response = await _shoppingCartService.AddWeaponCartItem(new WeaponCartItem
             {
                 WeaponId = weaponVM.Id,
                 Price = weaponVM.Price

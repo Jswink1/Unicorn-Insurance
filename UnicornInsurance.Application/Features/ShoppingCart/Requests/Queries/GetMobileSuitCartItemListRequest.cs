@@ -8,7 +8,7 @@ using UnicornInsurance.Application.DTOs.MobileSuitCartItem;
 
 namespace UnicornInsurance.Application.Features.ShoppingCart.Requests.Queries
 {
-    public class GetMobileSuitCartListRequest : IRequest<List<MobileSuitCartItemDTO>>
+    public class GetMobileSuitCartItemListRequest : IRequest<List<MobileSuitCartItemDTO>>
     {
     }
 }

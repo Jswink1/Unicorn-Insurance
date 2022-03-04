@@ -74,18 +74,10 @@ namespace UnicornInsurance.MVC.Controllers
                 catch (Exception)
                 {
                     completeOrderHeader.Success = false;
-                    completeOrderResponse = await _orderService.CompleteOrder(completeOrderHeader);
-                    //TempData["Error"] = "Stripe Payment Failed";
+                    await _orderService.CompleteOrder(completeOrderHeader);
                     throw;
                 }
 
-                //if (charge.BalanceTransactionId == null)
-                //{
-                //    completeOrderHeader.Success = false;
-                //    completeOrderResponse = await _orderService.CompleteOrder(completeOrderHeader);
-                //    TempData["Error"] = "Stripe Payment Failed";
-                //    return View(new ShoppingCartVM());
-                //}
                 if (charge.Status.ToLower() == "succeeded")
                 {
                     completeOrderHeader.Success = true;
@@ -114,14 +106,14 @@ namespace UnicornInsurance.MVC.Controllers
 
         public async Task<IActionResult> IncreaseWeaponQuantity(int itemId)
         {
-            await _shoppingCartService.IncreaseWeaponCartQuantity(itemId);
+            await _shoppingCartService.IncreaseWeaponQuantity(itemId);
 
             return RedirectToAction(nameof(Index));
         }
 
         public async Task<IActionResult> DecreaseWeaponQuantity(int itemId)
         {
-            await _shoppingCartService.DecreaseWeaponCartQuantity(itemId);
+            await _shoppingCartService.DecreaseWeaponQuantity(itemId);
 
             return RedirectToAction(nameof(Index));
         }

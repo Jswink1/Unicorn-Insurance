@@ -1,28 +1,22 @@
-﻿using AutoMapper;
-using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 using UnicornInsurance.Application.Contracts.Data;
 using UnicornInsurance.Application.Exceptions;
-using UnicornInsurance.Application.Features.MobileSuits.Requests.Commands;
 using UnicornInsurance.Application.Features.ShoppingCart.Requests.Commands;
 
 namespace UnicornInsurance.Application.Features.ShoppingCart.Handlers.Commands
 {
-    public class DeleteMobileSuitCartHandler : IRequestHandler<DeleteMobileSuitCartCommand>
+    public class DeleteMobileSuitCartItemHandler : IRequestHandler<DeleteMobileSuitCartItemCommand>
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public DeleteMobileSuitCartHandler(IUnitOfWork unitOfWork)
+        public DeleteMobileSuitCartItemHandler(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Unit> Handle(DeleteMobileSuitCartCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(DeleteMobileSuitCartItemCommand request, CancellationToken cancellationToken)
         {
             var mobileSuitCartItem = await _unitOfWork.MobileSuitCartRepository.Get(request.Id);
 

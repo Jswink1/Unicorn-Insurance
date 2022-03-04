@@ -27,10 +27,10 @@ namespace UnicornInsurance.Api.Controllers
         [HttpPost]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
-        [Route("WeaponCart")]
+        [Route("WeaponCartItem")]
         public async Task<ActionResult<BaseCommandResponse>> Post([FromBody] CreateWeaponCartItemDTO weaponCartItem)
         {
-            var command = new CreateWeaponCartCommand { WeaponCartItem = weaponCartItem };
+            var command = new CreateWeaponCartItemCommand { WeaponCartItem = weaponCartItem };
             var response = await _mediator.Send(command);
             return Ok(response);
         }
@@ -38,27 +38,27 @@ namespace UnicornInsurance.Api.Controllers
         [HttpPost]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
-        [Route("MobileSuitCart")]
+        [Route("MobileSuitCartItem")]
         public async Task<ActionResult<BaseCommandResponse>> Post([FromBody] CreateMobileSuitCartItemDTO mobileSuitCartItem)
         {
-            var command = new CreateMobileSuitCartCommand { MobileSuitCartItem = mobileSuitCartItem };
+            var command = new CreateMobileSuitCartItemCommand { MobileSuitCartItem = mobileSuitCartItem };
             var response = await _mediator.Send(command);
             return Ok(response);
         }
 
         [HttpGet]
-        [Route("WeaponCart")]
+        [Route("WeaponCartItem")]
         public async Task<ActionResult<List<WeaponCartItemDTO>>> GetWeaponCartItems()
         {
-            var weaponCartItems = await _mediator.Send(new GetWeaponCartListRequest());
+            var weaponCartItems = await _mediator.Send(new GetWeaponCartItemListRequest());
             return Ok(weaponCartItems);
         }
 
         [HttpGet]
-        [Route("MobileSuitCart")]
+        [Route("MobileSuitCartItem")]
         public async Task<ActionResult<List<MobileSuitCartItemDTO>>> GetMobileSuitCartItems()
         {
-            var mobileSuitCartItems = await _mediator.Send(new GetMobileSuitCartListRequest());
+            var mobileSuitCartItems = await _mediator.Send(new GetMobileSuitCartItemListRequest());
             return Ok(mobileSuitCartItems);
         }
 
@@ -70,34 +70,34 @@ namespace UnicornInsurance.Api.Controllers
             return Ok(response);
         }
 
-        [HttpPut("IncreaseWeaponCartQuantity/{id}")]
-        public async Task<ActionResult> IncreaseWeaponCartQuantity(int id)
+        [HttpPut("IncreaseWeaponQuantity/{id}")]
+        public async Task<ActionResult> IncreaseWeaponQuantity(int id)
         {
             var command = new IncreaseWeaponCartQuantityCommand { ItemId = id };
             var response = await _mediator.Send(command);
             return Ok(response);
         }
 
-        [HttpPut("DecreaseWeaponCartQuantity/{id}")]
-        public async Task<ActionResult> DecreaseWeaponCartQuantity(int id)
+        [HttpPut("DecreaseWeaponQuantity/{id}")]
+        public async Task<ActionResult> DecreaseWeaponQuantity(int id)
         {
             var command = new DecreaseWeaponCartQuantityCommand { ItemId = id };
             var response = await _mediator.Send(command);
             return Ok(response);
         }
    
-        [HttpDelete("MobileSuitCart/{id}")]
+        [HttpDelete("MobileSuitCartItem/{id}")]
         public async Task<ActionResult> DeleteMobileSuitCartItem(int id)
         {
-            var command = new DeleteMobileSuitCartCommand { Id = id };
+            var command = new DeleteMobileSuitCartItemCommand { Id = id };
             await _mediator.Send(command);
             return Ok();
         }
    
-        [HttpDelete("WeaponCart/{id}")]
+        [HttpDelete("WeaponCartItem/{id}")]
         public async Task<ActionResult> DeleteWeaponCartItem(int id)
         {
-            var command = new DeleteWeaponCartCommand { Id = id };
+            var command = new DeleteWeaponCartItemCommand { Id = id };
             await _mediator.Send(command);
             return Ok();
         }

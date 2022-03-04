@@ -14,13 +14,13 @@ using UnicornInsurance.Application.Features.ShoppingCart.Requests.Queries;
 
 namespace UnicornInsurance.Application.Features.ShoppingCart.Handlers.Queries
 {
-    public class GetWeaponCartListHandler : IRequestHandler<GetWeaponCartListRequest, List<WeaponCartItemDTO>>
+    public class GetWeaponCartItemListHandler : IRequestHandler<GetWeaponCartItemListRequest, List<WeaponCartItemDTO>>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public GetWeaponCartListHandler(IUnitOfWork unitOfWork,
+        public GetWeaponCartItemListHandler(IUnitOfWork unitOfWork,
                                         IMapper mapper,
                                         IHttpContextAccessor httpContextAccessor)
         {
@@ -29,7 +29,7 @@ namespace UnicornInsurance.Application.Features.ShoppingCart.Handlers.Queries
             _httpContextAccessor = httpContextAccessor;
         }
 
-        public async Task<List<WeaponCartItemDTO>> Handle(GetWeaponCartListRequest request, CancellationToken cancellationToken)
+        public async Task<List<WeaponCartItemDTO>> Handle(GetWeaponCartItemListRequest request, CancellationToken cancellationToken)
         {
             var userId = _httpContextAccessor.HttpContext.User.FindFirst(
                     q => q.Type == SD.Uid)?.Value;

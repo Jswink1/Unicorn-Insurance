@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace UnicornInsurance.Application.Features.ShoppingCart.Requests.Commands
 {
-    public class DeleteMobileSuitCartCommand : IRequest
+    public class DeleteMobileSuitCartItemCommand : IRequest
     {
         public int Id { get; set; }
     }

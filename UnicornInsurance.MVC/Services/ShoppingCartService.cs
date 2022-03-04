@@ -22,22 +22,22 @@ namespace UnicornInsurance.MVC.Services
             _httpclient = httpclient;
         }        
 
-        public async Task<BaseCommandResponse> CreateMobileSuitCartItem(MobileSuitCartItem mobileSuitCartItem)
+        public async Task<BaseCommandResponse> AddMobileSuitCartItem(MobileSuitCartItem mobileSuitCartItem)
         {
             AddBearerToken();
             var mobileSuitCart = _mapper.Map<CreateMobileSuitCartItemDTO>(mobileSuitCartItem);
 
-            var response = await _client.MobileSuitCartPOSTAsync(mobileSuitCart);
+            var response = await _client.MobileSuitCartItemPOSTAsync(mobileSuitCart);
 
             return response;
         }
 
-        public async Task<BaseCommandResponse> CreateWeaponCartItem(WeaponCartItem weaponCartItem)
+        public async Task<BaseCommandResponse> AddWeaponCartItem(WeaponCartItem weaponCartItem)
         {
             AddBearerToken();
             var weaponCart = _mapper.Map<CreateWeaponCartItemDTO>(weaponCartItem);
 
-            var response = await _client.WeaponCartPOSTAsync(weaponCart);
+            var response = await _client.WeaponCartItemPOSTAsync(weaponCart);
 
             return response;
         }
@@ -45,7 +45,7 @@ namespace UnicornInsurance.MVC.Services
         public async Task<List<MobileSuitCartItem>> GetAllMobileSuitCartItems()
         {
             AddBearerToken();
-            var mobileSuitCartItems = await _client.MobileSuitCartAllAsync();
+            var mobileSuitCartItems = await _client.MobileSuitCartItemAllAsync();
 
             return _mapper.Map<List<MobileSuitCartItem>>(mobileSuitCartItems);
         }
@@ -53,7 +53,7 @@ namespace UnicornInsurance.MVC.Services
         public async Task<List<WeaponCartItem>> GetAllWeaponCartItems()
         {
             AddBearerToken();
-            var weaponCartItems = await _client.WeaponCartAllAsync();
+            var weaponCartItems = await _client.WeaponCartItemAllAsync();
 
             return _mapper.Map<List<WeaponCartItem>>(weaponCartItems);
         }
@@ -66,28 +66,28 @@ namespace UnicornInsurance.MVC.Services
             return response;
         }
 
-        public async Task IncreaseWeaponCartQuantity(int itemId)
+        public async Task IncreaseWeaponQuantity(int itemId)
         {
             AddBearerToken();
-            await _client.IncreaseWeaponCartQuantityAsync(itemId);
+            await _client.IncreaseWeaponQuantityAsync(itemId);
         }
 
-        public async Task DecreaseWeaponCartQuantity(int itemId)
+        public async Task DecreaseWeaponQuantity(int itemId)
         {
             AddBearerToken();
-            await _client.DecreaseWeaponCartQuantityAsync(itemId);
+            await _client.DecreaseWeaponQuantityAsync(itemId);
         }
 
         public async Task DeleteMobileSuitCartItem(int itemId)
         {
             AddBearerToken();
-            await _client.MobileSuitCartDELETEAsync(itemId);
+            await _client.MobileSuitCartItemDELETEAsync(itemId);
         }
 
         public async Task DeleteWeaponCartItem(int itemId)
         {
             AddBearerToken();
-            await _client.WeaponCartDELETEAsync(itemId);
+            await _client.WeaponCartItemDELETEAsync(itemId);
         }
 
         public async Task ClearShoppingCart()

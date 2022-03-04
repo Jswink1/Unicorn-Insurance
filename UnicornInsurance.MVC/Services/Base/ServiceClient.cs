@@ -147,39 +147,39 @@ namespace UnicornInsurance.MVC.Services.Base
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<BaseCommandResponse> WeaponCartPOSTAsync(CreateWeaponCartItemDTO body);
+        System.Threading.Tasks.Task<BaseCommandResponse> WeaponCartItemPOSTAsync(CreateWeaponCartItemDTO body);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<BaseCommandResponse> WeaponCartPOSTAsync(CreateWeaponCartItemDTO body, System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task<BaseCommandResponse> WeaponCartItemPOSTAsync(CreateWeaponCartItemDTO body, System.Threading.CancellationToken cancellationToken);
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<WeaponCartItemDTO>> WeaponCartAllAsync();
-
-        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<WeaponCartItemDTO>> WeaponCartAllAsync(System.Threading.CancellationToken cancellationToken);
-
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<BaseCommandResponse> MobileSuitCartPOSTAsync(CreateMobileSuitCartItemDTO body);
+        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<WeaponCartItemDTO>> WeaponCartItemAllAsync();
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<BaseCommandResponse> MobileSuitCartPOSTAsync(CreateMobileSuitCartItemDTO body, System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<WeaponCartItemDTO>> WeaponCartItemAllAsync(System.Threading.CancellationToken cancellationToken);
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<MobileSuitCartItemDTO>> MobileSuitCartAllAsync();
+        System.Threading.Tasks.Task<BaseCommandResponse> MobileSuitCartItemPOSTAsync(CreateMobileSuitCartItemDTO body);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<MobileSuitCartItemDTO>> MobileSuitCartAllAsync(System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task<BaseCommandResponse> MobileSuitCartItemPOSTAsync(CreateMobileSuitCartItemDTO body, System.Threading.CancellationToken cancellationToken);
+
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<MobileSuitCartItemDTO>> MobileSuitCartItemAllAsync();
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<MobileSuitCartItemDTO>> MobileSuitCartItemAllAsync(System.Threading.CancellationToken cancellationToken);
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
@@ -192,39 +192,39 @@ namespace UnicornInsurance.MVC.Services.Base
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task IncreaseWeaponCartQuantityAsync(int id);
+        System.Threading.Tasks.Task IncreaseWeaponQuantityAsync(int id);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task IncreaseWeaponCartQuantityAsync(int id, System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task IncreaseWeaponQuantityAsync(int id, System.Threading.CancellationToken cancellationToken);
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task DecreaseWeaponCartQuantityAsync(int id);
-
-        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task DecreaseWeaponCartQuantityAsync(int id, System.Threading.CancellationToken cancellationToken);
-
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task MobileSuitCartDELETEAsync(int id);
+        System.Threading.Tasks.Task DecreaseWeaponQuantityAsync(int id);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task MobileSuitCartDELETEAsync(int id, System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task DecreaseWeaponQuantityAsync(int id, System.Threading.CancellationToken cancellationToken);
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task WeaponCartDELETEAsync(int id);
+        System.Threading.Tasks.Task MobileSuitCartItemDELETEAsync(int id);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task WeaponCartDELETEAsync(int id, System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task MobileSuitCartItemDELETEAsync(int id, System.Threading.CancellationToken cancellationToken);
+
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task WeaponCartItemDELETEAsync(int id);
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task WeaponCartItemDELETEAsync(int id, System.Threading.CancellationToken cancellationToken);
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
@@ -1424,18 +1424,18 @@ namespace UnicornInsurance.MVC.Services.Base
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<BaseCommandResponse> WeaponCartPOSTAsync(CreateWeaponCartItemDTO body)
+        public virtual System.Threading.Tasks.Task<BaseCommandResponse> WeaponCartItemPOSTAsync(CreateWeaponCartItemDTO body)
         {
-            return WeaponCartPOSTAsync(body, System.Threading.CancellationToken.None);
+            return WeaponCartItemPOSTAsync(body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<BaseCommandResponse> WeaponCartPOSTAsync(CreateWeaponCartItemDTO body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<BaseCommandResponse> WeaponCartItemPOSTAsync(CreateWeaponCartItemDTO body, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append("api/WeaponCart");
+            urlBuilder_.Append("api/WeaponCartItem");
 
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -1511,18 +1511,18 @@ namespace UnicornInsurance.MVC.Services.Base
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<WeaponCartItemDTO>> WeaponCartAllAsync()
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<WeaponCartItemDTO>> WeaponCartItemAllAsync()
         {
-            return WeaponCartAllAsync(System.Threading.CancellationToken.None);
+            return WeaponCartItemAllAsync(System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<WeaponCartItemDTO>> WeaponCartAllAsync(System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<WeaponCartItemDTO>> WeaponCartItemAllAsync(System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append("api/WeaponCart");
+            urlBuilder_.Append("api/WeaponCartItem");
 
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -1585,18 +1585,18 @@ namespace UnicornInsurance.MVC.Services.Base
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<BaseCommandResponse> MobileSuitCartPOSTAsync(CreateMobileSuitCartItemDTO body)
+        public virtual System.Threading.Tasks.Task<BaseCommandResponse> MobileSuitCartItemPOSTAsync(CreateMobileSuitCartItemDTO body)
         {
-            return MobileSuitCartPOSTAsync(body, System.Threading.CancellationToken.None);
+            return MobileSuitCartItemPOSTAsync(body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<BaseCommandResponse> MobileSuitCartPOSTAsync(CreateMobileSuitCartItemDTO body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<BaseCommandResponse> MobileSuitCartItemPOSTAsync(CreateMobileSuitCartItemDTO body, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append("api/MobileSuitCart");
+            urlBuilder_.Append("api/MobileSuitCartItem");
 
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -1672,18 +1672,18 @@ namespace UnicornInsurance.MVC.Services.Base
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<MobileSuitCartItemDTO>> MobileSuitCartAllAsync()
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<MobileSuitCartItemDTO>> MobileSuitCartItemAllAsync()
         {
-            return MobileSuitCartAllAsync(System.Threading.CancellationToken.None);
+            return MobileSuitCartItemAllAsync(System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<MobileSuitCartItemDTO>> MobileSuitCartAllAsync(System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<MobileSuitCartItemDTO>> MobileSuitCartItemAllAsync(System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append("api/MobileSuitCart");
+            urlBuilder_.Append("api/MobileSuitCartItem");
 
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -1820,21 +1820,21 @@ namespace UnicornInsurance.MVC.Services.Base
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task IncreaseWeaponCartQuantityAsync(int id)
+        public virtual System.Threading.Tasks.Task IncreaseWeaponQuantityAsync(int id)
         {
-            return IncreaseWeaponCartQuantityAsync(id, System.Threading.CancellationToken.None);
+            return IncreaseWeaponQuantityAsync(id, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task IncreaseWeaponCartQuantityAsync(int id, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task IncreaseWeaponQuantityAsync(int id, System.Threading.CancellationToken cancellationToken)
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
 
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append("api/IncreaseWeaponCartQuantity/{id}");
+            urlBuilder_.Append("api/IncreaseWeaponQuantity/{id}");
             urlBuilder_.Replace("{id}", System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
 
             var client_ = _httpClient;
@@ -1893,21 +1893,21 @@ namespace UnicornInsurance.MVC.Services.Base
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task DecreaseWeaponCartQuantityAsync(int id)
+        public virtual System.Threading.Tasks.Task DecreaseWeaponQuantityAsync(int id)
         {
-            return DecreaseWeaponCartQuantityAsync(id, System.Threading.CancellationToken.None);
+            return DecreaseWeaponQuantityAsync(id, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task DecreaseWeaponCartQuantityAsync(int id, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task DecreaseWeaponQuantityAsync(int id, System.Threading.CancellationToken cancellationToken)
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
 
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append("api/DecreaseWeaponCartQuantity/{id}");
+            urlBuilder_.Append("api/DecreaseWeaponQuantity/{id}");
             urlBuilder_.Replace("{id}", System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
 
             var client_ = _httpClient;
@@ -1966,21 +1966,21 @@ namespace UnicornInsurance.MVC.Services.Base
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task MobileSuitCartDELETEAsync(int id)
+        public virtual System.Threading.Tasks.Task MobileSuitCartItemDELETEAsync(int id)
         {
-            return MobileSuitCartDELETEAsync(id, System.Threading.CancellationToken.None);
+            return MobileSuitCartItemDELETEAsync(id, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task MobileSuitCartDELETEAsync(int id, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task MobileSuitCartItemDELETEAsync(int id, System.Threading.CancellationToken cancellationToken)
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
 
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append("api/MobileSuitCart/{id}");
+            urlBuilder_.Append("api/MobileSuitCartItem/{id}");
             urlBuilder_.Replace("{id}", System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
 
             var client_ = _httpClient;
@@ -2038,21 +2038,21 @@ namespace UnicornInsurance.MVC.Services.Base
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task WeaponCartDELETEAsync(int id)
+        public virtual System.Threading.Tasks.Task WeaponCartItemDELETEAsync(int id)
         {
-            return WeaponCartDELETEAsync(id, System.Threading.CancellationToken.None);
+            return WeaponCartItemDELETEAsync(id, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task WeaponCartDELETEAsync(int id, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task WeaponCartItemDELETEAsync(int id, System.Threading.CancellationToken cancellationToken)
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
 
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append("api/WeaponCart/{id}");
+            urlBuilder_.Append("api/WeaponCartItem/{id}");
             urlBuilder_.Replace("{id}", System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
 
             var client_ = _httpClient;
@@ -3014,13 +3014,38 @@ namespace UnicornInsurance.MVC.Services.Base
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.15.5.0 (NJsonSchema v10.6.6.0 (Newtonsoft.Json v12.0.0.0))")]
+    public partial class CreateMobileSuitPurchaseDTO
+    {
+        [Newtonsoft.Json.JsonProperty("mobileSuitId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int MobileSuitId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("price", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double Price { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.15.5.0 (NJsonSchema v10.6.6.0 (Newtonsoft.Json v12.0.0.0))")]
+    public partial class CreateWeaponPurchaseDTO
+    {
+        [Newtonsoft.Json.JsonProperty("weaponId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int WeaponId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("price", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double Price { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Count { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.15.5.0 (NJsonSchema v10.6.6.0 (Newtonsoft.Json v12.0.0.0))")]
     public partial class CreateOrderDetailsDTO
     {
         [Newtonsoft.Json.JsonProperty("mobileSuitPurchases", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<MobileSuitPurchaseDTO> MobileSuitPurchases { get; set; }
+        public System.Collections.Generic.ICollection<CreateMobileSuitPurchaseDTO> MobileSuitPurchases { get; set; }
 
         [Newtonsoft.Json.JsonProperty("weaponPurchases", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<WeaponPurchaseDTO> WeaponPurchases { get; set; }
+        public System.Collections.Generic.ICollection<CreateWeaponPurchaseDTO> WeaponPurchases { get; set; }
 
         [Newtonsoft.Json.JsonProperty("orderHeaderId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int OrderHeaderId { get; set; }

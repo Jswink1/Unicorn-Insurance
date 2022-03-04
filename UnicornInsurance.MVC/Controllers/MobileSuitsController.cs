@@ -49,7 +49,7 @@ namespace UnicornInsurance.MVC.Controllers
         // Add to Cart
         public async Task<IActionResult> Details(MobileSuitVM mobileSuitVM)
         {
-            var response = await _shoppingCartService.CreateMobileSuitCartItem(new MobileSuitCartItem
+            var response = await _shoppingCartService.AddMobileSuitCartItem(new MobileSuitCartItem
             {
                 MobileSuitId = mobileSuitVM.Id,
                 Price = mobileSuitVM.Price

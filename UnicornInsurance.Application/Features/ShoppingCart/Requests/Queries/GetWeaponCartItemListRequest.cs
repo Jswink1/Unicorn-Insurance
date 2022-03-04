@@ -8,7 +8,7 @@ using UnicornInsurance.Application.DTOs.WeaponCartItem;
 
 namespace UnicornInsurance.Application.Features.ShoppingCart.Requests.Queries
 {
-    public class GetWeaponCartListRequest : IRequest<List<WeaponCartItemDTO>>
+    public class GetWeaponCartItemListRequest : IRequest<List<WeaponCartItemDTO>>
     {
     }
 }

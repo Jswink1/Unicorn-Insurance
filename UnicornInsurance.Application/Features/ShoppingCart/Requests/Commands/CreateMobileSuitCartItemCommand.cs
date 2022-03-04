@@ -4,13 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using UnicornInsurance.Application.DTOs.WeaponCartItem;
+using UnicornInsurance.Application.DTOs.MobileSuitCartItem;
 using UnicornInsurance.Application.Responses;
 
 namespace UnicornInsurance.Application.Features.ShoppingCart.Requests.Commands
 {
-    public class CreateWeaponCartCommand : IRequest<BaseCommandResponse>
+    public class CreateMobileSuitCartItemCommand : IRequest<BaseCommandResponse>
     {
-        public CreateWeaponCartItemDTO WeaponCartItem { get; set; }
+        public CreateMobileSuitCartItemDTO MobileSuitCartItem { get; set; }
     }
 }
