@@ -19,6 +19,8 @@ namespace UnicornInsurance.Data.Repositories
         private IOrderHeaderRepository _orderHeaderRepository;
         private IMobileSuitPurchaseRepository _mobileSuitPurchaseRepository;
         private IWeaponPurchaseRepository _weaponPurchaseRepository;        
+        private IUserMobileSuitRepository _userMobileSuitRepository;
+        private IUserWeaponRepository _userWeaponRepository;
 
         public UnitOfWork(UnicornDataDBContext context, IHttpContextAccessor httpContextAccessor)
         {
@@ -47,6 +49,12 @@ namespace UnicornInsurance.Data.Repositories
         public IWeaponPurchaseRepository WeaponPurchaseRepository =>
             _weaponPurchaseRepository ??= new WeaponPurchaseRepository(_context);
 
+        public IUserMobileSuitRepository UserMobileSuitRepository =>
+            _userMobileSuitRepository ??= new UserMobileSuitRepository(_context);
+
+        public IUserWeaponRepository UserWeaponRepository =>
+            _userWeaponRepository ??= new UserWeaponRepository(_context);
+
         public void Dispose()
         {
             _context.Dispose();
@@ -55,6 +63,7 @@ namespace UnicornInsurance.Data.Repositories
 
         public async Task Save()
         {
+            // TODO: Set up DB auditing
             // Pass the username to the DbContext to be audited
             //var username = _httpContextAccessor.HttpContext.User.FindFirst(CustomClaimTypes.Uid)?.Value;
 

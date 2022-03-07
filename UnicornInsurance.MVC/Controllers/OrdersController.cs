@@ -35,43 +35,6 @@ namespace UnicornInsurance.MVC.Controllers
             return View(orderDetails);
         }
 
-        //public async Task<IActionResult> RefundOrder(int id)
-        //{
-        //    var orderHeader = await _orderService.GetOrderHeader(OrderVM.OrderHeader.Id);
-
-        //    var options = new RefundCreateOptions
-        //    {
-        //        Amount = Convert.ToInt32(orderHeader.OrderTotal * 100),
-        //        Reason = RefundReasons.RequestedByCustomer,
-        //        Charge = orderHeader.TransactionId
-        //    };
-
-        //    // Only process a refund if the status was approved
-        //    if (orderHeader.PaymentStatus == SD.StatusApproved)
-        //    {
-        //        var options = new RefundCreateOptions
-        //        {
-        //            Amount = Convert.ToInt32(orderHeader.OrderTotal * 100),
-        //            Reason = RefundReasons.RequestedByCustomer,
-        //            Charge = orderHeader.TransactionId
-        //        };
-
-        //        var service = new RefundService();
-        //        Refund refund = service.Create(options);
-
-        //        orderHeader.OrderStatus = SD.StatusRefunded;
-        //        orderHeader.PaymentStatus = SD.StatusRefunded;
-        //    }
-        //    // If the order was never approved, simply mark the status as cancelled
-        //    else
-        //    {
-        //        orderHeader.OrderStatus = SD.StatusCancelled;
-        //        orderHeader.PaymentStatus = SD.StatusCancelled;
-        //    }
-
-        //    return RedirectToAction("Index");
-        //}
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ActionName("Details")]

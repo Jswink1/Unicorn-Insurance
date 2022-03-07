@@ -34,14 +34,16 @@ namespace UnicornInsurance.MVC
                 .ForMember(q => q.PaymentDate, opt => opt.MapFrom(x => x.PaymentDate.DateTime))
                 .ReverseMap();
 
-            CreateMap<OrderDetails, CreateOrderDetailsDTO>().ReverseMap();
-            CreateMap<OrderDetailsVM, OrderDetailsDTO>().ReverseMap();
-            CreateMap<MobileSuitCartItem, MobileSuitPurchaseDTO>().ReverseMap();
-            CreateMap<WeaponCartItem, WeaponPurchaseDTO>().ReverseMap();
-
             CreateMap<CompleteOrderHeader, CompleteOrderHeaderDTO>().ReverseMap();
 
+            CreateMap<OrderDetails, CreateOrderDetailsDTO>().ReverseMap();
+            CreateMap<OrderDetailsVM, OrderDetailsDTO>().ReverseMap();
 
+            CreateMap<MobileSuitCartItem, MobileSuitPurchaseDTO>().ReverseMap();
+            CreateMap<MobileSuitCartItem, CreateMobileSuitPurchaseDTO>().ReverseMap();
+
+            CreateMap<WeaponCartItem, WeaponPurchaseDTO>().ReverseMap();
+            CreateMap<WeaponCartItem, CreateWeaponPurchaseDTO>().ReverseMap();
         }
     }
 }

@@ -26,6 +26,8 @@ namespace UnicornInsurance.Data
         public virtual DbSet<OrderHeader> OrderHeaders { get; set; }
         public virtual DbSet<MobileSuitPurchase> MobileSuitPurchases { get; set; }
         public virtual DbSet<WeaponPurchase> WeaponPurchases { get; set; }
+        public virtual DbSet<UserMobileSuit> UserMobileSuits { get; set; }
+        public virtual DbSet<UserWeapon> UserWeapons { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -68,6 +70,12 @@ namespace UnicornInsurance.Data
             {
                 entity.Property(e => e.Price).HasColumnType("money");
             });
+
+            //modelBuilder.Entity<UserMobileSuit>(entity =>
+            //{
+            //    entity.HasOne(d => d.CustomWeapon)
+            //        .WithOne().OnDelete(DeleteBehavior.SetNull);
+            //});
 
             OnModelCreatingPartial(modelBuilder);
 

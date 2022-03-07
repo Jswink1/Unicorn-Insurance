@@ -58,6 +58,25 @@ namespace UnicornInsurance.Application.Features.Orders.Handlers.Commands
                     orderHeader.PaymentStatus = SD.StatusApproved;
                     orderHeader.PaymentDate = DateTime.Now;
                     orderHeader.TransactionId = request.OrderHeaderCompletionDTO.TransactionId;
+
+                    var mobileSuitPurchases = await _unitOfWork.MobileSuitPurchaseRepository.GetMobileSuitPurchasesForOrder(orderHeader.Id);
+                    var weaponPurchases = await _unitOfWork.WeaponPurchaseRepository.GetWeaponPurchasesForOrder(orderHeader.Id);
+
+                    if (mobileSuitPurchases.Count > 0)
+                    {
+                        foreach (var mobileSuit in mobileSuitPurchases)
+                        {
+                            await _unitOfWork.UserMobileSuitRepository.CreateUserMobileSuit(userId, mobileSuit);
+                        }
+                    }
+
+                    if (weaponPurchases.Count > 0)
+                    {
+                        foreach (var weapon in weaponPurchases)
+                        {
+                            await _unitOfWork.UserWeaponRepository.CreateUserWeapon(userId, weapon);
+                        } 
+                    }
                 }
                 else
                 {

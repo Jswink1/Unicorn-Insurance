@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UnicornInsurance.Data;
 
 namespace UnicornInsurance.Data.Migrations
 {
     [DbContext(typeof(UnicornDataDBContext))]
-    partial class UnicornDataDBContextModelSnapshot : ModelSnapshot
+    [Migration("20220307173848_AddUserMobileSuitsAndWeapons")]
+    partial class AddUserMobileSuitsAndWeapons
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -299,6 +301,9 @@ namespace UnicornInsurance.Data.Migrations
                     b.Property<string>("ApplicationUserId")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("CustomWeaponId")
+                        .HasColumnType("int");
+
                     b.Property<int>("MobileSuitId")
                         .HasColumnType("int");
 
@@ -325,12 +330,19 @@ namespace UnicornInsurance.Data.Migrations
                     b.Property<bool>("IsCustomWeapon")
                         .HasColumnType("bit");
 
+                    b.Property<int?>("UserMobileSuitId")
+                        .HasColumnType("int");
+
                     b.Property<int>("WeaponId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("EquippedMobileSuitId");
+
+                    b.HasIndex("UserMobileSuitId")
+                        .IsUnique()
+                        .HasFilter("[UserMobileSuitId] IS NOT NULL");
 
                     b.HasIndex("WeaponId");
 
@@ -580,9 +592,14 @@ namespace UnicornInsurance.Data.Migrations
 
             modelBuilder.Entity("UnicornInsurance.Models.UserWeapon", b =>
                 {
-                    b.HasOne("UnicornInsurance.Models.UserMobileSuit", "UserMobileSuit")
+                    b.HasOne("UnicornInsurance.Models.UserMobileSuit", "EquippedMobileSuit")
                         .WithMany()
                         .HasForeignKey("EquippedMobileSuitId");
+
+                    b.HasOne("UnicornInsurance.Models.UserMobileSuit", null)
+                        .WithOne("CustomWeapon")
+                        .HasForeignKey("UnicornInsurance.Models.UserWeapon", "UserMobileSuitId")
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("UnicornInsurance.Models.Weapon", "Weapon")
                         .WithMany()
@@ -590,7 +607,7 @@ namespace UnicornInsurance.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("UserMobileSuit");
+                    b.Navigation("EquippedMobileSuit");
 
                     b.Navigation("Weapon");
                 });
@@ -623,6 +640,11 @@ namespace UnicornInsurance.Data.Migrations
                     b.Navigation("OrderHeader");
 
                     b.Navigation("Weapon");
+                });
+
+            modelBuilder.Entity("UnicornInsurance.Models.UserMobileSuit", b =>
+                {
+                    b.Navigation("CustomWeapon");
                 });
 #pragma warning restore 612, 618
         }
