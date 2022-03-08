@@ -8,6 +8,7 @@ using UnicornInsurance.Application.DTOs.MobileSuit;
 using UnicornInsurance.Application.DTOs.MobileSuitCartItem;
 using UnicornInsurance.Application.DTOs.OrderDetails;
 using UnicornInsurance.Application.DTOs.OrderHeader;
+using UnicornInsurance.Application.DTOs.UserMobileSuit;
 using UnicornInsurance.Application.DTOs.Weapon;
 using UnicornInsurance.Application.DTOs.WeaponCartItem;
 using UnicornInsurance.Models;
@@ -41,23 +42,7 @@ namespace UnicornInsurance.Application
             CreateMap<WeaponPurchase, WeaponPurchaseDTO>().ReverseMap();
             CreateMap<WeaponPurchase, CreateWeaponPurchaseDTO>().ReverseMap();
 
-            //CreateMap<CustomWeapon, WeaponDTO>().ReverseMap();
-
-
-
-
-            //CreateMap<LeaveRequest, LeaveRequestListDTO>()
-            //    .ForMember(dest => dest.DateRequested, opt => opt.MapFrom(src => src.DateCreated)).ReverseMap();
-
-            //CreateMap<LeaveRequest, CreateLeaveRequestDTO>().ReverseMap();
-            //CreateMap<LeaveRequest, UpdateLeaveRequestDTO>().ReverseMap();
-
-            //CreateMap<LeaveAllocation, LeaveAllocationDTO>().ReverseMap();
-            //CreateMap<LeaveAllocation, CreateLeaveRequestDTO>().ReverseMap();
-            //CreateMap<LeaveAllocation, UpdateLeaveRequestDTO>().ReverseMap();
-
-            //CreateMap<LeaveType, LeaveTypeDTO>().ReverseMap();
-            //CreateMap<LeaveType, CreateLeaveTypeDTO>().ReverseMap();
+            CreateMap<UserMobileSuit, UserMobileSuitDTO>().ReverseMap();
         }
     }
 }

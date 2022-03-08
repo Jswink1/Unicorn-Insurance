@@ -10,5 +10,6 @@ namespace UnicornInsurance.Application.Contracts.Data
     public interface IUserMobileSuitRepository : IGenericRepository<UserMobileSuit>
     {
         Task CreateUserMobileSuit(string userId, MobileSuitPurchase mobileSuit);
+        Task<List<UserMobileSuit>> GetAllUserMobileSuits(string applicationUserId);
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -42,6 +43,15 @@ namespace UnicornInsurance.Data.Repositories
             }
 
             return;
+        }
+
+        public async Task<List<UserMobileSuit>> GetAllUserMobileSuits(string applicationUserId)
+        {
+            var userMobileSuits = await _dbContext.UserMobileSuits.Where(x => x.ApplicationUserId == applicationUserId)
+                                                                .Include(x => x.MobileSuit)
+                                                                .ToListAsync();
+
+            return userMobileSuits;
         }
     }
 }
