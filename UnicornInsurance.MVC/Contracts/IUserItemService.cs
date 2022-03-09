@@ -9,5 +9,6 @@ namespace UnicornInsurance.MVC.Contracts
     public interface IUserItemService
     {
         Task<List<UserMobileSuit>> GetAllUserMobileSuits();
+        Task<UserMobileSuit> GetUserMobileSuitDetails(int userMobileSuitId);
     }
 }

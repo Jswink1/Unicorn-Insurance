@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -34,6 +35,29 @@ namespace UnicornInsurance.Data.Repositories
             await _dbContext.SaveChangesAsync();
 
             return;
+        }
+
+        public async Task<List<UserWeapon>> GetUserMobileSuitEquippedWeapons(int userMobileSuitId)
+        {
+            var equippedWeapons = await _dbContext.UserWeapons.Where(w => w.EquippedMobileSuitId == userMobileSuitId)
+                                                                    .Include(w => w.Weapon)
+                                                                    .ToListAsync();
+
+            return equippedWeapons;
+        }
+
+        public async Task<List<UserWeapon>> GetAvailableUserWeapons(string userId)
+        {
+            var availableWeapons = await _dbContext.UserWeapons.Where(w => w.ApplicationUserId == userId)
+                                                               .Where(w => w.EquippedMobileSuitId == null)
+                                                               .Include(w => w.Weapon)
+                                                               .ToListAsync();
+
+            availableWeapons = availableWeapons.GroupBy(w => w.WeaponId)
+                                               .Select(g => g.First())
+                                               .ToList();
+
+            return availableWeapons;
         }
     }
 }

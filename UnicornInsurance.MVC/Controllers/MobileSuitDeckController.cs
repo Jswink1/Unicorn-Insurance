@@ -22,5 +22,14 @@ namespace UnicornInsurance.MVC.Controllers
 
             return View(userMobileSuits);
         }
+
+        public async Task<IActionResult> Details(int id)
+        {
+            var userMobileSuitDetails = await _userItemService.GetUserMobileSuitDetails(id);
+
+            Console.WriteLine();
+
+            return View(userMobileSuitDetails);
+        }
     }
 }

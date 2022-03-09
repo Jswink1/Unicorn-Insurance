@@ -25,9 +25,17 @@ namespace UnicornInsurance.MVC.Services
         public async Task<List<UserMobileSuit>> GetAllUserMobileSuits()
         {
             AddBearerToken();
-            var userMobileSuits = await _client.UserMobileSuitAsync();
+            var userMobileSuits = await _client.UserMobileSuitAllAsync();
 
             return _mapper.Map<List<UserMobileSuit>>(userMobileSuits);
+        }
+
+        public async Task<UserMobileSuit> GetUserMobileSuitDetails(int userMobileSuitId)
+        {
+            AddBearerToken();
+            var userMobileSuit = await _client.UserMobileSuitAsync(userMobileSuitId);
+
+            return _mapper.Map<UserMobileSuit>(userMobileSuit);
         }
     }
 }

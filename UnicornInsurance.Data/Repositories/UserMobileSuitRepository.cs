@@ -53,5 +53,14 @@ namespace UnicornInsurance.Data.Repositories
 
             return userMobileSuits;
         }
+
+        public async Task<UserMobileSuit> GetUserMobileSuit(int id)
+        {
+            var userMobileSuit = await _dbContext.UserMobileSuits.Where(x => x.Id == id)
+                                                                .Include(x => x.MobileSuit)
+                                                                .FirstOrDefaultAsync();
+
+            return userMobileSuit;
+        }
     }
 }

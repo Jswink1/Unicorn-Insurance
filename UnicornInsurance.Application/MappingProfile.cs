@@ -9,6 +9,7 @@ using UnicornInsurance.Application.DTOs.MobileSuitCartItem;
 using UnicornInsurance.Application.DTOs.OrderDetails;
 using UnicornInsurance.Application.DTOs.OrderHeader;
 using UnicornInsurance.Application.DTOs.UserMobileSuit;
+using UnicornInsurance.Application.DTOs.UserWeapon;
 using UnicornInsurance.Application.DTOs.Weapon;
 using UnicornInsurance.Application.DTOs.WeaponCartItem;
 using UnicornInsurance.Models;
@@ -39,10 +40,14 @@ namespace UnicornInsurance.Application
 
             CreateMap<MobileSuitPurchase, MobileSuitPurchaseDTO>().ReverseMap();
             CreateMap<MobileSuitPurchase, CreateMobileSuitPurchaseDTO>().ReverseMap();
+
             CreateMap<WeaponPurchase, WeaponPurchaseDTO>().ReverseMap();
             CreateMap<WeaponPurchase, CreateWeaponPurchaseDTO>().ReverseMap();
 
             CreateMap<UserMobileSuit, UserMobileSuitDTO>().ReverseMap();
+            CreateMap<UserMobileSuit, MobileSuitDTO>().ReverseMap();
+
+            CreateMap<UserWeapon, UserWeaponDTO>().ReverseMap();
         }
     }
 }

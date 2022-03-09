@@ -28,5 +28,13 @@ namespace UnicornInsurance.Api.Controllers
             var userMobileSuits = await _mediator.Send(new GetUserMobileSuitListRequest());
             return Ok(userMobileSuits);
         }
+
+        [HttpGet]
+        [Route("UserMobileSuit/{id}")]
+        public async Task<ActionResult<FullUserMobileSuitDTO>> GetUserMobileSuitDetails(int id)
+        {
+            var userMobileSuit = await _mediator.Send(new GetUserMobileSuitDetailsRequest() { Id = id });
+            return Ok(userMobileSuit);
+        }
     }
 }

@@ -11,5 +11,6 @@ namespace UnicornInsurance.Application.Contracts.Data
     {
         Task CreateUserMobileSuit(string userId, MobileSuitPurchase mobileSuit);
         Task<List<UserMobileSuit>> GetAllUserMobileSuits(string applicationUserId);
+        Task<UserMobileSuit> GetUserMobileSuit(int id);
     }
 }
