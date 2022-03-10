@@ -6,7 +6,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using UnicornInsurance.Application.DTOs.UserMobileSuit;
+using UnicornInsurance.Application.DTOs.UserWeapon;
+using UnicornInsurance.Application.Features.UserItems.Requests.Commands;
 using UnicornInsurance.Application.Features.UserItems.Requests.Queries;
+using UnicornInsurance.Application.Responses;
 
 namespace UnicornInsurance.Api.Controllers
 {
@@ -35,6 +38,22 @@ namespace UnicornInsurance.Api.Controllers
         {
             var userMobileSuit = await _mediator.Send(new GetUserMobileSuitDetailsRequest() { Id = id });
             return Ok(userMobileSuit);
+        }
+
+        [HttpPost]
+        [Route("EquipWeapon")]
+        public async Task<ActionResult<BaseCommandResponse>> EquipWeapon([FromBody] EquipWeaponDTO equipWeaponDTO)
+        {
+            var response = await _mediator.Send(new EquipWeaponCommand() { EquipWeaponDTO = equipWeaponDTO });
+            return Ok(response);
+        }
+
+        [HttpPost]
+        [Route("UnequipWeapon")]
+        public async Task<ActionResult> UnequipWeapon(int userMobileSuitId)
+        {
+            await _mediator.Send(new UnequipWeaponCommand() { UserMobileSuitId = userMobileSuitId });
+            return Ok();
         }
     }
 }

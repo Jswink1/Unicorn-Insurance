@@ -37,5 +37,28 @@ namespace UnicornInsurance.MVC.Services
 
             return _mapper.Map<UserMobileSuit>(userMobileSuit);
         }
+
+        public async Task<BaseCommandResponse> EquipWeapon(int selectedWeaponId, int userMobileSuitId)
+        {
+            EquipWeaponDTO equipWeaponDTO = new()
+            {
+                SelectedWeaponId = selectedWeaponId,
+                UserMobileSuitId = userMobileSuitId
+            };
+
+            AddBearerToken();
+            var response = await _client.EquipWeaponAsync(equipWeaponDTO);
+
+            return response;
+        }
+
+        public async Task UnequipWeapon(int userMobileSuitId)
+        {
+            AddBearerToken();
+            await _client.UnequipWeaponAsync(userMobileSuitId);
+
+            return;
+        }
+
     }
 }

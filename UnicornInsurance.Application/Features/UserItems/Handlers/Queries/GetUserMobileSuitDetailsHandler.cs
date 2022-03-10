@@ -45,15 +45,23 @@ namespace UnicornInsurance.Application.Features.UserItems.Handlers.Queries
             if (userMobileSuit.ApplicationUserId != userId)
                 throw new UnauthorizedAccessException();
 
-            var equippedWeapons = await _unitOfWork.UserWeaponRepository.GetUserMobileSuitEquippedWeapons(userMobileSuit.Id);
+            var equippedWeapon = await _unitOfWork.UserWeaponRepository.GetUserMobileSuitEquippedWeapon(userMobileSuit.Id);
 
             var availableWeapons = await _unitOfWork.UserWeaponRepository.GetAvailableUserWeapons(userId);
+
+            if (equippedWeapon is not null)
+            {
+                if (availableWeapons.Any(w => w.WeaponId == equippedWeapon.WeaponId))
+                {
+                    availableWeapons.RemoveAll(w => w.WeaponId == equippedWeapon.WeaponId);
+                }
+            }
 
             FullUserMobileSuitDTO userMobileSuitDTO = new()
             {
                 Id = userMobileSuit.Id,
                 MobileSuit = _mapper.Map<MobileSuitDTO>(userMobileSuit.MobileSuit),
-                EquippedWeapons = _mapper.Map<List<UserWeaponDTO>>(equippedWeapons),
+                EquippedWeapon = _mapper.Map<UserWeaponDTO>(equippedWeapon),
                 AvailableWeapons = _mapper.Map<List<UserWeaponDTO>>(availableWeapons)
             };
 

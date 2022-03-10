@@ -10,7 +10,8 @@ namespace UnicornInsurance.Application.Contracts.Data
     public interface IUserWeaponRepository : IGenericRepository<UserWeapon>
     {
         Task CreateUserWeapon(string userId, WeaponPurchase weapon);
-        Task<List<UserWeapon>> GetUserMobileSuitEquippedWeapons(int userMobileSuitId);
+        Task<UserWeapon> GetUserMobileSuitEquippedWeapon(int userMobileSuitId);
         Task<List<UserWeapon>> GetAvailableUserWeapons(string userId);
+        Task EquipWeapon(int selectedWeaponId, int userMobileSuitId);
     }
 }

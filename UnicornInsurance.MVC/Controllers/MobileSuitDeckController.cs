@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using UnicornInsurance.MVC.Contracts;
+using UnicornInsurance.MVC.Models;
 
 namespace UnicornInsurance.MVC.Controllers
 {
@@ -27,9 +29,28 @@ namespace UnicornInsurance.MVC.Controllers
         {
             var userMobileSuitDetails = await _userItemService.GetUserMobileSuitDetails(id);
 
+            userMobileSuitDetails.AvailableWeaponsList = new SelectList(userMobileSuitDetails.AvailableWeapons, "Id", "Weapon.Name");
+
             Console.WriteLine();
 
             return View(userMobileSuitDetails);
+        }
+
+        [HttpPost]
+        [ActionName("Details")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Details(UserMobileSuit userMobileSuit)
+        {
+            await _userItemService.EquipWeapon(userMobileSuit.SelectedWeaponId, userMobileSuit.Id);
+
+            return RedirectToAction("Details", "MobileSuitDeck", new { id = userMobileSuit.Id });
+        }
+
+        public async Task<IActionResult> UnequipWeapon(int userMobileSuitId)
+        {
+            await _userItemService.UnequipWeapon(userMobileSuitId);
+
+            return RedirectToAction("Details", "MobileSuitDeck", new { id = userMobileSuitId });
         }
     }
 }
