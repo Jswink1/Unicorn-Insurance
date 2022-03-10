@@ -124,7 +124,9 @@ namespace UnicornInsurance.Api
                     Version = "v1",
                     Title = "Unicorn Insurance Api",                    
                 });
-                
+
+                c.UseAllOfToExtendReferenceSchemas();
+
             });
         }
     }
