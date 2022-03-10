@@ -3512,6 +3512,9 @@ namespace UnicornInsurance.MVC.Services.Base
         [Newtonsoft.Json.JsonProperty("equippedWeapon", Required = Newtonsoft.Json.Required.AllowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public UserWeaponDTO EquippedWeapon { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("customWeapon", Required = Newtonsoft.Json.Required.AllowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public UserWeaponDTO CustomWeapon { get; set; }
+
         [Newtonsoft.Json.JsonProperty("availableWeapons", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<UserWeaponDTO> AvailableWeapons { get; set; }
 

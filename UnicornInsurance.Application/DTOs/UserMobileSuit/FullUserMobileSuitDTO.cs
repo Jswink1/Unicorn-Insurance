@@ -13,6 +13,7 @@ namespace UnicornInsurance.Application.DTOs.UserMobileSuit
         public int Id { get; set; }
         public MobileSuitDTO MobileSuit { get; set; }
         public UserWeaponDTO EquippedWeapon { get; set; }
+        public UserWeaponDTO CustomWeapon { get; set; }
         public List<UserWeaponDTO> AvailableWeapons { get; set; }
     }
 }

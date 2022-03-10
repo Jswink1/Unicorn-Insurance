@@ -41,14 +41,14 @@ namespace UnicornInsurance.Application.Features.UserItems.Handlers.Queries
 
             if (userMobileSuit is null)
                 throw new NotFoundException(nameof(userMobileSuit), request.Id);
-
             if (userMobileSuit.ApplicationUserId != userId)
                 throw new UnauthorizedAccessException();
 
             var equippedWeapon = await _unitOfWork.UserWeaponRepository.GetUserMobileSuitEquippedWeapon(userMobileSuit.Id);
-
+            var customWeapon = await _unitOfWork.UserWeaponRepository.GetUserMobileSuitCustomWeapon(userMobileSuit.Id);
             var availableWeapons = await _unitOfWork.UserWeaponRepository.GetAvailableUserWeapons(userId);
-
+            
+            // Remove duplicate of EquippedWeapon from the list of AvailableWeapons
             if (equippedWeapon is not null)
             {
                 if (availableWeapons.Any(w => w.WeaponId == equippedWeapon.WeaponId))
@@ -62,6 +62,7 @@ namespace UnicornInsurance.Application.Features.UserItems.Handlers.Queries
                 Id = userMobileSuit.Id,
                 MobileSuit = _mapper.Map<MobileSuitDTO>(userMobileSuit.MobileSuit),
                 EquippedWeapon = _mapper.Map<UserWeaponDTO>(equippedWeapon),
+                CustomWeapon = _mapper.Map<UserWeaponDTO>(customWeapon),
                 AvailableWeapons = _mapper.Map<List<UserWeaponDTO>>(availableWeapons)
             };
 

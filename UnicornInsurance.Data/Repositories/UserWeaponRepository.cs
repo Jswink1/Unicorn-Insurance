@@ -40,8 +40,9 @@ namespace UnicornInsurance.Data.Repositories
         public async Task<UserWeapon> GetUserMobileSuitEquippedWeapon(int userMobileSuitId)
         {
             var equippedWeapon = await _dbContext.UserWeapons.Where(w => w.EquippedMobileSuitId == userMobileSuitId)
-                                                                    .Include(w => w.Weapon)
-                                                                    .FirstOrDefaultAsync();
+                                                             .Where(w => w.IsCustomWeapon == false)
+                                                             .Include(w => w.Weapon)
+                                                             .FirstOrDefaultAsync();
 
             return equippedWeapon;
         }
@@ -67,6 +68,16 @@ namespace UnicornInsurance.Data.Repositories
             await _dbContext.SaveChangesAsync();
 
             return;
+        }
+
+        public async Task<UserWeapon> GetUserMobileSuitCustomWeapon(int userMobileSuitId)
+        {
+            var customWeapon = await _dbContext.UserWeapons.Where(w => w.EquippedMobileSuitId == userMobileSuitId)
+                                                             .Where(w => w.IsCustomWeapon == true)
+                                                             .Include(w => w.Weapon)
+                                                             .FirstOrDefaultAsync();
+
+            return customWeapon;
         }
     }
 }

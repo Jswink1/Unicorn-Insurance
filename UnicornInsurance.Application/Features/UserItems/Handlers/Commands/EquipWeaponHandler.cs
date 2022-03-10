@@ -49,22 +49,22 @@ namespace UnicornInsurance.Application.Features.UserItems.Handlers.Commands
                     q => q.Type == SD.Uid)?.Value;
 
                 var userMobileSuit = await _unitOfWork.UserMobileSuitRepository.Get(request.EquipWeaponDTO.UserMobileSuitId);
-                var userWeapon = await _unitOfWork.UserWeaponRepository.Get(request.EquipWeaponDTO.SelectedWeaponId);
+                var selectedWeapon = await _unitOfWork.UserWeaponRepository.Get(request.EquipWeaponDTO.SelectedWeaponId);
 
                 if (userMobileSuit is null)
                     throw new NotFoundException(nameof(userMobileSuit), request.EquipWeaponDTO.UserMobileSuitId);
-                if (userWeapon is null)
-                    throw new NotFoundException(nameof(userWeapon), request.EquipWeaponDTO.SelectedWeaponId);
+                if (selectedWeapon is null)
+                    throw new NotFoundException(nameof(selectedWeapon), request.EquipWeaponDTO.SelectedWeaponId);
 
                 if (userMobileSuit.ApplicationUserId != userId ||
-                    userWeapon.ApplicationUserId != userId)
+                    selectedWeapon.ApplicationUserId != userId)
                     throw new UnauthorizedAccessException();
 
-                var userMobileSuitEquippedWeapon = await _unitOfWork.UserWeaponRepository.GetUserMobileSuitEquippedWeapon(request.EquipWeaponDTO.UserMobileSuitId);
+                var currentlyEquippedWeapon = await _unitOfWork.UserWeaponRepository.GetUserMobileSuitEquippedWeapon(request.EquipWeaponDTO.UserMobileSuitId);
 
-                if (userMobileSuitEquippedWeapon is not null)
+                if (currentlyEquippedWeapon is not null)
                 {
-                    userMobileSuitEquippedWeapon.EquippedMobileSuitId = null;                   
+                    currentlyEquippedWeapon.EquippedMobileSuitId = null;                   
                 }
 
                 await _unitOfWork.UserWeaponRepository.EquipWeapon(request.EquipWeaponDTO.SelectedWeaponId, request.EquipWeaponDTO.UserMobileSuitId);

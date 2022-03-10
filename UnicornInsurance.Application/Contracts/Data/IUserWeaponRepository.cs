@@ -13,5 +13,6 @@ namespace UnicornInsurance.Application.Contracts.Data
         Task<UserWeapon> GetUserMobileSuitEquippedWeapon(int userMobileSuitId);
         Task<List<UserWeapon>> GetAvailableUserWeapons(string userId);
         Task EquipWeapon(int selectedWeaponId, int userMobileSuitId);
+        Task<UserWeapon> GetUserMobileSuitCustomWeapon(int userMobileSuitId);
     }
 }

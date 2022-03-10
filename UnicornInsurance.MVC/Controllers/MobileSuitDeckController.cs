@@ -31,8 +31,6 @@ namespace UnicornInsurance.MVC.Controllers
 
             userMobileSuitDetails.AvailableWeaponsList = new SelectList(userMobileSuitDetails.AvailableWeapons, "Id", "Weapon.Name");
 
-            Console.WriteLine();
-
             return View(userMobileSuitDetails);
         }
 
