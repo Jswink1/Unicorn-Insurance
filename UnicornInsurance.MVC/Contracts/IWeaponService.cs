@@ -9,10 +9,10 @@ namespace UnicornInsurance.MVC.Contracts
 {
     public interface IWeaponService
     {
-        Task<List<WeaponVM>> GetWeapons();
-        Task<WeaponVM> GetWeaponDetails(int id);
-        Task<BaseCommandResponse> InsertWeapon(WeaponVM weaponVM);
-        Task<BaseCommandResponse> UpdateWeapon(WeaponVM weaponVM);
+        Task<List<Weapon>> GetWeapons();
+        Task<Weapon> GetWeaponDetails(int id);
+        Task<BaseCommandResponse> InsertWeapon(Weapon weaponVM);
+        Task<BaseCommandResponse> UpdateWeapon(Weapon weaponVM);
         Task DeleteWeapon(int id);
     }
 }

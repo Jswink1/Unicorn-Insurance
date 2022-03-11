@@ -9,7 +9,7 @@ namespace UnicornInsurance.MVC.Models
     public class UserMobileSuit
     {
         public int Id { get; set; }
-        public MobileSuitVM MobileSuit { get; set; }
+        public MobileSuit MobileSuit { get; set; }
         public UserWeapon EquippedWeapon { get; set; }
         public UserWeapon CustomWeapon { get; set; }
         public List<UserWeapon> AvailableWeapons { get; set; }

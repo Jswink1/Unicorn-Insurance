@@ -1,4 +1,4 @@
-﻿// TODO: check if the TinyMCE plugin even works correctly or if it just looks stupid when displaying customized text
+﻿// TODO: check if the TinyMCE plugin even works correctly or if it just looks derpy when displaying customized text
 // Initialize TinyMCE textarea plugin
 tinymce.init({
     selector: 'textarea',

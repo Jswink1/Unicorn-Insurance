@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace UnicornInsurance.MVC.Models
 {
-    public class MobileSuitVM
+    public class MobileSuit
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -18,7 +18,6 @@ namespace UnicornInsurance.MVC.Models
         public string PowerOutput { get; set; }
         public string Armor { get; set; }
         public string ImageUrl { get; set; }
-        public WeaponVM CustomWeapon { get; set; }
-        public ICollection<string> Errors { get; set; }
+        public Weapon CustomWeapon { get; set; }        
     }
 }

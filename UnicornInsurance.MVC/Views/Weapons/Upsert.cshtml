@@ -1,10 +1,10 @@
-﻿@model WeaponVM
+﻿@model WeaponUpsertVM
 @{
     @* If the model is being edited change the title *@
     var title = "Create Weapon";
-    @if (Model.Id != 0)
+    @if (Model.Weapon.Id != 0)
     {
-        title = $"Edit {Model.Name}";
+        title = $"Edit {Model.Weapon.Name}";
     }
 
     ViewData["Title"] = title;
@@ -24,11 +24,11 @@
             </ul>
         }
 
-        @if (Model.Id != 0)
+        @if (Model.Weapon.Id != 0)
         {
             @*If the model is being edited include the Model Id and ImageUrl as a hidden field *@
-            <input type="hidden" asp-for="Id" />
-            <input type="hidden" asp-for="ImageUrl" />
+            <input type="hidden" asp-for="Weapon.Id" />
+            <input type="hidden" asp-for="Weapon.ImageUrl" />
         }
 
         @* Page Header/Title *@
@@ -40,10 +40,10 @@
             @* Weapon Name Input *@
             <div class="form-group row mt-2">
                 <div class="col-3">
-                    <label asp-for="Name"></label>
+                    <label asp-for="Weapon.Name"></label>
                 </div>
                 <div class="col-8">
-                    <input asp-for="Name" class="form-control" />
+                    <input asp-for="Weapon.Name" class="form-control" />
                 </div>
             </div>
 
@@ -51,20 +51,20 @@
             @* Weapon Description Input *@
             <div class="form-group row mt-2">
                 <div class="col-3">
-                    <label asp-for="Description"></label>
+                    <label asp-for="Weapon.Description"></label>
                 </div>
                 <div class="col-8">
-                    <textarea asp-for="Description" class="form-control"></textarea>
+                    <textarea asp-for="Weapon.Description" class="form-control"></textarea>
                 </div>
             </div>
 
             @* Weapon Price Input *@
             <div class="form-group row mt-2">
                 <div class="col-3">
-                    <label asp-for="Price"></label>
+                    <label asp-for="Weapon.Price"></label>
                 </div>
                 <div class="col-8">
-                    <input asp-for="Price" class="form-control" />
+                    <input asp-for="Weapon.Price" class="form-control" />
                 </div>
             </div>
 
@@ -81,9 +81,9 @@
             <div class="form-group row mt-2">
                 <div class="col-8 offset-3">
                     @*Check whether to display Edit or Create Button*@
-                    @if (Model.Id != 0)
+                    @if (Model.Weapon.Id != 0)
                     {
-                        <partial name="_EditAndBackToListButton" model="Model.Id" />
+                        <partial name="_EditAndBackToListButton" model="Model.Weapon.Id" />
                     }
                     else
                     {
@@ -101,10 +101,10 @@
         </div>
 
         @*If the model is being edited, display the current image*@
-        @if (Model.Id != 0)
+        @if (Model.Weapon.Id != 0)
         {
             <div class="col-3 offset-1 mt-4">
-                <img src="@Model.ImageUrl" class="d-block w-100" />
+                <img src="@Model.Weapon.ImageUrl" class="d-block w-100" />
             </div>
         }
     </div>

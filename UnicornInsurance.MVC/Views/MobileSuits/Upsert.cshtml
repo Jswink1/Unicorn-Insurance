@@ -1,10 +1,10 @@
-﻿@model MobileSuitVM
+﻿@model MobileSuitUpsertVM
 @{
     @* If the model is being edited change the title *@
     var title = "Create Mobile Suit";
-    @if (Model.Id != 0)
+    @if (Model.MobileSuit.Id != 0)
     {
-        title = $"Edit {Model.Name}";
+        title = $"Edit {Model.MobileSuit.Name}";
     }
 
     ViewData["Title"] = title;
@@ -24,16 +24,16 @@
             </ul>
         }
 
-        @if (Model.Id != 0)
+        @if (Model.MobileSuit.Id != 0)
         {
             @* If the model is being edited include the Model Id and ImageUrl as a hidden field *@
-            <input type="hidden" asp-for="Id" />
-            <input type="hidden" asp-for="ImageUrl" />
+            <input type="hidden" asp-for="MobileSuit.Id" />
+            <input type="hidden" asp-for="MobileSuit.ImageUrl" />
 
-            if (Model.CustomWeapon is not null &&
-                Model.CustomWeapon.Id != 0)
+            if (Model.MobileSuit.CustomWeapon is not null &&
+                Model.MobileSuit.CustomWeapon.Id != 0)
             {
-                <input type="hidden" asp-for="CustomWeapon.Id" />
+                <input type="hidden" asp-for="MobileSuit.CustomWeapon.Id" />
             }
         }
 
@@ -46,10 +46,10 @@
             @* Mobile Suit Name Input *@
             <div class="form-group row mt-2">
                 <div class="col-3">
-                    <label asp-for="Name"></label>
+                    <label asp-for="MobileSuit.Name"></label>
                 </div>
                 <div class="col-8">
-                    <input asp-for="Name" class="form-control" />
+                    <input asp-for="MobileSuit.Name" class="form-control" />
                 </div>
             </div>
 
@@ -57,80 +57,80 @@
             @* Mobile Suit Description Input *@
             <div class="form-group row mt-2">
                 <div class="col-3">
-                    <label asp-for="Description"></label>
+                    <label asp-for="MobileSuit.Description"></label>
                 </div>
                 <div class="col-8">
-                    <textarea asp-for="Description" class="form-control"></textarea>
+                    <textarea asp-for="MobileSuit.Description" class="form-control"></textarea>
                 </div>
             </div>
 
             @* Mobile Suit Price Input *@
             <div class="form-group row mt-2">
                 <div class="col-3">
-                    <label asp-for="Price"></label>
+                    <label asp-for="MobileSuit.Price"></label>
                 </div>
                 <div class="col-8">
-                    <input asp-for="Price" class="form-control" />
+                    <input asp-for="MobileSuit.Price" class="form-control" />
                 </div>
             </div>
 
             @* Mobile Suit Type Input *@
             <div class="form-group row mt-2">
                 <div class="col-3">
-                    <label asp-for="Type"></label>
+                    <label asp-for="MobileSuit.Type"></label>
                 </div>
                 <div class="col-8">
-                    <input asp-for="Type" class="form-control" />
+                    <input asp-for="MobileSuit.Type" class="form-control" />
                 </div>
             </div>
 
             @* Mobile Suit Manufacturer Input *@
             <div class="form-group row mt-2">
                 <div class="col-3">
-                    <label asp-for="Manufacturer"></label>
+                    <label asp-for="MobileSuit.Manufacturer"></label>
                 </div>
                 <div class="col-8">
-                    <input asp-for="Manufacturer" class="form-control" />
+                    <input asp-for="MobileSuit.Manufacturer" class="form-control" />
                 </div>
             </div>
 
             @* Mobile Suit Height Input *@
             <div class="form-group row mt-2">
                 <div class="col-3">
-                    <label asp-for="Height"></label>
+                    <label asp-for="MobileSuit.Height"></label>
                 </div>
                 <div class="col-8">
-                    <input asp-for="Height" class="form-control" />
+                    <input asp-for="MobileSuit.Height" class="form-control" />
                 </div>
             </div>
 
             @* Mobile Suit Weight Input *@
             <div class="form-group row mt-2">
                 <div class="col-3">
-                    <label asp-for="Weight"></label>
+                    <label asp-for="MobileSuit.Weight"></label>
                 </div>
                 <div class="col-8">
-                    <input asp-for="Weight" class="form-control" />
+                    <input asp-for="MobileSuit.Weight" class="form-control" />
                 </div>
             </div>
 
             @* Mobile Suit PowerOutput Input *@
             <div class="form-group row mt-2">
                 <div class="col-3">
-                    <label asp-for="PowerOutput"></label>
+                    <label asp-for="MobileSuit.PowerOutput"></label>
                 </div>
                 <div class="col-8">
-                    <input asp-for="PowerOutput" class="form-control" />
+                    <input asp-for="MobileSuit.PowerOutput" class="form-control" />
                 </div>
             </div>
 
             @* Mobile Suit Armor Input *@
             <div class="form-group row mt-2">
                 <div class="col-3">
-                    <label asp-for="Armor"></label>
+                    <label asp-for="MobileSuit.Armor"></label>
                 </div>
                 <div class="col-8">
-                    <input asp-for="Armor" class="form-control" />
+                    <input asp-for="MobileSuit.Armor" class="form-control" />
                 </div>
             </div>
 
@@ -146,10 +146,10 @@
         </div>
 
         @*If the model is being edited, display the current image*@
-        @if (Model.Id != 0)
+        @if (Model.MobileSuit.Id != 0)
         {
             <div class="col-3 offset-1 mt-4">
-                <img src="@Model.ImageUrl" class="d-block w-100" />
+                <img src="@Model.MobileSuit.ImageUrl" class="d-block w-100" />
             </div>
         }
 
@@ -161,39 +161,39 @@
             @* Mobile Suit CustomWeapon Name Input *@
             <div class="form-group row mt-2">
                 <div class="col-3">
-                    <label asp-for="CustomWeapon.Name"></label>
+                    <label asp-for="MobileSuit.CustomWeapon.Name"></label>
                 </div>
                 <div class="col-8">
-                    <input asp-for="CustomWeapon.Name" class="form-control" />
+                    <input asp-for="MobileSuit.CustomWeapon.Name" class="form-control" />
                 </div>
             </div>
 
             @* Mobile Suit CustomWeapon Description Input *@
             <div class="form-group row mt-2">
                 <div class="col-3">
-                    <label asp-for="CustomWeapon.Description"></label>
+                    <label asp-for="MobileSuit.CustomWeapon.Description"></label>
                 </div>
                 <div class="col-8">
-                    <textarea asp-for="CustomWeapon.Description" class="form-control"></textarea>
+                    <textarea asp-for="MobileSuit.CustomWeapon.Description" class="form-control"></textarea>
                 </div>
             </div>
 
             @* Mobile Suit CustomWeapon Price Input *@
             <div class="form-group row mt-2">
                 <div class="col-3">
-                    <label asp-for="CustomWeapon.Price"></label>
+                    <label asp-for="MobileSuit.CustomWeapon.Price"></label>
                 </div>
                 <div class="col-8">
-                    <input asp-for="CustomWeapon.Price" class="form-control" />
+                    <input asp-for="MobileSuit.CustomWeapon.Price" class="form-control" />
                 </div>
             </div>
 
             <div class="form-group row mt-2">
                 <div class="col-8 offset-3">
                     @*Check whether to display Edit or Create Button*@
-                    @if (Model.Id != 0)
+                    @if (Model.MobileSuit.Id != 0)
                     {
-                        <partial name="_EditAndBackToListButton" model="Model.Id" />
+                        <partial name="_EditAndBackToListButton" model="Model.MobileSuit.Id" />
                     }
                     else
                     {

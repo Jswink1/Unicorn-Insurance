@@ -1,4 +1,4 @@
-﻿@model MobileSuitVM
+﻿@model MobileSuit
 @using System.Reflection
 
 @{
@@ -51,7 +51,10 @@
                     if (property.Name == "CustomWeapon" &&
                         @property.GetValue(Model) != null)
                     {
-                        <li class="list-group-item"><span class="font-weight-bold">Custom Weapon - </span> @Model.CustomWeapon.Name</li>
+                        <hr / >
+                        <h5>Custom Weapon</h5>
+                        <li class="list-group-item"><span class="font-weight-bold">Name - </span> @Model.CustomWeapon.Name</li>
+                        <li class="list-group-item"><span class="font-weight-bold">Ability - </span> @Model.CustomWeapon.Description</li>
                     }
                 }
             </ul>

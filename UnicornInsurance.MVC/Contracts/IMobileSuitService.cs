@@ -9,10 +9,10 @@ namespace UnicornInsurance.MVC.Contracts
 {
     public interface IMobileSuitService
     {
-        Task<List<MobileSuitVM>> GetMobileSuits();
-        Task<MobileSuitVM> GetMobileSuitDetails(int id);
-        Task<BaseCommandResponse> InsertMobileSuit(MobileSuitVM mobileSuitVM);
-        Task<BaseCommandResponse> UpdateMobileSuit(MobileSuitVM mobileSuitVM);
+        Task<List<MobileSuit>> GetMobileSuits();
+        Task<MobileSuit> GetMobileSuitDetails(int id);
+        Task<BaseCommandResponse> InsertMobileSuit(MobileSuit mobileSuitVM);
+        Task<BaseCommandResponse> UpdateMobileSuit(MobileSuit mobileSuitVM);
         Task DeleteMobileSuit(int id);
     }
 }

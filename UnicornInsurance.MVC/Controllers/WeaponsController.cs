@@ -6,10 +6,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 using UnicornInsurance.MVC.Constants;
 using UnicornInsurance.MVC.Contracts;
 using UnicornInsurance.MVC.Models;
+using UnicornInsurance.MVC.Models.ViewModels;
 using UnicornInsurance.MVC.Services.Base;
 
 namespace UnicornInsurance.MVC.Controllers
@@ -29,9 +31,47 @@ namespace UnicornInsurance.MVC.Controllers
             _shoppingCartService = shoppingCartService;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page = 1, string searchWeapon = null)
         {
-            var model = await _weaponService.GetWeapons();
+            WeaponListVM model = new()
+            {
+                Weapons = await _weaponService.GetWeapons()
+            };
+
+            // Create url pagination parameters
+            StringBuilder url = new();
+            url.Append("/Weapons?page=:");
+
+            // Determine if there is search criteria
+            url.Append("&searchWeapon=");
+            if (searchWeapon != null)
+            {
+                url.Append(searchWeapon);
+            }
+
+            // Apply filter to search results
+            if (searchWeapon != null)
+            {
+                model.Weapons = model.Weapons.Where(m => m.Name.ToLower().Contains(searchWeapon.ToLower())).ToList();
+            }
+
+            // Get total number of items
+            var count = model.Weapons.Count;
+
+            // Initialize Pagination properties
+            model.Pagination = new()
+            {
+                CurrentPage = page,
+                ItemsPerPage = SD.WeaponsPerPage,
+                TotalItems = count,
+                UrlParam = url.ToString()
+            };
+
+            // Retrieve the items according to the Pagination
+            model.Weapons = model.Weapons.Skip((page - 1) * SD.WeaponsPerPage)
+                                         .Take(SD.WeaponsPerPage)
+                                         .ToList();
+
             return View(model);
         }
 
@@ -44,12 +84,12 @@ namespace UnicornInsurance.MVC.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         // Add to Cart
-        public async Task<IActionResult> Details(WeaponVM weaponVM)
+        public async Task<IActionResult> Details(Weapon weapon)
         {
             var response = await _shoppingCartService.AddWeaponCartItem(new WeaponCartItem
             {
-                WeaponId = weaponVM.Id,
-                Price = weaponVM.Price
+                WeaponId = weapon.Id,
+                Price = weapon.Price
             });
 
             if (response.Success)
@@ -66,19 +106,18 @@ namespace UnicornInsurance.MVC.Controllers
 
         public async Task<IActionResult> Upsert(int? id)
         {
-            WeaponVM model;
+            WeaponUpsertVM model = new();
 
             // If inserting
             if (id == null)
             {
-                model = new WeaponVM();
                 return View(model);
             }
 
             // If updating
             else
             {
-                model = await _weaponService.GetWeaponDetails(id.GetValueOrDefault());
+                model.Weapon = await _weaponService.GetWeaponDetails(id.GetValueOrDefault());
 
                 return View(model);
             }
@@ -86,7 +125,7 @@ namespace UnicornInsurance.MVC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Upsert(WeaponVM weaponVM)
+        public async Task<IActionResult> Upsert(WeaponUpsertVM model)
         {
             BaseCommandResponse response;
 
@@ -105,10 +144,10 @@ namespace UnicornInsurance.MVC.Controllers
                 var extension = Path.GetExtension(files[0].FileName);
 
                 // If user is editing
-                if (weaponVM.ImageUrl != null)
+                if (model.Weapon.ImageUrl != null)
                 {
                     // Remove the old image
-                    var imagePath = Path.Combine(webRootPath, weaponVM.ImageUrl.TrimStart('\\'));
+                    var imagePath = Path.Combine(webRootPath, model.Weapon.ImageUrl.TrimStart('\\'));
                     if (System.IO.File.Exists(imagePath))
                     {
                         System.IO.File.Delete(imagePath);
@@ -120,37 +159,37 @@ namespace UnicornInsurance.MVC.Controllers
                 {
                     files[0].CopyTo(filesStreams);
                 }
-                weaponVM.ImageUrl = @"\images\weapons\" + fileName + extension;
+                model.Weapon.ImageUrl = @"\images\weapons\" + fileName + extension;
             }
 
             // Else, if the user did not upload a new image file
             else
             {
                 // If user is editing, an image file for the product should already exist in the DB
-                if (weaponVM.Id != 0)
+                if (model.Weapon.Id != 0)
                 {
                     // Retrieve the image stored in the DB
-                    var weapon = await _weaponService.GetWeaponDetails(weaponVM.Id);
-                    weaponVM.ImageUrl = weapon.ImageUrl;
+                    var weapon = await _weaponService.GetWeaponDetails(model.Weapon.Id);
+                    model.Weapon.ImageUrl = weapon.ImageUrl;
                 }
                 // If user is inserting, the user needs to upload an image, so throw an error
                 else
                 {
                     TempData["Error"] = "You must upload an Image File";
-                    return View(weaponVM);
+                    return View(model);
                 }
             }
 
 
             // If inserting
-            if (weaponVM.Id == 0)
+            if (model.Weapon.Id == 0)
             {
-                response = await _weaponService.InsertWeapon(weaponVM);                                        
+                response = await _weaponService.InsertWeapon(model.Weapon);                                        
             }
             // If updating
             else
             {
-                response = await _weaponService.UpdateWeapon(weaponVM);
+                response = await _weaponService.UpdateWeapon(model.Weapon);
             }
 
             if (response.Success)
@@ -161,8 +200,8 @@ namespace UnicornInsurance.MVC.Controllers
             else
             {
                 TempData["Error"] = response.Message;
-                weaponVM.Errors = response.Errors;
-                return View(weaponVM);
+                model.Errors = response.Errors;
+                return View(model);
             }
         }
 

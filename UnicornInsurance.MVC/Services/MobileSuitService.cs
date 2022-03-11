@@ -22,29 +22,28 @@ namespace UnicornInsurance.MVC.Services
             _httpclient = httpclient;
         }
 
-        public async Task<MobileSuitVM> GetMobileSuitDetails(int id)
+        public async Task<MobileSuit> GetMobileSuitDetails(int id)
         {
             var mobileSuit = await _client.MobileSuitGETAsync(id);
 
-            // TODO: make it so that NSwag ServiceClient does not generate FullMobileSuitDTO with "DisallowNull" Requirement on the CustomWeapon property
-            return _mapper.Map<MobileSuitVM>(mobileSuit);
+            return _mapper.Map<MobileSuit>(mobileSuit);
         }
 
-        public async Task<List<MobileSuitVM>> GetMobileSuits()
+        public async Task<List<MobileSuit>> GetMobileSuits()
         {
             var mobileSuits = await _client.MobileSuitAllAsync();
 
-            return _mapper.Map<List<MobileSuitVM>>(mobileSuits);
+            return _mapper.Map<List<MobileSuit>>(mobileSuits);
         }
 
-        public async Task<BaseCommandResponse> InsertMobileSuit(MobileSuitVM mobileSuitVM)
+        public async Task<BaseCommandResponse> InsertMobileSuit(MobileSuit mobileSuitVM)
         {
             var mobileSuit = _mapper.Map<CreateFullMobileSuitDTO>(mobileSuitVM);
 
             return await _client.MobileSuitPOSTAsync(mobileSuit);
         }
 
-        public async Task<BaseCommandResponse> UpdateMobileSuit(MobileSuitVM mobileSuitVM)
+        public async Task<BaseCommandResponse> UpdateMobileSuit(MobileSuit mobileSuitVM)
         {
             var mobileSuit = _mapper.Map<FullMobileSuitDTO>(mobileSuitVM);
 

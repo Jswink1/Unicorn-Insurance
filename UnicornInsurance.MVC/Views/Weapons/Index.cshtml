@@ -1,65 +1,77 @@
-﻿@model List<WeaponVM>
+﻿@model WeaponListVM
 @{
     ViewData["Title"] = "Weapons";
 }
 
-<div class="container">
-    <div class="row">
-
-        @* Page Header/Title *@
-        <div class="col-9">
-            <h2 class="display-4">Weapons</h2>
+<form method="get" asp-action="Index">
+    <div class="container">
+        <div class="row">
+            @if (User.IsInRole("Admin"))
+            {
+                @* Create New Weapon Button *@
+                <div class="col-3">
+                    <a class="btn btn-primary" asp-action="Upsert"><i class="fas fa-plus"></i> &nbsp; Create New Weapon</a>
+                </div>
+            }
         </div>
 
-        @if (User.IsInRole("Admin"))
-        {
-            @* Create New Weapon Button *@
-            <div class="col-3 mt-3">
-                <a class="btn btn-primary" asp-action="Upsert"><i class="fas fa-plus"></i> &nbsp; Create New Weapon</a>
+        @*Search Bar, Search Button, and Pagination*@
+        <div class="row mb-2">
+            <div class="col-6 offset-3">
+                @Html.Editor("searchWeapon", new { htmlAttributes = new { @class = "form-control", placeholder = "Search Weapons..." } })
             </div>
-        }
-    </div>
+            <button type="submit" name="submit" value="Search" class="btn btn-info form-control col-1" style="padding-top: 10px; padding-right: 15px;">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+        <div class="row mb-2 offset-1">
+            <h5 class="mt-1">Pages:</h5>
+            <div page-model="@Model.Pagination" asp-action="Index" page-class="btn border"
+                 page-class-normal="btn btn-light" page-class-selected="btn btn-info active" class="ml-1 btn-group">
+            </div>
+        </div>
 
-    <div class="row">
+        <div class="row">
 
-        @foreach (var Weapon in Model)
-        {
-            <div class="col-md-4">
-                <div class="card mb-4 shadow-sm">
+            @foreach (var Weapon in Model.Weapons)
+            {
+                <div class="col-md-4">
+                    <div class="card mb-4 shadow-sm">
 
-                    @* Product Image *@
-                    <img src="@Weapon.ImageUrl" class="card-img-top rounded" height="235"/>
+                        @* Product Image *@
+                        <img src="@Weapon.ImageUrl" class="card-img-top rounded" height="265"/>
 
-                    <div class="card-body">
-                        <h3 class="card-title">@Weapon.Name</h3>
-                        <p class="card-text">@Weapon.Price.ToString("C")</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="text-center">
-                                <a asp-action="Details" asp-route-id="@Weapon.Id" class="btn btn-secondary">Weapon Details</a>
+                        <div class="card-body">
+                            <h3 class="card-title">@Weapon.Name</h3>
+                            <p class="card-text">@Weapon.Price.ToString("C")</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="text-center">
+                                    <a asp-action="Details" asp-route-id="@Weapon.Id" class="btn btn-secondary">Weapon Details</a>
 
-                                @if (User.IsInRole("Admin"))
-                                {
-                                    <a asp-action="Upsert" asp-route-id="@Weapon.Id" class="btn btn-info">Edit</a>
+                                    @if (User.IsInRole("Admin"))
+                                    {
+                                        <a asp-action="Upsert" asp-route-id="@Weapon.Id" class="btn btn-info">Edit</a>
 
-                                    // TODO: make the delete button not look derpy
-                                    <span id="confirmDeleteSpan_@Weapon.Id" style="display:none">
-                                        <span>Are you sure you want to delete?</span>
-                                        <a asp-action="Delete" asp-route-id="@Weapon.Id" class="btn btn-danger">Yes</a>
-                                        <a href="#" class="btn btn-primary" onclick="confirmDelete('@Weapon.Id', false)">No</a>
-                                    </span>
+                                        // TODO: make the delete button not look derpy
+                                        <span id="confirmDeleteSpan_@Weapon.Id" style="display:none">
+                                            <span>Are you sure you want to delete?</span>
+                                            <a asp-action="Delete" asp-route-id="@Weapon.Id" class="btn btn-danger">Yes</a>
+                                            <a href="#" class="btn btn-primary" onclick="confirmDelete('@Weapon.Id', false)">No</a>
+                                        </span>
 
-                                    <span id="deleteSpan_@Weapon.Id">
-                                        <a href="#" class="btn btn-danger" onclick="confirmDelete('@Weapon.Id', true)">Delete</a>
-                                    </span>
-                                }
+                                        <span id="deleteSpan_@Weapon.Id">
+                                            <a href="#" class="btn btn-danger" onclick="confirmDelete('@Weapon.Id', true)">Delete</a>
+                                        </span>
+                                    }
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        }
+            }
+        </div>
     </div>
-</div>
+</form>
 
 @section Scripts {
     <script src="~/js/confirmDelete.js"></script>

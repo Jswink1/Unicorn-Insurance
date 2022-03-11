@@ -1,72 +1,83 @@
-﻿@model List<MobileSuitVM>
+﻿@model MobileSuitListVM
 @{
     ViewData["Title"] = "Mobile Suits";
 }
 
-<div class="container">
-    <div class="row">
-
-        @* Page Header/Title *@
-        <div class="col-9">
-            <h2 class="display-4">MobileSuits</h2>
+<form method="get" asp-action="Index">
+    <div class="container">
+        <div class="row">
+            @if (User.IsInRole("Admin"))
+            {
+                @* Create New Mobile Suit Button *@
+                <div class="col-3">
+                    <a class="btn btn-primary" asp-action="Upsert"><i class="fas fa-plus"></i> &nbsp; Create New Mobile Suit</a>
+                </div>
+            }
         </div>
 
-        @if (User.IsInRole("Admin"))
-        {
-            @* Create New Mobile Suit Button *@
-            <div class="col-3 mt-3">
-                <a class="btn btn-primary" asp-action="Upsert"><i class="fas fa-plus"></i> &nbsp; Create New Mobile Suit</a>
+        @*Search Bar, Search Button, and Pagination*@
+        <div class="row mb-2">
+            <div class="col-6 offset-3">
+                @Html.Editor("searchMobileSuit", new { htmlAttributes = new { @class = "form-control", placeholder = "Search Mobile Suits..." } })
             </div>
-        }
-    </div>
+            <button type="submit" name="submit" value="Search" class="btn btn-info form-control col-1" style="padding-top: 10px; padding-right: 15px;">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+        <div class="row mb-2 offset-1">
+            <h5 class="mt-1">Pages:</h5>
+            <div page-model="@Model.Pagination" asp-action="Index" page-class="btn border"
+                 page-class-normal="btn btn-light" page-class-selected="btn btn-info active" class="ml-1 btn-group">
+            </div>
+        </div>
 
-    <div class="row">
+        <div class="row">
 
-        @foreach (var MobileSuit in Model)
-        {
-            <div class="col-lg-4">
-                <div class="card mb-4 shadow-sm">
+            @foreach (var MobileSuit in Model.MobileSuits)
+            {
+                <div class="col-lg-4">
+                    <div class="card mb-4 shadow-sm">
 
-                    @* Product Image *@
-                     <img src="@MobileSuit.ImageUrl" class="card-img-top rounded w-100"/> 
+                        @* Product Image *@
+                        <img src="@MobileSuit.ImageUrl" class="card-img-top rounded" />
 
-                    @*TODO: Make the card contain an item description. Limit the description to 100 characters or something*@
-                    <div class="card-body">
-                        <h3 class="card-title">@MobileSuit.Name</h3>
-                        <p class="card-text">@MobileSuit.Price.ToString("C")</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="text-center">
-                                <a asp-action="Details" asp-route-id="@MobileSuit.Id" class="btn btn-secondary">Mobile Suit Details</a>
+                        @* TODO: Make the card contain an item description. Limit the description to 100 characters or something *@
+                        <div class="card-body">
+                            <h3 class="card-title">@MobileSuit.Name</h3>
+                            <p class="card-text">@MobileSuit.Price.ToString("C")</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="text-center">
+                                    <a asp-action="Details" asp-route-id="@MobileSuit.Id" class="btn btn-secondary">Mobile Suit Details</a>
 
-                                @if (User.IsInRole("Admin"))
-                                {
-                                    <a asp-action="Upsert" asp-route-id="@MobileSuit.Id" class="btn btn-info">Edit</a>
+                                    @if (User.IsInRole("Admin"))
+                                    {
+                                        <a asp-action="Upsert" asp-route-id="@MobileSuit.Id" class="btn btn-info">Edit</a>
 
-                                    // TODO: make the delete button not look derpy
-                                    <span id="confirmDeleteSpan_@MobileSuit.Id" style="display:none">
-                                        <span>Are you sure you want to delete?</span>
-                                        <a asp-action="Delete" asp-route-id="@MobileSuit.Id" class="btn btn-danger">Yes</a>
-                                        <a href="#" class="btn btn-primary" onclick="confirmDelete('@MobileSuit.Id', false)">No</a>
-                                    </span>
+                                        <span id="confirmDeleteSpan_@MobileSuit.Id" style="display:none">
+                                            <span>Are you sure you want to delete?</span>
+                                            <a asp-action="Delete" asp-route-id="@MobileSuit.Id" class="btn btn-danger">Yes</a>
+                                            <a href="#" class="btn btn-primary" onclick="confirmDelete('@MobileSuit.Id', false)">No</a>
+                                        </span>
 
-                                    <span id="deleteSpan_@MobileSuit.Id">
-                                        <a href="#" class="btn btn-danger" onclick="confirmDelete('@MobileSuit.Id', true)">Delete</a>
-                                    </span>
-                                }
+                                        <span id="deleteSpan_@MobileSuit.Id">
+                                            <a href="#" class="btn btn-danger" onclick="confirmDelete('@MobileSuit.Id', true)">Delete</a>
+                                        </span>
+                                    }
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        }
+            }
+        </div>
     </div>
-</div>
+</form>
 
-@section Scripts {
-    <script src="~/js/confirmDelete.js"></script>
+    @section Scripts {
+        <script src="~/js/confirmDelete.js"></script>
 
-    <script src="~/js/openAlertModal.js"></script>
-    <script>
+        <script src="~/js/openAlertModal.js"></script>
+        <script>
         $(document).ready(function () {
             var successMsg = "@TempData["Success"]";
             var errorMsg = "@TempData["Error"]";
@@ -78,5 +89,5 @@
                 openErrorModal(errorMsg);
             }
         });
-    </script>
-}
+        </script>
+    }

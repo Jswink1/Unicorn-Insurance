@@ -22,28 +22,28 @@ namespace UnicornInsurance.MVC.Services
             _httpclient = httpclient;
         }        
 
-        public async Task<WeaponVM> GetWeaponDetails(int id)
+        public async Task<Weapon> GetWeaponDetails(int id)
         {
             var weapon = await _client.WeaponGETAsync(id);
 
-            return _mapper.Map<WeaponVM>(weapon);
+            return _mapper.Map<Weapon>(weapon);
         }
 
-        public async Task<List<WeaponVM>> GetWeapons()
+        public async Task<List<Weapon>> GetWeapons()
         {
             var weapons = await _client.WeaponAllAsync();
 
-            return _mapper.Map<List<WeaponVM>>(weapons);
+            return _mapper.Map<List<Weapon>>(weapons);
         }
 
-        public async Task<BaseCommandResponse> InsertWeapon(WeaponVM weaponVM)
+        public async Task<BaseCommandResponse> InsertWeapon(Weapon weaponVM)
         {
             var weapon = _mapper.Map<CreateWeaponDTO>(weaponVM);
 
             return await _client.WeaponPOSTAsync(weapon);
         }
 
-        public async Task<BaseCommandResponse> UpdateWeapon(WeaponVM weaponVM)
+        public async Task<BaseCommandResponse> UpdateWeapon(Weapon weaponVM)
         {
             var weapon = _mapper.Map<WeaponDTO>(weaponVM);
 

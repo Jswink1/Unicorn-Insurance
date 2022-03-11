@@ -21,5 +21,9 @@ namespace UnicornInsurance.MVC.Constants
         // Order Statuses
         public const string StatusPending = "Pending";
         public const string StatusApproved = "Approved";
+
+        // Pagination Items Per Page
+        public const int MobileSuitsPerPage = 3;
+        public const int WeaponsPerPage = 3;
     }
 }

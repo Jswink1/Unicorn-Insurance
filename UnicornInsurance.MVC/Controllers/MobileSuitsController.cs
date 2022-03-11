@@ -6,10 +6,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 using UnicornInsurance.MVC.Constants;
 using UnicornInsurance.MVC.Contracts;
 using UnicornInsurance.MVC.Models;
+using UnicornInsurance.MVC.Models.ViewModels;
 using UnicornInsurance.MVC.Services.Base;
 
 namespace UnicornInsurance.MVC.Controllers
@@ -32,9 +34,47 @@ namespace UnicornInsurance.MVC.Controllers
             _shoppingCartService = shoppingCartService;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page = 1, string searchMobileSuit = null)
         {
-            var model = await _mobileSuitService.GetMobileSuits();
+            MobileSuitListVM model = new()
+            {
+                MobileSuits = await _mobileSuitService.GetMobileSuits()
+            };
+
+            // Create url pagination parameters
+            StringBuilder url = new();
+            url.Append("/MobileSuits?page=:");
+
+            // Determine if there is search criteria
+            url.Append("&searchMobileSuit=");
+            if (searchMobileSuit != null)
+            {
+                url.Append(searchMobileSuit);
+            }
+
+            // Apply filter to search results
+            if (searchMobileSuit != null)
+            {
+                model.MobileSuits = model.MobileSuits.Where(m => m.Name.ToLower().Contains(searchMobileSuit.ToLower())).ToList();
+            }
+
+            // Get total number of items
+            var count = model.MobileSuits.Count;
+
+            // Initialize Pagination properties
+            model.Pagination = new()
+            {
+                CurrentPage = page,
+                ItemsPerPage = SD.MobileSuitsPerPage,
+                TotalItems = count,
+                UrlParam = url.ToString()
+            };
+
+            // Retrieve the items according to the Pagination
+            model.MobileSuits = model.MobileSuits.Skip((page - 1) * SD.MobileSuitsPerPage)
+                                                 .Take(SD.MobileSuitsPerPage)
+                                                 .ToList();
+
             return View(model);
         }
 
@@ -47,12 +87,12 @@ namespace UnicornInsurance.MVC.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         // Add to Cart
-        public async Task<IActionResult> Details(MobileSuitVM mobileSuitVM)
+        public async Task<IActionResult> Details(MobileSuit mobileSuit)
         {
             var response = await _shoppingCartService.AddMobileSuitCartItem(new MobileSuitCartItem
             {
-                MobileSuitId = mobileSuitVM.Id,
-                Price = mobileSuitVM.Price
+                MobileSuitId = mobileSuit.Id,
+                Price = mobileSuit.Price
             });
 
             if (response.Success)
@@ -69,19 +109,18 @@ namespace UnicornInsurance.MVC.Controllers
 
         public async Task<IActionResult> Upsert(int? id)
         {
-            MobileSuitVM model;
+            MobileSuitUpsertVM model = new();
 
             // If inserting
             if (id == null)
             {
-                model = new MobileSuitVM();
                 return View(model);
             }
 
             // If updating
             else
             {
-                model = await _mobileSuitService.GetMobileSuitDetails(id.GetValueOrDefault());
+                model.MobileSuit = await _mobileSuitService.GetMobileSuitDetails(id.GetValueOrDefault());
 
                 return View(model);
             }
@@ -89,7 +128,7 @@ namespace UnicornInsurance.MVC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Upsert(MobileSuitVM mobileSuitVM)
+        public async Task<IActionResult> Upsert(MobileSuitUpsertVM model)
         {
             BaseCommandResponse response;
 
@@ -108,10 +147,10 @@ namespace UnicornInsurance.MVC.Controllers
                 var extension = Path.GetExtension(files[0].FileName);
 
                 // If we are editing
-                if (mobileSuitVM.ImageUrl != null)
+                if (model.MobileSuit.ImageUrl != null)
                 {
                     // Remove the old image
-                    var imagePath = Path.Combine(webRootPath, mobileSuitVM.ImageUrl.TrimStart('\\'));
+                    var imagePath = Path.Combine(webRootPath, model.MobileSuit.ImageUrl.TrimStart('\\'));
                     if (System.IO.File.Exists(imagePath))
                     {
                         System.IO.File.Delete(imagePath);
@@ -123,55 +162,55 @@ namespace UnicornInsurance.MVC.Controllers
                 {
                     files[0].CopyTo(filesStreams);
                 }
-                mobileSuitVM.ImageUrl = @"\images\mobilesuits\" + fileName + extension;
+                model.MobileSuit.ImageUrl = @"\images\mobilesuits\" + fileName + extension;
             }
 
             // Else, if the user did not upload a new image file
             else
             {
                 // If we are editing, an image file for the product should already exist in the DB
-                if (mobileSuitVM.Id != 0)
+                if (model.MobileSuit.Id != 0)
                 {
                     // Retrieve the image stored in the DB
-                    var weapon = await _mobileSuitService.GetMobileSuitDetails(mobileSuitVM.Id);
-                    mobileSuitVM.ImageUrl = weapon.ImageUrl;
+                    var weapon = await _mobileSuitService.GetMobileSuitDetails(model.MobileSuit.Id);
+                    model.MobileSuit.ImageUrl = weapon.ImageUrl;
                 }
                 // If we are inserting, the user needs to upload an image, so throw an error
                 else
                 {
                     TempData["Error"] = "You must upload an Image File";
-                    return View(mobileSuitVM);
+                    return View(model);
                 }
             }
 
             // TODO: maybe refactor this logic and put it into the server-side, instead of client-side
             // If CustomWeapon input fields are empty
-            if (String.IsNullOrWhiteSpace(mobileSuitVM.CustomWeapon.Name) ||
-                String.IsNullOrWhiteSpace(mobileSuitVM.CustomWeapon.Description) ||
-                mobileSuitVM.CustomWeapon.Price == 0)
+            if (String.IsNullOrWhiteSpace(model.MobileSuit.CustomWeapon.Name) ||
+                String.IsNullOrWhiteSpace(model.MobileSuit.CustomWeapon.Description) ||
+                model.MobileSuit.CustomWeapon.Price == 0)
             {
                 // Set CustomWeapon to null so that an error is not thrown
-                if (mobileSuitVM.CustomWeapon.Id == 0)
+                if (model.MobileSuit.CustomWeapon.Id == 0)
                 {
-                    mobileSuitVM.CustomWeapon = null;
+                    model.MobileSuit.CustomWeapon = null;
                 }
                 // If there was a CustomWeapon initially, but the user is trying to remove it, delete the weapon and set the CustomWeapon to null
-                else if (mobileSuitVM.CustomWeapon.Id != 0)
+                else if (model.MobileSuit.CustomWeapon.Id != 0)
                 {
-                    await _weaponService.DeleteWeapon(mobileSuitVM.CustomWeapon.Id);
-                    mobileSuitVM.CustomWeapon = null;
+                    await _weaponService.DeleteWeapon(model.MobileSuit.CustomWeapon.Id);
+                    model.MobileSuit.CustomWeapon = null;
                 }
             }
 
             // If inserting
-            if (mobileSuitVM.Id == 0)
+            if (model.MobileSuit.Id == 0)
             {
-                response = await _mobileSuitService.InsertMobileSuit(mobileSuitVM);
+                response = await _mobileSuitService.InsertMobileSuit(model.MobileSuit);
             }
             // If updating
             else
             {
-                response = await _mobileSuitService.UpdateMobileSuit(mobileSuitVM);
+                response = await _mobileSuitService.UpdateMobileSuit(model.MobileSuit);
             }
 
             if (response.Success)
@@ -182,8 +221,8 @@ namespace UnicornInsurance.MVC.Controllers
             else
             {
                 TempData["Error"] = response.Message;
-                mobileSuitVM.Errors = response.Errors;
-                return View(mobileSuitVM);
+                model.Errors = response.Errors;
+                return View(model);
             }
         }
 
