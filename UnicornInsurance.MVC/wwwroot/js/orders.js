@@ -43,7 +43,7 @@ function loadDataTable(url) {
                 "width": "20%"
             },
             { "data": "paymentStatus", "width": "20%" },
-            { "data": "orderTotal", "width": "20%" },
+            { "data": "orderTotal", "render": $.fn.dataTable.render.number(',', '.', 2, '$'), "width": "20%" },
             {
                 "data": "id",
                 "render": function (data) {
