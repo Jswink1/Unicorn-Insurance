@@ -40,31 +40,30 @@ namespace UnicornInsurance.MVC.Controllers
         {
             await Initialize(ShoppingCartVM);            
 
-            var initialize = await _orderService.InitializeOrder(ShoppingCartVM.OrderHeader);
+            var initializeOrder = await _orderService.InitializeOrder(ShoppingCartVM.OrderHeader);
 
-            if (initialize.Success)
+            if (initializeOrder.Success)
             {
-                OrderDetails orderDetails = new()
+                OrderDetailsVM orderDetails = new()
                 {
                     MobileSuitPurchases = ShoppingCartVM.MobileSuitCartItems,
-                    WeaponPurchases = ShoppingCartVM.WeaponCartItems,
-                    OrderHeaderId = initialize.Id
+                    WeaponPurchases = ShoppingCartVM.WeaponCartItems
                 };
 
-                await _orderService.CreateOrderDetails(orderDetails);
+                await _orderService.CreateOrderDetails(orderDetails, initializeOrder.Id);
                 await _shoppingCartService.ClearShoppingCart();
 
                 var options = new ChargeCreateOptions
                 {
                     Amount = Convert.ToInt32(ShoppingCartVM.OrderHeader.OrderTotal * 100),
                     Currency = "usd",
-                    Description = "Order Id : " + initialize.Id,
+                    Description = "Order Id : " + initializeOrder.Id,
                     Source = stripeToken
                 };
 
                 // Process the transaction
                 Charge charge = new();
-                CompleteOrderHeader completeOrderHeader = new() { OrderId = initialize.Id};
+                CompleteOrderHeader completeOrderHeader = new() { OrderId = initializeOrder.Id};
                 BaseCommandResponse completeOrderResponse = new();
                 try
                 {
@@ -92,11 +91,11 @@ namespace UnicornInsurance.MVC.Controllers
             }
             else
             {
-                TempData["Error"] = initialize.Message;
+                TempData["Error"] = initializeOrder.Message;
                 return View(ShoppingCartVM);
             }
 
-            return RedirectToAction("OrderConfirmation", "Cart", new { id = initialize.Id });
+            return RedirectToAction("OrderConfirmation", "Cart", new { id = initializeOrder.Id });
         }
 
         public IActionResult OrderConfirmation(int id)

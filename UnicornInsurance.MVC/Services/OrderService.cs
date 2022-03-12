@@ -54,10 +54,11 @@ namespace UnicornInsurance.MVC.Services
             return await _client.InitializeOrderAsync(orderHeaderDTO);
         }
 
-        public async Task<BaseCommandResponse> CreateOrderDetails(OrderDetails orderDetails)
+        public async Task<BaseCommandResponse> CreateOrderDetails(OrderDetailsVM orderDetails, int orderId)
         {
             AddBearerToken();
             var orderDetailsDTO = _mapper.Map<CreateOrderDetailsDTO>(orderDetails);
+            orderDetailsDTO.OrderHeaderId = orderId;
 
             return await _client.CreateOrderDetailsAsync(orderDetailsDTO);
         }

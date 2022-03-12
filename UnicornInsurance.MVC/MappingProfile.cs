@@ -36,7 +36,7 @@ namespace UnicornInsurance.MVC
 
             CreateMap<CompleteOrderHeader, CompleteOrderHeaderDTO>().ReverseMap();
 
-            CreateMap<OrderDetails, CreateOrderDetailsDTO>().ReverseMap();
+            CreateMap<OrderDetailsVM, CreateOrderDetailsDTO>().ReverseMap();
             CreateMap<OrderDetailsVM, OrderDetailsDTO>().ReverseMap();
 
             CreateMap<MobileSuitCartItem, MobileSuitPurchaseDTO>().ReverseMap();
