@@ -1,4 +1,5 @@
 ﻿@model UserMobileSuit
+@using UnicornInsurance.MVC.Constants
 
 @{ ViewData["Title"] = Model.MobileSuit.Name; }
 
@@ -41,14 +42,45 @@
                style="height:35px; font-size:15px;">Unequip Weapon</a>
         }
 
-        <hr />
-
         @if (Model.CustomWeapon is not null)
         {
+            <hr />
             <h2>Custom Weapon</h2>
             <input readonly asp-for="CustomWeapon.Weapon.Name" type="text" class="form-control" />
         }
 
+        <hr />
+        <h2>Insurance</h2>
+        <div class="offset-3 col-6 p-4">
+            @if (Model.EndOfCoverage > DateTime.Now)
+            {
+                if (Model.InsurancePlan == SD.StandardInsurancePlan)
+                {
+                    <partial name="_StandardInsuranceIcon" />
+                }
+                if (Model.InsurancePlan == SD.SuperInsurancePlan)
+                {
+                    <partial name="_SuperInsuranceIcon" />
+                }
+                if (Model.InsurancePlan == SD.UltraInsurancePlan)
+                {
+                    <partial name="_UltraInsuranceIcon" />
+                }
+                <h5>Expires: @Model.EndOfCoverage</h5>
+            }
+            else
+            {
+                <div style="border: 1px solid red; border-radius: 20px;">
+                    <div class="text-center justify-content-center">
+                        <h5 class="text-danger p-5">No Insurance</h5>
+                    </div>
+                </div>
+                <a asp-controller="MobileSuitDeck" asp-action="Insurance" asp-route-id="@Model.Id" class="btn btn-info form-control mt-3">Purchase Insurance</a>
+            }
+        </div>
+
+        <hr />
+        <button class="btn-success form-control btn-lg">Deploy Mobile Suit (Feature Coming Soon)</button>
 
     </div>
 </div>

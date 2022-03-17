@@ -65,7 +65,7 @@ namespace UnicornInsurance.MVC
 
             services.AddSingleton<ILocalStorageService, LocalStorageService>();
 
-            services.AddControllersWithViews();
+            services.AddControllersWithViews().AddRazorRuntimeCompilation();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -35,6 +35,8 @@ namespace UnicornInsurance.MVC.Services
             AddBearerToken();
             var userMobileSuit = await _client.UserMobileSuitAsync(userMobileSuitId);
 
+            Console.WriteLine();
+
             return _mapper.Map<UserMobileSuit>(userMobileSuit);
         }
 
@@ -60,5 +62,18 @@ namespace UnicornInsurance.MVC.Services
             return;
         }
 
+        public async Task<BaseCommandResponse> PurchaseInsurance(int userMobileSuitId, string selectedInsurance)
+        {
+            UserInsurancePlanDTO userInsurancePlanDTO = new()
+            {               
+                UserMobileSuitId = userMobileSuitId,
+                InsurancePlan = selectedInsurance
+            };
+
+            AddBearerToken();
+            var response = await _client.UserInsurancePlanAsync(userInsurancePlanDTO);
+
+            return response;
+        }
     }
 }

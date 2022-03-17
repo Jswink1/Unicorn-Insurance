@@ -25,5 +25,10 @@ namespace UnicornInsurance.MVC.Constants
         // Pagination Items Per Page
         public const int MobileSuitsPerPage = 3;
         public const int WeaponsPerPage = 3;
+
+        // Insurance Plans
+        public const string StandardInsurancePlan = "Standard";
+        public const string SuperInsurancePlan = "Super";
+        public const string UltraInsurancePlan = "Ultra";
     }
 }

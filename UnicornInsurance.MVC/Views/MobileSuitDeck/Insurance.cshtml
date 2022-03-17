@@ -1,0 +1,60 @@
+﻿@model InsuranceVM
+@{ ViewData["Title"] = "Purchase Insurance"; }
+
+<div class="row">
+    <a asp-controller="MobileSuitDeck" asp-action="Details" asp-route-id="@Model.UserMobileSuit.Id" class="col-3 btn btn-info form-control btn-sm">Back to My Mobile Suit</a>
+</div>
+
+<div class="row">
+    <h2 class="display-4 text-center">Purchase Insurance For My @Model.UserMobileSuit.MobileSuit.Name</h2>
+</div>
+
+<div class="row">
+    <div class="col">
+        <partial name="_StandardInsuranceIcon" />
+    </div>
+
+    <div class="col">
+        <partial name="_SuperInsuranceIcon" />
+    </div>
+
+    <div class="col">
+        <partial name="_UltraInsuranceIcon" />
+    </div>
+    
+</div>
+
+<div class="row">
+    <div class="col-2 offset-1 mt-3 text-center">
+        <h5>$3,000</h5>
+        <partial name="_StandardInsuranceDetailsModal" />
+        <button class="btn btn-info form-control" data-toggle="modal" data-target="#standard-modal">View Details</button>
+        <form method="post">
+            <input type="hidden" asp-for="SelectedInsurance" value="Standard" />
+            <input type="hidden" asp-for="UserMobileSuit.Id" />
+            <button type="submit" class="btn btn-success form-control mt-2">Purchase</button>
+        </form>
+    </div>
+
+    <div class="col-2 offset-2 mt-3 text-center">
+        <h5>$4,000</h5>
+        <partial name="_SuperInsuranceDetailsModal" />
+        <button class="btn btn-info form-control" data-toggle="modal" data-target="#super-modal">View Details</button>
+        <form method="post">
+            <input type="hidden" asp-for="SelectedInsurance" value="Super" />
+            <input type="hidden" asp-for="UserMobileSuit.Id" />
+            <button type="submit" class="btn btn-success form-control mt-2">Purchase</button>
+        </form>
+    </div>
+
+    <div class="col-2 offset-2 mt-3 text-center">
+        <h5>$5,000</h5>
+        <partial name="_UltraInsuranceDetailsModal" />
+        <button class="btn btn-info form-control" data-toggle="modal" data-target="#ultra-modal">View Details</button>
+        <form method="post">
+            <input type="hidden" asp-for="SelectedInsurance" value="Ultra" />
+            <input type="hidden" asp-for="UserMobileSuit.Id" />
+            <button type="submit" class="btn btn-success form-control mt-2">Purchase</button>
+        </form>
+    </div>
+</div>

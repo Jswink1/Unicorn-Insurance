@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using UnicornInsurance.MVC.Contracts;
 using UnicornInsurance.MVC.Models;
+using UnicornInsurance.MVC.Models.ViewModels;
 
 namespace UnicornInsurance.MVC.Controllers
 {
@@ -49,6 +50,25 @@ namespace UnicornInsurance.MVC.Controllers
             await _userItemService.UnequipWeapon(userMobileSuitId);
 
             return RedirectToAction("Details", "MobileSuitDeck", new { id = userMobileSuitId });
+        }
+
+        public async Task<IActionResult> Insurance(int id)
+        {
+            InsuranceVM model = new()
+            {
+                UserMobileSuit = await _userItemService.GetUserMobileSuitDetails(id)
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Insurance(InsuranceVM model)
+        {
+            await _userItemService.PurchaseInsurance(model.UserMobileSuit.Id, model.SelectedInsurance);
+
+            return RedirectToAction("Details", "MobileSuitDeck", new { id = model.UserMobileSuit.Id });
         }
     }
 }

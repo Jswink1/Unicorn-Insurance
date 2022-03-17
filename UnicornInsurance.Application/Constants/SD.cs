@@ -23,5 +23,10 @@ namespace UnicornInsurance.Application.Constants
         // Order Statuses
         public const string StatusPending = "Pending";
         public const string StatusApproved = "Approved";
+
+        // Insurance Plans
+        public const string StandardInsurancePlan = "standard";
+        public const string SuperInsurancePlan = "super";
+        public const string UltraInsurancePlan = "ultra";
     }
 }

@@ -40,7 +40,7 @@ namespace UnicornInsurance.Api.Controllers
             return Ok(userMobileSuit);
         }
 
-        [HttpPost]
+        [HttpPut]
         [Route("EquipWeapon")]
         public async Task<ActionResult<BaseCommandResponse>> EquipWeapon([FromBody] EquipWeaponDTO equipWeaponDTO)
         {
@@ -48,12 +48,20 @@ namespace UnicornInsurance.Api.Controllers
             return Ok(response);
         }
 
-        [HttpPost]
+        [HttpPut]
         [Route("UnequipWeapon")]
         public async Task<ActionResult> UnequipWeapon(int userMobileSuitId)
         {
             await _mediator.Send(new UnequipWeaponCommand() { UserMobileSuitId = userMobileSuitId });
             return Ok();
+        }
+
+        [HttpPut]
+        [Route("UserInsurancePlan")]
+        public async Task<ActionResult<BaseCommandResponse>> UserInsurancePlan([FromBody] UserInsurancePlanDTO userInsurancePlanDTO)
+        {
+            var response = await _mediator.Send(new UpdateUserInsurancePlanCommand() { UserInsurancePlanDTO = userInsurancePlanDTO });
+            return Ok(response);
         }
     }
 }

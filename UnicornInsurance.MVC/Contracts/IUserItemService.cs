@@ -13,5 +13,6 @@ namespace UnicornInsurance.MVC.Contracts
         Task<UserMobileSuit> GetUserMobileSuitDetails(int userMobileSuitId);
         Task<BaseCommandResponse> EquipWeapon(int selectedWeaponId, int userMobileSuitId);
         Task UnequipWeapon(int userMobileSuitId);
+        Task<BaseCommandResponse> PurchaseInsurance(int userMobileSuitId, string selectedInsurance);
     }
 }

@@ -19,14 +19,15 @@ namespace UnicornInsurance.Data.Seeds
                     Id = 1,
                     Name = "RX-0 Unicorn Gundam",
                     Type = "Prototype Full Psycho-Frame Mobile Suit",
-                    Description = "\"To my only desire, the beast of possibility, the symbol of hope…\"",
+                    Description = "\"To my only desire, the symbol of hope, the beast of possibility...\"",
                     Price = 50000m,
                     Manufacturer = "Anaheim Electronics",
                     Height = "19.7 meters",
                     Weight = "42.7 metric tons",
                     PowerOutput = "3480 kW (Unmeasurable in Destroy Mode)",
                     Armor = "Gundarium Alloy",
-                    CustomWeaponId = 6
+                    CustomWeaponId = 6,
+                    ImageUrl = "\\images\\mobilesuits\\UnicornGundam.webp"
                 },
                 new MobileSuit
                 {
@@ -34,14 +35,15 @@ namespace UnicornInsurance.Data.Seeds
                     Name = "GN-001 Gundam Exia",
                     Type = "Close Quarters Combat Mobile Suit",
                     Description = "Also known as the \"Gundam Seven Swords\". Specializes in close-quarters combat. Generates multifunctional GN Particles from the " +
-                                  "semi-perpetual GN Drive mounted in the center of the frame, which provides almost limitless energy for combat, flight, and even stealth" +
+                                  "semi-perpetual GN Drive mounted in the center of the frame, which provides almost limitless energy for combat, flight, and even stealth " +
                                   "purposes.",
                     Price = 44999m,
                     Manufacturer = "Celestial Being",
                     Height = "18.3 meters",
                     Weight = "57.2 metric tons",
                     Armor = "E-Carbon",
-                    CustomWeaponId = 7
+                    CustomWeaponId = 7,
+                    ImageUrl = "\\images\\mobilesuits\\Exia.webp"
                 },
                 new MobileSuit
                 {
@@ -54,7 +56,8 @@ namespace UnicornInsurance.Data.Seeds
                     Height = "16.2 meters",
                     Weight = "15.5 metric tons",
                     Armor = "Gundarium alloy super ceramic composite",
-                    CustomWeaponId = 8
+                    CustomWeaponId = 8,
+                    ImageUrl = "\\images\\mobilesuits\\ShiningGundam.webp"
                 },
                 new MobileSuit
                 {
@@ -66,7 +69,8 @@ namespace UnicornInsurance.Data.Seeds
                     Manufacturer = "Teiwaz",
                     Height = "19 meters",
                     Weight = "32.1 metric tons",
-                    Armor = "Nanolaminate Armor"
+                    Armor = "Nanolaminate Armor",
+                    ImageUrl = "\\images\\mobilesuits\\BarbatosLupus.webp"
                 },
                 new MobileSuit
                 {
@@ -77,20 +81,22 @@ namespace UnicornInsurance.Data.Seeds
                     Price = 42000m,
                     Manufacturer = "Nils Nielsen",
                     Height = "17.9 meters",
-                    Weight = "58.2 metric tons"
+                    Weight = "58.2 metric tons",
+                    ImageUrl = "\\images\\mobilesuits\\SengokuAstray.webp"
                 },
                 new MobileSuit
                 {
                     Id = 6,
                     Name = "MSN-00100 Hyaku Shiki",
                     Type = "Prototype Attack-Use Mobile Suit",
-                    Description = "Originally designed as the prototype for a transformable mobile suit, however, defects in the frame led to the abandonment of the machines" +
+                    Description = "Originally designed as the prototype for a transformable mobile suit, however, defects in the frame led to the abandonment of the machines " +
                                   "development. The gold colored appearance is due to the application of a beam-resistant coating in the armor, " +
                                   "giving the machine some limited protection against beam attacks",
                     Price = 42000m,
                     Manufacturer = "Anaheim Electronics",
                     Height = "21.4 meters",
-                    Weight = "54.5 metric tons"
+                    Weight = "54.5 metric tons",
+                    ImageUrl = "\\images\\mobilesuits\\HyakuShiki.webp"
                 },
                 new MobileSuit
                 {
@@ -103,21 +109,23 @@ namespace UnicornInsurance.Data.Seeds
                     Height = "18.0 meters",
                     Weight = "60.0 metric tons",
                     Armor = "Luna Titanium",
-                    CustomWeaponId = 9
+                    CustomWeaponId = 9,
+                    ImageUrl = "\\images\\mobilesuits\\RX78Gundam.webp"
                 },
                 new MobileSuit
                 {
                     Id = 8,
                     Name = "MSN-06S Sinanju",
                     Type = "Prototype Attack-Use Mobile Suit",
-                    Description = "Sporting multiple vernier thrusters throughout its frame, the unit is capable of achieving precise movements and high speeds. With its " +
+                    Description = "Sporting multiple vernier thrusters throughout its frame, this unit is capable of achieving precise movements and high speeds. With its " +
                                   "overwhelming combat ability, crimson body, and mono-eye sensors, the Sinanju reminds all who see it of the legendary \"Red Comet\".",
                     Price = 44999m,
                     Manufacturer = "Anaheim Electronics",
                     Height = "22.6 meters",
                     Weight = "56.9 metric tons",
                     PowerOutput = "3240 kW",
-                    Armor = "Gundarium Alloy"
+                    Armor = "Gundarium Alloy",
+                    ImageUrl = "\\images\\mobilesuits\\Sinanju.webp"
                 }
             );
         }

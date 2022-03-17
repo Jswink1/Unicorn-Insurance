@@ -20,7 +20,8 @@ namespace UnicornInsurance.Data.Seeds
                     Name = "Beam Rifle",
                     Description = "A compact Mega-Particle Cannon. Powered by an Energy-Capitor or Energy-Pack, which stores Minovsky Particles in a condensed state.",
                     Price = 1750m,
-                    IsCustomWeapon = false
+                    IsCustomWeapon = false,
+                    ImageUrl = "\\images\\weapons\\BeamRifle.webp"
                 },
                 new Weapon
                 {
@@ -29,7 +30,8 @@ namespace UnicornInsurance.Data.Seeds
                     Description = "A short-range version of the Beam Rifle. Though it may lack in range, there is certainly no lack in power. " +
                                   "Due to the shortened barrel, the focus of the beam is more widespread and destructive.",
                     Price = 1650m,
-                    IsCustomWeapon = false
+                    IsCustomWeapon = false,
+                    ImageUrl = "\\images\\weapons\\BeamSprayGun.webp"
                 },
                 new Weapon
                 {
@@ -39,7 +41,8 @@ namespace UnicornInsurance.Data.Seeds
                                   "to form a sustained blade of superheated plasma. The Minovsky particles are stored in a E-cap within the hilt of the beam saber, which " +
                                   "is recharged using the mobile suit's reactor when the saber is returned to its storage rack, or via a plug in the hands of certain mobile suits",
                     Price = 1850m,
-                    IsCustomWeapon = false
+                    IsCustomWeapon = false,
+                    ImageUrl = "\\images\\weapons\\BeamSaber.webp"
                 },
                 new Weapon
                 {
@@ -49,7 +52,8 @@ namespace UnicornInsurance.Data.Seeds
                                   "They are weak in power, and low in accuracy. Their main purpose is to intercept enemy missles, fire warning shots, destroy light targets, " +
                                   "and aid in close-quarters combat.",
                     Price = 1100m,
-                    IsCustomWeapon = false
+                    IsCustomWeapon = false,
+                    ImageUrl = "\\images\\weapons\\HeadMountedVulcans.PNG"
                 },
                 new Weapon
                 {
@@ -59,7 +63,8 @@ namespace UnicornInsurance.Data.Seeds
                                   "and an energy cell to propel the funnel. When the funnels are not in use, they are attached to the mother suit's surface hardpoints " +
                                   "for recharging.",
                     Price = 1999m,
-                    IsCustomWeapon = false
+                    IsCustomWeapon = false,
+                    ImageUrl = "\\images\\weapons\\Funnels.jpg"
                 },
                 new Weapon
                 {
@@ -76,7 +81,7 @@ namespace UnicornInsurance.Data.Seeds
                     Id = 7,
                     Name = "Trans-Am System",
                     Description = "A feature of the GN Drive that temporarily increases the performance of the equipped Mobile Suit. Once activated, a machine " +
-                                          "can perform at three times the normal output for a limited time.The GN Particles emitted from the mobile suit during Trand-Am " +
+                                          "can perform at three times the normal output for a limited time. The GN Particles emitted from the mobile suit during Trand-Am " +
                                           "will cause the suit to glow red.",
                     Price = 2750m,
                     IsCustomWeapon = true
@@ -85,7 +90,7 @@ namespace UnicornInsurance.Data.Seeds
                 {
                     Id = 8,
                     Name = "Shining Finger",
-                    Description = "An ultimate martial-arts move, in which the finger joints of the Mobile Suit are uncovered and the hand becomes coated in" +
+                    Description = "An ultimate martial-arts move, in which the finger joints of the Mobile Suit are uncovered and the hand becomes coated in " +
                                           "liquid metal, concentrating a massive amount of energy into the hand that can be utilized in a devastating attack.",
                     Price = 2199m,
                     IsCustomWeapon = true

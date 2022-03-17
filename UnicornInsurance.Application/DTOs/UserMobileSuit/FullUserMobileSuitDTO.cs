@@ -15,5 +15,7 @@ namespace UnicornInsurance.Application.DTOs.UserMobileSuit
         public UserWeaponDTO EquippedWeapon { get; set; }
         public UserWeaponDTO CustomWeapon { get; set; }
         public List<UserWeaponDTO> AvailableWeapons { get; set; }
+        public string InsurancePlan { get; set; }
+        public DateTime EndOfCoverage { get; set; }
     }
 }

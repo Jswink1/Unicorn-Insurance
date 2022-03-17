@@ -14,6 +14,8 @@ namespace UnicornInsurance.Models
         public int MobileSuitId { get; set; }
         [ForeignKey("MobileSuitId")]
         public MobileSuit MobileSuit { get; set; }
+        public string InsurancePlan { get; set; }
+        public DateTime EndOfCoverage { get; set; }
 
         //public int? CustomWeaponId { get; set; }
         //public virtual UserWeapon CustomWeapon { get; set; }

@@ -10,14 +10,10 @@
 		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
 		<PackageReference Include="LocalStorage" Version="2.1.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="5.0.13" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.15" />
 		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
 		<PackageReference Include="Stripe.net" Version="39.93.0" />
 		<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.15.1" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="wwwroot\images\mobilesuits\" />
-	  <Folder Include="wwwroot\images\weapons\" />
 	</ItemGroup>
 
 </Project>

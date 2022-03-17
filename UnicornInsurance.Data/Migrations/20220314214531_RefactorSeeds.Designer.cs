@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UnicornInsurance.Data;
 
 namespace UnicornInsurance.Data.Migrations
 {
     [DbContext(typeof(UnicornDataDBContext))]
-    partial class UnicornDataDBContextModelSnapshot : ModelSnapshot
+    [Migration("20220314214531_RefactorSeeds")]
+    partial class RefactorSeeds
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -307,12 +309,6 @@ namespace UnicornInsurance.Data.Migrations
                     b.Property<string>("ApplicationUserId")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("EndOfCoverage")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("InsurancePlan")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("MobileSuitId")
                         .HasColumnType("int");
 
@@ -411,7 +407,7 @@ namespace UnicornInsurance.Data.Migrations
                             Id = 2,
                             DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "A short-range version of the Beam Rifle. Though it may lack in range, there is certainly no lack in power. Due to the shortened barrel, the focus of the beam is more widespread and destructive.",
-                            ImageUrl = "\\images\\weapons\\BeamSprayGun.webp",
+                            ImageUrl = "\\images\\weapons\\BeamRifle.webp",
                             IsCustomWeapon = false,
                             LastModifiedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Beam Spray Gun",
@@ -422,7 +418,7 @@ namespace UnicornInsurance.Data.Migrations
                             Id = 3,
                             DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Emits high-energy Minovsky particles, which are then contained by a blade-shaped I-field via manipulation of electromagnetic fields to form a sustained blade of superheated plasma. The Minovsky particles are stored in a E-cap within the hilt of the beam saber, which is recharged using the mobile suit's reactor when the saber is returned to its storage rack, or via a plug in the hands of certain mobile suits",
-                            ImageUrl = "\\images\\weapons\\BeamSaber.webp",
+                            ImageUrl = "\\images\\weapons\\BeamSrayGun.webp",
                             IsCustomWeapon = false,
                             LastModifiedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Beam Saber",
@@ -444,7 +440,7 @@ namespace UnicornInsurance.Data.Migrations
                             Id = 5,
                             DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Funnel-shaped drone units that are remotely controlled by a Newtype pilot. They are equipped with a small beam cannons, and an energy cell to propel the funnel. When the funnels are not in use, they are attached to the mother suit's surface hardpoints for recharging.",
-                            ImageUrl = "\\images\\weapons\\Funnels.jpg",
+                            ImageUrl = "\\images\\weapons\\Funnels.webp",
                             IsCustomWeapon = false,
                             LastModifiedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Funnels",

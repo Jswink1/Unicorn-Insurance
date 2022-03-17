@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UnicornInsurance.Data;
 
 namespace UnicornInsurance.Data.Migrations
 {
     [DbContext(typeof(UnicornDataDBContext))]
-    partial class UnicornDataDBContextModelSnapshot : ModelSnapshot
+    [Migration("20220314214825_RefactorSeedsAgain")]
+    partial class RefactorSeedsAgain
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -305,12 +307,6 @@ namespace UnicornInsurance.Data.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("ApplicationUserId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("EndOfCoverage")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("InsurancePlan")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("MobileSuitId")
