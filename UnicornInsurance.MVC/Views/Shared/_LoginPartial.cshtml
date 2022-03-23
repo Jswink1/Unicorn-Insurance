@@ -14,6 +14,10 @@
                 {
                     <a class="dropdown-item" asp-controller="MobileSuitDeck" asp-action="Index">Mobile Suit Deck</a>
                 }
+                @if (User.IsInRole(SD.AdminRole))
+                {
+                    <a class="dropdown-item" asp-controller="Deployments" asp-action="Index">Deployments</a>
+                }
             </div>
         </li>
         <li class="nav-item">

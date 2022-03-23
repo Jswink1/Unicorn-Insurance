@@ -20,6 +20,317 @@ namespace UnicornInsurance.Data.Migrations
                 .HasAnnotation("ProductVersion", "5.0.13")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("UnicornInsurance.Models.Deployment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasMaxLength(2000)
+                        .HasColumnType("nvarchar(2000)");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("LastModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ResultType")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Deployments");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "You got two Mobile Suits with one shot!",
+                            ImageUrl = "\\images\\deployments\\Collateral.webp",
+                            LastModifiedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResultType = "Good"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Your Mobile Suit got destroyed during the colony drop!",
+                            ImageUrl = "\\images\\deployments\\ColonyDrop.gif",
+                            LastModifiedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResultType = "Bad"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Your Mobile Suit got damaged during the firing of the colony laser!",
+                            ImageUrl = "\\images\\deployments\\ColonyLaser.webp",
+                            LastModifiedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResultType = "Bad"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Your Mobile Suit won a sword duel!",
+                            ImageUrl = "\\images\\deployments\\SwordDuel.webp",
+                            LastModifiedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResultType = "Good"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Your Mobile Suit was destroyed by a BearGuy!",
+                            ImageUrl = "\\images\\deployments\\DetroyedByBearGuy.webp",
+                            LastModifiedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResultType = "Bad"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Your Mobile Suit evaded an enemy barrage!",
+                            ImageUrl = "\\images\\deployments\\EvadedBarrage.gif",
+                            LastModifiedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResultType = "Good"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "You made friends with Haro!",
+                            ImageUrl = "\\images\\deployments\\Haro.gif",
+                            LastModifiedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResultType = "Good"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Your Mobile Suit launched successfully!",
+                            ImageUrl = "\\images\\deployments\\LaunchSuccessful.gif",
+                            LastModifiedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResultType = "Good"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Your Mobile Suit was shot to pieces!",
+                            ImageUrl = "\\images\\deployments\\ShotToPieces.gif",
+                            LastModifiedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResultType = "Bad"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Your Mobile Suit countered an enemy attack!",
+                            ImageUrl = "\\images\\deployments\\CounteredAttack.gif",
+                            LastModifiedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResultType = "Good"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Your Mobile Suit blocked an enemy attack!",
+                            ImageUrl = "\\images\\deployments\\BlockedAttack.gif",
+                            LastModifiedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResultType = "Good"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Your Mobile Suit tripped on a rock!",
+                            ImageUrl = "\\images\\deployments\\TrippedOnRock.webp",
+                            LastModifiedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResultType = "Bad"
+                        },
+                        new
+                        {
+                            Id = 13,
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Your Mobile Suit stomped on a Core Fighter!",
+                            ImageUrl = "\\images\\deployments\\StompedCoreFighter.webp",
+                            LastModifiedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResultType = "Good"
+                        },
+                        new
+                        {
+                            Id = 14,
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Your Mobile Suit destroyed a Magellan-class Battleship!",
+                            ImageUrl = "\\images\\deployments\\DestroyedMagellan.gif",
+                            LastModifiedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResultType = "Good"
+                        },
+                        new
+                        {
+                            Id = 15,
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Your Mobile Suit was shot by a Beam Rifle!",
+                            ImageUrl = "\\images\\deployments\\ShotByBeamRifle.gif",
+                            LastModifiedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResultType = "Bad"
+                        },
+                        new
+                        {
+                            Id = 16,
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Your Mobile Suit was sniped!",
+                            ImageUrl = "\\images\\deployments\\Sniped.gif",
+                            LastModifiedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResultType = "Bad"
+                        },
+                        new
+                        {
+                            Id = 17,
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Your Mobile Suit was stabbed by a Beam Saber!",
+                            ImageUrl = "\\images\\deployments\\StabbedByABeamSaber.gif",
+                            LastModifiedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResultType = "Bad"
+                        },
+                        new
+                        {
+                            Id = 18,
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Your Mobile Suit got its arm chopped off!",
+                            ImageUrl = "\\images\\deployments\\ArmChoppedOff.gif",
+                            LastModifiedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResultType = "Bad"
+                        },
+                        new
+                        {
+                            Id = 19,
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Your Mobile Suit got punched in the arm!",
+                            ImageUrl = "\\images\\deployments\\PunchedArm.gif",
+                            LastModifiedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResultType = "Bad"
+                        },
+                        new
+                        {
+                            Id = 20,
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Your Mobile Suit was ambushed!",
+                            ImageUrl = "\\images\\deployments\\Ambushed.gif",
+                            LastModifiedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResultType = "Bad"
+                        },
+                        new
+                        {
+                            Id = 21,
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Your Mobile Suit was destroyed!",
+                            ImageUrl = "\\images\\deployments\\Destroyed.gif",
+                            LastModifiedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResultType = "Bad"
+                        },
+                        new
+                        {
+                            Id = 22,
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Your Mobile Suit successfully navigated a debris field!",
+                            ImageUrl = "\\images\\deployments\\NavigatedDebris.gif",
+                            LastModifiedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResultType = "Good"
+                        },
+                        new
+                        {
+                            Id = 23,
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "You saved Princess Minerva Zabi from drifting in space!",
+                            ImageUrl = "\\images\\deployments\\SavedPrincess.webp",
+                            LastModifiedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResultType = "Good"
+                        },
+                        new
+                        {
+                            Id = 24,
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Your Mobile Suit got knocked out!",
+                            ImageUrl = "\\images\\deployments\\Punched.webp",
+                            LastModifiedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResultType = "Bad"
+                        },
+                        new
+                        {
+                            Id = 25,
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Your Mobile Suit destroyed some rockets!",
+                            ImageUrl = "\\images\\deployments\\DestroyedRockets.webp",
+                            LastModifiedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResultType = "Good"
+                        },
+                        new
+                        {
+                            Id = 26,
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Your Mobile Suit caught fire!",
+                            ImageUrl = "\\images\\deployments\\CaughtFire.gif",
+                            LastModifiedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResultType = "Bad"
+                        },
+                        new
+                        {
+                            Id = 27,
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Your Mobile Suit was chopped into pieces!",
+                            ImageUrl = "\\images\\deployments\\ChoppedIntoPieces.gif",
+                            LastModifiedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResultType = "Bad"
+                        },
+                        new
+                        {
+                            Id = 28,
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Your Mobile Suit launched successfully!",
+                            ImageUrl = "\\images\\deployments\\LaunchSuccessful2.gif",
+                            LastModifiedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResultType = "Good"
+                        },
+                        new
+                        {
+                            Id = 29,
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Your Mobile Suit launched successfully!",
+                            ImageUrl = "\\images\\deployments\\LaunchSuccessful3.webp",
+                            LastModifiedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResultType = "Good"
+                        },
+                        new
+                        {
+                            Id = 30,
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Your Mobile Suit launched successfully!",
+                            ImageUrl = "\\images\\deployments\\LaunchSuccessful4.gif",
+                            LastModifiedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ResultType = "Good"
+                        });
+                });
+
             modelBuilder.Entity("UnicornInsurance.Models.MobileSuit", b =>
                 {
                     b.Property<int>("Id")

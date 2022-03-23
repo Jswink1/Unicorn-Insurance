@@ -1,0 +1,122 @@
+﻿@model DeploymentUpsertVM
+@using UnicornInsurance.MVC.Constants
+@{ 
+    @* If the model is being edited change the title *@
+    var title = "Create Deployment";
+    @if (Model.Deployment.Id != 0)
+    {
+        title = $"Edit Deployment";
+    }
+
+    ViewData["Title"] = title; 
+}
+
+<form method="post" enctype="multipart/form-data">
+    <div class="row p-3 border">
+
+        @* Validation Errors *@
+        @if (Model.Errors is not null)
+        {
+            <ul>
+                @foreach (var error in Model.Errors)
+                {
+                    <li class="text-danger">@error</li>
+                }
+            </ul>
+        }
+
+        @if (Model.Deployment.Id != 0)
+        {
+            @* If the model is being edited include the Model Id and ImageUrl as a hidden field *@
+            <input type="hidden" asp-for="Deployment.Id" />
+            <input type="hidden" asp-for="Deployment.ImageUrl" />
+        }
+
+        @* Page Header/Title *@
+        <div class="col-12 border-bottom">
+            <h2 class="text-primary">@title</h2>
+        </div>
+        <div class="col-8 pt-4">
+
+            @* Deployment Result Type Input *@
+            <div class="form-group row mt-2">
+                <div class="col-3">
+                    <label asp-for="Deployment.ResultType"></label>
+                </div>
+                <div class="col-4 text-center">
+                    <label><b>@SD.GoodDeploymentResult</b></label>
+                    <input type="radio" asp-for="Deployment.ResultType" value="@SD.GoodDeploymentResult" class="form-control" style="font-size: 5px;" />
+                </div>
+                <div class="col-4 text-center">
+                    <label><b>@SD.BadDeploymentResult</b></label>
+                    <input type="radio" asp-for="Deployment.ResultType" value="@SD.BadDeploymentResult" class="form-control" style="font-size: 5px;" />
+                </div>
+            </div>
+
+
+            @* Deployment Description Input *@
+            <div class="form-group row mt-2">
+                <div class="col-3">
+                    <label asp-for="Deployment.Description"></label>
+                </div>
+                <div class="col-8">
+                    <textarea asp-for="Deployment.Description" class="form-control"></textarea>
+                </div>
+            </div>
+
+            @* Image File Upload *@
+            <div class="form-group row mt-2">
+                <div class="col-3">
+                    Image
+                </div>
+                <div class="col-8">
+                    <input type="file" name="files" id="uploadBox" multiple class="form-control" />
+                </div>
+            </div>
+        </div>
+
+        @*If the model is being edited, display the current image*@
+        @if (Model.Deployment.Id != 0)
+        {
+            <div class="col-3 offset-1 mt-4">
+                <img src="@Model.Deployment.ImageUrl" class="d-block w-100" />
+            </div>
+        }
+
+        <div class="col-8 pt-4">          
+            <div class="form-group row mt-2">
+                <div class="col-8 offset-3">
+                    @*Edit or Create Button*@
+                    @if (Model.Deployment.Id != 0)
+                    {
+                        <partial name="_EditAndBackToListButton" model="Model.Deployment.Id" />
+                    }
+                    else
+                    {
+                        <partial name="_CreateAndBackToListButton" />
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+    <script src="https://cdn.tiny.cloud/1/kcmkof3wb0uhjlr4up6uyig5s7ddla2nn8ensssdsei1yxa7/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="~/js/initializeTinyMCE.js"></script>
+
+    <script src="~/js/openAlertModal.js"></script>
+    <script>
+        $(document).ready(function () {
+            var successMsg = "@TempData["Success"]";
+            var errorMsg = "@TempData["Error"]";
+
+            if (successMsg) {
+                openSuccessModal(successMsg);
+            }
+            if (errorMsg) {
+                openErrorModal(errorMsg);
+            }
+        });
+    </script>
+}

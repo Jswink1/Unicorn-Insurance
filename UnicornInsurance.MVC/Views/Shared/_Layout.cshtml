@@ -12,6 +12,8 @@
 
     @*Datatables*@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" />
+    @*Toastr*@
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
 </head>
 <body>
     <header>
@@ -81,9 +83,14 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
 
-    @*Datatables, and FontAwesome*@
+    @*Datatables*@
     <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    @*FontAwesome*@
     <script src="https://kit.fontawesome.com/e19c476714.js"></script>
+    @*SweetAlert*@
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    @*Toastr*@
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>

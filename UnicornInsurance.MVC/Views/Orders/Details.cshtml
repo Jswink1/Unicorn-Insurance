@@ -67,7 +67,7 @@
                             </div>
 
 
-                            @*Only display TransacionId if the user is an admin*@
+                            @*Only display TransacionId if the user is an admin and the payment was not rejected*@
                             @if (User.IsInRole(SD.AdminRole))
                             {
                                 if (Model.OrderHeader.TransactionId is not null)

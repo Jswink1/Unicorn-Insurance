@@ -52,7 +52,6 @@
                                     {
                                         <a asp-action="Upsert" asp-route-id="@Weapon.Id" class="btn btn-info">Edit</a>
 
-                                        // TODO: make the delete button not look derpy
                                         <span id="confirmDeleteSpan_@Weapon.Id" style="display:none">
                                             <span>Are you sure you want to delete?</span>
                                             <a asp-action="Delete" asp-route-id="@Weapon.Id" class="btn btn-danger">Yes</a>

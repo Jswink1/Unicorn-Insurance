@@ -51,26 +51,17 @@
                     if (property.Name == "CustomWeapon" &&
                         @property.GetValue(Model) != null)
                     {
-                        <hr / >
-                        <h5>Custom Weapon</h5>
+                        <h5 class="mt-3">Custom Weapon</h5>
                         <li class="list-group-item"><span class="font-weight-bold">Name - </span> @Model.CustomWeapon.Name</li>
                         <li class="list-group-item"><span class="font-weight-bold">Ability - </span> @Model.CustomWeapon.Description</li>
                     }
                 }
             </ul>
 
-        </div>
-    </div>
-    <div class="row mt-2">
-
-        @* "Add to Cart" and "Back to List" Button *@
-        <div class="col-12 col-md-6 pb-1">
-            <a asp-action="Index" class="btn btn-primary form-control  btn-square btn-lg" style="height:50px;">Back to List</a>
-        </div>
-        <div class="col-12 col-md-6 pb-1">
-
-            <button type="submit" value="Add to Cart" class="btn btn-success btn-square btn-lg form-control" style="height:50px;">Add to Cart</button>
-
+            <hr />
+            <div class="row mt-2">
+                <partial name="_AddToCartAndBackToListButton" />
+            </div>
         </div>
     </div>
 </form>

@@ -190,21 +190,14 @@
 
             <div class="form-group row mt-2">
                 <div class="col-8 offset-3">
-                    @*Check whether to display Edit or Create Button*@
+                    @*Edit or Create Button*@
                     @if (Model.MobileSuit.Id != 0)
                     {
                         <partial name="_EditAndBackToListButton" model="Model.MobileSuit.Id" />
                     }
                     else
                     {
-                        <div class="row">
-                            <div class="col">
-                                <button type="submit" class="btn btn-primary form-control">Create</button>
-                            </div>
-                            <div class="col">
-                                <a asp-action="Index" class="btn btn-success form-control">Back to List</a>
-                            </div>
-                        </div>
+                        <partial name="_CreateAndBackToListButton" />
                     }
                 </div>
             </div>

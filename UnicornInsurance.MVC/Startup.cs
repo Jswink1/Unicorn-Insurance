@@ -62,6 +62,7 @@ namespace UnicornInsurance.MVC
             services.AddScoped<IShoppingCartService, ShoppingCartService>();
             services.AddScoped<IOrderService, Services.OrderService>();
             services.AddScoped<IUserItemService, UserItemService>();
+            services.AddScoped<IDeploymentService, DeploymentService>();
 
             services.AddSingleton<ILocalStorageService, LocalStorageService>();
 

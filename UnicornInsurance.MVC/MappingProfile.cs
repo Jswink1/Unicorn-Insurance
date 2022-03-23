@@ -51,6 +51,9 @@ namespace UnicornInsurance.MVC
                 .ReverseMap();
 
             CreateMap<UserWeapon, UserWeaponDTO>().ReverseMap();
+
+            CreateMap<Deployment, CreateDeploymentDTO>().ReverseMap();
+            CreateMap<Deployment, DeploymentDTO>().ReverseMap();
         }
     }
 }

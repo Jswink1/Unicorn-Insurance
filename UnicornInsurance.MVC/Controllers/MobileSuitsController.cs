@@ -172,8 +172,8 @@ namespace UnicornInsurance.MVC.Controllers
                 if (model.MobileSuit.Id != 0)
                 {
                     // Retrieve the image stored in the DB
-                    var weapon = await _mobileSuitService.GetMobileSuitDetails(model.MobileSuit.Id);
-                    model.MobileSuit.ImageUrl = weapon.ImageUrl;
+                    var mobileSuit = await _mobileSuitService.GetMobileSuitDetails(model.MobileSuit.Id);
+                    model.MobileSuit.ImageUrl = mobileSuit.ImageUrl;
                 }
                 // If we are inserting, the user needs to upload an image, so throw an error
                 else
@@ -222,6 +222,13 @@ namespace UnicornInsurance.MVC.Controllers
             {
                 TempData["Error"] = response.Message;
                 model.Errors = response.Errors;
+
+                var imagePath = Path.Combine(webRootPath, model.MobileSuit.ImageUrl.TrimStart('\\'));
+                if (System.IO.File.Exists(imagePath))
+                {
+                    System.IO.File.Delete(imagePath);
+                }
+
                 return View(model);
             }
         }

@@ -1,5 +1,4 @@
-﻿
-$(document).ready(function () {
+﻿$(document).ready(function () {
 
     // Determine what filter to use when loading the table
     var url = window.location.search;

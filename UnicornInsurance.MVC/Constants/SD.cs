@@ -30,5 +30,9 @@ namespace UnicornInsurance.MVC.Constants
         public const string StandardInsurancePlan = "Standard";
         public const string SuperInsurancePlan = "Super";
         public const string UltraInsurancePlan = "Ultra";
+
+        // Deployment Result Types
+        public const string GoodDeploymentResult = "Good";
+        public const string BadDeploymentResult = "Bad";
     }
 }

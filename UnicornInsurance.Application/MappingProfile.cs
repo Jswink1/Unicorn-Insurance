@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnicornInsurance.Application.DTOs.Deployment;
 using UnicornInsurance.Application.DTOs.MobileSuit;
 using UnicornInsurance.Application.DTOs.MobileSuitCartItem;
 using UnicornInsurance.Application.DTOs.OrderDetails;
@@ -48,6 +49,9 @@ namespace UnicornInsurance.Application
             CreateMap<UserMobileSuit, MobileSuitDTO>().ReverseMap();
 
             CreateMap<UserWeapon, UserWeaponDTO>().ReverseMap();
+
+            CreateMap<Deployment, CreateDeploymentDTO>().ReverseMap();
+            CreateMap<Deployment, DeploymentDTO>().ReverseMap();
         }
     }
 }
