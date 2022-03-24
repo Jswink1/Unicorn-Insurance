@@ -14,5 +14,6 @@ namespace UnicornInsurance.MVC.Contracts
         Task<Deployment> GetDeploymentDetails(int id);
         Task<List<Deployment>> GetDeployments();
         Task DeleteDeployment(int id);
+        Task<Deployment> DeployMobileSuit(int id);
     }
 }

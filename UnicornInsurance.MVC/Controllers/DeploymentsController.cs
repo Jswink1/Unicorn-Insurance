@@ -25,7 +25,7 @@ namespace UnicornInsurance.MVC.Controllers
             _webHostEnvironment = webHostEnvironment;
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             return View();
         }
@@ -135,6 +135,17 @@ namespace UnicornInsurance.MVC.Controllers
 
                 return View(model);
             }
+        }
+
+        public async Task<IActionResult> Deploy(int id)
+        {
+            DeploymentVM model = new()
+            {
+                Deployment = await _deploymentService.DeployMobileSuit(id),
+                UserMobileSuitId = id
+            };
+
+            return View(model);
         }
 
         #region API Calls

@@ -1,0 +1,36 @@
+﻿@model DeploymentVM
+@using UnicornInsurance.MVC.Constants
+@{
+    ViewData["Title"] = "Deployment Result";
+}
+
+@if (Model.Deployment.ResultType == SD.GoodDeploymentResult)
+{
+    <h1 class="text-success text-center">Deployment Successfull</h1>
+}
+else if (Model.Deployment.ResultType == SD.BadDeploymentResult)
+{
+    <h1 class="text-danger text-center">Deployment Failed</h1>
+}
+
+<div class="row justify-content-center">
+    <img src="@Model.Deployment.ImageUrl" style="min-width: 500px;" />
+</div>
+
+<div class="row justify-content-center mt-3">
+    <h5>@Model.Deployment.Description</h5>
+</div>
+
+<div class="row justify-content-center mt-2">
+    <a asp-controller="MobileSuitDeck" asp-action="Details" asp-route-id="@Model.UserMobileSuitId" class="btn btn-info form-control col-3">
+        Back to Mobile Suit
+    </a>
+
+    @if (Model.Deployment.ResultType == SD.GoodDeploymentResult)
+    {
+        <a asp-controller="Deployments" asp-action="Deploy" asp-route-id="@Model.UserMobileSuitId" class="btn btn-success form-control col-3 ml-2">
+            Deploy Again
+        </a>
+    }
+</div>
+

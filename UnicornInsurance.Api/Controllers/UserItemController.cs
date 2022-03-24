@@ -63,5 +63,13 @@ namespace UnicornInsurance.Api.Controllers
             var response = await _mediator.Send(new UpdateUserInsurancePlanCommand() { UserInsurancePlanDTO = userInsurancePlanDTO });
             return Ok(response);
         }
+
+        [HttpDelete]
+        [Route("UserMobileSuit/{id}")]
+        public async Task<ActionResult> DeleteUserMobileSuit(int id)
+        {
+            await _mediator.Send(new DeleteUserMobileSuitCommand() { UserMobileSuitId = id });
+            return Ok();
+        }
     }
 }

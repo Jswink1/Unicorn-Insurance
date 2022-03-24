@@ -25,9 +25,9 @@ namespace UnicornInsurance.Application.Constants
         public const string StatusApproved = "Approved";
 
         // Insurance Plans
-        public const string StandardInsurancePlan = "standard";
-        public const string SuperInsurancePlan = "super";
-        public const string UltraInsurancePlan = "ultra";
+        public const string StandardInsurancePlan = "Standard";
+        public const string SuperInsurancePlan = "Super";
+        public const string UltraInsurancePlan = "Ultra";
 
         // Deployment Result Types
         public const string GoodDeploymentResult = "Good";

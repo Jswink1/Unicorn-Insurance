@@ -70,5 +70,12 @@ namespace UnicornInsurance.MVC.Controllers
 
             return RedirectToAction("Details", "MobileSuitDeck", new { id = model.UserMobileSuit.Id });
         }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            await _userItemService.DeleteUserMobileSuit(id);
+
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

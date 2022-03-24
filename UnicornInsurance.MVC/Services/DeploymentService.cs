@@ -24,6 +24,7 @@ namespace UnicornInsurance.MVC.Services
 
         public async Task<List<Deployment>> GetDeployments()
         {
+            AddBearerToken();
             var deploymentDTOs = await _client.DeploymentAllAsync();
 
             return _mapper.Map<List<Deployment>>(deploymentDTOs);
@@ -31,6 +32,7 @@ namespace UnicornInsurance.MVC.Services
 
         public async Task<Deployment> GetDeploymentDetails(int id)
         {
+            AddBearerToken();
             var deploymentDTO = await _client.DeploymentGETAsync(id);
 
             return _mapper.Map<Deployment>(deploymentDTO);
@@ -38,6 +40,7 @@ namespace UnicornInsurance.MVC.Services
 
         public async Task<BaseCommandResponse> InsertDeployment(Deployment deployment)
         {
+            AddBearerToken();
             var deploymentDTO = _mapper.Map<CreateDeploymentDTO>(deployment);
 
             return await _client.DeploymentPOSTAsync(deploymentDTO);
@@ -45,6 +48,7 @@ namespace UnicornInsurance.MVC.Services
 
         public async Task<BaseCommandResponse> UpdateDeployment(Deployment deployment)
         {
+            AddBearerToken();
             var deploymentDTO = _mapper.Map<DeploymentDTO>(deployment);
 
             return await _client.DeploymentPUTAsync(deploymentDTO);
@@ -52,7 +56,16 @@ namespace UnicornInsurance.MVC.Services
 
         public async Task DeleteDeployment(int id)
         {
+            AddBearerToken();
             await _client.DeploymentDELETEAsync(id);
+        }
+
+        public async Task<Deployment> DeployMobileSuit(int id)
+        {
+            AddBearerToken();
+            var deployMobileSuitDTO = await _client.DeployMobileSuitAsync(id);
+
+            return _mapper.Map<Deployment>(deployMobileSuitDTO);
         }
     }
 }

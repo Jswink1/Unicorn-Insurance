@@ -53,6 +53,9 @@ namespace UnicornInsurance.Api.Middleware
                 case UnauthorizedAccessException unauthorizedException:
                     statusCode = HttpStatusCode.Unauthorized;
                     break;
+                case MobileSuitDamagedException mobileSuitDamagedException:
+                    statusCode = HttpStatusCode.InternalServerError;
+                    break;
                 default:
                     break;
             }

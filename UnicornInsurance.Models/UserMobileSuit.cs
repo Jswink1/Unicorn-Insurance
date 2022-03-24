@@ -16,6 +16,7 @@ namespace UnicornInsurance.Models
         public MobileSuit MobileSuit { get; set; }
         public string InsurancePlan { get; set; }
         public DateTime EndOfCoverage { get; set; }
+        public bool IsDamaged { get; set; }
 
         //public int? CustomWeaponId { get; set; }
         //public virtual UserWeapon CustomWeapon { get; set; }

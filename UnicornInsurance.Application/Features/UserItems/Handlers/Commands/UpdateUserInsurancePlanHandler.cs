@@ -55,9 +55,9 @@ namespace UnicornInsurance.Application.Features.UserItems.Handlers.Commands
                 if (userMobileSuit.ApplicationUserId != userId)
                     throw new UnauthorizedAccessException();
 
-                if (request.UserInsurancePlanDTO.InsurancePlan.ToLower() == SD.StandardInsurancePlan ||
-                    request.UserInsurancePlanDTO.InsurancePlan.ToLower() == SD.SuperInsurancePlan ||
-                    request.UserInsurancePlanDTO.InsurancePlan.ToLower() == SD.UltraInsurancePlan)
+                if (request.UserInsurancePlanDTO.InsurancePlan == SD.StandardInsurancePlan ||
+                    request.UserInsurancePlanDTO.InsurancePlan == SD.SuperInsurancePlan ||
+                    request.UserInsurancePlanDTO.InsurancePlan == SD.UltraInsurancePlan)
                 {
                     userMobileSuit.InsurancePlan = request.UserInsurancePlanDTO.InsurancePlan;
                     userMobileSuit.EndOfCoverage = DateTime.Now.AddDays(1);

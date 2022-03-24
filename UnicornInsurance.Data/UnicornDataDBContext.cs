@@ -72,6 +72,11 @@ namespace UnicornInsurance.Data
                 entity.Property(e => e.Price).HasColumnType("money");
             });
 
+            modelBuilder.Entity<UserMobileSuit>(entity =>
+            {
+                entity.Property(e => e.IsDamaged).HasDefaultValue(false);
+            });
+
             OnModelCreatingPartial(modelBuilder);
 
             modelBuilder.ApplyConfiguration(new MobileSuitSeed());

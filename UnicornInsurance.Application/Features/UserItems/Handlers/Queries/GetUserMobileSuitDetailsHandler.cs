@@ -65,7 +65,8 @@ namespace UnicornInsurance.Application.Features.UserItems.Handlers.Queries
                 CustomWeapon = _mapper.Map<UserWeaponDTO>(customWeapon),
                 AvailableWeapons = _mapper.Map<List<UserWeaponDTO>>(availableWeapons),
                 EndOfCoverage = userMobileSuit.EndOfCoverage,
-                InsurancePlan = userMobileSuit.InsurancePlan
+                InsurancePlan = userMobileSuit.InsurancePlan,
+                IsDamaged = userMobileSuit.IsDamaged
             };
 
             return userMobileSuitDTO;

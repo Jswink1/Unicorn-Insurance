@@ -63,5 +63,13 @@ namespace UnicornInsurance.Api.Controllers
             await _mediator.Send(command);
             return Ok();
         }
+
+        [HttpPost]
+        [Route("DeployMobileSuit/{id}")]
+        public async Task<ActionResult<DeploymentDTO>> DeployMobileSuit(int id)
+        {
+            var response = await _mediator.Send(new DeployMobileSuitCommand() { UserMobileSuitId = id });
+            return Ok(response);
+        }
     }
 }

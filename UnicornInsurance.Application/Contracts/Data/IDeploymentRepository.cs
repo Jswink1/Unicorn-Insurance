@@ -9,5 +9,7 @@ namespace UnicornInsurance.Application.Contracts.Data
 {
     public interface IDeploymentRepository : IGenericRepository<Deployment>
     {
+        Task<List<Deployment>> GetGoodDeploymentResults();
+        Task<List<Deployment>> GetBadDeploymentResults();
     }
 }

@@ -17,5 +17,6 @@ namespace UnicornInsurance.MVC.Models
         public int SelectedWeaponId { get; set; }
         public string InsurancePlan { get; set; }
         public DateTime EndOfCoverage { get; set; }
+        public bool IsDamaged { get; set; }
     }
 }

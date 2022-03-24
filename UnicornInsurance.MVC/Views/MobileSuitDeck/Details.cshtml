@@ -80,7 +80,16 @@
         </div>
 
         <hr />
-        <button class="btn-success form-control btn-lg">Deploy Mobile Suit (Feature Coming Soon)</button>
+        @if (Model.IsDamaged)
+        {
+            <h5>Mobile Suit Status: <b class="text-danger">Damaged</b></h5>
+            <a asp-controller="MobileSuitDeck" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger form-control btn-lg">Delete Mobile Suit</a>
+        }
+        else
+        {
+            <h5>Mobile Suit Status: <b class="text-success">Operational</b></h5>
+            <a asp-controller="Deployments" asp-action="Deploy" asp-route-id="@Model.Id" class="btn btn-success form-control btn-lg">Deploy Mobile Suit</a>
+        }
 
     </div>
 </div>
