@@ -9,6 +9,6 @@ namespace UnicornInsurance.Application.Features.ShoppingCart.Requests.Commands
 {
     public class DeleteMobileSuitCartItemCommand : IRequest
     {
-        public int Id { get; set; }
+        public int MobileSuitCartItemId { get; set; }
     }
 }

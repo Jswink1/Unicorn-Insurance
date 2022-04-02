@@ -9,8 +9,6 @@ using UnicornInsurance.Application.Features.Weapons.Requests.Commands;
 using UnicornInsurance.Application.Features.Weapons.Requests.Queries;
 using UnicornInsurance.Application.Responses;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace UnicornInsurance.Api.Controllers
 {
     [Route("api/[controller]")]
@@ -32,9 +30,9 @@ namespace UnicornInsurance.Api.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<FullWeaponDTO>> Get(int id)
+        public async Task<ActionResult<WeaponDTO>> Get(int id)
         {
-            var weapon = await _mediator.Send(new GetWeaponDetailsRequest { Id = id });
+            var weapon = await _mediator.Send(new GetWeaponDetailsRequest { WeaponId = id });
             return Ok(weapon);
         }
 
@@ -62,7 +60,7 @@ namespace UnicornInsurance.Api.Controllers
         //[Authorize(Roles = "Administrator")]
         public async Task<ActionResult> Delete(int id)
         {
-            var command = new DeleteWeaponCommand { Id = id };
+            var command = new DeleteWeaponCommand { WeaponId = id };
             await _mediator.Send(command);
             return Ok();
         }

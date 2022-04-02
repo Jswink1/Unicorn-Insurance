@@ -18,15 +18,12 @@ namespace UnicornInsurance.Application.Features.UserItems.Handlers.Commands
     public class UnequipWeaponHandler : IRequestHandler<UnequipWeaponCommand>
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IMapper _mapper;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
         public UnequipWeaponHandler(IUnitOfWork unitOfWork,
-                                    IMapper mapper,
                                     IHttpContextAccessor httpContextAccessor)
         {
             _unitOfWork = unitOfWork;
-            _mapper = mapper;
             _httpContextAccessor = httpContextAccessor;
         }
 
@@ -44,11 +41,11 @@ namespace UnicornInsurance.Application.Features.UserItems.Handlers.Commands
 
             var equippedWeapon = await _unitOfWork.UserWeaponRepository.GetUserMobileSuitEquippedWeapon(userMobileSuit.Id);
 
-            if (equippedWeapon is null)
-                throw new NotFoundException(nameof(equippedWeapon), equippedWeapon.Id);
-
-            equippedWeapon.EquippedMobileSuitId = null;
-            await _unitOfWork.Save();
+            if (equippedWeapon is not null)
+            {
+                equippedWeapon.EquippedMobileSuitId = null;
+                await _unitOfWork.Save();
+            }
 
             return Unit.Value;
         }

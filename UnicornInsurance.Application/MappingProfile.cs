@@ -8,7 +8,7 @@ using UnicornInsurance.Application.DTOs.Deployment;
 using UnicornInsurance.Application.DTOs.MobileSuit;
 using UnicornInsurance.Application.DTOs.MobileSuitCartItem;
 using UnicornInsurance.Application.DTOs.OrderDetails;
-using UnicornInsurance.Application.DTOs.OrderHeader;
+using UnicornInsurance.Application.DTOs.Order;
 using UnicornInsurance.Application.DTOs.UserMobileSuit;
 using UnicornInsurance.Application.DTOs.UserWeapon;
 using UnicornInsurance.Application.DTOs.Weapon;
@@ -23,20 +23,16 @@ namespace UnicornInsurance.Application
         {
             CreateMap<Weapon, WeaponDTO>().ReverseMap();
             CreateMap<Weapon, CreateWeaponDTO>().ReverseMap();
-            CreateMap<Weapon, FullWeaponDTO>().ReverseMap();
 
             CreateMap<MobileSuit, MobileSuitDTO>().ReverseMap();
             CreateMap<MobileSuit, FullMobileSuitDTO>().ReverseMap();
             CreateMap<MobileSuit, CreateMobileSuitDTO>().ReverseMap();
             CreateMap<MobileSuit, CreateFullMobileSuitDTO>().ReverseMap();
 
-            CreateMap<MobileSuitCartItem, CreateMobileSuitCartItemDTO>().ReverseMap();
             CreateMap<MobileSuitCartItem, MobileSuitCartItemDTO>().ReverseMap();
 
-            CreateMap<WeaponCartItem, CreateWeaponCartItemDTO>().ReverseMap();
             CreateMap<WeaponCartItem, WeaponCartItemDTO>().ReverseMap();
 
-            CreateMap<OrderHeader, InitializeOrderHeaderDTO>().ReverseMap();
             CreateMap<OrderHeader, OrderHeaderDTO>().ReverseMap();
 
             CreateMap<MobileSuitPurchase, MobileSuitPurchaseDTO>().ReverseMap();

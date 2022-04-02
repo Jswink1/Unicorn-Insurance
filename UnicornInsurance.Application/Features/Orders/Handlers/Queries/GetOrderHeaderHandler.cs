@@ -10,7 +10,8 @@ using System.Threading.Tasks;
 using UnicornInsurance.Application.Constants;
 using UnicornInsurance.Application.Contracts.Data;
 using UnicornInsurance.Application.Contracts.Identity;
-using UnicornInsurance.Application.DTOs.OrderHeader;
+using UnicornInsurance.Application.DTOs.Order;
+using UnicornInsurance.Application.Exceptions;
 using UnicornInsurance.Application.Features.Orders.Requests.Queries;
 
 namespace UnicornInsurance.Application.Features.Orders.Handlers.Queries
@@ -20,26 +21,25 @@ namespace UnicornInsurance.Application.Features.Orders.Handlers.Queries
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        private readonly IUserService _userService;
 
         public GetOrderHeaderHandler(IUnitOfWork unitOfWork,
                                      IMapper mapper,
-                                     IHttpContextAccessor httpContextAccessor,
-                                     IUserService userService)
+                                     IHttpContextAccessor httpContextAccessor)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
             _httpContextAccessor = httpContextAccessor;
-            _userService = userService;
         }
 
         public async Task<OrderHeaderDTO> Handle(GetOrderHeaderRequest request, CancellationToken cancellationToken)
         {
-            var orderHeader = await _unitOfWork.OrderHeaderRepository.Get(request.OrderId);
-
             var userId = _httpContextAccessor.HttpContext.User.FindFirst(
                     q => q.Type == SD.Uid)?.Value;
 
+            var orderHeader = await _unitOfWork.OrderHeaderRepository.Get(request.OrderId);
+
+            if (orderHeader is null)
+                throw new NotFoundException(nameof(orderHeader), request.OrderId);
             if (orderHeader.ApplicationUserId != userId)
                 throw new UnauthorizedAccessException();
 

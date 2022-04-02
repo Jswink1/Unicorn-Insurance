@@ -26,10 +26,10 @@ namespace UnicornInsurance.Application.Features.MobileSuits.Handlers.Queries
 
         public async Task<FullMobileSuitDTO> Handle(GetMobileSuitDetailsRequest request, CancellationToken cancellationToken)
         {
-            var mobileSuit = await _unitOfWork.MobileSuitRepository.GetFullMobileSuitDetails(request.Id);
+            var mobileSuit = await _unitOfWork.MobileSuitRepository.GetFullMobileSuitDetails(request.MobileSuitId);
 
             if (mobileSuit is null)
-                throw new NotFoundException(nameof(mobileSuit), request.Id);
+                throw new NotFoundException(nameof(mobileSuit), request.MobileSuitId);
 
             return _mapper.Map<FullMobileSuitDTO>(mobileSuit);
         }

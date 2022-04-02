@@ -21,8 +21,8 @@ namespace UnicornInsurance.Application.Features.ShoppingCart.Handlers.Queries
         private readonly IHttpContextAccessor _httpContextAccessor;
 
         public GetWeaponCartItemListHandler(IUnitOfWork unitOfWork,
-                                        IMapper mapper,
-                                        IHttpContextAccessor httpContextAccessor)
+                                            IMapper mapper,
+                                            IHttpContextAccessor httpContextAccessor)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;

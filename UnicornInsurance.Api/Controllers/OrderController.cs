@@ -5,8 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using UnicornInsurance.Application.DTOs.Order;
 using UnicornInsurance.Application.DTOs.OrderDetails;
-using UnicornInsurance.Application.DTOs.OrderHeader;
 using UnicornInsurance.Application.Features.Orders.Requests.Commands;
 using UnicornInsurance.Application.Features.Orders.Requests.Queries;
 using UnicornInsurance.Application.Responses;
@@ -52,20 +52,9 @@ namespace UnicornInsurance.Api.Controllers
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
         [Route("InitializeOrder")]
-        public async Task<ActionResult<BaseCommandResponse>> Post([FromBody] InitializeOrderHeaderDTO orderHeader)
+        public async Task<ActionResult<BaseCommandResponse>> Post([FromBody] InitializeOrderDTO initializeOrderDTO)
         {
-            var command = new InitializeOrderHeaderCommand { OrderHeaderDTO = orderHeader };
-            var response = await _mediator.Send(command);
-            return Ok(response);
-        }
-
-        [HttpPost]
-        [ProducesResponseType(200)]
-        [ProducesResponseType(400)]
-        [Route("CreateOrderDetails")]
-        public async Task<ActionResult<BaseCommandResponse>> Post([FromBody] CreateOrderDetailsDTO orderDetails)
-        {
-            var command = new CreateOrderDetailsCommand { OrderDetailsDTO = orderDetails };
+            var command = new InitializeOrderCommand { InitializeOrderDTO = initializeOrderDTO };
             var response = await _mediator.Send(command);
             return Ok(response);
         }
@@ -74,9 +63,9 @@ namespace UnicornInsurance.Api.Controllers
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
         [Route("CompleteOrder")]
-        public async Task<ActionResult<BaseCommandResponse>> Post([FromBody] CompleteOrderHeaderDTO orderHeaderCompletion)
+        public async Task<ActionResult<BaseCommandResponse>> Post([FromBody] CompleteOrderDTO completeOrderDTO)
         {
-            var command = new CompleteOrderHeaderCommand { OrderHeaderCompletionDTO = orderHeaderCompletion };
+            var command = new CompleteOrderCommand { CompleteOrderDTO = completeOrderDTO };
             var response = await _mediator.Send(command);
             return Ok(response);
         }

@@ -19,24 +19,19 @@ namespace UnicornInsurance.MVC
             CreateMap<MobileSuit, CreateFullMobileSuitDTO>().ReverseMap();
 
             CreateMap<Weapon, WeaponDTO>().ReverseMap();
-            CreateMap<Weapon, FullWeaponDTO>().ReverseMap();
             CreateMap<Weapon, CreateWeaponDTO>().ReverseMap();
 
-            CreateMap<MobileSuitCartItem, CreateMobileSuitCartItemDTO>().ReverseMap();
             CreateMap<MobileSuitCartItem, MobileSuitCartItemDTO>().ReverseMap();
 
-            CreateMap<WeaponCartItem, CreateWeaponCartItemDTO>().ReverseMap();
             CreateMap<WeaponCartItem, WeaponCartItemDTO>().ReverseMap();
 
-            CreateMap<OrderHeader, InitializeOrderHeaderDTO>().ReverseMap();
             CreateMap<OrderHeaderDTO, OrderHeader>()
                 .ForMember(q => q.OrderDate , opt => opt.MapFrom(x => x.OrderDate.DateTime))
                 .ForMember(q => q.PaymentDate, opt => opt.MapFrom(x => x.PaymentDate.DateTime))
                 .ReverseMap();
 
-            CreateMap<CompleteOrderHeader, CompleteOrderHeaderDTO>().ReverseMap();
+            CreateMap<CompleteOrderHeader, CompleteOrderDTO>().ReverseMap();
 
-            CreateMap<OrderDetailsVM, CreateOrderDetailsDTO>().ReverseMap();
             CreateMap<OrderDetailsVM, OrderDetailsDTO>().ReverseMap();
 
             CreateMap<MobileSuitCartItem, MobileSuitPurchaseDTO>().ReverseMap();

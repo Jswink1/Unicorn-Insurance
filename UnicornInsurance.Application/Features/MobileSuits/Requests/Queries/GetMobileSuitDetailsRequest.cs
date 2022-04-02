@@ -10,6 +10,6 @@ namespace UnicornInsurance.Application.Features.MobileSuits.Requests.Queries
 {
     public class GetMobileSuitDetailsRequest : IRequest<FullMobileSuitDTO>
     {
-        public int Id { get; set; }
+        public int MobileSuitId { get; set; }
     }
 }

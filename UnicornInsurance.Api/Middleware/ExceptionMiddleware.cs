@@ -40,9 +40,6 @@ namespace UnicornInsurance.Api.Middleware
 
             switch (exception)
             {
-                //case BadRequestException badRequestException:
-                //    statusCode = HttpStatusCode.BadRequest;
-                //    break;
                 case ValidationException validationException:
                     statusCode = HttpStatusCode.BadRequest;
                     result = JsonConvert.SerializeObject(validationException.Errors);
@@ -52,9 +49,6 @@ namespace UnicornInsurance.Api.Middleware
                     break;
                 case UnauthorizedAccessException unauthorizedException:
                     statusCode = HttpStatusCode.Unauthorized;
-                    break;
-                case MobileSuitDamagedException mobileSuitDamagedException:
-                    statusCode = HttpStatusCode.InternalServerError;
                     break;
                 default:
                     break;

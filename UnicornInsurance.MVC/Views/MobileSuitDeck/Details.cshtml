@@ -1,5 +1,6 @@
 ﻿@model UserMobileSuit
-@using UnicornInsurance.MVC.Constants
+@using UnicornInsurance.MVC.Constants 
+@using ExpressTimezone
 
 @{ ViewData["Title"] = Model.MobileSuit.Name; }
 
@@ -52,7 +53,7 @@
         <hr />
         <h2>Insurance</h2>
         <div class="offset-3 col-6 p-4">
-            @if (Model.EndOfCoverage > DateTime.Now)
+            @if (Model.EndOfCoverage.UTCToSystemTime() > DateTime.Now)
             {
                 if (Model.InsurancePlan == SD.StandardInsurancePlan)
                 {
@@ -66,7 +67,7 @@
                 {
                     <partial name="_UltraInsuranceIcon" />
                 }
-                <h5>Expires: @Model.EndOfCoverage</h5>
+                <h5>Expires: @Model.EndOfCoverage.UTCToSystemTime()</h5>
             }
             else
             {

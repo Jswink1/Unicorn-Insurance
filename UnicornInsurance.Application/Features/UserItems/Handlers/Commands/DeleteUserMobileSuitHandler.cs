@@ -17,15 +17,12 @@ namespace UnicornInsurance.Application.Features.UserItems.Handlers.Commands
     public class DeleteUserMobileSuitHandler : IRequestHandler<DeleteUserMobileSuitCommand>
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IMapper _mapper;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
         public DeleteUserMobileSuitHandler(IUnitOfWork unitOfWork,
-                                           IMapper mapper,
                                            IHttpContextAccessor httpContextAccessor)
         {
             _unitOfWork = unitOfWork;
-            _mapper = mapper;
             _httpContextAccessor = httpContextAccessor;
         }
 
@@ -41,10 +38,15 @@ namespace UnicornInsurance.Application.Features.UserItems.Handlers.Commands
             if (userMobileSuit.ApplicationUserId != userId)
                 throw new UnauthorizedAccessException();
 
-            var equippedWeapon = await _unitOfWork.UserWeaponRepository.GetUserMobileSuitEquippedWeapon(request.UserMobileSuitId);
-
+            var equippedWeapon = await _unitOfWork.UserWeaponRepository.GetUserMobileSuitEquippedWeapon(request.UserMobileSuitId); 
+            
             if (equippedWeapon is not null)
                 equippedWeapon.EquippedMobileSuitId = null;
+
+            var customWeapon = await _unitOfWork.UserWeaponRepository.GetUserMobileSuitCustomWeapon(request.UserMobileSuitId);
+
+            if (customWeapon is not null)
+                await _unitOfWork.UserWeaponRepository.Delete(customWeapon);
 
             await _unitOfWork.UserMobileSuitRepository.Delete(userMobileSuit);
             await _unitOfWork.Save();

@@ -45,7 +45,7 @@ namespace UnicornInsurance.Application.Features.Weapons.Handlers.Commands
                     throw new NotFoundException(nameof(weapon), request.WeaponDTO.Id);
 
                 if (weapon.IsCustomWeapon == true)
-                    throw new UpdateWeaponException();
+                    throw new UpdateCustomWeaponException();
 
                 _mapper.Map(request.WeaponDTO, weapon);
 

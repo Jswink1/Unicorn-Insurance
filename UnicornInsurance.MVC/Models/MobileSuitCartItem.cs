@@ -9,7 +9,6 @@ namespace UnicornInsurance.MVC.Models
     public class MobileSuitCartItem
     {
         public int Id { get; set; }
-        public int MobileSuitId { get; set; }
         public MobileSuit MobileSuit { get; set; }
         public decimal Price { get; set; }
     }

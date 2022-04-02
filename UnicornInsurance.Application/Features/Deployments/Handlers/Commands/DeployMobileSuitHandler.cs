@@ -44,7 +44,6 @@ namespace UnicornInsurance.Application.Features.Deployments.Handlers.Commands
                 throw new NotFoundException(nameof(userMobileSuit), request.UserMobileSuitId);
             if (userMobileSuit.ApplicationUserId != userId)
                 throw new UnauthorizedAccessException();
-
             if (userMobileSuit.IsDamaged)
                 throw new MobileSuitDamagedException();
 
@@ -92,7 +91,7 @@ namespace UnicornInsurance.Application.Features.Deployments.Handlers.Commands
                 deployment = _mapper.Map<DeploymentDTO>(randomResult);
 
                 // If user has no insurance
-                if (userMobileSuit.EndOfCoverage < DateTime.Now)
+                if (userMobileSuit.EndOfCoverage < DateTime.UtcNow)
                 {
                     // Set the mobile suit damage status
                     userMobileSuit.IsDamaged = true;

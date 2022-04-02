@@ -25,6 +25,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnicornInsurance.MVC", "Uni
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnicornInsurance.Utilities", "UnicornInsurance.Utilities\UnicornInsurance.Utilities.csproj", "{6916D954-D9EC-44C1-B2D0-5D9D0337E741}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{71B254A0-B756-4510-B603-792526BBDACF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnicornInsurance.Application.UnitTests", "UnicornInsurance.Application.UnitTests\UnicornInsurance.Application.UnitTests.csproj", "{566A08D2-5AA3-4BC4-93CA-83739D4812C0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +63,10 @@ Global
 		{6916D954-D9EC-44C1-B2D0-5D9D0337E741}.Debug|Any CPU.Build.0 = Release|Any CPU
 		{6916D954-D9EC-44C1-B2D0-5D9D0337E741}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6916D954-D9EC-44C1-B2D0-5D9D0337E741}.Release|Any CPU.Build.0 = Release|Any CPU
+		{566A08D2-5AA3-4BC4-93CA-83739D4812C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{566A08D2-5AA3-4BC4-93CA-83739D4812C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{566A08D2-5AA3-4BC4-93CA-83739D4812C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{566A08D2-5AA3-4BC4-93CA-83739D4812C0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -71,6 +79,7 @@ Global
 		{B458EB5E-0069-48E2-B396-97967BA6866D} = {C0381CCA-CDE7-40AB-9CA9-6B97C8E725DB}
 		{5E1A4A59-C75E-4817-8AD7-569EADA67319} = {FDFAFD60-4D90-4CC5-A7BB-8C5C91F74CCC}
 		{6916D954-D9EC-44C1-B2D0-5D9D0337E741} = {C0381CCA-CDE7-40AB-9CA9-6B97C8E725DB}
+		{566A08D2-5AA3-4BC4-93CA-83739D4812C0} = {71B254A0-B756-4510-B603-792526BBDACF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3396CC26-9DAA-4C29-90E5-4653D6D958B9}

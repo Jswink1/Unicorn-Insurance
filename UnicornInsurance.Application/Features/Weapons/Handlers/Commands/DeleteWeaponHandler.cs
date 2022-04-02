@@ -16,20 +16,20 @@ namespace UnicornInsurance.Application.Features.Weapons.Handlers.Commands
     public class DeleteWeaponHandler : IRequestHandler<DeleteWeaponCommand>
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IMapper _mapper;
 
-        public DeleteWeaponHandler(IUnitOfWork unitOfWork, IMapper mapper)
+        public DeleteWeaponHandler(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
-            _mapper = mapper;
         }
 
         public async Task<Unit> Handle(DeleteWeaponCommand request, CancellationToken cancellationToken)
         {
-            var weapon = await _unitOfWork.WeaponRepository.Get(request.Id);
+            var weapon = await _unitOfWork.WeaponRepository.Get(request.WeaponId);
 
             if (weapon is null)
-                throw new NotFoundException(nameof(weapon), request.Id);
+                throw new NotFoundException(nameof(weapon), request.WeaponId);
+            if (weapon.IsCustomWeapon)
+                throw new DeleteCustomWeaponException();
 
             await _unitOfWork.WeaponRepository.Delete(weapon);
             await _unitOfWork.Save();

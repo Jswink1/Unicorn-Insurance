@@ -34,7 +34,7 @@ namespace UnicornInsurance.Application.Features.Deployments.Handlers.Commands
             if (validationResult.IsValid == false)
             {
                 response.Success = false;
-                response.Message = "Mobile Suit Update Failed";
+                response.Message = "Deployment Update Failed";
                 response.Errors = validationResult.Errors.Select(q => q.ErrorMessage).ToList();
             }
             else

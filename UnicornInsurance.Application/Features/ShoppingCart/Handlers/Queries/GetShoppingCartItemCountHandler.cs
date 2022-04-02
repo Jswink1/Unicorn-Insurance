@@ -20,7 +20,7 @@ namespace UnicornInsurance.Application.Features.ShoppingCart.Handlers.Queries
         private readonly IHttpContextAccessor _httpContextAccessor;
 
         public GetShoppingCartItemCountHandler(IUnitOfWork unitOfWork,
-                                            IHttpContextAccessor httpContextAccessor)
+                                               IHttpContextAccessor httpContextAccessor)
         {
             _unitOfWork = unitOfWork;
             _httpContextAccessor = httpContextAccessor;

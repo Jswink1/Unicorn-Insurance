@@ -20,15 +20,12 @@ namespace UnicornInsurance.Application.Features.UserItems.Handlers.Commands
     public class UpdateUserInsurancePlanHandler : IRequestHandler<UpdateUserInsurancePlanCommand, BaseCommandResponse>
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IMapper _mapper;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
         public UpdateUserInsurancePlanHandler(IUnitOfWork unitOfWork,
-                                              IMapper mapper,
                                               IHttpContextAccessor httpContextAccessor)
         {
             _unitOfWork = unitOfWork;
-            _mapper = mapper;
             _httpContextAccessor = httpContextAccessor;
         }
 
@@ -40,7 +37,7 @@ namespace UnicornInsurance.Application.Features.UserItems.Handlers.Commands
             if (validationResult.IsValid == false)
             {
                 response.Success = false;
-                response.Message = "User Mobile Suit Update Failed";
+                response.Message = "Insurance Plan Update Failure";
                 response.Errors = validationResult.Errors.Select(q => q.ErrorMessage).ToList();
             }
             else
@@ -54,24 +51,15 @@ namespace UnicornInsurance.Application.Features.UserItems.Handlers.Commands
                     throw new NotFoundException(nameof(userMobileSuit), request.UserInsurancePlanDTO.UserMobileSuitId);
                 if (userMobileSuit.ApplicationUserId != userId)
                     throw new UnauthorizedAccessException();
+                if (userMobileSuit.IsDamaged == true)
+                    throw new MobileSuitDamagedException();
 
-                if (request.UserInsurancePlanDTO.InsurancePlan == SD.StandardInsurancePlan ||
-                    request.UserInsurancePlanDTO.InsurancePlan == SD.SuperInsurancePlan ||
-                    request.UserInsurancePlanDTO.InsurancePlan == SD.UltraInsurancePlan)
-                {
-                    userMobileSuit.InsurancePlan = request.UserInsurancePlanDTO.InsurancePlan;
-                    userMobileSuit.EndOfCoverage = DateTime.Now.AddDays(1);
-                    await _unitOfWork.Save();
-                }
-                else
-                {
-                    response.Success = false;
-                    response.Message = "Invalid Insurance Plan Name";
-                    return response;
-                }
+                userMobileSuit.InsurancePlan = request.UserInsurancePlanDTO.InsurancePlan;
+                userMobileSuit.EndOfCoverage = DateTime.UtcNow.AddDays(1);
+                await _unitOfWork.Save();
 
                 response.Success = true;
-                response.Message = "Weapon Equipped Successfully";
+                response.Message = "Insurance Plan Update Success";
             }
             return response;
         }

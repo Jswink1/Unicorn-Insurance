@@ -17,15 +17,12 @@ namespace UnicornInsurance.Application.Features.Deployments.Handlers.Queries
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-        private readonly IHttpContextAccessor _httpContextAccessor;
 
         public GetDeploymentListHandler(IUnitOfWork unitOfWork,
-                                        IMapper mapper,
-                                        IHttpContextAccessor httpContextAccessor)
+                                        IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
-            _httpContextAccessor = httpContextAccessor;
         }
 
         public async Task<List<DeploymentDTO>> Handle(GetDeploymentListRequest request, CancellationToken cancellationToken)

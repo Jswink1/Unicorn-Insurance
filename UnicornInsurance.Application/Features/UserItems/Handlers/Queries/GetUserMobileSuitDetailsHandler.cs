@@ -37,10 +37,10 @@ namespace UnicornInsurance.Application.Features.UserItems.Handlers.Queries
             var userId = _httpContextAccessor.HttpContext.User.FindFirst(
                     q => q.Type == SD.Uid)?.Value;
 
-            var userMobileSuit = await _unitOfWork.UserMobileSuitRepository.GetUserMobileSuit(request.Id);
+            var userMobileSuit = await _unitOfWork.UserMobileSuitRepository.GetUserMobileSuit(request.UserMobileSuitId);
 
             if (userMobileSuit is null)
-                throw new NotFoundException(nameof(userMobileSuit), request.Id);
+                throw new NotFoundException(nameof(userMobileSuit), request.UserMobileSuitId);
             if (userMobileSuit.ApplicationUserId != userId)
                 throw new UnauthorizedAccessException();
 

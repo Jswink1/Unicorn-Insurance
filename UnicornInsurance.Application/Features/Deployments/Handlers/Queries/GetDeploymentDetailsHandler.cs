@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using UnicornInsurance.Application.Contracts.Data;
 using UnicornInsurance.Application.Contracts.Identity;
 using UnicornInsurance.Application.DTOs.Deployment;
+using UnicornInsurance.Application.Exceptions;
 using UnicornInsurance.Application.Features.Deployments.Requests.Queries;
 
 namespace UnicornInsurance.Application.Features.Deployments.Handlers.Queries
@@ -18,20 +19,20 @@ namespace UnicornInsurance.Application.Features.Deployments.Handlers.Queries
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-        private readonly IHttpContextAccessor _httpContextAccessor;
 
         public GetDeploymentDetailsHandler(IUnitOfWork unitOfWork,
-                                           IMapper mapper,
-                                           IHttpContextAccessor httpContextAccessor)
+                                           IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
-            _httpContextAccessor = httpContextAccessor;
         }
 
         public async Task<DeploymentDTO> Handle(GetDeploymentDetailsRequest request, CancellationToken cancellationToken)
         {
-            var deployment = await _unitOfWork.DeploymentRepository.Get(request.Id);
+            var deployment = await _unitOfWork.DeploymentRepository.Get(request.DeploymentId);
+
+            if (deployment is null)
+                throw new NotFoundException(nameof(deployment), request.DeploymentId);
 
             return _mapper.Map<DeploymentDTO>(deployment);
         }

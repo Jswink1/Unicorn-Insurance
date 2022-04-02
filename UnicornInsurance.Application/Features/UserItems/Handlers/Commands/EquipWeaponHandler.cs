@@ -20,15 +20,12 @@ namespace UnicornInsurance.Application.Features.UserItems.Handlers.Commands
     public class EquipWeaponHandler : IRequestHandler<EquipWeaponCommand, BaseCommandResponse>
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IMapper _mapper;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
         public EquipWeaponHandler(IUnitOfWork unitOfWork,
-                                  IMapper mapper,
                                   IHttpContextAccessor httpContextAccessor)
         {
             _unitOfWork = unitOfWork;
-            _mapper = mapper;
             _httpContextAccessor = httpContextAccessor;
         }
 
@@ -59,6 +56,11 @@ namespace UnicornInsurance.Application.Features.UserItems.Handlers.Commands
                 if (userMobileSuit.ApplicationUserId != userId ||
                     selectedWeapon.ApplicationUserId != userId)
                     throw new UnauthorizedAccessException();
+
+                if (selectedWeapon.IsCustomWeapon == true)
+                    throw new EquipCustomWeaponException();
+                if (selectedWeapon.EquippedMobileSuitId != null)
+                    throw new WeaponEquippedException();
 
                 var currentlyEquippedWeapon = await _unitOfWork.UserWeaponRepository.GetUserMobileSuitEquippedWeapon(request.EquipWeaponDTO.UserMobileSuitId);
 

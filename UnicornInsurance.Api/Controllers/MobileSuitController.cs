@@ -34,7 +34,7 @@ namespace UnicornInsurance.Api.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<FullMobileSuitDTO>> Get(int id)
         {
-            var mobileSuit = await _mediator.Send(new GetMobileSuitDetailsRequest { Id = id });
+            var mobileSuit = await _mediator.Send(new GetMobileSuitDetailsRequest { MobileSuitId = id });
             return Ok(mobileSuit);
         }
 
@@ -62,7 +62,7 @@ namespace UnicornInsurance.Api.Controllers
         //[Authorize(Roles = "Administrator")]
         public async Task<ActionResult> Delete(int id)
         {
-            var command = new DeleteMobileSuitCommand { Id = id };
+            var command = new DeleteMobileSuitCommand { MobileSuitId = id };
             await _mediator.Send(command);
             return Ok();
         }

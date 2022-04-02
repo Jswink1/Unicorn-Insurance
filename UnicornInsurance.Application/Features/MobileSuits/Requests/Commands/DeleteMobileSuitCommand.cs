@@ -9,6 +9,6 @@ namespace UnicornInsurance.Application.Features.MobileSuits.Requests.Commands
 {
     public class DeleteMobileSuitCommand : IRequest
     {
-        public int Id { get; set; }
+        public int MobileSuitId { get; set; }
     }
 }

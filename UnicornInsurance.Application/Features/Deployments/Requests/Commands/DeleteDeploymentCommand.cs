@@ -9,6 +9,6 @@ namespace UnicornInsurance.Application.Features.Deployments.Requests.Commands
 {
     public class DeleteDeploymentCommand : IRequest
     {
-        public int Id { get; set; }
+        public int DeploymentId { get; set; }
     }
 }

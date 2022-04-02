@@ -62,7 +62,7 @@ namespace UnicornInsurance.MVC.Controllers
 
                 if (charge.Status.ToLower() == "succeeded")
                 {
-                    completeOrderHeader.Success = true;
+                    completeOrderHeader.TransactionSuccess = true;
                     completeOrderHeader.TransactionId = charge.Id;
                     completeOrderResponse = await _orderService.CompleteOrder(completeOrderHeader);
                 }

@@ -9,15 +9,15 @@ namespace UnicornInsurance.MVC.Contracts
 {
     public interface IShoppingCartService
     {
-        Task<BaseCommandResponse> AddWeaponCartItem(WeaponCartItem weaponCartItem);
-        Task<BaseCommandResponse> AddMobileSuitCartItem(MobileSuitCartItem mobileSuitCartItem);
+        Task<BaseCommandResponse> AddWeaponCartItem(int weaponId);
+        Task<BaseCommandResponse> AddMobileSuitCartItem(int mobileSuitId);
         Task<List<WeaponCartItem>> GetAllWeaponCartItems();
         Task<List<MobileSuitCartItem>> GetAllMobileSuitCartItems();
         Task<ShoppingCartItemCountResponse> GetShoppingCartItemCount();
-        Task DeleteMobileSuitCartItem(int itemId);
-        Task DeleteWeaponCartItem(int itemId);
-        Task IncreaseWeaponQuantity(int itemId);
-        Task DecreaseWeaponQuantity(int itemId);
+        Task DeleteMobileSuitCartItem(int cartItemId);
+        Task DeleteWeaponCartItem(int cartItemId);
+        Task IncreaseWeaponQuantity(int weaponId);
+        Task DecreaseWeaponQuantity(int weaponId);
         Task ClearShoppingCart();
 
     }

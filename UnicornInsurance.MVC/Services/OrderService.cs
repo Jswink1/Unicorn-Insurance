@@ -46,27 +46,28 @@ namespace UnicornInsurance.MVC.Services
             return _mapper.Map<OrderHeader>(orderheaderDTO);
         }
 
-        public async Task<BaseCommandResponse> InitializeOrder(OrderHeader orderHeader)
+        public async Task<BaseCommandResponse> InitializeOrder(ShoppingCartVM shoppingCart)
         {
             AddBearerToken();
-            var orderHeaderDTO = _mapper.Map<InitializeOrderHeaderDTO>(orderHeader);
+            InitializeOrderDTO initializeOrderDTO = new()
+            {
+                MobileSuitPurchases = new List<CreateMobileSuitPurchaseDTO>(),
+                WeaponPurchases = new List<CreateWeaponPurchaseDTO>()
+            };
 
-            return await _client.InitializeOrderAsync(orderHeaderDTO);
-        }
+            foreach (var mobileSuitCartItem in shoppingCart.MobileSuitCartItems)            
+                initializeOrderDTO.MobileSuitPurchases.Add(new CreateMobileSuitPurchaseDTO() { MobileSuitId = mobileSuitCartItem.MobileSuit.Id });
 
-        public async Task<BaseCommandResponse> CreateOrderDetails(OrderDetailsVM orderDetails, int orderId)
-        {
-            AddBearerToken();
-            var orderDetailsDTO = _mapper.Map<CreateOrderDetailsDTO>(orderDetails);
-            orderDetailsDTO.OrderHeaderId = orderId;
+            foreach (var weaponCartItem in shoppingCart.WeaponCartItems)
+                initializeOrderDTO.WeaponPurchases.Add(new CreateWeaponPurchaseDTO() { WeaponId = weaponCartItem.Weapon.Id, Count = weaponCartItem.Count });            
 
-            return await _client.CreateOrderDetailsAsync(orderDetailsDTO);
+            return await _client.InitializeOrderAsync(initializeOrderDTO);
         }
 
         public async Task<BaseCommandResponse> CompleteOrder(CompleteOrderHeader orderHeaderCompletion)
         {
             AddBearerToken();
-            var orderHeaderCompletionDTO = _mapper.Map<CompleteOrderHeaderDTO>(orderHeaderCompletion);
+            var orderHeaderCompletionDTO = _mapper.Map<CompleteOrderDTO>(orderHeaderCompletion);
 
             return await _client.CompleteOrderAsync(orderHeaderCompletionDTO);
         }

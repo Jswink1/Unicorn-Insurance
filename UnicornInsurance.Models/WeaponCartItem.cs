@@ -17,14 +17,12 @@ namespace UnicornInsurance.Models
 
         [Key]
         public int Id { get; set; }
+        public string ApplicationUserId { get; set; }        
+        public decimal Price { get; set; }
+        public int Count { get; set; }
 
-        public string ApplicationUserId { get; set; }
         public int WeaponId { get; set; }
         [ForeignKey("WeaponId")]
         public Weapon Weapon { get; set; }
-        public decimal Price { get; set; }
-
-        [Range(1, 100, ErrorMessage = "Please enter a value between 1 and 1000")]
-        public int Count { get; set; }
     }
 }

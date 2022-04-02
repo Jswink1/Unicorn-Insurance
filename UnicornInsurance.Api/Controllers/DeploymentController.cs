@@ -34,7 +34,7 @@ namespace UnicornInsurance.Api.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<DeploymentDTO>> Get(int id)
         {
-            var deployment = await _mediator.Send(new GetDeploymentDetailsRequest { Id = id });
+            var deployment = await _mediator.Send(new GetDeploymentDetailsRequest { DeploymentId = id });
             return Ok(deployment);
         }
 
@@ -59,7 +59,7 @@ namespace UnicornInsurance.Api.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {
-            var command = new DeleteDeploymentCommand { Id = id };
+            var command = new DeleteDeploymentCommand { DeploymentId = id };
             await _mediator.Send(command);
             return Ok();
         }

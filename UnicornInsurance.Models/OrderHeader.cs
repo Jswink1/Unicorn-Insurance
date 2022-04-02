@@ -15,7 +15,6 @@ namespace UnicornInsurance.Models
         [Required]
         public string ApplicationUserId { get; set; }
 
-        [Required]
         public decimal OrderTotal { get; set; }
 
         [Required]

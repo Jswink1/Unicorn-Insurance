@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using UnicornInsurance.Application.DTOs.OrderHeader;
+using UnicornInsurance.Application.DTOs.Order;
 
 namespace UnicornInsurance.Application.DTOs.OrderDetails
 {

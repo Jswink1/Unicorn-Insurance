@@ -8,8 +8,8 @@ using UnicornInsurance.Application.DTOs.Weapon;
 
 namespace UnicornInsurance.Application.Features.Weapons.Requests.Queries
 {
-    public class GetWeaponDetailsRequest : IRequest<FullWeaponDTO>
+    public class GetWeaponDetailsRequest : IRequest<WeaponDTO>
     {
-        public int Id { get; set; }
+        public int WeaponId { get; set; }
     }
 }

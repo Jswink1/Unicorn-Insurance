@@ -13,7 +13,7 @@ using UnicornInsurance.Application.Features.Weapons.Requests.Queries;
 
 namespace UnicornInsurance.Application.Features.Weapons.Handlers.Queries
 {
-    public class GetWeaponDetailsHandler : IRequestHandler<GetWeaponDetailsRequest, FullWeaponDTO>
+    public class GetWeaponDetailsHandler : IRequestHandler<GetWeaponDetailsRequest, WeaponDTO>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
@@ -24,14 +24,14 @@ namespace UnicornInsurance.Application.Features.Weapons.Handlers.Queries
             _mapper = mapper;
         }
 
-        public async Task<FullWeaponDTO> Handle(GetWeaponDetailsRequest request, CancellationToken cancellationToken)
+        public async Task<WeaponDTO> Handle(GetWeaponDetailsRequest request, CancellationToken cancellationToken)
         {
-            var weapon = await _unitOfWork.WeaponRepository.Get(request.Id);
+            var weapon = await _unitOfWork.WeaponRepository.Get(request.WeaponId);
 
             if (weapon is null)
-                throw new NotFoundException(nameof(weapon), request.Id);
+                throw new NotFoundException(nameof(weapon), request.WeaponId);
 
-            return _mapper.Map<FullWeaponDTO>(weapon);
+            return _mapper.Map<WeaponDTO>(weapon);
         }
     }    
 }

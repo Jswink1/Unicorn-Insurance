@@ -11,7 +11,7 @@ using UnicornInsurance.Application.Constants;
 using UnicornInsurance.Application.Contracts.Data;
 using UnicornInsurance.Application.Contracts.Identity;
 using UnicornInsurance.Application.DTOs.OrderDetails;
-using UnicornInsurance.Application.DTOs.OrderHeader;
+using UnicornInsurance.Application.DTOs.Order;
 using UnicornInsurance.Application.Exceptions;
 using UnicornInsurance.Application.Features.Orders.Requests.Queries;
 

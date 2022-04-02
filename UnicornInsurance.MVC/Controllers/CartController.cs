@@ -40,17 +40,10 @@ namespace UnicornInsurance.MVC.Controllers
         {
             await Initialize(ShoppingCartVM);            
 
-            var initializeOrder = await _orderService.InitializeOrder(ShoppingCartVM.OrderHeader);
+            var initializeOrder = await _orderService.InitializeOrder(ShoppingCartVM);
 
             if (initializeOrder.Success)
             {
-                OrderDetailsVM orderDetails = new()
-                {
-                    MobileSuitPurchases = ShoppingCartVM.MobileSuitCartItems,
-                    WeaponPurchases = ShoppingCartVM.WeaponCartItems
-                };
-
-                await _orderService.CreateOrderDetails(orderDetails, initializeOrder.Id);
                 await _shoppingCartService.ClearShoppingCart();
 
                 var options = new ChargeCreateOptions
@@ -72,14 +65,14 @@ namespace UnicornInsurance.MVC.Controllers
                 }
                 catch (Exception)
                 {
-                    completeOrderHeader.Success = false;
+                    completeOrderHeader.TransactionSuccess = false;
                     await _orderService.CompleteOrder(completeOrderHeader);
                     throw;
                 }
 
                 if (charge.Status.ToLower() == "succeeded")
                 {
-                    completeOrderHeader.Success = true;
+                    completeOrderHeader.TransactionSuccess = true;
                     completeOrderHeader.TransactionId = charge.Id;
                     completeOrderResponse = await _orderService.CompleteOrder(completeOrderHeader);
                 }

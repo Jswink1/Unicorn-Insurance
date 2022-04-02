@@ -7,7 +7,7 @@ namespace UnicornInsurance.MVC.Models
 {
     public class CompleteOrderHeader
     {
-        public bool Success { get; set; }
+        public bool TransactionSuccess { get; set; }
         public string TransactionId { get; set; }
         public int OrderId { get; set; }
     }

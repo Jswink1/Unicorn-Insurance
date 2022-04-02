@@ -10,6 +10,6 @@ namespace UnicornInsurance.Application.Features.Weapons.Requests.Commands
 {
     public class DeleteWeaponCommand : IRequest
     {
-        public int Id { get; set; }
+        public int WeaponId { get; set; }
     }
 }

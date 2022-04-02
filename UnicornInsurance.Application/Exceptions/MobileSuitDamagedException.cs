@@ -8,7 +8,7 @@ namespace UnicornInsurance.Application.Exceptions
 {
     public class MobileSuitDamagedException : ApplicationException
     {
-        public MobileSuitDamagedException() : base($"Your Mobile Suit is damaged. It can not be deployed.")
+        public MobileSuitDamagedException() : base($"Your Mobile Suit is damaged")
         {
 
         }

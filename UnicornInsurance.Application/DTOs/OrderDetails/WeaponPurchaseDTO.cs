@@ -9,7 +9,7 @@ namespace UnicornInsurance.Application.DTOs.OrderDetails
 {
     public class WeaponPurchaseDTO
     {
-        public int WeaponId { get; set; }
+        public int Id { get; set; }
         public WeaponDTO Weapon { get; set; }
         public decimal Price { get; set; }
         public int Count { get; set; }

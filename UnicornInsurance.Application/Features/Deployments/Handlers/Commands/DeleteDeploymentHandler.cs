@@ -15,20 +15,18 @@ namespace UnicornInsurance.Application.Features.Deployments.Handlers.Commands
     public class DeleteDeploymentHandler : IRequestHandler<DeleteDeploymentCommand>
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IMapper _mapper;
 
-        public DeleteDeploymentHandler(IUnitOfWork unitOfWork, IMapper mapper)
+        public DeleteDeploymentHandler(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
-            _mapper = mapper;
         }
 
         public async Task<Unit> Handle(DeleteDeploymentCommand request, CancellationToken cancellationToken)
         {
-            var deployment = await _unitOfWork.DeploymentRepository.Get(request.Id);
+            var deployment = await _unitOfWork.DeploymentRepository.Get(request.DeploymentId);
 
             if (deployment is null)
-                throw new NotFoundException(nameof(deployment), request.Id);
+                throw new NotFoundException(nameof(deployment), request.DeploymentId);
 
             await _unitOfWork.DeploymentRepository.Delete(deployment);
             await _unitOfWork.Save();
