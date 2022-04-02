@@ -23,5 +23,7 @@ namespace UnicornInsurance.Application.Models.Identity
         [Required]
         [MinLength(6)]
         public string Password { get; set; }
+
+        public string ClientVerifyEmailURL { get; set; }
     }
 }

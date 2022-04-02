@@ -93,7 +93,7 @@ namespace UnicornInsurance.Identity.Services
                     await _userManager.AddToRoleAsync(user, "Customer");
 
                     // TODO: set up email template
-                    SendVerificationEmail(user);
+                    SendVerificationEmail(user, request.ClientVerifyEmailURL);
 
                     return new RegistrationResponse() { UserId = user.Id };
 
@@ -152,11 +152,11 @@ namespace UnicornInsurance.Identity.Services
             return BitConverter.ToString(randomBytes).Replace("-", "");
         }
 
-        private void SendVerificationEmail(ApplicationUser user)
+        private void SendVerificationEmail(ApplicationUser user, string clientVerifyEmailURL)
         {
             // TODO: make this not hard-coded
             string origin = "https://localhost:44373/Users/verifyemail";
-            var verifyUrl = $"{origin}?token={user.EmailValidationToken}";
+            var verifyUrl = $"{clientVerifyEmailURL}?token={user.EmailValidationToken}";
 
             string message = $@"<p>Please click the below link to verify your email address:</p>
                             <p><a href=""{verifyUrl}"">{verifyUrl}</a></p>";

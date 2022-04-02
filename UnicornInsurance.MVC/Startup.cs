@@ -51,6 +51,7 @@ namespace UnicornInsurance.MVC
 
             // Configure Stripe Settings
             services.Configure<StripeSettings>(Configuration.GetSection("Stripe"));
+            services.Configure<ClientVerifyEmail>(Configuration.GetSection("ClientVerifyEmail"));
 
             services.AddTransient<IAuthenticationService, AuthenticationService>();
 

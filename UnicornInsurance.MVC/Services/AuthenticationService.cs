@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -19,14 +20,19 @@ namespace UnicornInsurance.MVC.Services
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IMapper _mapper;
+        private readonly IOptions<ClientVerifyEmail> _clientVerifyEmail;
         private JwtSecurityTokenHandler _tokenHandler;
 
-        public AuthenticationService(IClient client, ILocalStorageService localStorage, IHttpContextAccessor httpContextAccessor,
-            IMapper mapper)
-            : base(client, localStorage)
+        public AuthenticationService(IClient client, 
+                                     ILocalStorageService localStorage, 
+                                     IHttpContextAccessor httpContextAccessor,
+                                     IMapper mapper,
+                                     IOptions<ClientVerifyEmail> clientVerifyEmail)
+                                     : base(client, localStorage)
         {
             _httpContextAccessor = httpContextAccessor;
             _mapper = mapper;
+            _clientVerifyEmail = clientVerifyEmail;
             _tokenHandler = new JwtSecurityTokenHandler();
         }
 
@@ -60,6 +66,8 @@ namespace UnicornInsurance.MVC.Services
         public async Task<bool> Register(RegisterVM registration)
         {
             RegistrationRequest registrationRequest = _mapper.Map<RegistrationRequest>(registration);
+            registrationRequest.ClientVerifyEmailURL = _clientVerifyEmail.Value.URL;
+
             var response = await _client.RegisterAsync(registrationRequest);
 
             if (!string.IsNullOrEmpty(response.UserId))
