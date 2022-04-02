@@ -154,8 +154,6 @@ namespace UnicornInsurance.Identity.Services
 
         private void SendVerificationEmail(ApplicationUser user, string clientVerifyEmailURL)
         {
-            // TODO: make this not hard-coded
-            string origin = "https://localhost:44373/Users/verifyemail";
             var verifyUrl = $"{clientVerifyEmailURL}?token={user.EmailValidationToken}";
 
             string message = $@"<p>Please click the below link to verify your email address:</p>

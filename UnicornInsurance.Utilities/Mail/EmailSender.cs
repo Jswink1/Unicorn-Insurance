@@ -24,8 +24,7 @@ namespace UnicornInsurance.Utilities.Mail
             var client = new SendGridClient(Settings.SendGridKey);
             var msg = new SendGridMessage()
             {
-                // TODO : change the email from jacob to unicorn insurance
-                From = new EmailAddress("jacobswink1@gmail.com", "Unicorn Insurance"),
+                From = new EmailAddress("unicorninsurance123@gmail.com", "Unicorn Insurance"),
                 Subject = subject,
                 PlainTextContent = htmlMessage,
                 HtmlContent = htmlMessage
