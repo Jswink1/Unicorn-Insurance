@@ -30,13 +30,13 @@ namespace UnicornInsurance.MVC.Middleware
             try
             {
                 // Check if the user has a token in local storage
-                var tokenExists = _localStorageService.Exists("token");
+                var tokenExists = _localStorageService.Exists(SD.Token);
 
                 // If the user does have a token
                 var tokenIsValid = true;
                 if (tokenExists)
                 {
-                    var token = _localStorageService.GetStorageValue<string>("token");
+                    var token = _localStorageService.GetStorageValue<string>(SD.Token);
                     JwtSecurityTokenHandler tokenHandler = new();
                     var tokenContent = tokenHandler.ReadJwtToken(token);
                     var expiry = tokenContent.ValidTo;

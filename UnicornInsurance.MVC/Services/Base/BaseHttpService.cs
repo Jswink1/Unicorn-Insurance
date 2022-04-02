@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using UnicornInsurance.MVC.Constants;
 using UnicornInsurance.MVC.Contracts;
 
 namespace UnicornInsurance.MVC.Services.Base
@@ -38,9 +39,9 @@ namespace UnicornInsurance.MVC.Services.Base
 
         protected void AddBearerToken()
         {
-            if (_localStorage.Exists("token"))
+            if (_localStorage.Exists(SD.Token))
                 _client.HttpClient.DefaultRequestHeaders.Authorization =
-                    new AuthenticationHeaderValue("Bearer", _localStorage.GetStorageValue<string>("token"));
+                    new AuthenticationHeaderValue("Bearer", _localStorage.GetStorageValue<string>(SD.Token));
         }
     }
 }

@@ -8,6 +8,7 @@ namespace UnicornInsurance.MVC.Constants
     public static class SD
     {
         public const string CartSesh = "UnicornShoppingCart";
+        public const string Token = "UnicornToken";
 
         // User Roles
         public const string AdminRole = "Admin";

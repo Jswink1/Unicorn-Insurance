@@ -8,6 +8,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using UnicornInsurance.MVC.Constants;
 using UnicornInsurance.MVC.Contracts;
 using UnicornInsurance.MVC.Models;
 using UnicornInsurance.MVC.Services.Base;
@@ -43,7 +44,7 @@ namespace UnicornInsurance.MVC.Services
                     var claims = ParseClaims(tokenContent);
                     var user = new ClaimsPrincipal(new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme));
                     var loginResult = _httpContextAccessor.HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, user);
-                    _localStorage.SetStorageValue("token", authenticationResponse.Token);
+                    _localStorage.SetStorageValue(SD.Token, authenticationResponse.Token);
 
                     return true;
                 }
@@ -77,8 +78,7 @@ namespace UnicornInsurance.MVC.Services
 
         public async Task Logout()
         {
-            // TODO: make this "token" string not hard-coded
-            _localStorage.ClearStorage(new List<string> { "token" });
+            _localStorage.ClearStorage(new List<string> { SD.Token });
             await _httpContextAccessor.HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
         }
 

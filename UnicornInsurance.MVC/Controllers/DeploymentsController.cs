@@ -126,7 +126,6 @@ namespace UnicornInsurance.MVC.Controllers
                 TempData["Error"] = response.Message;
                 model.Errors = response.Errors;
 
-                // TODO: Check if this works right when updating, if so, add it to MobileSuit and Weapon Upsert
                 var imagePath = Path.Combine(webRootPath, model.Deployment.ImageUrl.TrimStart('\\'));
                 if (System.IO.File.Exists(imagePath))
                 {
