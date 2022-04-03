@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using UnicornInsurance.Data.Seeds;
 using UnicornInsurance.Models;
+using UnicornInsurance.Models.Common;
 
 #nullable disable
 
@@ -77,11 +80,27 @@ namespace UnicornInsurance.Data
                 entity.Property(e => e.IsDamaged).HasDefaultValue(false);
             });
 
-            OnModelCreatingPartial(modelBuilder);
+            OnModelCreatingPartial(modelBuilder);            
 
-            modelBuilder.ApplyConfiguration(new MobileSuitSeed());
-            modelBuilder.ApplyConfiguration(new WeaponSeed());
-            modelBuilder.ApplyConfiguration(new DeploymentSeed());
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(UnicornDataDBContext).Assembly);
+        }
+
+        public virtual async Task<int> SaveChangesAsync()
+        {
+            foreach (var entry in base.ChangeTracker.Entries<BaseModel>()
+                .Where(q => q.State == EntityState.Added || q.State == EntityState.Modified))
+            {
+                entry.Entity.LastModifiedDate = DateTime.Now;
+
+                if (entry.State == EntityState.Added)
+                {
+                    entry.Entity.DateCreated = DateTime.Now;
+                }
+            }
+
+            var result = await base.SaveChangesAsync();
+
+            return result;
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);

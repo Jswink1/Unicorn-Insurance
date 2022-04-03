@@ -2,8 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using UnicornInsurance.Application.Constants;
 using UnicornInsurance.Application.Contracts.Data;
 
 namespace UnicornInsurance.Data.Repositories
@@ -67,10 +69,6 @@ namespace UnicornInsurance.Data.Repositories
 
         public async Task Save()
         {
-            // TODO: Set up DB auditing
-            // Pass the username to the DbContext to be audited
-            //var username = _httpContextAccessor.HttpContext.User.FindFirst(CustomClaimTypes.Uid)?.Value;
-
             await _context.SaveChangesAsync();
         }
     }
