@@ -28,8 +28,6 @@ namespace UnicornInsurance.Application.Features.Weapons.Handlers.Commands
 
             if (weapon is null)
                 throw new NotFoundException(nameof(weapon), request.WeaponId);
-            if (weapon.IsCustomWeapon)
-                throw new DeleteCustomWeaponException();
 
             await _unitOfWork.WeaponRepository.Delete(weapon);
             await _unitOfWork.Save();

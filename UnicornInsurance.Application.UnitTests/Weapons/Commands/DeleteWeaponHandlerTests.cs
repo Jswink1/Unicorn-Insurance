@@ -49,13 +49,5 @@ namespace UnicornInsurance.Application.UnitTests.Weapons.Commands
             await _handler.Handle(new DeleteWeaponCommand() { WeaponId = id }, CancellationToken.None)
                           .ShouldThrowAsync<NotFoundException>();
         }
-
-        [Test]
-        [TestCase(6)]
-        public async Task DeleteWeapon_ShouldThrow_DeleteCustomWeaponException(int id)
-        {
-            await _handler.Handle(new DeleteWeaponCommand() { WeaponId = id }, CancellationToken.None)
-                          .ShouldThrowAsync<DeleteCustomWeaponException>();
-        }
     }
 }

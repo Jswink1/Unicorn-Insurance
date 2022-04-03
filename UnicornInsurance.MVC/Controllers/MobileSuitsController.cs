@@ -179,11 +179,9 @@ namespace UnicornInsurance.MVC.Controllers
                 }
             }
 
-            // TODO: maybe refactor this logic and put it into the server-side, instead of client-side
             // If CustomWeapon input fields are empty
             if (String.IsNullOrWhiteSpace(model.MobileSuit.CustomWeapon.Name) ||
-                String.IsNullOrWhiteSpace(model.MobileSuit.CustomWeapon.Description) ||
-                model.MobileSuit.CustomWeapon.Price == 0)
+                String.IsNullOrWhiteSpace(model.MobileSuit.CustomWeapon.Description))
             {
                 // Set CustomWeapon to null so that an error is not thrown
                 if (model.MobileSuit.CustomWeapon.Id == 0)
@@ -196,6 +194,10 @@ namespace UnicornInsurance.MVC.Controllers
                     await _weaponService.DeleteWeapon(model.MobileSuit.CustomWeapon.Id);
                     model.MobileSuit.CustomWeapon = null;
                 }
+            }
+            else
+            {
+                model.MobileSuit.CustomWeapon.Price = 1;
             }
 
             // If inserting
