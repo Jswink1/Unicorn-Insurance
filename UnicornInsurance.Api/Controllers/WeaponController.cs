@@ -1,9 +1,11 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using UnicornInsurance.Application.Constants;
 using UnicornInsurance.Application.DTOs.Weapon;
 using UnicornInsurance.Application.Features.Weapons.Requests.Commands;
 using UnicornInsurance.Application.Features.Weapons.Requests.Queries;
@@ -39,7 +41,7 @@ namespace UnicornInsurance.Api.Controllers
         [HttpPost]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
-        //[Authorize(Roles = "Administrator")]
+        [Authorize(Roles = SD.AdminRole)]
         public async Task<ActionResult<BaseCommandResponse>> Post([FromBody] CreateWeaponDTO weapon)
         {
             var command = new CreateWeaponCommand { CreateWeaponDTO = weapon };
@@ -48,7 +50,7 @@ namespace UnicornInsurance.Api.Controllers
         }
 
         [HttpPut]
-        //[Authorize(Roles = "Administrator")]
+        [Authorize(Roles = SD.AdminRole)]
         public async Task<ActionResult<BaseCommandResponse>> Put([FromBody] WeaponDTO weapon)
         {
             var command = new UpdateWeaponCommand { WeaponDTO = weapon };
@@ -57,7 +59,7 @@ namespace UnicornInsurance.Api.Controllers
         }
 
         [HttpDelete("{id}")]
-        //[Authorize(Roles = "Administrator")]
+        [Authorize(Roles = SD.AdminRole)]
         public async Task<ActionResult> Delete(int id)
         {
             var command = new DeleteWeaponCommand { WeaponId = id };

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Stripe;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ using UnicornInsurance.MVC.Services.Base;
 
 namespace UnicornInsurance.MVC.Controllers
 {
+    [Authorize()]
     public class OrdersController : Controller
     {
         private readonly IOrderService _orderService;

@@ -24,6 +24,7 @@ namespace UnicornInsurance.MVC.Services
 
         public async Task<Weapon> GetWeaponDetails(int id)
         {
+            AddBearerToken();
             var weapon = await _client.WeaponGETAsync(id);
 
             return _mapper.Map<Weapon>(weapon);
@@ -31,6 +32,7 @@ namespace UnicornInsurance.MVC.Services
 
         public async Task<List<Weapon>> GetWeapons()
         {
+            AddBearerToken();
             var weapons = await _client.WeaponAllAsync();
 
             return _mapper.Map<List<Weapon>>(weapons);
@@ -38,6 +40,7 @@ namespace UnicornInsurance.MVC.Services
 
         public async Task<BaseCommandResponse> InsertWeapon(Weapon weaponVM)
         {
+            AddBearerToken();
             var weapon = _mapper.Map<CreateWeaponDTO>(weaponVM);
 
             return await _client.WeaponPOSTAsync(weapon);
@@ -45,6 +48,7 @@ namespace UnicornInsurance.MVC.Services
 
         public async Task<BaseCommandResponse> UpdateWeapon(Weapon weaponVM)
         {
+            AddBearerToken();
             var weapon = _mapper.Map<WeaponDTO>(weaponVM);
 
             return await _client.WeaponPUTAsync(weapon);
@@ -52,6 +56,7 @@ namespace UnicornInsurance.MVC.Services
 
         public async Task DeleteWeapon(int id)
         {
+            AddBearerToken();
             await _client.WeaponDELETEAsync(id);
         }
     }

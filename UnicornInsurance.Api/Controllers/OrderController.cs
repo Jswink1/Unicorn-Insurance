@@ -1,10 +1,12 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using UnicornInsurance.Application.Constants;
 using UnicornInsurance.Application.DTOs.Order;
 using UnicornInsurance.Application.DTOs.OrderDetails;
 using UnicornInsurance.Application.Features.Orders.Requests.Commands;
@@ -15,6 +17,7 @@ namespace UnicornInsurance.Api.Controllers
 {
     [Route("api/")]
     [ApiController]
+    [Authorize]
     public class OrderController : ControllerBase
     {
         private readonly IMediator _mediator;

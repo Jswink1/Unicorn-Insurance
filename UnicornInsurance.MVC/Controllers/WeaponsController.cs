@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -83,6 +84,7 @@ namespace UnicornInsurance.MVC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         // Add to Cart
         public async Task<IActionResult> Details(Weapon weapon)
         {
@@ -100,6 +102,7 @@ namespace UnicornInsurance.MVC.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [Authorize(Roles = SD.AdminRole)]
         public async Task<IActionResult> Upsert(int? id)
         {
             WeaponUpsertVM model = new();
@@ -121,6 +124,7 @@ namespace UnicornInsurance.MVC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = SD.AdminRole)]
         public async Task<IActionResult> Upsert(WeaponUpsertVM model)
         {
             BaseCommandResponse response;

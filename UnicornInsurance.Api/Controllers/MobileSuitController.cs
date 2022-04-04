@@ -1,10 +1,12 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using UnicornInsurance.Application.Constants;
 using UnicornInsurance.Application.DTOs.MobileSuit;
 using UnicornInsurance.Application.DTOs.Weapon;
 using UnicornInsurance.Application.Features.MobileSuits.Requests.Commands;
@@ -14,7 +16,7 @@ using UnicornInsurance.Application.Responses;
 namespace UnicornInsurance.Api.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]
+    [ApiController]    
     public class MobileSuitController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -41,7 +43,7 @@ namespace UnicornInsurance.Api.Controllers
         [HttpPost]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
-        //[Authorize(Roles = "Administrator")]
+        [Authorize(Roles = SD.AdminRole)]
         public async Task<ActionResult<BaseCommandResponse>> Post([FromBody] CreateFullMobileSuitDTO mobileSuit)
         {
             var command = new CreateMobileSuitCommand { CreateMobileSuitDTO = mobileSuit };
@@ -50,7 +52,7 @@ namespace UnicornInsurance.Api.Controllers
         }
 
         [HttpPut]
-        //[Authorize(Roles = "Administrator")]
+        [Authorize(Roles = SD.AdminRole)]
         public async Task<ActionResult<BaseCommandResponse>> Put([FromBody] FullMobileSuitDTO mobileSuit)
         {
             var command = new UpdateMobileSuitCommand { MobileSuitDTO = mobileSuit };
@@ -59,7 +61,7 @@ namespace UnicornInsurance.Api.Controllers
         }
 
         [HttpDelete("{id}")]
-        //[Authorize(Roles = "Administrator")]
+        [Authorize(Roles = SD.AdminRole)]
         public async Task<ActionResult> Delete(int id)
         {
             var command = new DeleteMobileSuitCommand { MobileSuitId = id };

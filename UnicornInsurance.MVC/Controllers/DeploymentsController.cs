@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -25,11 +26,13 @@ namespace UnicornInsurance.MVC.Controllers
             _webHostEnvironment = webHostEnvironment;
         }
 
+        [Authorize(Roles = SD.AdminRole)]
         public IActionResult Index()
         {
             return View();
         }
 
+        [Authorize(Roles = SD.AdminRole)]
         public async Task<IActionResult> Upsert(int? id)
         {
             DeploymentUpsertVM model = new();
@@ -51,6 +54,7 @@ namespace UnicornInsurance.MVC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = SD.AdminRole)]
         public async Task<IActionResult> Upsert(DeploymentUpsertVM model)
         {
             BaseCommandResponse response;
@@ -136,6 +140,7 @@ namespace UnicornInsurance.MVC.Controllers
             }
         }
 
+        [Authorize]
         public async Task<IActionResult> Deploy(int id)
         {
             DeploymentVM model = new()

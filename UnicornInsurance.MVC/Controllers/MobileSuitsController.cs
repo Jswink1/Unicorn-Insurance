@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -86,6 +87,7 @@ namespace UnicornInsurance.MVC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         // Add to Cart
         public async Task<IActionResult> Details(MobileSuit mobileSuit)
         {
@@ -103,6 +105,7 @@ namespace UnicornInsurance.MVC.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [Authorize(Roles = SD.AdminRole)]
         public async Task<IActionResult> Upsert(int? id)
         {
             MobileSuitUpsertVM model = new();
@@ -124,6 +127,7 @@ namespace UnicornInsurance.MVC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = SD.AdminRole)]
         public async Task<IActionResult> Upsert(MobileSuitUpsertVM model)
         {
             BaseCommandResponse response;
@@ -231,6 +235,7 @@ namespace UnicornInsurance.MVC.Controllers
             }
         }
 
+        [Authorize(Roles = SD.AdminRole)]
         public async Task<IActionResult> Delete(int id)
         {
             // Remove the image

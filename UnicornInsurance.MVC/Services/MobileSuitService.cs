@@ -24,6 +24,7 @@ namespace UnicornInsurance.MVC.Services
 
         public async Task<MobileSuit> GetMobileSuitDetails(int id)
         {
+            AddBearerToken();
             var mobileSuit = await _client.MobileSuitGETAsync(id);
 
             return _mapper.Map<MobileSuit>(mobileSuit);
@@ -31,6 +32,7 @@ namespace UnicornInsurance.MVC.Services
 
         public async Task<List<MobileSuit>> GetMobileSuits()
         {
+            AddBearerToken();
             var mobileSuits = await _client.MobileSuitAllAsync();
 
             return _mapper.Map<List<MobileSuit>>(mobileSuits);
@@ -38,6 +40,7 @@ namespace UnicornInsurance.MVC.Services
 
         public async Task<BaseCommandResponse> InsertMobileSuit(MobileSuit mobileSuitVM)
         {
+            AddBearerToken();
             var mobileSuit = _mapper.Map<CreateFullMobileSuitDTO>(mobileSuitVM);
 
             return await _client.MobileSuitPOSTAsync(mobileSuit);
@@ -45,6 +48,7 @@ namespace UnicornInsurance.MVC.Services
 
         public async Task<BaseCommandResponse> UpdateMobileSuit(MobileSuit mobileSuitVM)
         {
+            AddBearerToken();
             var mobileSuit = _mapper.Map<FullMobileSuitDTO>(mobileSuitVM);
 
             return await _client.MobileSuitPUTAsync(mobileSuit);
@@ -52,6 +56,7 @@ namespace UnicornInsurance.MVC.Services
 
         public async Task DeleteMobileSuit(int id)
         {
+            AddBearerToken();
             await _client.MobileSuitDELETEAsync(id);
         }
     }

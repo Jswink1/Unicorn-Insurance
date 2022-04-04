@@ -51,7 +51,6 @@ namespace UnicornInsurance.MVC.Middleware
                 // If the user has no token or the token is expired
                 if (tokenIsValid == false || tokenExists == false)
                 {
-                    //await SignOutAndRedirect(httpContext);
                     httpContext.Session.SetInt32(SD.CartSesh, 0);
                     await _next(httpContext);
                     return;
@@ -66,18 +65,11 @@ namespace UnicornInsurance.MVC.Middleware
                 // Move on to the next request
                 await _next(httpContext);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 throw;
             }
-        }
-
-        private static async Task SignOutAndRedirect(HttpContext httpContext)
-        {
-            await httpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            var path = $"/users/login";
-            httpContext.Response.Redirect(path);
         }
     }
 }

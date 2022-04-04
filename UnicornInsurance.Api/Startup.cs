@@ -53,23 +53,23 @@ namespace UnicornInsurance.Api
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "UnicornInsurance.Api v1"));
-            }
-
-            app.UseMiddleware<ExceptionMiddleware>();
-
-            app.UseAuthentication();
+            }            
 
             app.UseHttpsRedirection();
 
-            app.UseRouting();
-
-            app.UseAuthorization();
+            app.UseMiddleware<ExceptionMiddleware>();
 
             app.UseCors(x => x
                 .SetIsOriginAllowed(origin => true)
                 .AllowAnyMethod()
                 .AllowAnyHeader()
                 .AllowCredentials());
+
+            app.UseAuthentication();
+
+            app.UseRouting();
+
+            app.UseAuthorization();            
 
             app.UseEndpoints(endpoints =>
             {

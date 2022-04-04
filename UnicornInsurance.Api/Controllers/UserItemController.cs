@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -15,6 +16,7 @@ namespace UnicornInsurance.Api.Controllers
 {
     [Route("api/")]
     [ApiController]
+    [Authorize]
     public class UserItemController : ControllerBase
     {
         private readonly IMediator _mediator;

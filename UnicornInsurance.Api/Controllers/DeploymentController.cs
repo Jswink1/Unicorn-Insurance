@@ -1,10 +1,12 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using UnicornInsurance.Application.Constants;
 using UnicornInsurance.Application.DTOs.Deployment;
 using UnicornInsurance.Application.Features.Deployments.Requests.Commands;
 using UnicornInsurance.Application.Features.Deployments.Requests.Queries;
@@ -24,6 +26,7 @@ namespace UnicornInsurance.Api.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = SD.AdminRole)]
         public async Task<ActionResult<List<DeploymentDTO>>> Get()
         {
             var deployments = await _mediator.Send(new GetDeploymentListRequest());
@@ -32,6 +35,7 @@ namespace UnicornInsurance.Api.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize(Roles = SD.AdminRole)]
         public async Task<ActionResult<DeploymentDTO>> Get(int id)
         {
             var deployment = await _mediator.Send(new GetDeploymentDetailsRequest { DeploymentId = id });
@@ -41,6 +45,7 @@ namespace UnicornInsurance.Api.Controllers
         [HttpPost]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
+        [Authorize(Roles = SD.AdminRole)]
         public async Task<ActionResult<BaseCommandResponse>> Post([FromBody] CreateDeploymentDTO deployment)
         {
             var command = new CreateDeploymentCommand { CreateDeploymentDTO = deployment };
@@ -49,6 +54,7 @@ namespace UnicornInsurance.Api.Controllers
         }
 
         [HttpPut]
+        [Authorize(Roles = SD.AdminRole)]
         public async Task<ActionResult<BaseCommandResponse>> Put([FromBody] DeploymentDTO deployment)
         {
             var command = new UpdateDeploymentCommand { DeploymentDTO = deployment };
@@ -57,6 +63,7 @@ namespace UnicornInsurance.Api.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = SD.AdminRole)]
         public async Task<ActionResult> Delete(int id)
         {
             var command = new DeleteDeploymentCommand { DeploymentId = id };
@@ -66,6 +73,7 @@ namespace UnicornInsurance.Api.Controllers
 
         [HttpPost]
         [Route("DeployMobileSuit/{id}")]
+        [Authorize()]
         public async Task<ActionResult<DeploymentDTO>> DeployMobileSuit(int id)
         {
             var response = await _mediator.Send(new DeployMobileSuitCommand() { UserMobileSuitId = id });

@@ -40,7 +40,11 @@ namespace UnicornInsurance.MVC
             });
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-            .AddCookie();
+            .AddCookie(options =>
+            {
+                options.LoginPath = "/Users/Login";
+                options.AccessDeniedPath = "/Home/NotAuthorized";
+            });
 
             services.AddSession(options =>
             {
@@ -96,7 +100,7 @@ namespace UnicornInsurance.MVC
 
             app.UseSession();
 
-            app.UseMiddleware<CartCountMiddleware>();
+            app.UseMiddleware<CartCountMiddleware>();            
 
             app.UseAuthorization();
 

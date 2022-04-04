@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ using UnicornInsurance.MVC.Models.ViewModels;
 
 namespace UnicornInsurance.MVC.Controllers
 {
+    [Authorize]
     public class MobileSuitDeckController : Controller
     {
         private readonly IUserItemService _userItemService;
