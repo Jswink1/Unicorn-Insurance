@@ -13,6 +13,8 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using UnicornInsurance.MVC.Contracts;
+using UnicornInsurance.MVC.Contracts.Helpers;
+using UnicornInsurance.MVC.Helpers;
 using UnicornInsurance.MVC.Middleware;
 using UnicornInsurance.MVC.Models;
 using UnicornInsurance.MVC.Services;
@@ -68,6 +70,9 @@ namespace UnicornInsurance.MVC
             services.AddScoped<IOrderService, Services.OrderService>();
             services.AddScoped<IUserItemService, UserItemService>();
             services.AddScoped<IDeploymentService, DeploymentService>();
+
+            services.AddScoped<IHttpContextHelper, HttpContextHelper>();
+            services.AddScoped<IFileUploadHelper, FileUploadHelper>();
 
             services.AddSingleton<ILocalStorageService, LocalStorageService>();
 

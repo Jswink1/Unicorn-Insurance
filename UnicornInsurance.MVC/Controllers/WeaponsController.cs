@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnicornInsurance.MVC.Constants;
 using UnicornInsurance.MVC.Contracts;
+using UnicornInsurance.MVC.Contracts.Helpers;
 using UnicornInsurance.MVC.Models;
 using UnicornInsurance.MVC.Models.ViewModels;
 using UnicornInsurance.MVC.Services.Base;
@@ -22,14 +23,20 @@ namespace UnicornInsurance.MVC.Controllers
         private readonly IWeaponService _weaponService;
         private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly IShoppingCartService _shoppingCartService;
+        private readonly IHttpContextHelper _httpContextHelper;
+        private readonly IFileUploadHelper _fileUploadHelper;
 
         public WeaponsController(IWeaponService weaponService,
                                  IWebHostEnvironment webHostEnvironment,
-                                 IShoppingCartService shoppingCartService)
+                                 IShoppingCartService shoppingCartService,
+                                 IHttpContextHelper httpContextHelper,
+                                 IFileUploadHelper fileUploadHelper)
         {
             _weaponService = weaponService;
             _webHostEnvironment = webHostEnvironment;
             _shoppingCartService = shoppingCartService;
+            _httpContextHelper = httpContextHelper;
+            _fileUploadHelper = fileUploadHelper;
         }
 
         public async Task<IActionResult> Index(int page = 1, string searchWeapon = null)
@@ -131,7 +138,7 @@ namespace UnicornInsurance.MVC.Controllers
 
             // Get the web root path, and retrieve the file that has been uploaded
             string webRootPath = _webHostEnvironment.WebRootPath;
-            var files = HttpContext.Request.Form.Files;
+            var files = _httpContextHelper.GetUploadedFiles(this);
 
             // If an image file was uploaded
             if (files.Count > 0)
@@ -155,10 +162,8 @@ namespace UnicornInsurance.MVC.Controllers
                 }
 
                 // Upload the new image to static files
-                using (var filesStreams = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
-                {
-                    files[0].CopyTo(filesStreams);
-                }
+                _fileUploadHelper.UploadImageFile(files, uploads, fileName, extension);
+
                 model.Weapon.ImageUrl = @"\images\weapons\" + fileName + extension;
             }
 

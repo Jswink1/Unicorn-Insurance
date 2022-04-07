@@ -46,7 +46,7 @@ namespace UnicornInsurance.MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                var returnUrl = Url.Content("~/");
+                //var returnUrl = Url.Content("~/");
                 var isCreated = await _authService.Register(registration);
                 if (isCreated)
                     return Redirect(nameof(PleaseVerifyEmail));

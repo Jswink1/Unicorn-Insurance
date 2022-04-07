@@ -17,6 +17,9 @@ namespace UnicornInsurance.Models
         [MaxLength(500)]
         public string Description { get; set; }
 
+        [Required]
+        public decimal Price { get; set; }
+
         [MaxLength(200)]
         public string Type { get; set; }
 
@@ -36,8 +39,7 @@ namespace UnicornInsurance.Models
         public string Armor { get; set; }
 
         [MaxLength(2000)]
-        public string ImageUrl { get; set; }
-        public decimal Price { get; set; }
+        public string ImageUrl { get; set; }        
 
         public int? CustomWeaponId { get; set; }
         public virtual Weapon CustomWeapon { get; set; }        
