@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace UnicornInsurance.Application.DTOs.Weapon
 {
-    public interface IWeaponDTO
+    public class CustomWeaponDTO : IWeaponDTO
     {
         public string Name { get; set; }
         public string Description { get; set; }

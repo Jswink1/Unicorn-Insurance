@@ -41,7 +41,7 @@ namespace UnicornInsurance.MVC.Services
         public async Task<BaseCommandResponse> InsertMobileSuit(MobileSuit mobileSuitVM)
         {
             AddBearerToken();
-            var mobileSuit = _mapper.Map<CreateFullMobileSuitDTO>(mobileSuitVM);
+            var mobileSuit = _mapper.Map<CreateMobileSuitDTO>(mobileSuitVM);
 
             return await _client.MobileSuitPOSTAsync(mobileSuit);
         }

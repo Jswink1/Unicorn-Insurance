@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace UnicornInsurance.Application.DTOs.MobileSuit.Validators
 {
-    public class CreateMobileSuitDTOValidator : AbstractValidator<CreateFullMobileSuitDTO>
+    public class CreateMobileSuitDTOValidator : AbstractValidator<CreateMobileSuitDTO>
     {
         public CreateMobileSuitDTOValidator()
         {

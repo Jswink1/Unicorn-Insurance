@@ -22,6 +22,6 @@ namespace UnicornInsurance.Application.DTOs.MobileSuit
         public string Armor { get; set; }
         public string ImageUrl { get; set; }
 
-        public WeaponDTO CustomWeapon { get; set; } 
+        public CustomWeaponDTO CustomWeapon { get; set; } 
     }
 }

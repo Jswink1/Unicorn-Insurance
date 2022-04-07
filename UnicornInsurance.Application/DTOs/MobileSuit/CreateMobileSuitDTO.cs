@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnicornInsurance.Application.DTOs.Weapon;
 
 namespace UnicornInsurance.Application.DTOs.MobileSuit
 {
@@ -18,5 +19,6 @@ namespace UnicornInsurance.Application.DTOs.MobileSuit
         public string PowerOutput { get; set; }
         public string Armor { get; set; }
         public string ImageUrl { get; set; }
+        public CustomWeaponDTO CustomWeapon { get; set; }
     }
 }

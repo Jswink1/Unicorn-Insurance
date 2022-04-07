@@ -11,6 +11,6 @@ namespace UnicornInsurance.Application.Features.MobileSuits.Requests.Commands
 {
     public class CreateMobileSuitCommand : IRequest<BaseCommandResponse>
     {
-        public CreateFullMobileSuitDTO CreateMobileSuitDTO { get; set; }
+        public CreateMobileSuitDTO CreateMobileSuitDTO { get; set; }
     }
 }

@@ -44,7 +44,7 @@ namespace UnicornInsurance.Api.Controllers
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
         [Authorize(Roles = SD.AdminRole)]
-        public async Task<ActionResult<BaseCommandResponse>> Post([FromBody] CreateFullMobileSuitDTO mobileSuit)
+        public async Task<ActionResult<BaseCommandResponse>> Post([FromBody] CreateMobileSuitDTO mobileSuit)
         {
             var command = new CreateMobileSuitCommand { CreateMobileSuitDTO = mobileSuit };
             var response = await _mediator.Send(command);

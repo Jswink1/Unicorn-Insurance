@@ -207,11 +207,16 @@ namespace UnicornInsurance.MVC.Controllers
                 TempData["Error"] = response.Message;
                 model.Errors = response.Errors;
 
-                var imagePath = Path.Combine(webRootPath, model.Weapon.ImageUrl.TrimStart('\\'));
-                if (System.IO.File.Exists(imagePath))
+                // If inserting
+                if (model.Weapon.Id == 0)
                 {
-                    System.IO.File.Delete(imagePath);
-                }
+                    // Delete the image the user tried to upload
+                    var imagePath = Path.Combine(webRootPath, model.Weapon.ImageUrl.TrimStart('\\'));
+                    if (System.IO.File.Exists(imagePath))
+                    {
+                        System.IO.File.Delete(imagePath);
+                    }
+                }                
 
                 return View(model);
             }

@@ -72,12 +72,10 @@ namespace UnicornInsurance.Application.UnitTests.MobileSuits.Commands
                     Name = "Pheonix Gundam",
                     Description = "Better than a unicorn",
                     Price = 2m,
-                    CustomWeapon = new WeaponDTO
+                    CustomWeapon = new CustomWeaponDTO
                     {
-                        Id = 6,
                         Name = "Super New-Type Destroyer System",
-                        Description = "Better than a regular one",
-                        Price = 5500m
+                        Description = "Better than a regular one"
                     }
                 },
                 new FullMobileSuitDTO()
@@ -86,12 +84,10 @@ namespace UnicornInsurance.Application.UnitTests.MobileSuits.Commands
                     Name = "Random Gundam",
                     Description = "Very Random",
                     Price = 14m,
-                    CustomWeapon = new WeaponDTO
+                    CustomWeapon = new CustomWeaponDTO
                     {
-                        Id = 6,
                         Name = "Random Custom Weapon",
-                        Description = "Why",
-                        Price = 6000m
+                        Description = "Why"
                     }
                 },
             };
@@ -173,6 +169,28 @@ namespace UnicornInsurance.Application.UnitTests.MobileSuits.Commands
                 var mobileSuitDetails = await _mockUnitOfWork.Object.MobileSuitRepository.GetFullMobileSuitDetails(mobileSuit.Id);
                 mobileSuitDetails.CustomWeapon.ShouldBeNull();
             }
+        }
+
+        [Test]
+        [TestCase("Pheonix Gundam", "Better than a unicorn", -2500)]
+        [TestCase("Pheonix Gundam", "", 2500)]
+        [TestCase("Pheonix Gundam", null, 2500)]
+        [TestCase("", "Better than a unicorn", 2500)]
+        [TestCase(null, "Better than a unicorn", 2500)]
+        public async Task Invalid_MobileSuit_UpdateValues(string name, string description, decimal price)
+        {
+            var mobileSuit = new FullMobileSuitDTO()
+            {
+                Id = 1,
+                Name = name,
+                Description = description,
+                Price = price
+            };
+
+            var result = await _handler.Handle(new UpdateMobileSuitCommand() { MobileSuitDTO = mobileSuit }, CancellationToken.None);
+
+            result.ShouldBeOfType<BaseCommandResponse>();
+            result.Success.ShouldBeFalse();
         }
     }
 }

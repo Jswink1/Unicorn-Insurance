@@ -23,7 +23,7 @@ namespace UnicornInsurance.Application.UnitTests.MobileSuits.Commands
         private readonly Mock<IUnitOfWork> _mockUnitOfWork;
         private readonly IMapper _mapper;
         private readonly CreateMobileSuitHandler _handler;
-        private readonly CreateFullMobileSuitDTO _mobileSuitDTO;
+        private readonly CreateMobileSuitDTO _mobileSuitDTO;
 
         public CreateMobileSuitHandlerTests()
         {
@@ -37,7 +37,7 @@ namespace UnicornInsurance.Application.UnitTests.MobileSuits.Commands
 
             _handler = new CreateMobileSuitHandler(_mockUnitOfWork.Object, _mapper);
 
-            _mobileSuitDTO = new CreateFullMobileSuitDTO
+            _mobileSuitDTO = new CreateMobileSuitDTO
             {
                 Name = "MSN-00100 Hyaku Shiki",
                 Description = "Originally designed as the prototype for a transformable mobile suit.",
@@ -49,7 +49,7 @@ namespace UnicornInsurance.Application.UnitTests.MobileSuits.Commands
         {
             yield return new object[]
             {
-                new CreateFullMobileSuitDTO()
+                new CreateMobileSuitDTO()
                 {
                     Name = "MSN-00100 Hyaku Shiki",
                     Description = "Originally designed as the prototype for a transformable mobile suit.",
@@ -58,7 +58,7 @@ namespace UnicornInsurance.Application.UnitTests.MobileSuits.Commands
             };
             yield return new object[]
             {
-                new CreateFullMobileSuitDTO()
+                new CreateMobileSuitDTO()
                 {
                     Name = "MSN-06S Sinanju",
                     Description = "Sporting multiple vernier thrusters throughout its frame",
@@ -71,31 +71,29 @@ namespace UnicornInsurance.Application.UnitTests.MobileSuits.Commands
         {
             yield return new object[]
             {
-                new CreateFullMobileSuitDTO()
+                new CreateMobileSuitDTO()
                 {
                     Name = "GF13-017NJ Shining Gundam",
                     Description = "Designed with an emphasis on mobility. The Shining Gundam specializes in martial-arts fighting.",
                     Price = 41000m,
-                    CustomWeapon = new CreateWeaponDTO()
+                    CustomWeapon = new CustomWeaponDTO()
                     {
                         Name = "Shining Finger",
-                        Description = "Devastating Martial Arts Attack",
-                        Price = 5000
+                        Description = "Devastating Martial Arts Attack"
                     }
                 }
             };
             yield return new object[]
             {
-                new CreateFullMobileSuitDTO()
+                new CreateMobileSuitDTO()
                 {
                     Name = "RX-78-2 Gundam",
                     Description = "The original Gundam. Turned the tide of war in favor of the Earth Federation",
                     Price = 39999m,
-                    CustomWeapon = new CreateWeaponDTO()
+                    CustomWeapon = new CustomWeaponDTO()
                     {
                         Name = "RX Shield",
-                        Description = "Simple defensive equipment that can be carried or mounted to a Mobile Suit.",
-                        Price = 1000m
+                        Description = "Simple defensive equipment that can be carried or mounted to a Mobile Suit."
                     }
                 }
             };
@@ -104,7 +102,7 @@ namespace UnicornInsurance.Application.UnitTests.MobileSuits.Commands
         [Test]
         [Order(1)]
         [TestCaseSource(nameof(MobileSuitValues))]
-        public async Task Valid_MobileSuit_Added(CreateFullMobileSuitDTO mobileSuit)
+        public async Task Valid_MobileSuit_Added(CreateMobileSuitDTO mobileSuit)
         {
             var mobileSuitList = await _mockUnitOfWork.Object.MobileSuitRepository.GetAll();
             var count = mobileSuitList.Count;
@@ -123,7 +121,7 @@ namespace UnicornInsurance.Application.UnitTests.MobileSuits.Commands
         [Test]
         [Order(2)]
         [TestCaseSource(nameof(MobileSuitWithCustomWeaponValues))]
-        public async Task Valid_MobileSuitWithCustomWeapon_Added(CreateFullMobileSuitDTO mobileSuit)
+        public async Task Valid_MobileSuitWithCustomWeapon_Added(CreateMobileSuitDTO mobileSuit)
         {
             var mobileSuitList = await _mockUnitOfWork.Object.MobileSuitRepository.GetAll();
             var count = mobileSuitList.Count;

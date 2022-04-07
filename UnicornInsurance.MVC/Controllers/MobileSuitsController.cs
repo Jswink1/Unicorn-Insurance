@@ -154,7 +154,7 @@ namespace UnicornInsurance.MVC.Controllers
                 // Get the extension of the uploaded file
                 var extension = Path.GetExtension(files[0].FileName);
 
-                // If we are editing
+                // If editing
                 if (model.MobileSuit.ImageUrl != null)
                 {
                     // Remove the old image
@@ -189,27 +189,6 @@ namespace UnicornInsurance.MVC.Controllers
                 }
             }
 
-            // If CustomWeapon input fields are empty
-            if (String.IsNullOrWhiteSpace(model.MobileSuit.CustomWeapon.Name) ||
-                String.IsNullOrWhiteSpace(model.MobileSuit.CustomWeapon.Description))
-            {
-                // Set CustomWeapon to null so that an error is not thrown
-                if (model.MobileSuit.CustomWeapon.Id == 0)
-                {
-                    model.MobileSuit.CustomWeapon = null;
-                }
-                // If there was a CustomWeapon initially, but the user is trying to remove it, delete the weapon and set the CustomWeapon to null
-                else if (model.MobileSuit.CustomWeapon.Id != 0)
-                {
-                    await _weaponService.DeleteWeapon(model.MobileSuit.CustomWeapon.Id);
-                    model.MobileSuit.CustomWeapon = null;
-                }
-            }
-            else
-            {
-                model.MobileSuit.CustomWeapon.Price = 1;
-            }
-
             // If inserting
             if (model.MobileSuit.Id == 0)
             {
@@ -231,10 +210,15 @@ namespace UnicornInsurance.MVC.Controllers
                 TempData["Error"] = response.Message;
                 model.Errors = response.Errors;
 
-                var imagePath = Path.Combine(webRootPath, model.MobileSuit.ImageUrl.TrimStart('\\'));
-                if (System.IO.File.Exists(imagePath))
+                // If inserting
+                if (model.MobileSuit.Id == 0)
                 {
-                    System.IO.File.Delete(imagePath);
+                    // Delete the image the user tried to upload
+                    var imagePath = Path.Combine(webRootPath, model.MobileSuit.ImageUrl.TrimStart('\\'));
+                    if (System.IO.File.Exists(imagePath))
+                    {
+                        System.IO.File.Delete(imagePath);
+                    }
                 }
 
                 return View(model);

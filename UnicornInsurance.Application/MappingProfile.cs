@@ -23,11 +23,11 @@ namespace UnicornInsurance.Application
         {
             CreateMap<Weapon, WeaponDTO>().ReverseMap();
             CreateMap<Weapon, CreateWeaponDTO>().ReverseMap();
+            CreateMap<Weapon, CustomWeaponDTO>().ReverseMap();
 
             CreateMap<MobileSuit, MobileSuitDTO>().ReverseMap();
             CreateMap<MobileSuit, FullMobileSuitDTO>().ReverseMap();
             CreateMap<MobileSuit, CreateMobileSuitDTO>().ReverseMap();
-            CreateMap<MobileSuit, CreateFullMobileSuitDTO>().ReverseMap();
 
             CreateMap<MobileSuitCartItem, MobileSuitCartItemDTO>().ReverseMap();
 
