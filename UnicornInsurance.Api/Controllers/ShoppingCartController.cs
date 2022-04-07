@@ -15,8 +15,7 @@ using UnicornInsurance.Application.Responses;
 namespace UnicornInsurance.Api.Controllers
 {
     [Route("api/")]
-    [ApiController]
-    [Authorize]
+    [ApiController]    
     public class ShoppingCartController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -30,6 +29,7 @@ namespace UnicornInsurance.Api.Controllers
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
         [Route("AddWeaponToCart/{WeaponId}")]
+        [Authorize]
         public async Task<ActionResult<BaseCommandResponse>> AddWeaponToCart(int WeaponId)
         {
             var command = new AddWeaponCartItemCommand { WeaponId = WeaponId };
@@ -41,6 +41,7 @@ namespace UnicornInsurance.Api.Controllers
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
         [Route("AddMobileSuitToCart/{MobileSuitId}")]
+        [Authorize]
         public async Task<ActionResult<BaseCommandResponse>> AddMobileSuitToCart(int MobileSuitId)
         {
             var command = new AddMobileSuitCartItemCommand { MobileSuitId = MobileSuitId };
@@ -50,6 +51,7 @@ namespace UnicornInsurance.Api.Controllers
 
         [HttpGet]
         [Route("WeaponCartItemsList")]
+        [Authorize]
         public async Task<ActionResult<List<WeaponCartItemDTO>>> GetWeaponCartItems()
         {
             var weaponCartItems = await _mediator.Send(new GetWeaponCartItemListRequest());
@@ -58,6 +60,7 @@ namespace UnicornInsurance.Api.Controllers
 
         [HttpGet]
         [Route("MobileSuitCartItemsList")]
+        [Authorize]
         public async Task<ActionResult<List<MobileSuitCartItemDTO>>> GetMobileSuitCartItems()
         {
             var mobileSuitCartItems = await _mediator.Send(new GetMobileSuitCartItemListRequest());
@@ -73,6 +76,7 @@ namespace UnicornInsurance.Api.Controllers
         }
 
         [HttpPut("WeaponCartItemQuantityIncrease/{WeaponId}")]
+        [Authorize]
         public async Task<ActionResult> IncreaseWeaponQuantity(int WeaponId)
         {
             var command = new WeaponCartItemQuantityIncreaseCommand { WeaponId = WeaponId };
@@ -81,6 +85,7 @@ namespace UnicornInsurance.Api.Controllers
         }
 
         [HttpPut("WeaponCartItemQuantityDecrease/{WeaponId}")]
+        [Authorize]
         public async Task<ActionResult> DecreaseWeaponQuantity(int WeaponId)
         {
             var command = new WeaponCartItemQuantityDecreaseCommand { WeaponId = WeaponId };
@@ -89,6 +94,7 @@ namespace UnicornInsurance.Api.Controllers
         }
    
         [HttpDelete("DeleteMobileSuitCartItem/{CartItemId}")]
+        [Authorize]
         public async Task<ActionResult> DeleteMobileSuitCartItem(int CartItemId)
         {
             var command = new DeleteMobileSuitCartItemCommand { MobileSuitCartItemId = CartItemId };
@@ -97,6 +103,7 @@ namespace UnicornInsurance.Api.Controllers
         }
    
         [HttpDelete("DeleteWeaponCartItem/{CartItemId}")]
+        [Authorize]
         public async Task<ActionResult> DeleteWeaponCartItem(int CartItemId)
         {
             var command = new DeleteWeaponCartItemCommand { WeaponCartItemId = CartItemId };
@@ -105,6 +112,7 @@ namespace UnicornInsurance.Api.Controllers
         }
 
         [HttpDelete("ClearShoppingCart")]
+        [Authorize]
         public async Task<ActionResult> ClearShoppingCart()
         {
             var response = await _mediator.Send(new ClearShoppingCartCommand());
