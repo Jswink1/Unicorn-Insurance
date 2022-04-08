@@ -32,6 +32,25 @@ namespace UnicornInsurance.Application.Features.MobileSuits.Handlers.Commands
             if (mobileSuit.CustomWeapon is not null)
                 await _unitOfWork.WeaponRepository.Delete(mobileSuit.CustomWeapon);
 
+            var userMobileSuits = await _unitOfWork.UserMobileSuitRepository.GetAll();
+            var userMobileSuitsToDelete = userMobileSuits.Where(i => i.MobileSuitId == mobileSuit.Id).ToList();
+
+            foreach (var userMobileSuit in userMobileSuitsToDelete)
+            {
+                var userEquippedWeapon = await _unitOfWork.UserWeaponRepository.GetUserMobileSuitEquippedWeapon(userMobileSuit.Id);
+                if (userEquippedWeapon is not null)
+                {
+                    userEquippedWeapon.EquippedMobileSuitId = null;
+                    await _unitOfWork.UserWeaponRepository.Update(userEquippedWeapon);
+                }
+
+                var userMobileSuitCustomWeapon = await _unitOfWork.UserWeaponRepository.GetUserMobileSuitCustomWeapon(userMobileSuit.Id);
+                if (userMobileSuitCustomWeapon is not null)
+                    await _unitOfWork.UserWeaponRepository.Delete(userMobileSuitCustomWeapon);
+
+                await _unitOfWork.UserMobileSuitRepository.Delete(userMobileSuit);
+            }
+
             await _unitOfWork.MobileSuitRepository.Delete(mobileSuit);
             await _unitOfWork.Save();
 
