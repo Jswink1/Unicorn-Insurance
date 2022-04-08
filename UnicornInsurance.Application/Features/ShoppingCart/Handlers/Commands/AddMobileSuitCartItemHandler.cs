@@ -34,12 +34,18 @@ namespace UnicornInsurance.Application.Features.ShoppingCart.Handlers.Commands
             var response = new BaseCommandResponse();
 
             var mobileSuit = await _unitOfWork.MobileSuitRepository.GetFullMobileSuitDetails(request.MobileSuitId);
-            
+
             if (mobileSuit is null)
                 throw new NotFoundException(nameof(mobileSuit), request.MobileSuitId);
 
             var userId = _httpContextAccessor.HttpContext.User.FindFirst(
                     q => q.Type == SD.Uid)?.Value;
+
+            var userMobileSuits = await _unitOfWork.UserMobileSuitRepository.GetAllUserMobileSuits(userId);
+            var alreadyOwnedMobileSuit = userMobileSuits.Where(m => m.MobileSuitId == mobileSuit.Id).FirstOrDefault();
+
+            if (alreadyOwnedMobileSuit is not null)
+                throw new SingleMobileSuitException();                      
 
             var cartItemExists = await _unitOfWork.MobileSuitCartRepository.CartItemExists(userId, request.MobileSuitId);
 

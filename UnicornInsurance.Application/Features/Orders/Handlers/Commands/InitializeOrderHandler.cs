@@ -45,10 +45,20 @@ namespace UnicornInsurance.Application.Features.Orders.Handlers.Commands
             }
             else
             {
-                decimal total = 0;
-
                 var userId = _httpContextAccessor.HttpContext.User.FindFirst(
                     q => q.Type == SD.Uid)?.Value;
+
+                // Check if user is trying to purchase a mobile suit that they already own
+                foreach (var mobileSuitPurchase in request.InitializeOrderDTO.MobileSuitPurchases)
+                {
+                    var userMobileSuits = await _unitOfWork.UserMobileSuitRepository.GetAllUserMobileSuits(userId);
+                    var alreadyOwnedMobileSuit = userMobileSuits.Where(m => m.MobileSuitId == mobileSuitPurchase.MobileSuitId).FirstOrDefault();
+
+                    if (alreadyOwnedMobileSuit is not null)
+                        throw new SingleMobileSuitException();
+                }
+
+                decimal total = 0;
 
                 OrderHeader orderheader = new();
                 orderheader.PaymentStatus = SD.PaymentStatusPending;
