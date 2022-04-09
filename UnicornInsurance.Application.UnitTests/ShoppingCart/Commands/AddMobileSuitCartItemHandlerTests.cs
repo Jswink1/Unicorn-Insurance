@@ -39,11 +39,7 @@ namespace UnicornInsurance.Application.UnitTests.ShoppingCart.Commands
 
         private static IEnumerable<object[]> NewMobileSuitCartItems()
         {
-            yield return new object[] { 4, _user1HttpContext, "user1" };
-            yield return new object[] { 5, _user1HttpContext, "user1" };
-            yield return new object[] { 1, _user2HttpContext, "user2" };
             yield return new object[] { 2, _user2HttpContext, "user2" };
-            yield return new object[] { 5, _user2HttpContext, "user2" };
         }
 
         [Test]
@@ -67,9 +63,7 @@ namespace UnicornInsurance.Application.UnitTests.ShoppingCart.Commands
 
         private static IEnumerable<object[]> ExistingMobileSuitCartItems()
         {
-            yield return new object[] { 1, _user1HttpContext, "user1" };
             yield return new object[] { 2, _user1HttpContext, "user1" };
-            yield return new object[] { 4, _user2HttpContext, "user2" };
         }
 
         [Test]

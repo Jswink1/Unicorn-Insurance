@@ -44,35 +44,10 @@ namespace UnicornInsurance.Application.UnitTests.Orders.Commands
             {
                 new InitializeOrderDTO
                 {
-                    MobileSuitPurchases = new List<CreateMobileSuitPurchaseDTO>()
-                    {
-                        new CreateMobileSuitPurchaseDTO { MobileSuitId = 1 },
-                        new CreateMobileSuitPurchaseDTO { MobileSuitId = 2 }
-                    }
-                }
-            };
-            yield return new object[]
-            {
-                new InitializeOrderDTO
-                {
                     WeaponPurchases = new List<CreateWeaponPurchaseDTO>()
                     {
                         new CreateWeaponPurchaseDTO { WeaponId = 1, Count = 2 },
                         new CreateWeaponPurchaseDTO { WeaponId = 2, Count = 1 }
-                    }
-                }
-            };
-            yield return new object[]
-            {
-                new InitializeOrderDTO
-                {
-                    MobileSuitPurchases = new List<CreateMobileSuitPurchaseDTO>()
-                    {
-                        new CreateMobileSuitPurchaseDTO { MobileSuitId = 4 }
-                    },
-                    WeaponPurchases = new List<CreateWeaponPurchaseDTO>()
-                    {
-                        new CreateWeaponPurchaseDTO { WeaponId = 3, Count = 2 }
                     }
                 }
             };

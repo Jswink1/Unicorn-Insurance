@@ -16,12 +16,15 @@ namespace UnicornInsurance.Models
         [Required]
         [MaxLength(500)]
         public string Description { get; set; }
-        
+
+        [Required]
+        [Range(1, 100000)]
+        public decimal Price { get; set; }
+
         [Required]
         public bool IsCustomWeapon { get; set; }
 
         [MaxLength(2000)]
         public string ImageUrl { get; set; }
-        public decimal Price { get; set; }
     }
 }

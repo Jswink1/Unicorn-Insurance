@@ -13,6 +13,7 @@
 
 <form method="post" enctype="multipart/form-data">
     <div class="row p-3 border">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
         @* Validation Errors *@
         @if (Model.Errors is not null)
@@ -51,6 +52,7 @@
                     <label><b>@SD.BadDeploymentResult</b></label>
                     <input type="radio" asp-for="Deployment.ResultType" value="@SD.BadDeploymentResult" class="form-control" style="font-size: 5px;" />
                 </div>
+                <span asp-validation-for="Deployment.ResultType" class="text-danger"></span>
             </div>
 
 
@@ -61,6 +63,7 @@
                 </div>
                 <div class="col-8">
                     <textarea asp-for="Deployment.Description" class="form-control"></textarea>
+                    <span asp-validation-for="Deployment.Description" class="text-danger"></span>
                 </div>
             </div>
 

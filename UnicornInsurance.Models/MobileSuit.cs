@@ -18,6 +18,7 @@ namespace UnicornInsurance.Models
         public string Description { get; set; }
 
         [Required]
+        [Range(1, 1000000)]
         public decimal Price { get; set; }
 
         [MaxLength(200)]

@@ -134,6 +134,11 @@ namespace UnicornInsurance.MVC.Controllers
         [Authorize(Roles = SD.AdminRole)]
         public async Task<IActionResult> Upsert(WeaponUpsertVM model)
         {
+            if (ModelState.IsValid == false)
+            {
+                return View(model);
+            }
+
             BaseCommandResponse response;
 
             // Get the web root path, and retrieve the file that has been uploaded

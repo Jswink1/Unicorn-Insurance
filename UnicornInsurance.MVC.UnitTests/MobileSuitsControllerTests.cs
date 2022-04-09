@@ -31,6 +31,7 @@ namespace UnicornInsurance.MVC.UnitTests
         private Mock<IHttpContextHelper> _httpContextHelper;
         private Mock<IFileUploadHelper> _fileUploadHelper;
         private MobileSuitsController _mobileSuitsController;
+        private MobileSuitUpsertVM _mobileSuitUpsertVM;
 
         public MobileSuitsControllerTests()
         {
@@ -55,6 +56,17 @@ namespace UnicornInsurance.MVC.UnitTests
                                                                _fileUploadHelper.Object)
             {
                 TempData = tempData
+            };
+
+            _mobileSuitUpsertVM = new MobileSuitUpsertVM()
+            {
+                MobileSuit = new MobileSuit()
+                {
+                    Name = "New Mobile Suit",
+                    Description = "Very New",
+                    Price = 25000m,
+                    CustomWeapon = new CustomWeapon()
+                }
             };
         }
 
@@ -165,19 +177,9 @@ namespace UnicornInsurance.MVC.UnitTests
             _httpContextHelper.Setup(x => x.GetUploadedFiles(It.IsAny<ControllerBase>()))
                                 .Returns(new FormFileCollection());
 
-            MobileSuitUpsertVM viewModel = new()
-            {
-                MobileSuit = new()
-                {
-                    Id = mobileSuitId,
-                    Name = "New Mobile Suit",
-                    Description = "Very New",
-                    Price = 25000m,
-                    CustomWeapon = new Weapon()
-                }
-            };
+            _mobileSuitUpsertVM.MobileSuit.Id = mobileSuitId;
 
-            var result = await _mobileSuitsController.Upsert(viewModel);
+            var result = await _mobileSuitsController.Upsert(_mobileSuitUpsertVM);
 
             var redirectToActionResult = Assert.IsType<RedirectToActionResult>(result);
             redirectToActionResult.ControllerName.ShouldBe(null);
@@ -206,19 +208,7 @@ namespace UnicornInsurance.MVC.UnitTests
                                                            It.IsAny<string>(),
                                                            It.IsAny<string>()));
 
-            MobileSuitUpsertVM viewModel = new()
-            {
-                MobileSuit = new()
-                {
-                    Name = "New Mobile Suit",
-                    Description = "Very New",
-                    Price = 25000m,
-                    ImageUrl = "",
-                    CustomWeapon = new Weapon()
-                }
-            };
-
-            var result = await _mobileSuitsController.Upsert(viewModel);
+            var result = await _mobileSuitsController.Upsert(_mobileSuitUpsertVM);
 
             var redirectToActionResult = Assert.IsType<RedirectToActionResult>(result);
             redirectToActionResult.ControllerName.ShouldBe(null);
@@ -227,6 +217,20 @@ namespace UnicornInsurance.MVC.UnitTests
             // InsertMobileSuit() should only be called
             _mobileSuitService.Verify(x => x.UpdateMobileSuit(It.IsAny<MobileSuit>()), Times.Never);
             _mobileSuitService.Verify(x => x.InsertMobileSuit(It.IsAny<MobileSuit>()), Times.Once);
+        }
+
+        [Fact]
+        public async Task UpsertPage_ReturnsViewResult_WhenModelIsInvalid()
+        {
+            _mobileSuitsController.ModelState.AddModelError("Name", "Required");
+
+            var result = await _mobileSuitsController.Upsert(_mobileSuitUpsertVM);
+
+            var viewResult = Assert.IsType<ViewResult>(result);
+
+            // UpdateWeapon() and InsertWeapon() should not be called
+            _mobileSuitService.Verify(x => x.UpdateMobileSuit(It.IsAny<MobileSuit>()), Times.Never);
+            _mobileSuitService.Verify(x => x.InsertMobileSuit(It.IsAny<MobileSuit>()), Times.Never);
         }
 
         [Theory]

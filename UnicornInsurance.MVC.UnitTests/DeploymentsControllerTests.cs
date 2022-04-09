@@ -27,6 +27,7 @@ namespace UnicornInsurance.MVC.UnitTests
         private Mock<IHttpContextHelper> _httpContextHelper;
         private Mock<IFileUploadHelper> _fileUploadHelper;
         private DeploymentsController _deploymentsController;
+        private DeploymentUpsertVM _deploymentUpsertVM;
 
         public DeploymentsControllerTests()
         {
@@ -41,6 +42,16 @@ namespace UnicornInsurance.MVC.UnitTests
                                                                _webHostEnvironment.Object,
                                                                _httpContextHelper.Object,
                                                                _fileUploadHelper.Object);
+
+            _deploymentUpsertVM = new DeploymentUpsertVM()
+            {
+                Deployment = new Deployment()
+                {
+                    Description = "Random Description",
+                    ImageUrl = "",
+                    ResultType = SD.BadDeploymentResult
+                }
+            };
         }
 
         [Theory]
@@ -106,18 +117,9 @@ namespace UnicornInsurance.MVC.UnitTests
             _httpContextHelper.Setup(x => x.GetUploadedFiles(It.IsAny<ControllerBase>()))
                                 .Returns(new FormFileCollection());
 
-            DeploymentUpsertVM viewModel = new()
-            {
-                Deployment = new()
-                {
-                    Id = deploymentId,
-                    Description = "Random Desription",
-                    ImageUrl = "",
-                    ResultType = SD.BadDeploymentResult
-                }
-            };
+            _deploymentUpsertVM.Deployment.Id = deploymentId;
 
-            var result = await _deploymentsController.Upsert(viewModel);
+            var result = await _deploymentsController.Upsert(_deploymentUpsertVM);
 
             var redirectToActionResult = Assert.IsType<RedirectToActionResult>(result);
             redirectToActionResult.ControllerName.ShouldBe(null);
@@ -146,17 +148,7 @@ namespace UnicornInsurance.MVC.UnitTests
                                                            It.IsAny<string>(),
                                                            It.IsAny<string>()));
 
-            DeploymentUpsertVM viewModel = new()
-            {
-                Deployment = new()
-                {                    
-                    Description = "Random Desription",
-                    ImageUrl = "",
-                    ResultType = SD.BadDeploymentResult                    
-                }
-            };
-
-            var result = await _deploymentsController.Upsert(viewModel);
+            var result = await _deploymentsController.Upsert(_deploymentUpsertVM);
 
             var redirectToActionResult = Assert.IsType<RedirectToActionResult>(result);
             redirectToActionResult.ControllerName.ShouldBe(null);
@@ -165,6 +157,20 @@ namespace UnicornInsurance.MVC.UnitTests
             // InsertDeployment() should only be called
             _deploymentService.Verify(x => x.UpdateDeployment(It.IsAny<Deployment>()), Times.Never);
             _deploymentService.Verify(x => x.InsertDeployment(It.IsAny<Deployment>()), Times.Once);
+        }
+
+        [Fact]
+        public async Task UpsertPage_ReturnsViewResult_WhenModelIsInvalid()
+        {
+            _deploymentsController.ModelState.AddModelError("Name", "Required");
+
+            var result = await _deploymentsController.Upsert(_deploymentUpsertVM);
+
+            var viewResult = Assert.IsType<ViewResult>(result);
+
+            // UpdateDeployment() and InsertDeployment() should not be called
+            _deploymentService.Verify(x => x.UpdateDeployment(It.IsAny<Deployment>()), Times.Never);
+            _deploymentService.Verify(x => x.InsertDeployment(It.IsAny<Deployment>()), Times.Never);
         }
 
         [Theory]

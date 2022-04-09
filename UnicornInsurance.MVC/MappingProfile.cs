@@ -20,7 +20,7 @@ namespace UnicornInsurance.MVC
 
             CreateMap<Weapon, WeaponDTO>().ReverseMap();
             CreateMap<Weapon, CreateWeaponDTO>().ReverseMap();
-            CreateMap<Weapon, CustomWeaponDTO>().ReverseMap();
+            CreateMap<CustomWeapon, CustomWeaponDTO>().ReverseMap();
 
             CreateMap<MobileSuitCartItem, MobileSuitCartItemDTO>().ReverseMap();
 

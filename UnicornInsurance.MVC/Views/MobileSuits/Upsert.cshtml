@@ -12,6 +12,7 @@
 
 <form method="post" enctype="multipart/form-data">
     <div class="row p-3 border">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
         @* Validation Errors *@
         @if (Model.Errors is not null)
@@ -29,12 +30,6 @@
             @* If the model is being edited include the Model Id and ImageUrl as a hidden field *@
             <input type="hidden" asp-for="MobileSuit.Id" />
             <input type="hidden" asp-for="MobileSuit.ImageUrl" />
-
-            if (Model.MobileSuit.CustomWeapon is not null &&
-                Model.MobileSuit.CustomWeapon.Id != 0)
-            {
-                <input type="hidden" asp-for="MobileSuit.CustomWeapon.Id" />
-            }
         }
 
         @* Page Header/Title *@
@@ -50,6 +45,7 @@
                 </div>
                 <div class="col-8">
                     <input asp-for="MobileSuit.Name" class="form-control" />
+                    <span asp-validation-for="MobileSuit.Name" class="text-danger"></span>
                 </div>
             </div>
 
@@ -61,6 +57,7 @@
                 </div>
                 <div class="col-8">
                     <textarea asp-for="MobileSuit.Description" class="form-control"></textarea>
+                    <span asp-validation-for="MobileSuit.Description" class="text-danger"></span>
                 </div>
             </div>
 
@@ -71,6 +68,7 @@
                 </div>
                 <div class="col-8">
                     <input asp-for="MobileSuit.Price" class="form-control" />
+                    <span asp-validation-for="MobileSuit.Price" class="text-danger"></span>
                 </div>
             </div>
 
@@ -81,6 +79,7 @@
                 </div>
                 <div class="col-8">
                     <input asp-for="MobileSuit.Type" class="form-control" />
+                    <span asp-validation-for="MobileSuit.Type" class="text-danger"></span>
                 </div>
             </div>
 
@@ -91,6 +90,7 @@
                 </div>
                 <div class="col-8">
                     <input asp-for="MobileSuit.Manufacturer" class="form-control" />
+                    <span asp-validation-for="MobileSuit.Manufacturer" class="text-danger"></span>
                 </div>
             </div>
 
@@ -101,6 +101,7 @@
                 </div>
                 <div class="col-8">
                     <input asp-for="MobileSuit.Height" class="form-control" />
+                    <span asp-validation-for="MobileSuit.Height" class="text-danger"></span>
                 </div>
             </div>
 
@@ -111,6 +112,7 @@
                 </div>
                 <div class="col-8">
                     <input asp-for="MobileSuit.Weight" class="form-control" />
+                    <span asp-validation-for="MobileSuit.Weight" class="text-danger"></span>
                 </div>
             </div>
 
@@ -121,6 +123,7 @@
                 </div>
                 <div class="col-8">
                     <input asp-for="MobileSuit.PowerOutput" class="form-control" />
+                    <span asp-validation-for="MobileSuit.PowerOutput" class="text-danger"></span>
                 </div>
             </div>
 
@@ -131,6 +134,7 @@
                 </div>
                 <div class="col-8">
                     <input asp-for="MobileSuit.Armor" class="form-control" />
+                    <span asp-validation-for="MobileSuit.Armor" class="text-danger"></span>
                 </div>
             </div>
 
