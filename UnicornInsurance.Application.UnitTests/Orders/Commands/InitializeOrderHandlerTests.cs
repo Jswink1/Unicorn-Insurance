@@ -190,5 +190,43 @@ namespace UnicornInsurance.Application.UnitTests.Orders.Commands
             orderHeaders = await _mockUnitOfWork.Object.OrderHeaderRepository.GetUserOrders("user1");
             orderHeaders.Count.ShouldBe(count);
         }
+
+        private static IEnumerable<object[]> GetSingleMobileSuitInitializeOrderValues()
+        {
+            yield return new object[]
+            {
+                new InitializeOrderDTO
+                {
+                    MobileSuitPurchases = new List<CreateMobileSuitPurchaseDTO>()
+                    {
+                        new CreateMobileSuitPurchaseDTO { MobileSuitId = 1 }
+                    }
+                }
+            };
+            yield return new object[]
+            {
+                new InitializeOrderDTO
+                {
+                    MobileSuitPurchases = new List<CreateMobileSuitPurchaseDTO>()
+                    {
+                        new CreateMobileSuitPurchaseDTO { MobileSuitId = 4 }
+                    }
+                }
+            };
+        }
+
+        [Test]
+        [TestCaseSource(nameof(GetSingleMobileSuitInitializeOrderValues))]
+        public async Task InitializeOrder_ShouldThrow_SingleMobileSuitException(InitializeOrderDTO InitializeOrderDTO)
+        {
+            var orderHeaders = await _mockUnitOfWork.Object.OrderHeaderRepository.GetUserOrders("user1");
+            var count = orderHeaders.Count;
+
+            await _handler.Handle(new InitializeOrderCommand() { InitializeOrderDTO = InitializeOrderDTO }, CancellationToken.None)
+                          .ShouldThrowAsync<SingleMobileSuitException>();
+
+            orderHeaders = await _mockUnitOfWork.Object.OrderHeaderRepository.GetUserOrders("user1");
+            orderHeaders.Count.ShouldBe(count);
+        }
     }
 }

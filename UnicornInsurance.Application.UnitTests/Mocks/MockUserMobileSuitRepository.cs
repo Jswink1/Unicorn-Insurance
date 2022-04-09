@@ -85,6 +85,8 @@ namespace UnicornInsurance.Application.UnitTests.Mocks
                 return userItems;
             });
 
+            mockRepo.Setup(r => r.GetAll()).ReturnsAsync(userMobileSuits);
+
             mockRepo.Setup(r => r.GetUserMobileSuit(It.IsAny<int>())).ReturnsAsync((int userMobileSuitId) =>
             {
                 var userItem = userMobileSuits.Where(i => i.Id == userMobileSuitId).FirstOrDefault();

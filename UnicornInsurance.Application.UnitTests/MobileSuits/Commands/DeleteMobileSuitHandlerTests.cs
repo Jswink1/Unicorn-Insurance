@@ -31,8 +31,6 @@ namespace UnicornInsurance.Application.UnitTests.MobileSuits.Commands
         [Test]
         [TestCase(1)]
         [TestCase(2)]
-        [TestCase(4)]
-        [TestCase(5)]
         public async Task Valid_MobileSuit_Delete(int id)
         {
             await _handler.Handle(new DeleteMobileSuitCommand() { MobileSuitId = id }, CancellationToken.None);
@@ -49,6 +47,19 @@ namespace UnicornInsurance.Application.UnitTests.MobileSuits.Commands
         {
             await _handler.Handle(new DeleteMobileSuitCommand() { MobileSuitId = id }, CancellationToken.None)
                           .ShouldThrowAsync<NotFoundException>();
+        }
+
+        [Test]
+        [TestCase(4)]
+        [TestCase(5)]
+        public async Task DeleteMobileSuit_ShouldDelete_UserMobileSuits(int id)
+        {
+            await _handler.Handle(new DeleteMobileSuitCommand() { MobileSuitId = id }, CancellationToken.None);
+
+            var userMobileSuits = await _mockUnitOfWork.Object.UserMobileSuitRepository.GetAll();
+
+            var userMobileSuit = userMobileSuits.Where(i => i.MobileSuitId == id).FirstOrDefault();
+            userMobileSuit.ShouldBeNull();
         }
     }
 }

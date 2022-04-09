@@ -86,7 +86,7 @@ namespace UnicornInsurance.Application.UnitTests.ShoppingCart.Commands
         }
 
         [Test]
-        [Order(5)]
+        [Order(3)]
         [TestCase(6)]
         [TestCase(-14)]
         [TestCase(234234)]
@@ -96,6 +96,19 @@ namespace UnicornInsurance.Application.UnitTests.ShoppingCart.Commands
 
             await handler.Handle(new AddMobileSuitCartItemCommand() { MobileSuitId = mobileSuitId }, CancellationToken.None)
                          .ShouldThrowAsync<NotFoundException>();
+        }
+
+        [Test]
+        [Order(4)]
+        [TestCase(1)]
+        [TestCase(4)]
+        [TestCase(5)]
+        public async Task AddMobileSuitCartItem_ShouldThrow_SingleMobileSuitException(int mobileSuitId)
+        {
+            var handler = new AddMobileSuitCartItemHandler(_mockUnitOfWork.Object, _user1HttpContext.Object);
+
+            await handler.Handle(new AddMobileSuitCartItemCommand() { MobileSuitId = mobileSuitId }, CancellationToken.None)
+                         .ShouldThrowAsync<SingleMobileSuitException>();
         }
     }
 }
