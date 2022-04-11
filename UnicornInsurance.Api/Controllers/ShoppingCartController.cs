@@ -28,9 +28,9 @@ namespace UnicornInsurance.Api.Controllers
         [HttpPost]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
-        [Route("AddWeaponToCart/{WeaponId}")]
+        [Route("AddWeaponToCart")]
         [Authorize]
-        public async Task<ActionResult<BaseCommandResponse>> AddWeaponToCart(int WeaponId)
+        public async Task<ActionResult<BaseCommandResponse>> AddWeaponToCart([FromBody] int WeaponId)
         {
             var command = new AddWeaponCartItemCommand { WeaponId = WeaponId };
             var response = await _mediator.Send(command);
@@ -40,9 +40,9 @@ namespace UnicornInsurance.Api.Controllers
         [HttpPost]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
-        [Route("AddMobileSuitToCart/{MobileSuitId}")]
+        [Route("AddMobileSuitToCart")]
         [Authorize]
-        public async Task<ActionResult<BaseCommandResponse>> AddMobileSuitToCart(int MobileSuitId)
+        public async Task<ActionResult<BaseCommandResponse>> AddMobileSuitToCart([FromBody] int MobileSuitId)
         {
             var command = new AddMobileSuitCartItemCommand { MobileSuitId = MobileSuitId };
             var response = await _mediator.Send(command);
@@ -75,18 +75,18 @@ namespace UnicornInsurance.Api.Controllers
             return Ok(response);
         }
 
-        [HttpPut("WeaponCartItemQuantityIncrease/{WeaponId}")]
+        [HttpPut("WeaponCartItemQuantityIncrease")]
         [Authorize]
-        public async Task<ActionResult> IncreaseWeaponQuantity(int WeaponId)
+        public async Task<ActionResult> IncreaseWeaponQuantity([FromBody] int WeaponId)
         {
             var command = new WeaponCartItemQuantityIncreaseCommand { WeaponId = WeaponId };
             var response = await _mediator.Send(command);
             return Ok(response);
         }
 
-        [HttpPut("WeaponCartItemQuantityDecrease/{WeaponId}")]
+        [HttpPut("WeaponCartItemQuantityDecrease")]
         [Authorize]
-        public async Task<ActionResult> DecreaseWeaponQuantity(int WeaponId)
+        public async Task<ActionResult> DecreaseWeaponQuantity([FromBody] int WeaponId)
         {
             var command = new WeaponCartItemQuantityDecreaseCommand { WeaponId = WeaponId };
             var response = await _mediator.Send(command);

@@ -29,7 +29,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{71B254A0
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnicornInsurance.Application.UnitTests", "UnicornInsurance.Application.UnitTests\UnicornInsurance.Application.UnitTests.csproj", "{566A08D2-5AA3-4BC4-93CA-83739D4812C0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnicornInsurance.MVC.UnitTests", "UnicornInsurance.MVC.UnitTests\UnicornInsurance.MVC.UnitTests.csproj", "{9867052B-1186-4454-8AF5-9D8FDA210754}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnicornInsurance.MVC.UnitTests", "UnicornInsurance.MVC.UnitTests\UnicornInsurance.MVC.UnitTests.csproj", "{9867052B-1186-4454-8AF5-9D8FDA210754}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnicornInsurance.Api.IntegrationTests", "UnicornInsurance.Api.IntegrationTests\UnicornInsurance.Api.IntegrationTests.csproj", "{B2534FC1-7F9E-422D-BB70-2CB8E8DF6990}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -73,6 +75,10 @@ Global
 		{9867052B-1186-4454-8AF5-9D8FDA210754}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9867052B-1186-4454-8AF5-9D8FDA210754}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9867052B-1186-4454-8AF5-9D8FDA210754}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2534FC1-7F9E-422D-BB70-2CB8E8DF6990}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2534FC1-7F9E-422D-BB70-2CB8E8DF6990}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2534FC1-7F9E-422D-BB70-2CB8E8DF6990}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2534FC1-7F9E-422D-BB70-2CB8E8DF6990}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -87,6 +93,7 @@ Global
 		{6916D954-D9EC-44C1-B2D0-5D9D0337E741} = {C0381CCA-CDE7-40AB-9CA9-6B97C8E725DB}
 		{566A08D2-5AA3-4BC4-93CA-83739D4812C0} = {71B254A0-B756-4510-B603-792526BBDACF}
 		{9867052B-1186-4454-8AF5-9D8FDA210754} = {71B254A0-B756-4510-B603-792526BBDACF}
+		{B2534FC1-7F9E-422D-BB70-2CB8E8DF6990} = {71B254A0-B756-4510-B603-792526BBDACF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3396CC26-9DAA-4C29-90E5-4653D6D958B9}

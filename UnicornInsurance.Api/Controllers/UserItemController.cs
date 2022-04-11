@@ -52,7 +52,7 @@ namespace UnicornInsurance.Api.Controllers
 
         [HttpPut]
         [Route("UnequipWeapon")]
-        public async Task<ActionResult> UnequipWeapon(int userMobileSuitId)
+        public async Task<ActionResult> UnequipWeapon([FromBody] int userMobileSuitId)
         {
             await _mediator.Send(new UnequipWeaponCommand() { UserMobileSuitId = userMobileSuitId });
             return Ok();
