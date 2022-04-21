@@ -11,3 +11,142 @@ select {
     background: $purple !important;
     @include orbitronFont;
 }
+
+.blue-button {
+    font-size: 1.2rem;
+    text-align: center;
+    background-color: $body-bg;
+    display: inline-block;
+    color: $blue !important;
+    cursor: pointer;
+    text-decoration: none;
+    border: solid .125em $blue;
+    padding: .3em 1.5em;
+    border-radius: .25em;
+    box-shadow: inset 0 0 .5em 0 $blue, 0 0 .5em 0 $blue;
+    position: relative;
+    transition: background-color 100ms linear;
+}
+
+.blue-button:hover,
+.blue-button:focus {
+    background: $blue;
+    color: $body-bg !important;
+    text-shadow: none;
+}
+
+.blue-button::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    box-shadow: 0 0 1em .5em $blue;
+    opacity: 0;
+    transition: opacity 100ms linear;
+}
+
+.blue-button:hover::after,
+.blue-button:focus::after {
+    opacity: 1;
+}
+
+// ADD SHADOW BELOW BUTTON
+/*.neon-button::before {
+    content: '';
+    pointer-events: none;
+    position: absolute;
+    background: $primary;
+    top: 75%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: perspective(1em) rotateX(40deg) scale(1.5, .35);
+    filter: blur(1em);
+    opacity: .7;
+}*/
+/*.neon-button:hover::before,
+.neon-button:focus::before {
+    opacity: 1;
+}*/
+
+.green-button {
+    font-size: 1.2rem;
+    text-align: center;
+    background-color: $body-bg;
+    display: inline-block;
+    color: $green !important;
+    cursor: pointer;
+    text-decoration: none;
+    border: solid .125em $green;
+    padding: .3em 1.5em;
+    border-radius: .25em;
+    box-shadow: inset 0 0 .5em 0 $green, 0 0 .5em 0 $green;
+    position: relative;
+    transition: background-color 100ms linear;
+}
+
+.green-button:hover,
+.green-button:focus {
+    background: $green;
+    color: $body-bg !important;
+    text-shadow: none;
+}
+
+.green-button::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    box-shadow: 0 0 1em .5em $green;
+    opacity: 0;
+    transition: opacity 100ms linear;
+}
+
+.green-button:hover::after,
+.green-button:focus::after {
+    opacity: 1;
+}
+
+.red-button {
+    font-size: 1.2rem;
+    text-align: center;
+    background-color: $body-bg;
+    display: inline-block;
+    color: $red !important;
+    cursor: pointer;
+    text-decoration: none;
+    border: solid .125em $red;
+    padding: .3em 1.5em;
+    border-radius: .25em;
+    box-shadow: inset 0 0 .5em 0 $red, 0 0 .5em 0 $red;
+    position: relative;
+    transition: background-color 100ms linear;
+}
+
+.red-button:hover,
+.red-button:focus {
+    background: $red;
+    color: $body-bg !important;
+    text-shadow: none;
+}
+
+.red-button::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    box-shadow: 0 0 1em .5em $red;
+    opacity: 0;
+    transition: opacity 100ms linear;
+}
+
+.red-button:hover::after,
+.red-button:focus::after {
+    opacity: 1;
+}

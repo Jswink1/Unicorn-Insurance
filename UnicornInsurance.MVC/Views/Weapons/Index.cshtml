@@ -10,7 +10,7 @@
             {
                 @* CREATE NEW WEAPON BUTTON *@
                 <div class="col-12 col-lg-4 mb-3">
-                    <a class="btn btn-info" asp-action="Upsert"><i class="fas fa-plus"></i> &nbsp; Create New Weapon</a>
+                    <a class="blue-button" asp-action="Upsert"><i class="fas fa-plus"></i> &nbsp; Create New Weapon</a>
                 </div>
             }
         </div>
@@ -22,7 +22,7 @@
             </div>
             @* SEARCH BUTTON *@
             <div class="col-3 col-sm-2 col-md-2 col-lg-1">
-                <button type="submit" name="submit" value="Search" class="btn btn-info form-control">
+                <button type="submit" name="submit" value="Search" class="blue-button form-control">
                     <i class="fas fa-search"></i>
                 </button>
             </div>
@@ -55,23 +55,23 @@
                             <h3 class="card-text green-font">@Weapon.Price.ToString("C")</h3>
 
                             @* VIEW PRODUCT BUTTON *@
-                            <a asp-action="Details" asp-route-id="@Weapon.Id" class="btn btn-secondary">View Details</a>
+                            <a asp-action="Details" asp-route-id="@Weapon.Id" class="blue-button">View Details</a>
 
                             @* EDIT AND DELETE BUTTONS *@
                             @if (User.IsInRole("Admin"))
                             {
-                                <a asp-action="Upsert" asp-route-id="@Weapon.Id" class="btn btn-info">Edit</a>
+                                <a asp-action="Upsert" asp-route-id="@Weapon.Id" class="green-button">Edit</a>
 
                                 <div class="mt-2">
                                     <span id="confirmDeleteSpan_@Weapon.Id" style="display:none">
                                         <span class="orbitron-font">Are you sure you want to delete?</span>
-                                        <a asp-action="Delete" asp-route-id="@Weapon.Id" class="btn btn-danger">Yes</a>
-                                        <a class="btn btn-success" onclick="confirmDelete('@Weapon.Id', false)">No</a>
+                                        <a asp-action="Delete" asp-route-id="@Weapon.Id" class="red-button">Yes</a>
+                                        <a class="green-button" onclick="confirmDelete('@Weapon.Id', false)">No</a>
                                     </span>
                                 </div>
 
                                 <span id="deleteSpan_@Weapon.Id">
-                                    <a class="btn btn-danger" onclick="confirmDelete('@Weapon.Id', true)">Delete</a>
+                                    <a class="red-button" onclick="confirmDelete('@Weapon.Id', true)">Delete</a>
                                 </span>
                             }
                         </div>

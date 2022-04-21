@@ -46,7 +46,7 @@
                                 <div class="col-4 float-right">
                                     @* REMOVE FROM CART BUTTON *@
                                     <div class="float-right">
-                                        <a asp-action="deleteMobileSuitItem" asp-route-itemId="@MobileSuitItem.Id" type="submit" class="btn btn-danger">
+                                        <a asp-action="deleteMobileSuitItem" asp-route-itemId="@MobileSuitItem.Id" type="submit" class="red-button">
                                             <i class="fas fa-trash"></i>
                                         </a>
                                     </div>
@@ -99,20 +99,20 @@
 
                                     @* ITEM QUANTITY AND REMOVE FROM CART BUTTONS *@
                                     <div class="">
-                                        <a asp-action="IncreaseWeaponQuantity" asp-route-itemId="@WeaponItem.Weapon.Id" type="submit" class="btn btn-success">
+                                        <a asp-action="IncreaseWeaponQuantity" asp-route-itemId="@WeaponItem.Weapon.Id" type="submit" class="green-button">
                                             <i class="fas fa-plus"></i>
                                         </a>
                                     </div>
                                     @if (WeaponItem.Count > 1)
                                     {
                                         <div class="">
-                                            <a asp-action="DecreaseWeaponQuantity" asp-route-itemId="@WeaponItem.Weapon.Id" type="submit" class="btn btn-primary">
+                                            <a asp-action="DecreaseWeaponQuantity" asp-route-itemId="@WeaponItem.Weapon.Id" type="submit" class="blue-button">
                                                 <i class="fas fa-minus"></i>
                                             </a>
                                         </div>
                                     }
                                     <div class="">
-                                        <a asp-action="deleteWeaponItem" asp-route-itemId="@WeaponItem.Id" type="submit" class="btn btn-danger">
+                                        <a asp-action="deleteWeaponItem" asp-route-itemId="@WeaponItem.Id" type="submit" class="red-button">
                                             <i class="fas fa-trash"></i>
                                         </a>
                                     </div>
@@ -165,7 +165,7 @@
 
                         @* CHECKOUT BUTTON *@
                         <div class="col-sm-12 col-lg-4 col-md-6 offset-lg-8 offset-md-6 ">
-                            <button type="submit" value="Place Order" class="btn btn-success form-control">Place Order</button>
+                            <button type="submit" value="Place Order" class="green-button btn-lg form-control">Place Order</button>
                         </div>
 
                     </div>

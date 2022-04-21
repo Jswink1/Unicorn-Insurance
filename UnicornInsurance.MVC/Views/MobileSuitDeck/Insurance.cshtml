@@ -4,7 +4,7 @@
 <div class="row">
     @* BACK TO USER MOBILE SUIT PAGE *@
     <a asp-controller="MobileSuitDeck" asp-action="Details" asp-route-id="@Model.UserMobileSuit.Id"
-       class="col-12 col-md-6 col-lg-4 btn btn-info mb-2">Back to My Mobile Suit</a>
+       class="blue-button col-12 col-md-6 col-lg-4 mb-2">Back to My Mobile Suit</a>
 </div>
 
 @* PAGE TITLE *@
@@ -21,7 +21,7 @@
             <form method="post">
                 <input type="hidden" asp-for="SelectedInsurance" value="Standard" />
                 <input type="hidden" asp-for="UserMobileSuit.Id" />
-                <button type="submit" class="btn btn-success form-control mt-2">Purchase</button>
+                <button type="submit" class="green-button btn-lg form-control mt-4">Purchase</button>
             </form>
         </div>
 
@@ -43,7 +43,7 @@
             <form method="post">
                 <input type="hidden" asp-for="SelectedInsurance" value="Super" />
                 <input type="hidden" asp-for="UserMobileSuit.Id" />
-                <button type="submit" class="btn btn-success form-control mt-2">Purchase</button>
+                <button type="submit" class="green-button btn-lg form-control mt-4">Purchase</button>
             </form>
         </div>
 
@@ -66,7 +66,7 @@
             <form method="post">
                 <input type="hidden" asp-for="SelectedInsurance" value="Ultra" />
                 <input type="hidden" asp-for="UserMobileSuit.Id" />
-                <button type="submit" class="btn btn-success form-control mt-2">Purchase</button>
+                <button type="submit" class="green-button btn-lg form-control mt-4">Purchase</button>
             </form>
         </div>
 

@@ -24,13 +24,13 @@ else if (Model.Deployment.ResultType == SD.BadDeploymentResult)
 
 @* BACK TO USER MOBILE SUIT AND DEPLOY AGAIN BUTTONS *@
 <div class="row col-12 col-lg-6 offset-lg-3 mt-2">
-    <a asp-controller="MobileSuitDeck" asp-action="Details" asp-route-id="@Model.UserMobileSuitId" class="btn btn-info">
+    <a asp-controller="MobileSuitDeck" asp-action="Details" asp-route-id="@Model.UserMobileSuitId" class="blue-button btn-lg">
         Back to Mobile Suit
     </a>
 
     @if (Model.Deployment.ResultType == SD.GoodDeploymentResult)
     {
-        <a asp-controller="Deployments" asp-action="Deploy" asp-route-id="@Model.UserMobileSuitId" class="btn btn-success mt-2">
+        <a asp-controller="Deployments" asp-action="Deploy" asp-route-id="@Model.UserMobileSuitId" class="green-button btn-lg mt-2">
             Deploy Again
         </a>
     }

@@ -6,7 +6,7 @@
 
 @* BACK TO MOBILE SUIT DECK BUTTON *@
 <div class="row">
-    <a asp-controller="MobileSuitDeck" asp-action="Index" class="col-12 col-md-6 col-lg-4 btn btn-info mb-2">Back to Mobile Suit Deck</a>
+    <a asp-controller="MobileSuitDeck" asp-action="Index" class="blue-button col-12 col-md-6 col-lg-4 mb-2">Back to Mobile Suit Deck</a>
 </div>
 
 @* USER MOBILE SUIT PAGE TITLE *@
@@ -41,7 +41,7 @@
             </form>
 
             @* UNEQUIP WEAPON BUTTON *@
-            <a asp-action="UnequipWeapon" asp-route-userMobileSuitId="@Model.Id" class="btn btn-danger form-control mt-1">
+            <a asp-action="UnequipWeapon" asp-route-userMobileSuitId="@Model.Id" class="red-button btn-lg form-control mt-2">
                 Unequip Weapon
             </a>
         }
@@ -79,7 +79,7 @@
                 <div class="no-insurance-border text-center justify-content-center">
                     <h5 class="no-insurance-font p-5">No Insurance</h5>
                 </div>
-                <a asp-controller="MobileSuitDeck" asp-action="Insurance" asp-route-id="@Model.Id" class="btn btn-info form-control mt-3">Purchase Insurance</a>
+                <a asp-controller="MobileSuitDeck" asp-action="Insurance" asp-route-id="@Model.Id" class="blue-button btn-lg form-control mt-3">Purchase Insurance</a>
             }
         </div>
 
@@ -88,12 +88,12 @@
         @if (Model.IsDamaged)
         {
             <h5>Mobile Suit Status: <b class="red-font">Damaged</b></h5>
-            <a asp-controller="MobileSuitDeck" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger form-control btn-lg">Delete Mobile Suit</a>
+            <a asp-controller="MobileSuitDeck" asp-action="Delete" asp-route-id="@Model.Id" class="red-button form-control btn-lg">Delete Mobile Suit</a>
         }
         else
         {
             <h5>Mobile Suit Status: <b class="green-font">Operational</b></h5>
-            <a asp-controller="Deployments" asp-action="Deploy" asp-route-id="@Model.Id" class="btn btn-success form-control btn-lg">Deploy Mobile Suit</a>
+            <a asp-controller="Deployments" asp-action="Deploy" asp-route-id="@Model.Id" class="green-button form-control btn-lg">Deploy Mobile Suit</a>
         }
 
     </div>
