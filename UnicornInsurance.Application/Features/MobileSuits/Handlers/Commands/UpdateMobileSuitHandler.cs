@@ -52,7 +52,7 @@ namespace UnicornInsurance.Application.Features.MobileSuits.Handlers.Commands
             var mobileSuit = await _unitOfWork.MobileSuitRepository.GetFullMobileSuitDetails(request.MobileSuitDTO.Id);
 
             if (mobileSuit is null)
-                throw new NotFoundException(nameof(mobileSuit), request.MobileSuitDTO.Id);
+                throw new NotFoundException("Mobile Suit", request.MobileSuitDTO.Id);
 
             // If the mobile suit previously had a custom weapon, and the updated mobile suit has no custom weapon
             if (mobileSuit.CustomWeapon is not null &&

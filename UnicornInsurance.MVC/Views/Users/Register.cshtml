@@ -4,41 +4,55 @@
     ViewData["Title"] = "Register";
 }
 
-<h1>Register</h1>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Register">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+<div class="row mt-5">
+    <div class="col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+        <form class="user-form" asp-action="Register">
+            <div asp-validation-summary="ModelOnly" class="red-font"></div>
+
+            @* LOGO *@
+            <div class="text-center">
+                <img src="~/images/icons/logo.png" class="logo" />
             </div>
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
+
+            @* REGISTER FORM TITLE *@
+            <div class="text-center">
+                <h1 class="display-5">Register</h1>
             </div>
+
+            @* NAME *@
             <div class="form-group">
-                <label asp-for="UserName" class="control-label"></label>
-                <input asp-for="UserName" class="form-control" />
-                <span asp-validation-for="UserName" class="text-danger"></span>
+                <label asp-for="Name" class="lead"></label>
+                <input asp-for="Name" class="form-control user-input" />
+                <span asp-validation-for="Name" class="red-font"></span>
             </div>
+
+            @* EMAIL *@
             <div class="form-group">
-                <label asp-for="Password" class="control-label"></label>
-                <input asp-for="Password" class="form-control" />
-                <span asp-validation-for="Password" class="text-danger"></span>
+                <label asp-for="Email" class="lead"></label>
+                <input asp-for="Email" class="form-control user-input" />
+                <span asp-validation-for="Email" class="red-font"></span>
             </div>
+
+            @* USERNAME *@
             <div class="form-group">
-                <input type="submit" value="Register" class="btn btn-primary" />
+                <label asp-for="UserName" class="lead"></label>
+                <input asp-for="UserName" class="form-control user-input" />
+                <span asp-validation-for="UserName" class="red-font"></span>
+            </div>
+
+            @* PASSWORD *@
+            <div class="form-group">
+                <label asp-for="Password" class="lead"></label>
+                <input asp-for="Password" class="form-control user-input" />
+                <span asp-validation-for="Password" class="red-font"></span>
+            </div>
+
+            @* SUBMIT *@
+            <div class=" text-center">
+                <button type="submit" class="btn btn-info">Register</button>
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

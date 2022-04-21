@@ -4047,6 +4047,15 @@ namespace UnicornInsurance.MVC.Services.Base
         [Newtonsoft.Json.JsonProperty("mobileSuit", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public MobileSuitDTO MobileSuit { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("isDamaged", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IsDamaged { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("endOfCoverage", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTimeOffset EndOfCoverage { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("insurancePlan", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string InsurancePlan { get; set; }
+
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.15.5.0 (NJsonSchema v10.6.6.0 (Newtonsoft.Json v12.0.0.0))")]

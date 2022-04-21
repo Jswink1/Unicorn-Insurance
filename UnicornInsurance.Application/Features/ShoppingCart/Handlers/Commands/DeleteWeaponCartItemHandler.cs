@@ -33,7 +33,7 @@ namespace UnicornInsurance.Application.Features.ShoppingCart.Handlers.Commands
             var weaponCartItem = await _unitOfWork.WeaponCartRepository.Get(request.WeaponCartItemId);
 
             if (weaponCartItem is null)
-                throw new NotFoundException(nameof(weaponCartItem), request.WeaponCartItemId);
+                throw new NotFoundException("Shopping Cart Item", request.WeaponCartItemId);
             if (weaponCartItem.ApplicationUserId != userId)
                 throw new UnauthorizedAccessException();
 

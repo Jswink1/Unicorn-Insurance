@@ -35,9 +35,10 @@ namespace UnicornInsurance.Application.Features.ShoppingCart.Handlers.Commands
 
             var weapon = await _unitOfWork.WeaponRepository.Get(request.WeaponId);
 
-            if (weapon is null ||
-                weapon.IsCustomWeapon)
-                throw new NotFoundException(nameof(weapon), request.WeaponId);
+            if (weapon is null)
+                throw new NotFoundException("Weapon", request.WeaponId);
+            if (weapon.IsCustomWeapon)
+                throw new PurchaseCustomWeaponException();
 
             var userId = _httpContextAccessor.HttpContext.User.FindFirst(
                     q => q.Type == SD.Uid)?.Value;

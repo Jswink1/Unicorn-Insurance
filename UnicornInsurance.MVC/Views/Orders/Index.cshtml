@@ -3,41 +3,41 @@
     var status = Context.Request.Query["status"];
 
     @* Standard status button CSS class *@
-    var pending = "text-primary";
-    var approved = "text-primary";
-    var rejected = "text-primary";
-    var all = "text-primary";
+    var pending = "unpressed-button";
+    var approved = "unpressed-button";
+    var rejected = "unpressed-button";
+    var all = "unpressed-button";
 
     @* Selected status button CSS class *@
     switch (status)
     {
         case "pending":
-            pending = "active text-white";
+            pending = "pressed-button";
             break;
         case "approved":
-            approved = "active text-white";
+            approved = "pressed-button";
             break;
         case "rejected":
-            rejected = "active text-white";
+            rejected = "pressed-button";
             break;
         default:
-            all = "active text-white";
+            all = "pressed-button";
             break;
     }
 
     ViewData["Title"] = "Orders";
 }
 
-<div class="border p-3">
+<div class="border p-3 data-table">
     <div class="d-flex justify-content-between mb-3">
 
-        @* Page Header/Title *@
+        @* PAGE TITLE *@
         <div class="p-2">
-            <h2 class="text-primary">Orders</h2>
+            <h1 class="display-3">Orders</h1>
         </div>
         <div class="p-2">
 
-            @* Order Status Filter Buttons *@
+            @* ORDER STATUS FILTER BUTTONS *@
             <ul class="list-group list-group-horizontal-sm">
                 <a style="text-decoration: none;" asp-controller="Orders" asp-action="Index" asp-route-status="pending">
                 <li class="list-group-item @pending">Payment Pending</li>
@@ -60,10 +60,10 @@
     </div>
     <br /><br />
 
-    @* Order List Javascript DataTable *@
-    <table id="tblData" class="table table-striped table-bordered" style="width:100%">
-        <thead class="thead-dark">
-            <tr class="table-info">
+    @* ORDER LIST JAVASCRIPT DATATABLE *@
+    <table id="tblData">
+        <thead>
+            <tr class="black-ops-font lead">
                 <th>Id</th>
                 <th>Email</th>
                 <th>Order Date</th>

@@ -27,7 +27,7 @@ namespace UnicornInsurance.Application.Features.MobileSuits.Handlers.Commands
             var mobileSuit = await _unitOfWork.MobileSuitRepository.GetFullMobileSuitDetails(request.MobileSuitId);
 
             if (mobileSuit is null)
-                throw new NotFoundException(nameof(mobileSuit), request.MobileSuitId);
+                throw new NotFoundException("Mobile Suit", request.MobileSuitId);
 
             if (mobileSuit.CustomWeapon is not null)
                 await _unitOfWork.WeaponRepository.Delete(mobileSuit.CustomWeapon);

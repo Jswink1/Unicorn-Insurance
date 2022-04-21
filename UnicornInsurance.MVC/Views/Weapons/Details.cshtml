@@ -1,28 +1,28 @@
 ﻿@model Weapon
-
 @{
     ViewData["Title"] = Model.Name;
 }
 
 <form method="post">
-    <h2 class="display-4">@Model.Name</h2>
+    <h1 class="display-4 text-center">@Model.Name</h1>
     <div class="row">
         <div class="col-md-6">
-
+            @* PRODUCT IMAGE *@
             <img src="@Model.ImageUrl" class="d-block w-100" />
         </div>
 
         <div class="col-md-6">
-
+            @* PRODUCT PRICE *@
             <div class="row">
-                <div class="col-md-12">
-                    <h4>@Model.Price.ToString("C")</h4>
+                <div class="col-md-12 green-font">
+                    <h2>@Model.Price.ToString("C")</h2>
                 </div>
             </div>
 
+            @* PRODUCT DESCRIPTION *@
             <div class="row">
                 <div class="col-md-12">
-                    <p class="description">
+                    <p class="lead orbitron-font">
                         @Model.Description
                     </p>
                 </div>

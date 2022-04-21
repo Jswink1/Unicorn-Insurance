@@ -36,7 +36,7 @@ namespace UnicornInsurance.Application.Features.ShoppingCart.Handlers.Commands
             var mobileSuit = await _unitOfWork.MobileSuitRepository.GetFullMobileSuitDetails(request.MobileSuitId);
 
             if (mobileSuit is null)
-                throw new NotFoundException(nameof(mobileSuit), request.MobileSuitId);
+                throw new NotFoundException("Mobile Suit", request.MobileSuitId);
 
             var userId = _httpContextAccessor.HttpContext.User.FindFirst(
                     q => q.Type == SD.Uid)?.Value;

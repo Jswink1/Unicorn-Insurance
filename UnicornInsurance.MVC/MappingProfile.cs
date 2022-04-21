@@ -41,7 +41,9 @@ namespace UnicornInsurance.MVC
             CreateMap<WeaponCartItem, WeaponPurchaseDTO>().ReverseMap();
             CreateMap<WeaponCartItem, CreateWeaponPurchaseDTO>().ReverseMap();
 
-            CreateMap<UserMobileSuit, UserMobileSuitDTO>().ReverseMap();
+            CreateMap<UserMobileSuit, UserMobileSuitDTO>().ReverseMap()
+                .ForMember(q => q.EndOfCoverage, opt => opt.MapFrom(x => x.EndOfCoverage.DateTime))
+                .ReverseMap(); ;
             CreateMap<FullUserMobileSuitDTO, UserMobileSuit>()
                 .ForMember(q => q.EndOfCoverage, opt => opt.MapFrom(x => x.EndOfCoverage.DateTime))
                 .ReverseMap();

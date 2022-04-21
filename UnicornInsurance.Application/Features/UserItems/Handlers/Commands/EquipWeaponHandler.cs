@@ -49,9 +49,9 @@ namespace UnicornInsurance.Application.Features.UserItems.Handlers.Commands
                 var selectedWeapon = await _unitOfWork.UserWeaponRepository.Get(request.EquipWeaponDTO.SelectedWeaponId);
 
                 if (userMobileSuit is null)
-                    throw new NotFoundException(nameof(userMobileSuit), request.EquipWeaponDTO.UserMobileSuitId);
+                    throw new NotFoundException("User Mobile Suit", request.EquipWeaponDTO.UserMobileSuitId);
                 if (selectedWeapon is null)
-                    throw new NotFoundException(nameof(selectedWeapon), request.EquipWeaponDTO.SelectedWeaponId);
+                    throw new NotFoundException("User Weapon", request.EquipWeaponDTO.SelectedWeaponId);
 
                 if (userMobileSuit.ApplicationUserId != userId ||
                     selectedWeapon.ApplicationUserId != userId)

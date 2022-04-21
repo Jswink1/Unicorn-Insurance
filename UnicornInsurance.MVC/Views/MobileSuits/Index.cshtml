@@ -8,27 +8,35 @@
         <div class="row">
             @if (User.IsInRole("Admin"))
             {
-                @* Create New Mobile Suit Button *@
-                <div class="col-3">
-                    <a class="btn btn-primary" asp-action="Upsert"><i class="fas fa-plus"></i> &nbsp; Create New Mobile Suit</a>
+                @* CREATE NEW MOBILE SUIT BUTTON *@
+                <div class="col-12 col-lg-4 mb-3">
+                    <a class="btn btn-info" asp-action="Upsert"><i class="fas fa-plus"></i> &nbsp; Create New Mobile Suit</a>
                 </div>
             }
         </div>
 
-        @*Search Bar, Search Button, and Pagination*@
-        <div class="row mb-2">
-            <div class="col-6 offset-3">
-                @Html.Editor("searchMobileSuit", new { htmlAttributes = new { @class = "form-control", placeholder = "Search Mobile Suits..." } })
+        <div class="row mb-3">
+            @* SEARCH BAR *@
+            <div class="col-9 col-sm-10 col-md-10 col-lg-8 offset-lg-2">
+                @Html.Editor("searchMobileSuit", new { htmlAttributes = new { @class = "form-control purple-text-box", placeholder = "Search Mobile Suits..." } })
             </div>
-            <button type="submit" name="submit" value="Search" class="btn btn-info form-control col-1" style="padding-top: 10px; padding-right: 15px;">
-                <i class="fas fa-search"></i>
-            </button>
+            @* SEARCH BUTTON *@
+            <div class="col-3 col-sm-2 col-md-2 col-lg-1">
+                <button type="submit" name="submit" value="Search" class="btn btn-info form-control">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
         </div>
-        <div class="row mb-2 offset-1">
-            <h5 class="mt-1">Pages:</h5>
-            <div page-model="@Model.Pagination" asp-action="Index" page-class="btn border"
-                 page-class-normal="btn btn-light" page-class-selected="btn btn-info active" class="ml-1 btn-group">
+        @* PAGINATION *@
+        <div class="row mb-2">
+            <div class="col-3 col-md-1">
+                <h5 class="mt-1">Pages:</h5>
             </div>
+            <div class="col-9 col-md-11 orbitron-font">
+                <div page-model="@Model.Pagination" asp-action="Index" page-class="btn border"
+                     page-class-normal="btn btn-light black-font" page-class-selected="btn btn-info active" class="ml-1 btn-group">
+                </div>
+            </div>            
         </div>
 
         <div class="row">
@@ -36,35 +44,36 @@
             @foreach (var MobileSuit in Model.MobileSuits)
             {
                 <div class="col-lg-4">
-                    <div class="card mb-4 shadow-sm">
+                    <div class="card mb-4">
 
-                        @* Product Image *@
-                        <img src="@MobileSuit.ImageUrl" class="card-img-top rounded" />
+                        @* PRODUCT IMAGE *@
+                        <img src="@MobileSuit.ImageUrl" class="mobile-suit-img"/>
 
-                        @* TODO: Make the card contain an item description. Limit the description to 100 characters or something *@
-                        <div class="card-body">
-                            <h3 class="card-title">@MobileSuit.Name</h3>
-                            <p class="card-text">@MobileSuit.Price.ToString("C")</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="text-center">
-                                    <a asp-action="Details" asp-route-id="@MobileSuit.Id" class="btn btn-secondary">Mobile Suit Details</a>
+                        <div class="card-body card-body-grey text-center">
+                            @* PRODUCT NAME AND PRICE *@
+                            <h1 class="card-title">@MobileSuit.Name</h1>
+                            <h3 class="card-text green-font">@MobileSuit.Price.ToString("C")</h3>
 
-                                    @if (User.IsInRole("Admin"))
-                                    {
-                                        <a asp-action="Upsert" asp-route-id="@MobileSuit.Id" class="btn btn-info">Edit</a>
+                            @* VIEW PRODUCT BUTTON *@
+                            <a asp-action="Details" asp-route-id="@MobileSuit.Id" class="btn btn-secondary">View Details</a>
 
-                                        <span id="confirmDeleteSpan_@MobileSuit.Id" style="display:none">
-                                            <span>Are you sure you want to delete?</span>
-                                            <a asp-action="Delete" asp-route-id="@MobileSuit.Id" class="btn btn-danger">Yes</a>
-                                            <a href="#" class="btn btn-primary" onclick="confirmDelete('@MobileSuit.Id', false)">No</a>
-                                        </span>
+                            @* EDIT AND DELETE BUTTONS *@
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <a asp-action="Upsert" asp-route-id="@MobileSuit.Id" class="btn btn-info">Edit</a>
+                                    
+                                <div class="mt-2">
+                                    <span id="confirmDeleteSpan_@MobileSuit.Id" style="display:none">
+                                        <span class="orbitron-font">Are you sure you want to delete?</span>
+                                        <a asp-action="Delete" asp-route-id="@MobileSuit.Id" class="btn btn-danger">Yes</a>
+                                        <a class="btn btn-success" onclick="confirmDelete('@MobileSuit.Id', false)">No</a>
+                                    </span>
+                                </div>                                        
 
-                                        <span id="deleteSpan_@MobileSuit.Id">
-                                            <a href="#" class="btn btn-danger" onclick="confirmDelete('@MobileSuit.Id', true)">Delete</a>
-                                        </span>
-                                    }
-                                </div>
-                            </div>
+                                <span id="deleteSpan_@MobileSuit.Id">
+                                    <a class="btn btn-danger" onclick="confirmDelete('@MobileSuit.Id', true)">Delete</a>
+                                </span>
+                            }
                         </div>
                     </div>
                 </div>

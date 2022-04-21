@@ -9,122 +9,140 @@
     @if (Model.MobileSuitCartItems.Count > 0 || Model.WeaponCartItems.Count > 0)
     {
         <div class="container">
-            <div class="card">
-
-                @* Shopping Cart Item List *@
+            <div class="card shopping-cart">
                 <div class="card-body">
 
-                    <div class="row bg-dark text-light justify-content-center mb-2">
-                        <i class="fa fa-shopping-cart mt-3" style="font-size: 30px;"></i> &nbsp;
-                        <p class="mt-1" style="font-size: 30px;">Mobile Suits</p>
+                    @* MOBILE SUIT SECTION TITLE *@
+                    <div class="row cart-header align-items-center">
+                        <div class="col-3 col-md-2 col-lg-1">
+                            <i class="fa fa-shopping-cart" style="font-size: 30px;"></i> &nbsp;
+                        </div>
+                        <div class="col-9 col-md-10 col-lg-11 mt-2">
+                            <h1 class="display-5">Mobile Suits</h1>
+                        </div>
                     </div>
 
+                    @* MOBILE SUIT LIST *@
                     @foreach (var MobileSuitItem in Model.MobileSuitCartItems)
                     {
-                        <div class="row">
+                        <div class="row mt-2">
 
-                            @* Item Image *@
-                            <div class="col-2 d-none d-lg-block text-center py-2">
-                                <img src="@MobileSuitItem.MobileSuit.ImageUrl" class="rounded" style="max-height: 150px; " />
+                            @* ITEM IMAGE *@
+                            <div class="col-2 d-none d-md-block text-center py-2">
+                                <img src="@MobileSuitItem.MobileSuit.ImageUrl" class="img-fluid rounded" style="max-height: 150px; max-width: 165px;" />
                             </div>
 
-                            @* Item Title and Description *@
-                            <div class="col-6 text-left">
-                                <h5><strong>@MobileSuitItem.MobileSuit.Name</strong></h5>
-                                <p><small>@MobileSuitItem.MobileSuit.Description</small></p>
+                            @* ITEM TITLE AND DESCRIPTION *@
+                            <div class="col-12 col-md-6 text-left">
+                                <h3 class="text-decoration-underline">@MobileSuitItem.MobileSuit.Name</h3>
+                                <p>@MobileSuitItem.MobileSuit.Description</p>
                             </div>
 
-                            @* Item Price and Quantity *@
-                            <div class="col-4 row">
-                                <div class="col-8 text-left" style="padding-top:5px;">
-                                    <h6><strong> $@MobileSuitItem.MobileSuit.Price</h6>
+                            @* ITEM PRICE AND QUANTITY *@
+                            <div class="col-12 col-md-4 row">
+                                <div class="col-8 text-left">
+                                    <h5 class="green-font">$@MobileSuitItem.MobileSuit.Price</h5>
                                 </div>
                                 <div class="col-4 float-right">
-                                    @* Remove From Cart Button *@
-                                    <div class="float-right mx-1">
-                                        <a asp-action="deleteMobileSuitItem" asp-route-itemId="@MobileSuitItem.Id" type="submit" class="btn btn-outline-danger">
+                                    @* REMOVE FROM CART BUTTON *@
+                                    <div class="float-right">
+                                        <a asp-action="deleteMobileSuitItem" asp-route-itemId="@MobileSuitItem.Id" type="submit" class="btn btn-danger">
                                             <i class="fas fa-trash"></i>
                                         </a>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <hr />
+
+                        if (MobileSuitItem.Id != Model.MobileSuitCartItems.Last().Id)
+                        {
+                            <hr />
+                        }
                     }
 
-                    <div class="row bg-dark text-light justify-content-center mb-2">
-                        <i class="fa fa-shopping-cart mt-3" style="font-size: 30px;"></i> &nbsp;
-                        <p class="mt-1" style="font-size: 30px;">Weapons</p>
+                    @* WEAPON SECTION TITLE *@
+                    <div class="row cart-header align-items-center">
+                        <div class="col-3 col-md-2 col-lg-1">
+                            <i class="fa fa-shopping-cart" style="font-size: 30px;"></i> &nbsp;
+                        </div>
+                        <div class="col-9 col-md-10 col-lg-11 mt-2">
+                            <h1 class="display-5">Weapons</h1>
+                        </div>
                     </div>
 
+                    @* WEAPON LIST *@
                     @foreach (var WeaponItem in Model.WeaponCartItems)
                     {
-                        <div class="row">
+                        <div class="row mt-2">
 
-                            @* Item Image *@
-                            <div class="col-2 d-none d-lg-block text-center py-2">
-                                <img src="@WeaponItem.Weapon.ImageUrl" class="rounded" style="max-height: 150px; max-width: 165px;" />
+                            @* ITEM IMAGE *@
+                            <div class="col-2 d-none d-md-block text-center py-2">
+                                <img src="@WeaponItem.Weapon.ImageUrl" class="img-fluid rounded" style="max-height: 150px; max-width: 165px;" />
                             </div>
 
-                            @* Item Title and Description *@
-                            <div class="col-6 text-left">
-                                <h5><strong>@WeaponItem.Weapon.Name</strong></h5>
-                                <p><small>@WeaponItem.Weapon.Description</small></p>
+                            @* ITEM TITLE AND DESCRIPTION *@
+                            <div class="col-12 col-md-6 text-left">
+                                <h3 class="text-decoration-underline">@WeaponItem.Weapon.Name</h3>
+                                <p>@WeaponItem.Weapon.Description</p>
                             </div>
 
-                            @* Item Price and Quantity *@
-                            <div class="col-4 row">
+                            @* ITEM PRICE AND QUANTITY *@
+                            <div class="col-12 col-md-4 row">
                                 <div class="col-8 text-left" style="padding-top:5px;">
-                                    <h6><strong> $@WeaponItem.Weapon.Price Each</h6>
+                                    <h5><span class="green-font">$@WeaponItem.Weapon.Price</span> Each</h5>
                                     <br>
-                                    <h6><strong>Quantity: @WeaponItem.Count</h6>
+                                    <h5>Quantity: @WeaponItem.Count</h5>
                                     <br>
-                                    <h6><strong>Total: $@(WeaponItem.Weapon.Price * WeaponItem.Count)</h6>
+                                    <h5>Total: <span class="green-font">$@(WeaponItem.Weapon.Price * WeaponItem.Count)</span></h5>
                                 </div>
                                 <div class="col-4">
 
-                                    @* Quantity and Remove Buttons *@
+                                    @* ITEM QUANTITY AND REMOVE FROM CART BUTTONS *@
                                     <div class="">
-                                        <a asp-action="IncreaseWeaponQuantity" asp-route-itemId="@WeaponItem.Weapon.Id" type="submit" class="btn btn-primary">
+                                        <a asp-action="IncreaseWeaponQuantity" asp-route-itemId="@WeaponItem.Weapon.Id" type="submit" class="btn btn-success">
                                             <i class="fas fa-plus"></i>
                                         </a>
                                     </div>
                                     @if (WeaponItem.Count > 1)
                                     {
                                         <div class="">
-                                            <a asp-action="DecreaseWeaponQuantity" asp-route-itemId="@WeaponItem.Weapon.Id" type="submit" class="btn btn-danger">
+                                            <a asp-action="DecreaseWeaponQuantity" asp-route-itemId="@WeaponItem.Weapon.Id" type="submit" class="btn btn-primary">
                                                 <i class="fas fa-minus"></i>
                                             </a>
                                         </div>
                                     }
                                     <div class="">
-                                        <a asp-action="deleteWeaponItem" asp-route-itemId="@WeaponItem.Id" type="submit" class="btn btn-outline-danger">
+                                        <a asp-action="deleteWeaponItem" asp-route-itemId="@WeaponItem.Id" type="submit" class="btn btn-danger">
                                             <i class="fas fa-trash"></i>
                                         </a>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <hr />
+
+                        if (WeaponItem.Id != Model.WeaponCartItems.Last().Id)
+                        {
+                            <hr />
+                        }
                     }
-
                 </div>
-                @*Total*@
-                <div class="row">
-                    <div class="col-12 col-md-6 offset-md-6 col-lg-4 offset-lg-8 pr-4">
-                        <ul class="list-group">
-                            <li class="list-group-item d-flex justify-content-between bg-light">
-                                <span class="text-info"> Total (USD)</span>
-                                <strong class="text-info">$ <span id="txtOrderTotal">@Model.OrderHeader.OrderTotal</span></strong>
-                            </li>
-                        </ul>
+
+                <div class="card-footer cart-header">
+
+                    @* TOTAL *@
+                    <div class="card-footer row">
+                        <div class="col-12 col-md-6 offset-md-6 col-lg-4 offset-lg-8 pr-4">
+                            <ul class="list-group">
+                                <li class="list-group-item d-flex justify-content-between orbitron-font">
+                                    <span class="fw-bold"> Total: </span>
+                                    <span id="txtOrderTotal" class="green-font text-decoration-underline">$ @Model.OrderHeader.OrderTotal</span>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
-
-                <div class="card-footer">
                     <div class="card-footer row">
 
-                        @* Convert Total into cents for Stripe *@
+                        @* CONVERT TOTAL INTO CENTS FOR STRIPE *@
                         @{
                             var OrderTotalForStripe = Model.OrderHeader.OrderTotal * 100;
                         }
@@ -140,12 +158,12 @@
                                 data-image="https://stripe.com/img/documentation/checkout/marketplace.png">
                         </script>
 
-                        @*Hide the stripe button so that only the custom button displays*@
+                        @* HIDE THE DEFAULT STRIPE BUTTON *@
                         <script>
-                                    document.getElementsByClassName("stripe-button-el")[0].style.display = 'none';
+                            document.getElementsByClassName("stripe-button-el")[0].style.display = 'none';
                         </script>
 
-                        @* Checkout Button *@
+                        @* CHECKOUT BUTTON *@
                         <div class="col-sm-12 col-lg-4 col-md-6 offset-lg-8 offset-md-6 ">
                             <button type="submit" value="Place Order" class="btn btn-success form-control">Place Order</button>
                         </div>

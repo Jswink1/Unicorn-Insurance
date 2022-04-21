@@ -4,31 +4,33 @@
     ViewData["Title"] = "Deployment Result";
 }
 
+@* PAGE TITLE *@
 @if (Model.Deployment.ResultType == SD.GoodDeploymentResult)
 {
-    <h1 class="text-success text-center">Deployment Successfull</h1>
+    <h1 class="display-3 green-font text-center">Deployment Successfull</h1>
 }
 else if (Model.Deployment.ResultType == SD.BadDeploymentResult)
 {
-    <h1 class="text-danger text-center">Deployment Failed</h1>
+    <h1 class="display-3 red-font text-center">Deployment Failed</h1>
 }
 
-<div class="row justify-content-center">
-    <img src="@Model.Deployment.ImageUrl" style="min-width: 500px;" />
+@* DEPLOYMENT IMAGE *@
+<div class="text-center col-12 col-lg-8 offset-lg-2">
+    <img src="@Model.Deployment.ImageUrl" class="w-100 img-fluid" />
 </div>
 
-<div class="row justify-content-center mt-3">
-    <h5>@Model.Deployment.Description</h5>
-</div>
+@* DEPLOYMENT DESCRIPTION *@
+<h5 class="text-center mt-3 display-6">@Model.Deployment.Description</h5>
 
-<div class="row justify-content-center mt-2">
-    <a asp-controller="MobileSuitDeck" asp-action="Details" asp-route-id="@Model.UserMobileSuitId" class="btn btn-info form-control col-3">
+@* BACK TO USER MOBILE SUIT AND DEPLOY AGAIN BUTTONS *@
+<div class="row col-12 col-lg-6 offset-lg-3 mt-2">
+    <a asp-controller="MobileSuitDeck" asp-action="Details" asp-route-id="@Model.UserMobileSuitId" class="btn btn-info">
         Back to Mobile Suit
     </a>
 
     @if (Model.Deployment.ResultType == SD.GoodDeploymentResult)
     {
-        <a asp-controller="Deployments" asp-action="Deploy" asp-route-id="@Model.UserMobileSuitId" class="btn btn-success form-control col-3 ml-2">
+        <a asp-controller="Deployments" asp-action="Deploy" asp-route-id="@Model.UserMobileSuitId" class="btn btn-success mt-2">
             Deploy Again
         </a>
     }

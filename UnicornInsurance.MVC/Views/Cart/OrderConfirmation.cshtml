@@ -1,16 +1,36 @@
 ﻿@model int
 @{
     ViewData["Title"] = "Order Confirmation";
+
+    var imageId = new Random().Next(1, 7);
+    var imagePath = $"/images/orders/success-{imageId}.gif";
 }
 
 <div class="container row">
+
+    @* PAGE TITLE *@
     <div class="col-12 text-center">
-        <h1 class="text-primary text-center">Order Submitted Successfully</h1><br />
+        <h1 class="display-3 green-font text-center">Order Submitted</h1>
     </div>
-    <div class="col-12 text-center" style="color:maroon">
-        <br />
-        Thank you for your order!
-        <br />
-        Your Order Number is : @Model
+
+    @* ORDER SUCCESS IMAGE *@
+    <div class="text-center col-12 col-lg-8 offset-lg-2">
+        <img src="@imagePath" class="w-100 img-fluid" />
+    </div>
+
+    @* ORDER NUMBER DETAILS *@
+    <div class="col-12 text-center mt-3">
+        <h5>Thank you for your order!</h5>
+        <h5>Your Order Number is : @Model</h5>
+    </div>
+
+    @* MOBILE SUIT DECK AND ORDER PAGE BUTTONS *@
+    <div class="row col-12 col-lg-4 offset-lg-4 mt-2">
+        <a asp-controller="MobileSuitDeck" asp-action="Index" class="btn btn-success mb-2">
+            Mobile Suit Deck
+        </a>
+        <a asp-controller="Orders" asp-action="Index" class="btn btn-info">
+            Orders
+        </a>
     </div>
 </div>

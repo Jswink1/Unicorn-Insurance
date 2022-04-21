@@ -9,72 +9,74 @@
 <form method="post">
     <input hidden asp-for="OrderHeader.Id" />
     <br />
-    <div class="container">
+    <div class="container order-details">
         <div class="card">
-            <div class="card-header bg-dark text-light ml-0 row container">
+            <div class="card-header">
+                <div class="row">
+                    @* PAGE TITLE *@
+                    <div class="col-12 d-none d-md-block col-md-6 pb-1">
+                        <i class="fas fa-shopping-cart" style="font-size: 36px;"></i> &nbsp; <span class="display-6 black-ops-font">Order Summary</span>
+                    </div>
 
-                @* Page Header/Title *@
-                <div class="col-12 d-none d-md-block col-md-6 pb-1">
-                    <i class="fas fa-shopping-cart"></i> &nbsp; Order Summary
-                </div>
-
-                @* Back to Orders Page *@
-                <div class="col-12 col-md-4 offset-md-2 text-right">
-                    <a asp-controller="Orders" asp-action="Index" class="btn btn-outline-info form-control btn-sm">Back to Orders</a>
-                </div>
+                    @* BACK TO ORDERS PAGE *@
+                    <div class="col-12 col-md-4 offset-md-2 text-right mt-1">
+                        <a asp-controller="Orders" asp-action="Index" class="btn btn-info form-control">Back to Orders</a>
+                    </div>
+                </div>             
             </div>
             <div class="card-body">
                 <div class="container rounded p-2">
                     <div class="row">
                         <div class="col-12 col-lg-6 pb-4">
                             <div class="row">
-                                @* Order Details Header/Title *@
+                                @* ORDER DETAILS HEADER *@
                                 <h4 class="d-flex justify-content-between align-items-center mb-3">
-                                    <span class="text-primary">Order Details:</span>
+                                    <span>Order Details:</span>
                                 </h4>
                             </div>
 
-                            @* Order Id *@
-                            <div class="row my-1">
-                                <div class="col-3">Order Id</div>
-                                <div class="col-9">
+                            @* ORDER ID *@
+                            <div class="d-block d-lg-flex row my-1">
+                                <div class="col-12 col-lg-3">Order Id</div>
+                                <div class="col-12 col-lg-9">
                                     <input readonly asp-for="OrderHeader.Id" type="text" class="form-control" />
                                 </div>
                             </div>
 
-                            @* User Name *@
-                            <div class="row my-1">
-                                <div class="col-3">Name</div>
-                                <div class="col-9">
+                            @* USER NAME *@
+                            <div class="d-block d-lg-flex row my-1">
+                                <div class="col-12 col-lg-3">Name</div>
+                                <div class="col-12 col-lg-9">
                                     <input readonly asp-for="OrderHeader.UserEmail" type="text" class="form-control" />
                                 </div>
                             </div>
 
-                            @* Order Date *@
-                            <div class="row my-1">
-                                <div class="col-3">Order Date</div>
-                                <div class="col-9">
+                            @* ORDER DATE *@
+                            <div class="d-block d-lg-flex row my-1">
+                                <div class="col-12 col-lg-3">Order Date</div>
+                                <div class="col-12 col-lg-9">
                                     <input readonly asp-for="OrderHeader.OrderDate" type="text" class="form-control" />
                                 </div>
                             </div>
 
-                            @* Payment Status *@
-                            <div class="row my-1">
-                                <div class="col-3">Payment Status</div>
-                                <div class="col-9">
+                            @* PAYMENT STATUS *@
+                            <div class="d-block d-lg-flex row my-1">
+                                <div class="col-12 col-lg-3">Payment Status</div>
+                                <div class="col-12 col-lg-9">
                                     <input readonly asp-for="OrderHeader.PaymentStatus" type="text" class="form-control" />
                                 </div>
                             </div>
 
-
-                            @*Only display TransacionId if the user is an admin and the payment was not rejected*@
+                            @* IF THE USER IS AN ADMIN AND THE PAYMENT WAS NOT REJECTED *@
                             @if (User.IsInRole(SD.AdminRole))
                             {
                                 if (Model.OrderHeader.TransactionId is not null)
                                 {
-                                    <div class="row my-1">
-                                        <div class="col-3">Transaction ID</div>
-                                        <div class="col-9">
+
+                                    //DISPLAY TRANSACTION ID 
+                                    <div class="d-block d-lg-flex row my-1">
+                                        <div class="col-12 col-lg-3">Transaction ID</div>
+                                        <div class="col-12 col-lg-9">
                                             <input asp-for="OrderHeader.TransactionId" type="text" readonly class="form-control" />
                                         </div>
                                     </div>
@@ -82,63 +84,63 @@
                             }
                         </div>
 
-                        @*Order Summary*@
-                    <div class="col-12 col-lg-5 offset-lg-1">
+                    @* ORDER SUMMARY *@
+                    <div class="col-12 col-lg-6">
                         <h4 class="d-flex justify-content-between align-items-center mb-3">
-                            <span class="text-primary">Item Purchases:</span>
+                            <span>Item Purchases:</span>
                         </h4>
                         <ul class="list-group mb-3">
 
-                            @*Order Details (Product, Quantity, Price)*@
+                            @* ORDER DETAILS (PRODUCT, QUANTITY, PRICE) *@
                             @foreach (var mobileSuit in Model.MobileSuitPurchases)
                             {
-                                <li class="list-group-item d-flex justify-content-between p-2">
+                                <li class="list-group-item d-block d-md-flex justify-content-between p-2 order-item">
                                     <div class="row container">
-                                        <div class="col-8">
-                                            <h6 class="my-0 text-primary">@mobileSuit.MobileSuit.Name</h6>
+                                        <div class="col-12 col-md-8">
+                                            <h5 class="my-0 text-decoration-underline">@mobileSuit.MobileSuit.Name</h5>
                                         </div>
-                                        <div class="col-4">
-                                            <p class="text-success">@(String.Format("{0:C}", mobileSuit.Price))</p>
+                                        <div class="col-12 col-md-4">
+                                            <p class="green-font">@(String.Format("{0:C}", mobileSuit.Price))</p>
                                         </div>
                                     </div>
                                 </li>
                             }
                             @foreach (var weapon in Model.WeaponPurchases)
                             {
-                                <li class="list-group-item d-flex justify-content-between p-2">
+                                <li class="list-group-item d-block d-md-flex justify-content-between p-2 order-item">
                                     <div class="row container">
-                                        <div class="col-8">
-                                            <h6 class="my-0 text-primary">@weapon.Weapon.Name</h6>
-                                            <small class="text-muted">Quantity : @weapon.Count</small>
+                                        <div class="col-12 col-md-8">
+                                            <h5 class="my-0 text-decoration-underline">@weapon.Weapon.Name</h5>
+                                            <small>Quantity : @weapon.Count</small>
                                         </div>
-                                        <div class="col-4">
-                                            <p class="text-success">@(String.Format("{0:C}", weapon.Price))</p>
+                                        <div class="col-12 col-md-4">
+                                            <p class="green-font">@(String.Format("{0:C}", weapon.Price))</p>
                                         </div>
                                     </div>
                                 </li>
                             }
 
-                            @*Order Total*@
-                            <li class="list-group-item bg-info">
+                            @* ORDER TOTAL *@
+                            <li class="list-group-item d-block d-lg-flex order-total">
                                 <div class="row container">
-                                    <div class="col-6">
-                                        <h5 class="text-white">TOTAL </h5>
+                                    <div class="col-12 col-lg-6">
+                                        <h5 class="lead">TOTAL: </h5>
                                     </div>
-                                    <div class="col-6 text-right">
-                                        <h5 class="text-white">@(String.Format("{0:C}", Model.OrderHeader.OrderTotal))</h5>
+                                    <div class="col-12 col-lg-6 text-right">
+                                        <h5 class="lead green-font text-decoration-underline">@(String.Format("{0:C}", Model.OrderHeader.OrderTotal))</h5>
                                     </div>
                                 </div>
                             </li>
                         </ul>
 
                         @{
-                            //Order Total variable for Stripe, in the form of cents
+                            // CONVERT TOTAL TO CENTS FOR STRIPE
                             var OrderTotalForStripe = Model.OrderHeader.OrderTotal * 100;
                         }
 
-                        @*If the user has placed the order but it was rejected, display a button for them to try and pay again*@
+                        @* IF THE USER HAS PLACED THE ORDER BUT IT WAS REJECTED, DISPAY THE PAY BUTTON *@
                         @if (Model.OrderHeader.PaymentStatus == SD.PaymentStatusRejected
-                       && User.IsInRole(SD.CustomerRole))
+                      && User.IsInRole(SD.CustomerRole))
                         {
                             <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                                     data-key="@Stripe.Value.PublishableKey"
@@ -151,7 +153,7 @@
                                     data-image="https://stripe.com/img/documentation/checkout/marketplace.png">
                             </script>
 
-                            //Hide the stripe button so that only our button displays
+                            // HIDE THE DEFAULT STRIPE BUTTON
                             <script>
                                 document.getElementsByClassName("stripe-button-el")[0].style.display = 'none';
                             </script>

@@ -1,0 +1,52 @@
+﻿@import '../custom';
+@import '../components/mixins';
+
+.insurance-details {
+    ul {
+        text-align: center;
+        list-style-type: none;
+        font-size: 20px;
+        @include orbitronFont;
+    }
+
+    li:after {
+        content: "\2713\0020";
+        font-size: 30px;
+    }
+}
+
+.standard-insurance-border {
+    border: 3px solid $blue;
+    border-radius: 20px;
+}
+
+.standard-insurance-font {
+    color: $blue !important;
+}
+
+.super-insurance-border {
+    border: 3px solid $purple;
+    border-radius: 20px;
+}
+
+.super-insurance-font {
+    color: $purple !important;
+}
+
+.ultra-insurance-border {
+    border: 3px solid #ffc409;
+    border-radius: 20px;
+}
+
+.ultra-insurance-font {
+    color: #ffc409 !important;
+}
+
+.no-insurance-border {
+    border: 3px solid $red;
+    border-radius: 20px;
+}
+
+.no-insurance-font {
+    color: $red !important;
+}

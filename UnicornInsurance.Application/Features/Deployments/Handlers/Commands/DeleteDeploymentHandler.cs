@@ -26,7 +26,7 @@ namespace UnicornInsurance.Application.Features.Deployments.Handlers.Commands
             var deployment = await _unitOfWork.DeploymentRepository.Get(request.DeploymentId);
 
             if (deployment is null)
-                throw new NotFoundException(nameof(deployment), request.DeploymentId);
+                throw new NotFoundException("Deployment", request.DeploymentId);
 
             await _unitOfWork.DeploymentRepository.Delete(deployment);
             await _unitOfWork.Save();

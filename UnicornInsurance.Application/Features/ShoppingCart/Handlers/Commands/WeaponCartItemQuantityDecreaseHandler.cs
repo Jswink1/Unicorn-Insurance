@@ -31,7 +31,7 @@ namespace UnicornInsurance.Application.Features.ShoppingCart.Handlers.Commands
             var weaponCartItem = await _unitOfWork.WeaponCartRepository.GetCartItem(userId, request.WeaponId);
 
             if (weaponCartItem is null)
-                throw new NotFoundException(nameof(weaponCartItem), request.WeaponId);
+                throw new NotFoundException("Shopping Cart Item", request.WeaponId);
             if (weaponCartItem.Count <= 1)
                 throw new DecreaseItemQuantityException();
 

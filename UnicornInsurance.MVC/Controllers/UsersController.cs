@@ -56,12 +56,10 @@ namespace UnicornInsurance.MVC.Controllers
             return View(registration);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Logout(string returnUrl)
+        public async Task<IActionResult> Logout()
         {
-            returnUrl ??= Url.Content("~/");
             await _authService.Logout();
-            return LocalRedirect(returnUrl);
+            return RedirectToAction("Index", "Home");
         }
 
         public IActionResult PleaseVerifyEmail()

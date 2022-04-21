@@ -27,7 +27,7 @@ namespace UnicornInsurance.Application.Features.Weapons.Handlers.Commands
             var weapon = await _unitOfWork.WeaponRepository.Get(request.WeaponId);
 
             if (weapon is null)
-                throw new NotFoundException(nameof(weapon), request.WeaponId);
+                throw new NotFoundException("Weapon", request.WeaponId);
 
             await _unitOfWork.WeaponRepository.Delete(weapon);
             await _unitOfWork.Save();

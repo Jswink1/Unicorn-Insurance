@@ -30,7 +30,7 @@ namespace UnicornInsurance.Application.Features.ShoppingCart.Handlers.Commands
             var mobileSuitCartItem = await _unitOfWork.MobileSuitCartRepository.Get(request.MobileSuitCartItemId);
 
             if (mobileSuitCartItem is null)
-                throw new NotFoundException(nameof(mobileSuitCartItem), request.MobileSuitCartItemId);
+                throw new NotFoundException("Shopping Cart Item", request.MobileSuitCartItemId);
             if (mobileSuitCartItem.ApplicationUserId != userId)
                 throw new UnauthorizedAccessException();
 

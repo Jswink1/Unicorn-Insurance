@@ -91,7 +91,6 @@ namespace UnicornInsurance.Application.UnitTests.ShoppingCart.Commands
 
         [Test]
         [Order(5)]
-        [TestCase(6)]
         [TestCase(-1)]
         [TestCase(234234)]
         public async Task Invalid_WeaponCartItem_AddedToCart(int weaponId)

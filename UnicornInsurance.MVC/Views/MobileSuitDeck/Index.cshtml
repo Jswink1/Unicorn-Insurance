@@ -1,33 +1,61 @@
 ﻿@model List<UserMobileSuit>
+@using UnicornInsurance.MVC.Constants 
+@using ExpressTimezone
 @{ ViewData["Title"] = "Mobile Suit Deck"; }
 
 <div class="container">
-    <div class="row">
 
-        @* Page Header/Title *@
-        <div class="col-9">
-            <h2 class="display-4">Mobile Suit Deck</h2>
-        </div>
-    </div>
+    @* PAGE TITLE *@
+    <h1 class="display-3 text-center">Mobile Suit Deck</h1>
 
     <div class="row">
-
         @foreach (var UserMobileSuit in Model)
         {
             <div class="col-lg-4">
-                <div class="card mb-4 shadow-sm">
+                <div class="card mb-4">
 
-                 @* Product Image *@
-                <img src="@UserMobileSuit.MobileSuit.ImageUrl" class="card-img-top rounded w-100" />
+                 @* USER MOBILE SUIT IMAGE *@
+                <img src="@UserMobileSuit.MobileSuit.ImageUrl" class="mobile-suit-img" />
 
-                <div class="card-body">
-                    <h3 class="card-title">@UserMobileSuit.MobileSuit.Name</h3>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="text-center">
-                            <a asp-action="Details" asp-route-id="@UserMobileSuit.Id" class="btn btn-secondary">View My Mobile Suit</a>
-                            </div>
-                        </div>
-                    </div>
+                <div class="card-body card-body-grey text-center">
+
+                    @* USER MOBILE SUIT NAME *@
+                    <h1 class="card-title">@UserMobileSuit.MobileSuit.Name</h1>
+
+                    @* USER MOBILE SUIT STATUS *@
+                    @if (UserMobileSuit.IsDamaged == false)
+                    {
+                        <h3 class="card-text">Status: <span class="green-font">Operational</span></h3>
+                    }
+                    else if (UserMobileSuit.IsDamaged == true)
+                    {
+                        <h3 class="card-text">Status: <span class="red-font">Damaged</span></h3>
+                    }
+
+                    @* USER MOBILE SUIT INSURANCE PLAN *@
+                    @if (UserMobileSuit.EndOfCoverage.UTCToSystemTime() > DateTime.Now)
+                    {
+                        if (UserMobileSuit.InsurancePlan == SD.StandardInsurancePlan)
+                        {
+                            <h3 class="card-text">Insurance: <span class="standard-insurance-font">Standard</span></h3>
+                        }
+                        if (UserMobileSuit.InsurancePlan == SD.SuperInsurancePlan)
+                        {
+                            <h3 class="card-text">Insurance: <span class="super-insurance-font">Super</span></h3>
+                        }
+                        if (UserMobileSuit.InsurancePlan == SD.UltraInsurancePlan)
+                        {
+                            <h3 class="card-text">Insurance: <span class="ultra-insurance-font">Ultra</span></h3>
+                        }
+                    }
+                    else
+                    {
+                        <h3 class="card-text">Insurance: <span class="no-insurance-font">None</span></h3>
+                    }
+
+                    @* USER MOBILE SUIT DETAILS BUTTON *@
+                    <a asp-action="Details" asp-route-id="@UserMobileSuit.Id" class="btn btn-secondary">View My Mobile Suit</a>
+                </div>
                 </div>
             </div>
          }

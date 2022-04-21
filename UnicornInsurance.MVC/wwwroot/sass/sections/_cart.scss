@@ -1,0 +1,26 @@
+﻿@import '../_custom.scss';
+@import '../components/_mixins.scss';
+
+.shopping-cart {
+    background-color: $gray-800 !important;
+    color: $white;
+
+    hr {
+        border: 2px solid $green;
+        opacity: 1;
+    }
+
+    p {
+        @include orbitronFont;
+    }
+
+    .cart-header {
+        background-color: $purple !important;
+
+        /*h1 {
+            background-image: none !important;
+            -webkit-background-clip: inherit !important;
+            -webkit-text-fill-color: $white !important;
+        }*/
+    }
+}

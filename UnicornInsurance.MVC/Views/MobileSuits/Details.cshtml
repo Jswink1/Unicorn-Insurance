@@ -6,24 +6,25 @@
 }
 
 <form method="post">
-    <h2 class="display-4">@Model.Name</h2>
+    <h1 class="display-4 text-center">@Model.Name</h1>
     <div class="row">
         <div class="col-md-6">
-
+            @* PRODUCT IMAGE *@
             <img src="@Model.ImageUrl" class="d-block w-100" />
         </div>
 
         <div class="col-md-6">
-
+            @* PRODUCT PRICE *@
             <div class="row">
-                <div class="col-md-12">
-                    <h4>@Model.Price.ToString("C")</h4>
+                <div class="col-md-12 green-font">
+                    <h2>@Model.Price.ToString("C")</h2>
                 </div>
             </div>
 
+            @* PRODUCT DESCRIPTION *@
             <div class="row">
                 <div class="col-md-12">
-                    <p class="description">
+                    <p class="lead orbitron-font">
                         @Model.Description
                     </p>
                 </div>
@@ -32,28 +33,30 @@
             <hr />
 
             <ul class="list-group">
+            <h3 class="text-decoration-underline">Properties</h3>
 
-                @foreach (PropertyInfo property in Model.GetType().GetProperties())
+            @* PRODUCT PROPERTIES *@
+            @foreach (PropertyInfo property in Model.GetType().GetProperties())
+            {
+                if (property.Name != "Id" &&
+                    property.Name != "Name" &&
+                    property.Name != "Description" &&
+                    property.Name != "Price" &&
+                    property.Name != "CustomWeapon" &&
+                    property.Name != "ImageUrl" &&
+                    @property.GetValue(Model) != null)
                 {
-                    if (property.Name != "Id" &&
-                        property.Name != "Name" &&
-                        property.Name != "Description" &&
-                        property.Name != "Price" &&
-                        property.Name != "CustomWeapon" &&
-                        property.Name != "ImageUrl" &&
-                        @property.GetValue(Model) != null)
-                    {
-                        <li class="list-group-item"><span class="font-weight-bold">@property.Name - </span> @property.GetValue(Model)</li>
-                    }
-
-                    if (property.Name == "CustomWeapon" &&
-                        @property.GetValue(Model) != null)
-                    {
-                        <h5 class="mt-3">Custom Weapon</h5>
-                        <li class="list-group-item"><span class="font-weight-bold">Name - </span> @Model.CustomWeapon.Name</li>
-                        <li class="list-group-item"><span class="font-weight-bold">Ability - </span> @Model.CustomWeapon.Description</li>
-                    }
+                    <li class="list-group-item product-property"><span class="fw-bold">@property.Name - </span> @property.GetValue(Model)</li>
                 }
+
+                 if (property.Name == "CustomWeapon" &&
+                     @property.GetValue(Model) != null)
+                {
+                    <h3 class="mt-3 text-decoration-underline">Custom Weapon</h3>
+                    <li class="list-group-item product-property"><span class="fw-bold">Name - </span> @Model.CustomWeapon.Name</li>
+                    <li class="list-group-item product-property"><span class="fw-bold">Ability - </span> @Model.CustomWeapon.Description</li>
+                }
+            }
             </ul>
 
             <hr />

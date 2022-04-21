@@ -1,0 +1,18 @@
+﻿@import '../custom';
+@import '../components/mixins';
+
+.menu {
+    @include gradient;
+    @include orbitronFont;
+    font-size: 20px;
+
+    li {
+        padding: 0 0.7rem;
+
+        a {
+            color: $white !important;
+            text-transform: capitalize;
+            font-weight: 600;
+        }
+    }
+}

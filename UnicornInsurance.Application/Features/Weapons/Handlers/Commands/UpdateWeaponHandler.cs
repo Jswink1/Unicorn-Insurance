@@ -42,7 +42,7 @@ namespace UnicornInsurance.Application.Features.Weapons.Handlers.Commands
                 var weapon = await _unitOfWork.WeaponRepository.Get(request.WeaponDTO.Id);
 
                 if (weapon is null)
-                    throw new NotFoundException(nameof(weapon), request.WeaponDTO.Id);
+                    throw new NotFoundException("Weapon", request.WeaponDTO.Id);
 
                 if (weapon.IsCustomWeapon == true)
                     throw new UpdateCustomWeaponException();

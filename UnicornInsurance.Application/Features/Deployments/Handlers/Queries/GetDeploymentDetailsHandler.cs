@@ -32,7 +32,7 @@ namespace UnicornInsurance.Application.Features.Deployments.Handlers.Queries
             var deployment = await _unitOfWork.DeploymentRepository.Get(request.DeploymentId);
 
             if (deployment is null)
-                throw new NotFoundException(nameof(deployment), request.DeploymentId);
+                throw new NotFoundException("Deployment", request.DeploymentId);
 
             return _mapper.Map<DeploymentDTO>(deployment);
         }

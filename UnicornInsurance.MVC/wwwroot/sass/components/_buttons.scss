@@ -1,0 +1,13 @@
+﻿@import '../_custom.scss';
+@import '../components/_mixins.scss';
+
+a, button {
+    @include orbitronFont;
+    color: white !important;
+    font-weight: bold !important;
+}
+
+select {
+    background: $purple !important;
+    @include orbitronFont;
+}

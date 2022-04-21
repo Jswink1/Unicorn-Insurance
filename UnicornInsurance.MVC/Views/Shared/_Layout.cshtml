@@ -7,38 +7,47 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Unicorn Insurance</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
-
-    @*Datatables*@
+    @* BOOTSTRAP 5 *@
+    <link rel="stylesheet" href="~/sass/style.min.css">
+    @* DATATABLES *@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" />
-    @*Toastr*@
+    @* TOASTR *@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
+    <!-- ORBITRON FONT -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- BLACK OPS ONE FONT -->
+    <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+
+        <nav class="navbar navbar-expand-lg navbar-dark menu fixed-top">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Unicorn Insurance</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                @* NAVBAR ICON *@
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                    <img src="/images/icons/logo.png" class="img-fluid" style="max-height: 55px;" alt="logo image">
+                </a>
+                @* MOBILE DEVICE NAVBAR HAMBURGER BUTTON *@
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+                <div class="navbar-collapse collapse justify-content-between" id="navbarNav">
+                    <ul class="navbar-nav">
 
+                        @* NAVBAR PAGES *@
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="MobileSuits" asp-action="Index">Mobile Suits</a>
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Weapons" asp-action="Index">Weapons</a>
+                            <a class="nav-link" asp-area="" asp-controller="MobileSuits" asp-action="Index">Mobile Suits</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Weapons" asp-action="Index">Weapons</a>
                         </li>
 
-                        @* Shopping Cart *@
+                        @* SHOPPING CART *@
                         @if (HttpContextAccessor.HttpContext.Session.GetInt32(SD.CartSesh) != null)
                         {
                             <li style="color: red;">
@@ -62,14 +71,18 @@
 
                     </ul>
 
+                    @* LOGIN AND REGISTER BUTTONS *@
                     <partial name="_LoginPartial" />
                 </div>
             </div>
         </nav>
+
     </header>
     <div class="container">
-        <main role="main" class="pb-3">
+        <main role="main" class="mt-5 mb-5 pt-5 pb-5">
+            @* POPUP NOTIFICATIONS *@
             <partial name="_Notifications" />
+            @* BODY *@
             @RenderBody()
         </main>
     </div>
@@ -79,17 +92,19 @@
             &copy; @DateTime.Now.Year - Unicorn Insurance
         </div>
     </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
 
-    @*Datatables*@
+    @* BOOTSTRAP 5 *@
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    @* JQUERY *@
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @* DATATABLES *@
     <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-    @*FontAwesome*@
+    @* FONTAWESOME *@
     <script src="https://kit.fontawesome.com/e19c476714.js"></script>
-    @*SweetAlert*@
+    @* SWEETALERT *@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    @*Toastr*@
+    @* TOASTR *@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
     @await RenderSectionAsync("Scripts", required: false)

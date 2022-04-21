@@ -77,7 +77,7 @@ namespace UnicornInsurance.Application.Features.Orders.Handlers.Commands
                             var mobileSuit = await _unitOfWork.MobileSuitRepository.Get(mobileSuitPurchaseDTO.MobileSuitId);
 
                             if (mobileSuit is null)
-                                throw new NotFoundException(nameof(mobileSuit), mobileSuitPurchaseDTO.MobileSuitId);
+                                throw new NotFoundException("Mobile Suit", mobileSuitPurchaseDTO.MobileSuitId);
 
                             MobileSuitPurchase mobileSuitPurchase = new()
                             {
@@ -98,7 +98,7 @@ namespace UnicornInsurance.Application.Features.Orders.Handlers.Commands
                             var weapon = await _unitOfWork.WeaponRepository.Get(weaponPurchaseDTO.WeaponId);
 
                             if (weapon is null)
-                                throw new NotFoundException(nameof(weapon), weaponPurchaseDTO.WeaponId);
+                                throw new NotFoundException("Weapon", weaponPurchaseDTO.WeaponId);
                             if (weapon.IsCustomWeapon)
                                 throw new PurchaseCustomWeaponException();
 

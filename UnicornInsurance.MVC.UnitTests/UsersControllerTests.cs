@@ -88,10 +88,9 @@ namespace UnicornInsurance.MVC.UnitTests
         [Fact]
         public async Task LogoutTest()
         {
-            var result = await _usersController.Logout("ReturnUrl");
+            var result = await _usersController.Logout();
 
-            var localRedirectResult = Assert.IsType<LocalRedirectResult>(result);
-            localRedirectResult.Url.ShouldBe("ReturnUrl");
+            var localRedirectResult = Assert.IsType<RedirectToActionResult>(result);
 
             _authService.Verify(x => x.Logout(), Times.Once);
         }

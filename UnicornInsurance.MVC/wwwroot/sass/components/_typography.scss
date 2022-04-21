@@ -1,0 +1,65 @@
+﻿@import '../_custom.scss';
+@import '../components/_mixins.scss';
+
+//
+// BACKGROUND COLORS
+//
+
+.gradient-background {
+    @include gradient;
+}
+
+.green-background {
+    background-color: $green;
+}
+
+.red-background {
+    background-color: $red;
+}
+
+.card-body-grey {
+    background-color: $gray-900;
+}
+
+//
+// FONT FAMILIES
+//
+
+.black-ops-font {
+    font-family: 'Black Ops One', cursive;
+}
+
+.orbitron-font {
+    @include orbitronFont;
+}
+
+//
+// FONT COLORS
+//
+
+.green-font {
+    color: $green;
+    font-weight: 700;
+}
+
+.black-font {
+    color: $black !important;
+}
+
+.red-font {
+    color: $red !important;
+}
+
+//
+// PAGE TITLE FONTS
+//
+
+h1 {
+    font-family: 'Black Ops One', cursive;
+    /*@include gradientFont;*/
+}
+
+h3, h2, h5 {
+    @include orbitronFont;
+}
+

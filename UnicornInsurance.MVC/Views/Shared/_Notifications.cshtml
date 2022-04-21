@@ -1,60 +1,37 @@
-﻿<div id="myModalSuccess" class="modal fade text-width:30%" role="dialog">
-    <div class="modal-dialog">
+﻿<div id="myModalSuccess" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
 
-            <div class="modal-header">
-                <h2>Success</h2>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <div class="modal-header gradient-background">
+                <h1>Success</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
-            <div id="myModalSuccessAlertBody" class="modal-body alert alert-success"></div>
+            <div id="myModalSuccessAlertBody" class="modal-body green-background orbitron-font text-center lead" 
+                 style="margin-bottom: 0px !important;"></div>
 
-            <div class="modal-footer">
-                &nbsp;
-                <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+            <div class="modal-footer gradient-background">
+                <button type="button" class="btn btn-success" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
 </div>
 
-<div id="myModalError" class="modal fade text-width:30%" role="dialog">
-    <div class="modal-dialog">
+<div id="myModalError" class="modal fade" role="dialog">
+    <div class="modal-dialog  modal-dialog-centered">
         <div class="modal-content">
 
-            <div class="modal-header">
-                <h2>Error</h2>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <div class="modal-header gradient-background">
+                <h1>Error</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
-            <div id="myModalErrorAlertBody" class="modal-body alert alert-danger"></div>
+            <div id="myModalErrorAlertBody" class="modal-body red-background orbitron-font text-center lead"
+                 style="margin-bottom: 0px !important;"></div>
 
-            <div class="modal-footer">
-                &nbsp;
-                <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+            <div class="modal-footer gradient-background">
+                <button type="button" class="btn btn-success" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
 </div>
-
-
-@*@if (TempData["Success"] != null)
-{
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        @TempData["Success"]
-        <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close">
-            <span class="justify-content-end" aria-hidden="true">&times;</span>
-        </button>
-    </div>
-}
-else
-{
-    @if (TempData["Error"] != null)
-    {
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            @TempData["Error"]
-            <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    }
-}*@

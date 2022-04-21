@@ -1,0 +1,16 @@
+﻿@import '_custom.scss';
+
+@import 'components/_mixins.scss';
+@import 'components/_buttons.scss';
+@import 'components/_typography.scss';
+
+
+@import 'sections/_navbar.scss';
+@import 'sections/_loginPartial.scss';
+@import 'sections/_product.scss';
+@import 'sections/_upsert.scss';
+@import 'sections/_cart.scss';
+@import 'sections/_dataTables.scss';
+@import 'sections/_orderDetails.scss';
+@import 'sections/_insurance.scss';
+@import 'sections/_users.scss';

@@ -48,7 +48,7 @@ namespace UnicornInsurance.Application.Features.Orders.Handlers.Commands
                 var orderHeader = await _unitOfWork.OrderHeaderRepository.Get(request.CompleteOrderDTO.OrderId);
 
                 if (orderHeader == null)
-                    throw new NotFoundException(nameof(orderHeader), request.CompleteOrderDTO.OrderId);
+                    throw new NotFoundException("Order", request.CompleteOrderDTO.OrderId);
                 if (orderHeader.PaymentStatus == SD.PaymentStatusApproved)
                     throw new PaymentAlreadyApprovedException();
                 if (orderHeader.ApplicationUserId != userId)

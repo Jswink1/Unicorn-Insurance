@@ -4,4 +4,25 @@
 @{
 }
 
-<h1 class="jumbotron">NOT AUTHORIZED</h1>
+<div class="container row">
+
+    @* UNAUTHORIZED TITLE *@
+    <div class="col-12 text-center">
+        <h1 class="display-3 red-font text-center">UNAUTHORIZED</h1>
+    </div>
+
+    @* UNAUTHORIZED IMAGE *@
+    <div class="text-center col-12 col-lg-8 offset-lg-2">
+        <img src="~/images/errors/YouShallNotPass.gif" class="w-100 img-fluid" />
+    </div>
+
+    @* LOGIN AND REGISTER BUTTONS *@
+    <div class="row col-12 col-lg-4 offset-lg-4 mt-2">
+        <a asp-controller="Users" asp-action="Login" class="btn btn-success mb-2">
+            Login
+        </a>
+        <a asp-controller="Users" asp-action="Register" class="btn btn-info">
+            Register
+        </a>
+    </div>
+</div>

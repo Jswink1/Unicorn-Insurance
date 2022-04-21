@@ -29,7 +29,7 @@ namespace UnicornInsurance.Application.Features.MobileSuits.Handlers.Queries
             var mobileSuit = await _unitOfWork.MobileSuitRepository.GetFullMobileSuitDetails(request.MobileSuitId);
 
             if (mobileSuit is null)
-                throw new NotFoundException(nameof(mobileSuit), request.MobileSuitId);
+                throw new NotFoundException("Mobile Suit", request.MobileSuitId);
 
             return _mapper.Map<FullMobileSuitDTO>(mobileSuit);
         }

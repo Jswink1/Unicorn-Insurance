@@ -1,0 +1,28 @@
+﻿@import '../custom';
+
+@mixin gradient {
+    background: linear-gradient(to right, $primary, $secondary);
+}
+@mixin gradientFont {
+    background-image: linear-gradient(to right, $primary, $secondary) !important;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+@mixin orbitronFont {
+    font-family: 'Orbitron', sans-serif !important;
+    letter-spacing: 1px !important;
+}
+
+@mixin purpleTextBox {
+    background-color: $purple !important;
+
+    &:hover {
+        border: 2px solid $green;
+    }
+
+    &:focus {
+        border: 2px solid $green !important;
+        background-color: $body-bg !important;
+    }
+}

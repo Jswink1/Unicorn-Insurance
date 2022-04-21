@@ -1,0 +1,29 @@
+﻿@import '../_custom.scss';
+@import '../components/_mixins.scss';
+
+.order-details {
+    @include orbitronFont;
+
+    input {
+        @include purpleTextBox;
+    }
+
+    .card-header {
+        background-color: $red !important;
+    }
+
+    .card-body {
+        background-color: $gray-900;
+    }
+
+    .order-item {
+        background-color: $purple !important;
+        color: $white !important;
+        border-bottom: 2px solid $green;
+    }
+
+    .order-total {
+        background-color: $red !important;
+        color: $white !important;
+    }
+}

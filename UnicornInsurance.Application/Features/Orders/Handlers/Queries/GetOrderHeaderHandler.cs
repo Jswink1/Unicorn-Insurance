@@ -39,7 +39,7 @@ namespace UnicornInsurance.Application.Features.Orders.Handlers.Queries
             var orderHeader = await _unitOfWork.OrderHeaderRepository.Get(request.OrderId);
 
             if (orderHeader is null)
-                throw new NotFoundException(nameof(orderHeader), request.OrderId);
+                throw new NotFoundException("Order", request.OrderId);
             if (orderHeader.ApplicationUserId != userId)
                 throw new UnauthorizedAccessException();
 

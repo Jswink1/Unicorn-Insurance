@@ -35,7 +35,7 @@ namespace UnicornInsurance.Application.Features.UserItems.Handlers.Commands
             var userMobileSuit = await _unitOfWork.UserMobileSuitRepository.Get(request.UserMobileSuitId);
 
             if (userMobileSuit is null)
-                throw new NotFoundException(nameof(userMobileSuit), request.UserMobileSuitId);
+                throw new NotFoundException("User Mobile Suit", request.UserMobileSuitId);
             if (userMobileSuit.ApplicationUserId != userId)
                 throw new UnauthorizedAccessException();
 
