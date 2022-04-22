@@ -93,12 +93,23 @@ namespace UnicornInsurance.Application.UnitTests.ShoppingCart.Commands
         [Order(5)]
         [TestCase(-1)]
         [TestCase(234234)]
-        public async Task Invalid_WeaponCartItem_AddedToCart(int weaponId)
+        public async Task AddWeaponToCart_ShouldThrow_NotFoundException(int weaponId)
         {
             var handler = new AddWeaponCartItemHandler(_mockUnitOfWork.Object, _user1HttpContext.Object);
 
             await handler.Handle(new AddWeaponCartItemCommand() { WeaponId = weaponId }, CancellationToken.None)
                          .ShouldThrowAsync<NotFoundException>();
+        }
+
+        [Test]
+        [Order(6)]
+        [TestCase(6)]
+        public async Task AddWeaponToCart_ShouldThrow_PurchaseCustomWeaponException(int weaponId)
+        {
+            var handler = new AddWeaponCartItemHandler(_mockUnitOfWork.Object, _user1HttpContext.Object);
+
+            await handler.Handle(new AddWeaponCartItemCommand() { WeaponId = weaponId }, CancellationToken.None)
+                         .ShouldThrowAsync<PurchaseCustomWeaponException>();
         }
     }
 }

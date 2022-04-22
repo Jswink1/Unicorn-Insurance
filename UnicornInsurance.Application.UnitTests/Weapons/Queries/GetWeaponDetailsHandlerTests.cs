@@ -58,5 +58,13 @@ namespace UnicornInsurance.Application.UnitTests.Weapons.Queries
             await _handler.Handle(new GetWeaponDetailsRequest() { WeaponId = id }, CancellationToken.None)
                           .ShouldThrowAsync<NotFoundException>();
         }
+
+        [Test]
+        [TestCase(6)]
+        public async Task GetWeaponDetails_ShouldThrow_CustomWeaponDetailsException(int id)
+        {
+            await _handler.Handle(new GetWeaponDetailsRequest() { WeaponId = id }, CancellationToken.None)
+                          .ShouldThrowAsync<CustomWeaponDetailsException>();
+        }
     }
 }
