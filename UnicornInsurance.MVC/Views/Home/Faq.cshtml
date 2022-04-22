@@ -1,0 +1,145 @@
+﻿@{
+    ViewData["Title"] = "FAQ";
+}
+
+<div class="container">
+    <div class="row text-center">
+        <h1 class="display-3 fw-bold">FAQ</h1>
+        <hr />
+    </div>
+</div>
+
+<div class="row mt-5">
+    <div class="col-md-12">
+        <div class="accordion" id="accordionExample">
+            <!-- ACCORDION ITEM 1 -->
+            <div class="accordion-item mb-3">
+                <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        What is this website?
+                    </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse show card-body-grey" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                    <div class="accordion-body lead">
+                        This is a sample E-Commerce website. Here, you can purchase Mobile Suits and Weapons. Then, your purchased items will appear in
+                        your "Mobile Suit Deck." There, you can attach weapons to your Mobile Suits, purchase insurance, and deploy your Mobile Suits.
+                    </div>
+                </div>
+            </div>
+
+            <!-- ACCORDION ITEM 2 -->
+            <div class="accordion-item mb-3">
+                <h2 class="accordion-header" id="headingTwo">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        How do I purchase items?
+                    </button>
+                </h2>
+                <div id="collapseTwo" class="accordion-collapse collapse card-body-grey" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                    <div class="accordion-body lead">
+                        <p>
+                            After adding the items to your cart, press the "Place Order" button at the bottom of the shopping cart page. Then use these
+                            test credit card numbers.
+                        </p>
+
+                        <p>Card Number: 4242 4242 4242 4242</p>
+                        <p>Expiration Date: 04/24</p>
+                        <p>Security Code: 424</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ACCORDION ITEM 3 -->
+            <div class="accordion-item mb-3">
+                <h2 class="accordion-header" id="headingThree">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        What is a Mobile Suit?
+                    </button>
+                </h2>
+                <div id="collapseThree" class="accordion-collapse collapse card-body-grey" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                    <div class="accordion-body lead">
+                        A Mobile Suit is a giant humanoid robot from the series "Mobile Suit Gundam."
+                    </div>
+                </div>
+            </div>
+
+            <!-- ACCORDION ITEM 4 -->
+            <div class="accordion-item mb-3">
+                <h2 class="accordion-header" id="headingFour">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                        What happens when I deploy a Mobile Suit?
+                    </button>
+                </h2>
+                <div id="collapseFour" class="accordion-collapse collapse card-body-grey" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
+                    <div class="accordion-body lead">
+                        <p>Something good may happen. Something bad may happen. It will be entertaining either way.</p>
+                        <p>Note: If something bad happens, and your Mobile Suit is not covered by insurance, your Mobile Suit will become damaged!</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ACCORDION ITEM 5 -->
+            <div class="accordion-item mb-3">
+                <h2 class="accordion-header" id="headingFive">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                        What do Weapons do?
+                    </button>
+                </h2>
+                <div id="collapseFive" class="accordion-collapse collapse card-body-grey" aria-labelledby="headingFive" data-bs-parent="#accordionExample">
+                    <div class="accordion-body lead">
+                        <p>Attaching a weapon to your Mobile Suit before you deploy decreases the chances of something bad happening during your deployment.</p>
+                        <p>
+                            Note: Some Mobile Suits come with "Custom Weapons," which are weapons that can only be acquired by purchasing a Mobile Suit that
+                            it comes attached to.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ACCORDION ITEM 6 -->
+            <div class="accordion-item mb-3">
+                <h2 class="accordion-header" id="headingFive">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                        Do I have to register an account?
+                    </button>
+                </h2>
+                <div id="collapseSix" class="accordion-collapse collapse card-body-grey" aria-labelledby="headingSix" data-bs-parent="#accordionExample">
+                    <div class="accordion-body lead">
+                        <p>
+                            If you register an account you will be sent an E-mail in order to confirm your E-mail address. If you dont want to do this
+                            you can use the default user account.
+                        </p>
+                        <p>
+                            E-mail: user@user.com
+                        </p>
+                        <p>
+                            Password: password
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ACCORDION ITEM 7 -->
+            <div class="accordion-item mb-3">
+                <h2 class="accordion-header" id="headingSeven">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+                        Can I create Mobile Suits, Weapons, and Deployment Scenarios?
+                    </button>
+                </h2>
+                <div id="collapseSeven" class="accordion-collapse collapse card-body-grey" aria-labelledby="headingSeven" data-bs-parent="#accordionExample">
+                    <div class="accordion-body lead">
+                        <p>
+                            Yes, if you log-in to the admin account.
+                        </p>
+                        <p>
+                            E-mail: admin@user.com
+                        </p>
+                        <p>
+                            Password: password
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

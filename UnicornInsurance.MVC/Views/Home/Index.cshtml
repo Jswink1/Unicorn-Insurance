@@ -2,6 +2,19 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4" style="font-family: 'Black Ops One', cursive;">Welcome</h1>
+<div class="text-center mt-2">
+    <h1 class="display-1">Welcome To My Website</h1>
 </div>
+
+<div class="row col-12 col-lg-4 offset-lg-4 mt-3">
+    <img src="~/images/icons/logo.png" class="logo" />
+</div>
+
+<div class="row col-12 col-lg-6 offset-lg-3 mt-4">
+    <a asp-controller="Home" asp-action="Faq" class="green-button btn-lg mb-4">
+        How To Use This Website
+    </a>
+
+    <a href="https://github.com/Jswink1/Unicorn-Insurance" class="blue-button btn-lg">View The Code For This Website</a>
+</div>
+

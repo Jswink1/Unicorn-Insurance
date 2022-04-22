@@ -38,7 +38,7 @@
 //
 
 .green-font {
-    color: $green;
+    color: $green !important;
     font-weight: 700;
 }
 
@@ -48,6 +48,10 @@
 
 .red-font {
     color: $red !important;
+}
+
+.gray-font {
+    color: $gray-400 !important;
 }
 
 //

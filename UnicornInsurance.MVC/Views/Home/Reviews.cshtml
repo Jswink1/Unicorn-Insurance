@@ -1,0 +1,151 @@
+﻿@{
+    ViewData["Title"] = "Reviews";
+}
+
+<div class="container reviews mb-5">
+    <div class="row text-center text-white">
+        <h1 class="display-3">Reviews</h1>
+        <p class="lead pt-1">See what users are saying about this website</p>
+    </div>
+
+    <!-- CAROUSEL CONTENT -->
+    <div class="row align-items-center">
+        <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel" data-bs-interval="false">
+            <div class="carousel-inner">
+
+                <!-- CAROUSEL ITEM 1 -->
+                <div class="carousel-item active">
+                    <!-- TESTIMONIAL CARD -->
+                    <div class="reviews__card">
+                        <p class="lh-lg">
+                            <i class="fas fa-quote-left"></i>
+                            I dont know what is right, and I am only one person... But even so, I believe in humanity. I believe in possibility.
+                            <i class="fas fa-quote-right"></i>
+                            <div class="ratings p-1">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </p>
+                    </div>
+                    <!-- CLIENT PICTURE -->
+                    <div class="reviews__picture">
+                        <img src="~/images/users/Banagher.webp" alt="user-1 picture" class="img-fluid rounded-circle">
+                    </div>
+                    <!-- CLIENT NAME AND ROLE 1 -->
+                    <div class="reviews__name">
+                        <h3>Banagher Links</h3>
+                        <p class="fw-light">Pilot of the Unicorn Gundam</p>
+                    </div>
+                </div>
+
+                <!-- CAROUSEL ITEM 2 -->
+                <div class="carousel-item">
+                    <!-- TESTIMONIAL CARD -->
+                    <div class="reviews__card">
+                        <p class="lh-lg">
+                            <i class="fas fa-quote-left"></i>
+                            Though we may walk different paths, you and I are the same. We are both searching for answers...
+                            A world where people understand each other.
+                            <i class="fas fa-quote-right p-1"></i>
+                            <div class="ratings">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </p>
+                    </div>
+                    <!-- CLIENT PICTURE -->
+                    <div class="reviews__picture">
+                        <img src="~/images/users/Setsuna.webp" alt="user-2 picture" class="img-fluid rounded-circle">
+                    </div>
+                    <!-- CLIENT NAME AND ROLE -->
+                    <div class="reviews__name">
+                        <h3>Setsuna F. Seiei</h3>
+                        <p class="fw-light">Gundam Meister</p>
+                    </div>
+                </div>
+
+                <!-- CAROUSEL ITEM 3 -->
+                <div class="carousel-item">
+                    <!-- TESTIMONIAL CARD -->
+                    <div class="reviews__card">
+                        <p class="lh-lg">
+                            <i class="fas fa-quote-left"></i>
+                            You fool. It is not the Mobile Suit that matters, but the pilot inside it.
+                            <i class="fas fa-quote-right p-1"></i>
+                            <div class="ratings">
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </p>
+                    </div>
+                    <!-- CLIENT PICTURE -->
+                    <div class="reviews__picture">
+                        <img src="~/images/users/Char.webp" alt="user-3 picture" class="img-fluid rounded-circle">
+                    </div>
+                    <!-- CLIENT NAME AND ROLE -->
+                    <div class="reviews__name">
+                        <h3>Char Aznable</h3>
+                        <p class="fw-light">The Red Comet</p>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center">
+                <button class="green-button" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                    Prev
+                </button>
+                <button class="blue-button" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                    Next
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row text-center">
+        <h1 class="display-3 mt-5">Used by companies such as:</h1>
+        <div class="heading-line mb-5"></div>
+    </div>
+</div>
+
+<!-- COMPANIES LIST  -->
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 col-lg-2">
+            <div class="companies__logo-box shadow-sm">
+                <img src="~/images/companies/Anaheim.webp" alt="Anaheim logo" title="Anaheim Logo" class="img-fluid">
+            </div>
+        </div>
+        <div class="col-md-4 col-lg-2">
+            <div class="companies__logo-box shadow-sm">
+                <img src="~/images/companies/Zeonic.webp" alt="Zeonic logo" title="Zeonic Logo" class="img-fluid">
+            </div>
+        </div>
+        <div class="col-md-4 col-lg-2">
+            <div class="companies__logo-box shadow-sm">
+                <img src="~/images/companies/Yashima.webp" alt="Yashima logo" title="Yashima Logo" class="img-fluid">
+            </div>
+        </div>
+        <div class="col-md-4 col-lg-2">
+            <div class="companies__logo-box shadow-sm">
+                <img src="~/images/companies/Felipe.webp" alt="Felipe logo" title="Felipe Logo" class="img-fluid">
+            </div>
+        </div>
+        <div class="col-md-4 col-lg-2">
+            <div class="companies__logo-box shadow-sm">
+                <img src="~/images/companies/Gramonica.webp" alt="Gramonica logo" title="Gramonica Logo" class="img-fluid">
+            </div>
+        </div>
+        <div class="col-md-4 col-lg-2">
+            <div class="companies__logo-box shadow-sm">
+                <img src="~/images/companies/Zimmad.webp" alt="Zimmad logo" title="Zimmad Logo" class="img-fluid">
+            </div>
+        </div>
+    </div>
+</div>

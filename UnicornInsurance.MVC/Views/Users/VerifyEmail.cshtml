@@ -1,13 +1,12 @@
 ﻿@model VerifyEmailVM
+@{ ViewData["Title"] = "Verify Email"; }
 
 @if (Model.VerificationSuccessful)
 {
-    <h1 class="display-1 text-center">Verification Successful, Thank You</h1>
-}
-else
-{
-    <h1 class="display-1 text-center">Sorry, Something Went Wrong</h1>
-}
+<h1 class="display-1 text-center">Verification Successful, Thank You</h1> }
+            else
+            {
+<h1 class="display-1 text-center">Sorry, Something Went Wrong</h1>}
 
 
 

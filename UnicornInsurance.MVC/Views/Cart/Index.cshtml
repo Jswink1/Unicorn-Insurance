@@ -41,7 +41,7 @@
                             @* ITEM PRICE AND QUANTITY *@
                             <div class="col-12 col-md-4 row">
                                 <div class="col-8 text-left">
-                                    <h5 class="green-font">$@MobileSuitItem.MobileSuit.Price</h5>
+                                    <h5 class="green-font">@MobileSuitItem.MobileSuit.Price.ToString("C")</h5>
                                 </div>
                                 <div class="col-4 float-right">
                                     @* REMOVE FROM CART BUTTON *@
@@ -86,14 +86,18 @@
                                 <p>@WeaponItem.Weapon.Description</p>
                             </div>
 
+                            @{ 
+                                var weaponItemTotal = WeaponItem.Weapon.Price * WeaponItem.Count;
+                            }
+
                             @* ITEM PRICE AND QUANTITY *@
                             <div class="col-12 col-md-4 row">
                                 <div class="col-8 text-left" style="padding-top:5px;">
-                                    <h5><span class="green-font">$@WeaponItem.Weapon.Price</span> Each</h5>
+                                    <h5><span class="green-font">@WeaponItem.Weapon.Price.ToString("C")</span> Each</h5>
                                     <br>
                                     <h5>Quantity: @WeaponItem.Count</h5>
                                     <br>
-                                    <h5>Total: <span class="green-font">$@(WeaponItem.Weapon.Price * WeaponItem.Count)</span></h5>
+                                    <h5>Total: <span class="green-font">@weaponItemTotal.ToString("C")</span></h5>
                                 </div>
                                 <div class="col-4">
 
@@ -135,7 +139,7 @@
                             <ul class="list-group">
                                 <li class="list-group-item d-flex justify-content-between orbitron-font">
                                     <span class="fw-bold"> Total: </span>
-                                    <span id="txtOrderTotal" class="green-font text-decoration-underline">$ @Model.OrderHeader.OrderTotal</span>
+                                    <span id="txtOrderTotal" class="green-font text-decoration-underline">@Model.OrderHeader.OrderTotal.ToString("C")</span>
                                 </li>
                             </ul>
                         </div>

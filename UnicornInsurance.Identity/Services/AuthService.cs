@@ -44,6 +44,11 @@ namespace UnicornInsurance.Identity.Services
                 throw new Exception($"User with {request.Email} not found.");
             }
 
+            if (user.EmailConfirmed == false)
+            {
+                throw new Exception($"User must confirm email");
+            }
+
             var result = await _signInManager.PasswordSignInAsync(user.UserName, request.Password, false, lockoutOnFailure: false);
 
             if (!result.Succeeded)

@@ -62,5 +62,15 @@ namespace UnicornInsurance.MVC.Controllers
         {
             return View();
         }
+
+        public IActionResult Faq()
+        {
+            return View();
+        }
+
+        public IActionResult Reviews()
+        {
+            return View();
+        }
     }
 }

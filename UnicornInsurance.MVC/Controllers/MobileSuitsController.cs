@@ -107,7 +107,6 @@ namespace UnicornInsurance.MVC.Controllers
             else
             {
                 TempData["Error"] = response.Message;
-                return Content("");
             }
 
             return RedirectToAction(nameof(Index));
