@@ -62,7 +62,9 @@ namespace UnicornInsurance.MVC
             services.AddTransient<IAuthenticationService, AuthenticationService>();
 
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
-            services.AddHttpClient<IClient, Client>(cl => cl.BaseAddress = new Uri("https://localhost:5001"));
+
+            var httpClientUrl = Configuration.GetSection("HttpClientUrl").Value;
+            services.AddHttpClient<IClient, Client>(cl => cl.BaseAddress = new Uri(httpClientUrl));
 
             services.AddScoped<IMobileSuitService, MobileSuitService>();
             services.AddScoped<IWeaponService, WeaponService>();
