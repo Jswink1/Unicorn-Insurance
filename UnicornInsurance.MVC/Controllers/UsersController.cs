@@ -17,20 +17,18 @@ namespace UnicornInsurance.MVC.Controllers
             _authService = authService;
         }
 
-        public IActionResult Login(string returnUrl = null)
+        public IActionResult Login()
         {
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(LoginVM login, string returnUrl)
+        public async Task<IActionResult> Login(LoginVM login)
         {
             if (ModelState.IsValid)
             {
-                returnUrl ??= Url.Content("~/");
                 var isLoggedIn = await _authService.Authenticate(login);
-                if (isLoggedIn)
-                    return LocalRedirect(returnUrl);
+                return RedirectToAction("Index", "Home");
             }
             ModelState.AddModelError("", "Log In Attempt Failed. Please try again.");
             return View(login);
