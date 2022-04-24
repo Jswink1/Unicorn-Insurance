@@ -1,3 +1,4 @@
+using Azure.Storage.Blobs;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -77,6 +78,9 @@ namespace UnicornInsurance.MVC
             services.AddScoped<IFileUploadHelper, FileUploadHelper>();
 
             services.AddSingleton<ILocalStorageService, LocalStorageService>();
+            services.AddSingleton(x => new BlobServiceClient(Configuration.GetValue<string>("BlobConnectionString")));
+
+            services.AddSingleton<IBlobService, BlobService>();
 
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
         }

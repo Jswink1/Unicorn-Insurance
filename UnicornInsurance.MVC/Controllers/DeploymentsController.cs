@@ -21,16 +21,19 @@ namespace UnicornInsurance.MVC.Controllers
         private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly IHttpContextHelper _httpContextHelper;
         private readonly IFileUploadHelper _fileUploadHelper;
+        private readonly IBlobService _blobService;
 
         public DeploymentsController(IDeploymentService deploymentService,
                                      IWebHostEnvironment webHostEnvironment,
                                      IHttpContextHelper httpContextHelper,
-                                     IFileUploadHelper fileUploadHelper)
+                                     IFileUploadHelper fileUploadHelper,
+                                     IBlobService blobService)
         {
             _deploymentService = deploymentService;
             _webHostEnvironment = webHostEnvironment;
             _httpContextHelper = httpContextHelper;
             _fileUploadHelper = fileUploadHelper;
+            _blobService = blobService;
         }
 
         [Authorize(Roles = SD.AdminRole)]
@@ -72,47 +75,35 @@ namespace UnicornInsurance.MVC.Controllers
             BaseCommandResponse response;
 
             // Get the web root path, and retrieve the file that has been uploaded
-            string webRootPath = _webHostEnvironment.WebRootPath;
             var files = _httpContextHelper.GetUploadedFiles(this);
 
             // If an image file was uploaded
             if (files.Count > 0)
             {
-                // Name the file with a Guid
-                string fileName = Guid.NewGuid().ToString();
-                // Navigate to the images path
-                var uploads = Path.Combine(webRootPath, @"images\deployments");
-                // Get the extension of the uploaded file
-                var extension = Path.GetExtension(files[0].FileName);
-
-                // If we are editing
+                // If editing
                 if (model.Deployment.ImageUrl != null)
                 {
                     // Remove the old image
-                    var imagePath = Path.Combine(webRootPath, model.Deployment.ImageUrl.TrimStart('\\'));
-                    if (System.IO.File.Exists(imagePath))
-                    {
-                        System.IO.File.Delete(imagePath);
-                    }
+                    await _blobService.DeleteBlobAsync(model.Deployment.ImageUrl);
                 }
 
-                // Upload the new image to static files
-                _fileUploadHelper.UploadImageFile(files, uploads, fileName, extension);
+                // Upload the image
+                await _blobService.UploadFileBlobAsync((Microsoft.AspNetCore.Http.FormFile)files.First());
 
-                model.Deployment.ImageUrl = @"\images\deployments\" + fileName + extension;
+                model.Deployment.ImageUrl = "https://unicornblobstorage.blob.core.windows.net/images/" + files.First().FileName;
             }
 
             // Else, if the user did not upload a new image file
             else
             {
-                // If we are editing, an image file for the product should already exist in the DB
+                // If editing, an image file for the product should already exist in the DB
                 if (model.Deployment.Id != 0)
                 {
                     // Retrieve the image stored in the DB
                     var deployment = await _deploymentService.GetDeploymentDetails(model.Deployment.Id);
                     model.Deployment.ImageUrl = deployment.ImageUrl;
                 }
-                // If we are inserting, the user needs to upload an image, so throw an error
+                // If inserting, the user needs to upload an image, so throw an error
                 else
                 {
                     TempData["Error"] = "You must upload an Image File";
@@ -140,10 +131,11 @@ namespace UnicornInsurance.MVC.Controllers
                 TempData["Error"] = response.Message;
                 model.Errors = response.Errors;
 
-                var imagePath = Path.Combine(webRootPath, model.Deployment.ImageUrl.TrimStart('\\'));
-                if (System.IO.File.Exists(imagePath))
+                // If inserting
+                if (model.Deployment.Id == 0)
                 {
-                    System.IO.File.Delete(imagePath);
+                    // Delete the image the user tried to upload
+                    await _blobService.DeleteBlobAsync(model.Deployment.ImageUrl);
                 }
 
                 return View(model);
@@ -191,12 +183,8 @@ namespace UnicornInsurance.MVC.Controllers
             {
                 // Remove the image
                 var deployment = await _deploymentService.GetDeploymentDetails(id);
-                string webRootpath = _webHostEnvironment.WebRootPath;
-                var imagePath = Path.Combine(webRootpath, deployment.ImageUrl.TrimStart('\\'));
-                if (System.IO.File.Exists(imagePath))
-                {
-                    System.IO.File.Delete(imagePath);
-                }
+
+                await _blobService.DeleteBlobAsync(deployment.ImageUrl);
 
                 await _deploymentService.DeleteDeployment(id);
             }
