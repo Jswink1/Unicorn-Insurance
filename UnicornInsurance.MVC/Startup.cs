@@ -75,7 +75,6 @@ namespace UnicornInsurance.MVC
             services.AddScoped<IDeploymentService, DeploymentService>();
 
             services.AddScoped<IHttpContextHelper, HttpContextHelper>();
-            services.AddScoped<IFileUploadHelper, FileUploadHelper>();
 
             services.AddSingleton<ILocalStorageService, LocalStorageService>();
             services.AddSingleton(x => new BlobServiceClient(Configuration.GetValue<string>("BlobConnectionString")));

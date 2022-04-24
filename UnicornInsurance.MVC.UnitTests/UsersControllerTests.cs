@@ -45,10 +45,11 @@ namespace UnicornInsurance.MVC.UnitTests
         [Fact]
         public async Task Login_ReturnsLocalRedirect_WhenModelStateIsValid()
         {
-            var result = await _usersController.Login(_login, "ReturnUrl");
+            var result = await _usersController.Login(_login);
 
-            var localRedirectResult = Assert.IsType<LocalRedirectResult>(result);
-            localRedirectResult.Url.ShouldBe("ReturnUrl");
+            var redirectToActionResult = Assert.IsType<RedirectToActionResult>(result);
+            redirectToActionResult.ControllerName.ShouldBe("Home");
+            redirectToActionResult.ActionName.ShouldBe("Index");
 
             _authService.Verify(x => x.Authenticate(It.IsAny<LoginVM>()), Times.Once);
         }
@@ -57,7 +58,7 @@ namespace UnicornInsurance.MVC.UnitTests
         public async Task Login_ReturnsView_WhenModelStateIsInvalid()
         {
             _usersController.ModelState.AddModelError("Password", "Required");
-            var result = await _usersController.Login(_login, "ReturnUrl");
+            var result = await _usersController.Login(_login);
 
             Assert.IsType<ViewResult>(result);
 

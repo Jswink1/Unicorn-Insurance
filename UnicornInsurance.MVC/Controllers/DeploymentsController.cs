@@ -20,19 +20,16 @@ namespace UnicornInsurance.MVC.Controllers
         private readonly IDeploymentService _deploymentService;
         private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly IHttpContextHelper _httpContextHelper;
-        private readonly IFileUploadHelper _fileUploadHelper;
         private readonly IBlobService _blobService;
 
         public DeploymentsController(IDeploymentService deploymentService,
                                      IWebHostEnvironment webHostEnvironment,
                                      IHttpContextHelper httpContextHelper,
-                                     IFileUploadHelper fileUploadHelper,
                                      IBlobService blobService)
         {
             _deploymentService = deploymentService;
             _webHostEnvironment = webHostEnvironment;
             _httpContextHelper = httpContextHelper;
-            _fileUploadHelper = fileUploadHelper;
             _blobService = blobService;
         }
 

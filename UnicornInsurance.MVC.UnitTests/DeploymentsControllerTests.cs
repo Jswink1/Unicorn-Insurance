@@ -25,7 +25,7 @@ namespace UnicornInsurance.MVC.UnitTests
         private Mock<IDeploymentService> _deploymentService;
         private Mock<IWebHostEnvironment> _webHostEnvironment;
         private Mock<IHttpContextHelper> _httpContextHelper;
-        private Mock<IFileUploadHelper> _fileUploadHelper;
+        private Mock<IBlobService> _blobService;
         private DeploymentsController _deploymentsController;
         private DeploymentUpsertVM _deploymentUpsertVM;
 
@@ -34,14 +34,14 @@ namespace UnicornInsurance.MVC.UnitTests
             _deploymentService = MockDeploymentService.GetDeploymentService();
             _webHostEnvironment = new Mock<IWebHostEnvironment>();
             _httpContextHelper = new Mock<IHttpContextHelper>();
-            _fileUploadHelper = new Mock<IFileUploadHelper>();
+            _blobService = new Mock<IBlobService>();
 
             _webHostEnvironment.Setup(x => x.WebRootPath).Returns("wwwroot");
 
             _deploymentsController = new DeploymentsController(_deploymentService.Object, 
                                                                _webHostEnvironment.Object,
                                                                _httpContextHelper.Object,
-                                                               _fileUploadHelper.Object);
+                                                               _blobService.Object);
 
             _deploymentUpsertVM = new DeploymentUpsertVM()
             {
@@ -142,11 +142,6 @@ namespace UnicornInsurance.MVC.UnitTests
                                                  It.IsAny<string>(),
                                                  "image.webp")
                                 });
-
-            _fileUploadHelper.Setup(x => x.UploadImageFile(It.IsAny<IFormFileCollection>(),
-                                                           It.IsAny<string>(),
-                                                           It.IsAny<string>(),
-                                                           It.IsAny<string>()));
 
             var result = await _deploymentsController.Upsert(_deploymentUpsertVM);
 

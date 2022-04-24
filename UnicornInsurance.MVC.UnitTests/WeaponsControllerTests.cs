@@ -27,7 +27,7 @@ namespace UnicornInsurance.MVC.UnitTests
         private Mock<IWebHostEnvironment> _webHostEnvironment;
         private Mock<IShoppingCartService> _shoppingCartService;
         private Mock<IHttpContextHelper> _httpContextHelper;
-        private Mock<IFileUploadHelper> _fileUploadHelper;
+        private Mock<IBlobService> _blobService;
         private WeaponsController _weaponsController;
         private WeaponUpsertVM _weaponUpsertVM;
 
@@ -37,7 +37,7 @@ namespace UnicornInsurance.MVC.UnitTests
             _webHostEnvironment = new Mock<IWebHostEnvironment>();
             _shoppingCartService = new Mock<IShoppingCartService>();
             _httpContextHelper = new Mock<IHttpContextHelper>();
-            _fileUploadHelper = new Mock<IFileUploadHelper>();
+            _blobService = new Mock<IBlobService>();
 
             _webHostEnvironment.Setup(x => x.WebRootPath).Returns("wwwroot");
 
@@ -49,7 +49,7 @@ namespace UnicornInsurance.MVC.UnitTests
                                                        _webHostEnvironment.Object,
                                                        _shoppingCartService.Object,
                                                        _httpContextHelper.Object,
-                                                       _fileUploadHelper.Object)
+                                                       _blobService.Object)
             {
                 TempData = tempData
             };
@@ -197,12 +197,7 @@ namespace UnicornInsurance.MVC.UnitTests
                                                  It.IsAny<long>(),
                                                  It.IsAny<string>(),
                                                  "image.webp")
-                                });
-
-            _fileUploadHelper.Setup(x => x.UploadImageFile(It.IsAny<IFormFileCollection>(),
-                                                           It.IsAny<string>(),
-                                                           It.IsAny<string>(),
-                                                           It.IsAny<string>()));            
+                                });   
 
             var result = await _weaponsController.Upsert(_weaponUpsertVM);
 

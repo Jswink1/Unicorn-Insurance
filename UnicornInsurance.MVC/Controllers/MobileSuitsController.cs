@@ -25,7 +25,6 @@ namespace UnicornInsurance.MVC.Controllers
         private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly IShoppingCartService _shoppingCartService;
         private readonly IHttpContextHelper _httpContextHelper;
-        private readonly IFileUploadHelper _fileUploadHelper;
         private readonly IBlobService _blobService;
 
         public MobileSuitsController(IMobileSuitService mobileSuitService,
@@ -33,7 +32,6 @@ namespace UnicornInsurance.MVC.Controllers
                                      IWebHostEnvironment webHostEnvironment,
                                      IShoppingCartService shoppingCartService,
                                      IHttpContextHelper httpContextHelper,
-                                     IFileUploadHelper fileUploadHelper,
                                      IBlobService blobService)
         {
             _mobileSuitService = mobileSuitService;
@@ -41,7 +39,6 @@ namespace UnicornInsurance.MVC.Controllers
             _webHostEnvironment = webHostEnvironment;
             _shoppingCartService = shoppingCartService;
             _httpContextHelper = httpContextHelper;
-            _fileUploadHelper = fileUploadHelper;
             _blobService = blobService;
         }
 
