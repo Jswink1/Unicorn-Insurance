@@ -27,6 +27,5 @@
 		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
 		<PackageReference Include="Stripe.net" Version="39.93.0" />
 		<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.15.1" />
-		<PackageReference Include="Twileloop.ExpressTimezone" Version="1.0.0" />
 	</ItemGroup>
 </Project>

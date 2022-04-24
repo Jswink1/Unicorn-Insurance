@@ -1,6 +1,5 @@
 ﻿@model List<UserMobileSuit>
 @using UnicornInsurance.MVC.Constants 
-@using ExpressTimezone
 @{ ViewData["Title"] = "Mobile Suit Deck"; }
 
 <div class="container">
@@ -30,28 +29,7 @@
                     else if (UserMobileSuit.IsDamaged == true)
                     {
                         <h3 class="card-text">Status: <span class="red-font">Damaged</span></h3>
-                    }
-
-                    @* USER MOBILE SUIT INSURANCE PLAN *@
-                    @if (UserMobileSuit.EndOfCoverage.UTCToSystemTime() > DateTime.Now)
-                    {
-                        if (UserMobileSuit.InsurancePlan == SD.StandardInsurancePlan)
-                        {
-                            <h3 class="card-text">Insurance: <span class="standard-insurance-font">Standard</span></h3>
-                        }
-                        if (UserMobileSuit.InsurancePlan == SD.SuperInsurancePlan)
-                        {
-                            <h3 class="card-text">Insurance: <span class="super-insurance-font">Super</span></h3>
-                        }
-                        if (UserMobileSuit.InsurancePlan == SD.UltraInsurancePlan)
-                        {
-                            <h3 class="card-text">Insurance: <span class="ultra-insurance-font">Ultra</span></h3>
-                        }
-                    }
-                    else
-                    {
-                        <h3 class="card-text">Insurance: <span class="no-insurance-font">None</span></h3>
-                    }
+                    }                    
 
                     @* USER MOBILE SUIT DETAILS BUTTON *@
                     <a asp-action="Details" asp-route-id="@UserMobileSuit.Id" class="blue-button">View My Mobile Suit</a>

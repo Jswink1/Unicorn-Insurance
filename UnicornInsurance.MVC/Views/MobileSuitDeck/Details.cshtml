@@ -1,6 +1,5 @@
 ﻿@model UserMobileSuit
 @using UnicornInsurance.MVC.Constants
-@using ExpressTimezone
 
 @{ ViewData["Title"] = Model.MobileSuit.Name; }
 
@@ -57,30 +56,11 @@
         @* USER MOBILE SUIT INSURANCE PLAN *@
         <hr />
         <h2>Insurance</h2>
-        <div class="offset-1 col-10 offset-lg-3 col-lg-6 p-4">
-            @if (Model.EndOfCoverage.UTCToSystemTime() > DateTime.Now)
-            {
-                if (Model.InsurancePlan == SD.StandardInsurancePlan)
-                {
-                    <partial name="_StandardInsuranceIcon" />
-                }
-                if (Model.InsurancePlan == SD.SuperInsurancePlan)
-                {
-                    <partial name="_SuperInsuranceIcon" />
-                }
-                if (Model.InsurancePlan == SD.UltraInsurancePlan)
-                {
-                    <partial name="_UltraInsuranceIcon" />
-                }
-                <h5>Expires: @Model.EndOfCoverage.UTCToSystemTime()</h5>
-            }
-            else
-            {
-                <div class="no-insurance-border text-center justify-content-center">
-                    <h5 class="no-insurance-font p-5">No Insurance</h5>
-                </div>
-                <a asp-controller="MobileSuitDeck" asp-action="Insurance" asp-route-id="@Model.Id" class="blue-button btn-lg form-control mt-3">Purchase Insurance</a>
-            }
+        <div class="">
+            <input value="No Insurance Plan" id="insurance-plan" type="text" readonly class="purple-text-box form-control" />
+            <br />
+            <input value="" id="insurance-expiration" type="text" readonly class="purple-text-box form-control" />
+            <a asp-controller="MobileSuitDeck" asp-action="Insurance" asp-route-id="@Model.Id" class="blue-button btn-lg form-control mt-3">Purchase Insurance</a>
         </div>
 
         @* USER MOBILE SUIT STATUS *@
@@ -100,6 +80,36 @@
 </div>
 
 @section Scripts {
+   
+    <script>
+        $(document).ready(function () {
+            var endOfCoverageString = "@Model.EndOfCoverage.ToString("o")" + "Z";
+
+            var endOfCoverage = new Date(endOfCoverageString);
+
+            var now = new Date();
+
+            var insurancePlan = document.getElementById("insurance-plan");
+            var insuranceExpiration = document.getElementById("insurance-expiration");
+
+            if (endOfCoverage > now) {
+                insurancePlan.value = "@Model.InsurancePlan Insurance Plan";
+
+                var diffMs = (endOfCoverage - now);
+                var diffHrs = Math.floor((diffMs % 86400000) / 3600000);
+                var diffMins = Math.round(((diffMs % 86400000) % 3600000) / 60000);
+
+                insuranceExpiration.value = "Expires in " + diffHrs + " hours and " + diffMins + " minutes";
+            }
+            else {
+                insurancePlan.value = "No Insurance Plan";
+                insuranceExpiration.value = "";
+            }
+
+        })(jQuery);
+    </script>
+
+
     <script>
         function submitform() {
             $('form').submit();
