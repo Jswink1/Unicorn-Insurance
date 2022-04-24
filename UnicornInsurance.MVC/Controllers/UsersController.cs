@@ -28,7 +28,16 @@ namespace UnicornInsurance.MVC.Controllers
             if (ModelState.IsValid)
             {
                 var isLoggedIn = await _authService.Authenticate(login);
-                return RedirectToAction("Index", "Home");
+
+                if (isLoggedIn)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Log In Attempt Failed.");
+                    return View(login);
+                }                
             }
             ModelState.AddModelError("", "Log In Attempt Failed. Please try again.");
             return View(login);
