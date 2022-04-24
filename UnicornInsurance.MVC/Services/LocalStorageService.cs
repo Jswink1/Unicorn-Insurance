@@ -33,7 +33,7 @@ namespace UnicornInsurance.MVC.Services
         public void SetStorageValue<T>(string key, T value)
         {
             _storage.Store(key, value);
-            _storage.Persist();
+            //_storage.Persist();
         }
 
         public T GetStorageValue<T>(string key)
