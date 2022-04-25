@@ -33,6 +33,8 @@ namespace UnicornInsurance.Api
         {
             services.AddHttpContextAccessor();
 
+            services.AddApplicationInsightsTelemetry();
+
             AddSwaggerDoc(services);
 
             services.ConfigureApplicationServices();

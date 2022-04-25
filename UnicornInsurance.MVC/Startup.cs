@@ -37,6 +37,8 @@ namespace UnicornInsurance.MVC
         {
             services.AddHttpContextAccessor();
 
+            services.AddApplicationInsightsTelemetry();
+
             services.Configure<CookiePolicyOptions>(options =>
             {
                 options.MinimumSameSitePolicy = SameSiteMode.None;
