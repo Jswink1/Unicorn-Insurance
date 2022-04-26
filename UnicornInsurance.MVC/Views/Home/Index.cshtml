@@ -1,6 +1,6 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@using Microsoft.Extensions.Options
+@inject IOptions<SwaggerProductionUI> SwaggerProductionUI
+@{ ViewData["Title"] = "Home Page"; }
 
 <div class="text-center mt-2">
     <h1 class="display-1">Welcome To My Website</h1>
@@ -15,6 +15,8 @@
         How To Use This Website
     </a>
 
-    <a href="https://github.com/Jswink1/Unicorn-Insurance" class="blue-button btn-lg">View The Code For This Website</a>
+    <a href="https://github.com/Jswink1/Unicorn-Insurance" class="blue-button btn-lg mb-4">View The Code For This Website</a>
+
+    <a href="@SwaggerProductionUI.Value.URL" class="red-button btn-lg">View The Swagger UI for the API</a>
 </div>
 

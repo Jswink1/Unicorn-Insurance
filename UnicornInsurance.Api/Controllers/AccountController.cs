@@ -19,13 +19,13 @@ namespace UnicornInsurance.Api.Controllers
             _authenticationService = authenticationService;
         }
 
-        [HttpPost("login")]
+        [HttpPost("Login")]
         public async Task<ActionResult<AuthResponse>> Login(AuthRequest request)
         {            
             return Ok(await _authenticationService.Login(request));
         }
 
-        [HttpPost("register")]
+        [HttpPost("Register")]
         public async Task<ActionResult<RegistrationResponse>> Register(RegistrationRequest request)
         {
             return Ok(await _authenticationService.Register(request));
