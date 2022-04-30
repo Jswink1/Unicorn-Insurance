@@ -7,6 +7,8 @@ update-database --context UnicornDataDBContext
 
 update-database --context UnicornIdentityDBContext
 
+Example LocalDB ConnectionString: Server=(localdb)\\mssqllocaldb;Database=UnicornDataDB;Trusted_Connection=True;MultipleActiveResultSets=true
+
 There are also a couple other AppSettings that are required for the site to be fully functional, such as:
 
 -A SendGrid key in the API project AppSettings. SendGrid is used to send a user a verification email when they register an account.
